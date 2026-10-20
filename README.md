@@ -3,8 +3,8 @@
 
 Aplicación web rápida, interactiva y con persistencia en tiempo real para calcular las cuotas exactas del fin de semana en el **Country Club El Bosque (Chosica)**.
 
-**Fechas:** Sábado 19 al Lunes 21 de Diciembre (2 Noches)  
-**Total Base:** S/ 1,552.76  
+**Fechas:** Viernes 18 al Lunes 21 de Diciembre (3 Noches)  
+**Total Base:** S/ 1,702.76  
 **Enlace en Vivo:** [https://nico1234556.github.io/presupuesto-el-bosque/](https://nico1234556.github.io/presupuesto-el-bosque/)
 
 ---
@@ -13,10 +13,10 @@ Aplicación web rápida, interactiva y con persistencia en tiempo real para calc
 
 | Participante | Cuota Base (Sin Pernocte) | Con Pernocte (+S/ 70) | Detalle de Reparto |
 | :--- | :---: | :---: | :--- |
-| **Los 2 que NO toman** | **S/ 171.60** | **S/ 241.60** | Pagan exactamente **S/ 20.00 menos** que los bebedores. |
-| **Los 5 que TOMAN** | **S/ 191.60** | **S/ 261.60** | Cuota estándar de bebedores (comida + alcohol + logística). |
-| **Tú (Organizador)** | **S/ 251.60** | **S/ 321.60** | Asume **S/ 60.00 extra** voluntario para aliviar cuotas del grupo. |
-| **TOTAL VIAJE** | **S/ 1,552.76** | **S/ 2,112.76** | Cuadre exacto al céntimo. |
+| **Los 2 que NO toman** | **S/ 190.35** | **S/ 260.35** | Pagan exactamente **S/ 20.00 menos** que los bebedores. |
+| **Los 5 que TOMAN** | **S/ 210.35** | **S/ 280.35** | Cuota estándar de bebedores (comida + alcohol + bungalow + movilidad). |
+| **Tú (Organizador)** | **S/ 270.35** | **S/ 340.35** | Asume **S/ 60.00 extra** voluntario para aliviar cuotas del grupo. |
+| **TOTAL VIAJE** | **S/ 1,702.76** | **S/ 2,262.76** | Cuadre exacto al céntimo (incluye S/ 150 más por noche extra en bungalow). |
 
 ---
 
