@@ -199,8 +199,8 @@
       <div class="absolute bottom-0 left-0 right-0 h-40 sm:h-52 bg-gradient-to-t from-canvas via-canvas/95 to-transparent pointer-events-none"></div>
     </div>
 
-    <!-- Contenido del Hero -->
-    <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-48 sm:pb-56 text-center text-white space-y-4">
+    <!-- Contenido del Hero (z-30 para estar siempre por encima de las nubes) -->
+    <div class="relative z-30 max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-36 sm:pb-44 text-center text-white space-y-4">
       
       <!-- Badge con borde discontinuo Travelio -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-dashed border-white/40 bg-white/10 backdrop-blur-md text-amber-200 text-xs font-medium shadow-xs">
@@ -234,18 +234,18 @@
     </div>
 
     <!-- ======================================================================= -->
-    <!-- CAPA DE NUBES FLOTANTES REALISTAS TRAVELIO (SIN CORTES HORIZONTALES) -->
+    <!-- CAPA DE NUBES FLOTANTES REALISTAS TRAVELIO (POSICIONADAS ABAJO) -->
     <!-- ======================================================================= -->
-    <div class="absolute bottom-0 left-0 right-0 w-full pointer-events-none z-20 select-none overflow-visible flex justify-center leading-none">
+    <div class="absolute bottom-0 left-0 right-0 w-full pointer-events-none z-10 select-none overflow-visible flex justify-center leading-none">
       
-      <!-- Nube 1: Izquierda flotante suave -->
-      <img src="./img/framer-cloud-1.png" alt="Nube" class="absolute -bottom-10 sm:-bottom-14 -left-20 sm:-left-10 w-[720px] sm:w-[980px] max-w-none opacity-95 anim-cloud-left pointer-events-none drop-shadow-xs">
+      <!-- Nube 1: Izquierda flotante suave (empujada hacia abajo) -->
+      <img src="./img/framer-cloud-1.png" alt="Nube" class="absolute -bottom-40 sm:-bottom-56 md:-bottom-72 lg:-bottom-[340px] -left-20 sm:-left-10 w-[600px] sm:w-[850px] lg:w-[980px] max-w-none opacity-95 anim-cloud-left pointer-events-none drop-shadow-xs">
       
-      <!-- Nube 2: Centro flotante dominante -->
-      <img src="./img/framer-cloud-2.png" alt="Nube" class="absolute -bottom-12 sm:-bottom-16 left-1/2 -translate-x-1/2 w-[880px] sm:w-[1180px] max-w-none opacity-95 anim-cloud-center pointer-events-none drop-shadow-xs">
+      <!-- Nube 2: Centro flotante dominante (empujada hacia abajo) -->
+      <img src="./img/framer-cloud-2.png" alt="Nube" class="absolute -bottom-44 sm:-bottom-60 md:-bottom-76 lg:-bottom-[350px] left-1/2 -translate-x-1/2 w-[700px] sm:w-[950px] lg:w-[1100px] max-w-none opacity-95 anim-cloud-center pointer-events-none drop-shadow-xs">
       
-      <!-- Nube 3: Derecha flotante invertida -->
-      <img src="./img/framer-cloud-1.png" alt="Nube" class="absolute -bottom-10 sm:-bottom-14 -right-20 sm:-right-10 w-[720px] sm:w-[980px] max-w-none scale-x-[-1] opacity-95 anim-cloud-right pointer-events-none drop-shadow-xs">
+      <!-- Nube 3: Derecha flotante invertida (empujada hacia abajo) -->
+      <img src="./img/framer-cloud-1.png" alt="Nube" class="absolute -bottom-40 sm:-bottom-56 md:-bottom-72 lg:-bottom-[340px] -right-20 sm:-right-10 w-[600px] sm:w-[850px] lg:w-[980px] max-w-none scale-x-[-1] opacity-95 anim-cloud-right pointer-events-none drop-shadow-xs">
     </div>
 
   </section>
@@ -260,8 +260,6 @@
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-dashed border-ink/25 bg-[#fff6c7] text-ink text-xs font-semibold shadow-2xs">
         <i class="fa-solid fa-sparkles text-amber-600 text-[11px]"></i>
         <span>Presupuesto Oficial & Cuotas Transparentes</span>
-        <i class="fa-solid fa-sparkles text-amber-600 text-[11px]"></i>
-      </div>
         <i class="fa-solid fa-sparkles text-amber-600 text-[11px]"></i>
       </div>
 
