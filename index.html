@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Country Club El Bosque · Sábado 19 al Lunes 21 Diciembre</title>
+  <title>Bungalow en Country Club El Bosque · Chosica (19 al 21 Dic)</title>
   
-  <!-- Favicon Oficial & Metas -->
+  <!-- Favicon Oficial & Metadatos -->
   <link rel="icon" type="image/png" href="./img/logo-el-bosque.png">
   <link rel="apple-touch-icon" href="./img/logo-el-bosque.png">
-  <meta name="description" content="Presupuesto y cuotas para el fin de semana del Sábado 19 al Lunes 21 de Diciembre en Country Club El Bosque, Sede Chosica.">
-  <meta property="og:title" content="Country Club El Bosque · Sábado 19 al Lunes 21 Dic">
-  <meta property="og:description" content="Viaje del Sábado 19 al Lunes 21 de Diciembre. Cuotas exactas, compras, parrilla y fotos oficiales.">
+  <meta name="description" content="Bungalow privado en Country Club El Bosque, Sede Chosica. Sábado 19 al Lunes 21 de Diciembre. Presupuesto transparente y cuotas exactas.">
+  <meta property="og:title" content="Bungalow en Country Club El Bosque · Chosica (19 al 21 Dic)">
+  <meta property="og:description" content="Sábado 19 a Lunes 21 de Diciembre. Cuotas exactas para 8 amigos, fotos oficiales y lista de compras.">
   <meta property="og:image" content="./img/logo-el-bosque.png">
-  <meta name="theme-color" content="#164d2d">
+  <meta name="theme-color" content="#ffffff">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,44 +20,42 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <!-- Google Fonts: Inter (Airbnb Cereal closest open-source counterpart) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Inter"', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Inter"', 'Circular', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'sans-serif'],
           },
           colors: {
-            stone: {
-              25: '#fcfbf9',
-              50: '#f9f8f5',
-              100: '#f3f1eb',
-              200: '#e7e4dc',
-              300: '#d7d2c6',
-              700: '#524e47',
-              800: '#34322e',
-              900: '#1e1c1a',
+            rausch: {
+              DEFAULT: '#ff385c',
+              hover: '#e00b41',
+              disabled: '#ffd1da',
+            },
+            ink: '#222222',
+            bodytext: '#3f3f3f',
+            muted: '#717171',
+            mutedsoft: '#929292',
+            hairline: '#dddddd',
+            hairlinesoft: '#ebebeb',
+            surface: {
+              soft: '#f7f7f7',
+              strong: '#f2f2f2',
             },
             forest: {
-              50: '#f0f7f3',
-              100: '#dbeee2',
-              600: '#1b5e37',
-              700: '#164d2d',
-              800: '#123d24',
-              900: '#0d2b19',
-            },
-            amberwarm: {
-              50: '#fef9ee',
-              100: '#fcf0d3',
-              700: '#9b5b00',
-              800: '#7c4800',
+              DEFAULT: '#164d2d',
+              light: '#f0f7f3',
             }
+          },
+          boxShadow: {
+            airbnb: 'rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0',
+            airbnbelevated: 'rgba(0, 0, 0, 0.08) 0 4px 16px 0, rgba(0, 0, 0, 0.04) 0 2px 6px 0',
           }
         }
       }
@@ -66,19 +64,20 @@
 
   <style>
     body {
-      background-color: #f7f6f2;
-      color: #1e1c1a;
-      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #222222;
+      font-family: 'Inter', Circular, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
     .custom-scroll::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
     }
     .custom-scroll::-webkit-scrollbar-track {
-      background: #f3f1eb;
+      background: #f7f7f7;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #d7d2c6;
+      background: #dddddd;
       border-radius: 4px;
     }
     input[type=number]::-webkit-inner-spin-button, 
@@ -92,558 +91,581 @@
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-forest-100 selection:text-forest-900 pb-28 sm:pb-20">
+<body class="min-h-screen pb-24 lg:pb-12 text-ink selection:bg-rausch/10 selection:text-rausch">
 
   <!-- ========================================================================= -->
-  <!-- CABECERA SUPERIOR STICKY CON LOGO OFICIAL & FECHA CLARA -->
+  <!-- 1. AIRBNB TOP NAVIGATION (80px, pure white, bottom hairline) -->
   <!-- ========================================================================= -->
-  <header class="border-b border-stone-200 bg-white/95 backdrop-blur-md sticky top-0 z-30 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-white border-b border-hairlinesoft h-20 flex items-center">
+    <div class="max-w-6xl w-full mx-auto px-4 sm:px-8 flex items-center justify-between">
       
-      <div class="flex items-center gap-3">
-        <!-- Logo Oficial Country Club El Bosque -->
-        <img src="./img/logo-el-bosque.png" alt="Logo Country Club El Bosque" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-forest-600/30 p-0.5 bg-white shadow-sm flex-shrink-0 object-contain">
-        <div>
-          <div class="flex items-center gap-1.5 flex-wrap">
-            <span class="text-[10px] font-mono uppercase tracking-wider text-forest-700 font-bold">Country Club El Bosque</span>
-            <span class="text-stone-300 text-xs">·</span>
-            <span class="text-[10px] font-mono font-bold bg-amberwarm-100 text-amberwarm-900 border border-amberwarm-700/20 px-1.5 py-0.2 rounded">
-              <i class="fa-regular fa-calendar-days text-[9px] mr-1"></i>Sáb 19 — Lun 21 Dic
-            </span>
-          </div>
-          <h1 class="text-sm sm:text-base font-bold text-stone-900 tracking-tight leading-tight">
-            Presupuesto & Cuotas del Viaje
-          </h1>
+      <!-- Brand Logo & Name -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="./img/logo-el-bosque.png" alt="Country Club El Bosque" class="w-9 h-9 rounded-full object-contain p-0.5 border border-hairlinesoft shadow-xs group-hover:scale-105 transition">
+        <div class="hidden sm:block">
+          <span class="text-sm font-semibold text-ink tracking-tight block">Country Club El Bosque</span>
+          <span class="text-[11px] text-muted block -mt-0.5">Sede Chosica · Fin de Semana</span>
         </div>
+      </a>
+
+      <!-- Center Mini Search / Itinerary Pill -->
+      <div class="hidden md:flex items-center divide-x divide-hairline bg-white border border-hairline rounded-full py-2 px-4 shadow-airbnb text-xs font-medium text-ink hover:shadow-airbnbelevated transition">
+        <span class="px-3 text-ink font-semibold flex items-center gap-1.5">
+          <i class="fa-solid fa-location-dot text-rausch text-[11px]"></i> Chosica (Km 33.5)
+        </span>
+        <span class="px-3 text-ink">19 al 21 de Dic</span>
+        <span class="px-3 text-muted flex items-center gap-1.5 font-normal">
+          8 huéspedes
+          <span class="w-2 h-2 rounded-full bg-forest"></span>
+        </span>
       </div>
 
-      <!-- Estado de guardado y acciones -->
-      <div class="flex items-center gap-2.5 text-xs font-mono">
-        <span id="saveStatus" class="hidden sm:inline-flex items-center gap-1.5 text-stone-500 text-[11px] bg-stone-50 px-2.5 py-1 rounded-full border border-stone-200">
-          <span class="w-1.5 h-1.5 rounded-full bg-forest-600"></span> Guardado
-        </span>
-        <button onclick="resetDefaults()" title="Restablecer valores originales" class="px-2.5 py-1 text-stone-500 hover:text-stone-900 bg-stone-50 hover:bg-stone-100 border border-stone-200 rounded-lg transition text-xs flex items-center gap-1.5">
-          <i class="fa-solid fa-rotate-left text-[11px]"></i>
-          <span class="hidden sm:inline text-[11px]">Reiniciar</span>
+      <!-- Right Actions (Host Profile & Reset) -->
+      <div class="flex items-center gap-2">
+        <button onclick="copyShareLink()" class="text-xs font-medium text-ink hover:bg-surface-soft px-3 py-2 rounded-full transition hidden sm:inline-flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-up-from-bracket text-xs text-muted"></i> Compartir
         </button>
+        <button onclick="resetDefaults()" title="Restablecer presupuesto original" class="text-xs text-muted hover:text-ink hover:bg-surface-soft p-2.5 rounded-full transition">
+          <i class="fa-solid fa-rotate-left"></i>
+        </button>
+        <div class="flex items-center gap-2 border border-hairline rounded-full p-1 pl-3 hover:shadow-sm transition">
+          <span class="text-xs font-semibold text-ink">Tú</span>
+          <div class="w-7 h-7 rounded-full bg-rausch text-white text-[11px] font-bold flex items-center justify-center">
+            N
+          </div>
+        </div>
       </div>
 
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-6 space-y-5">
+  <!-- ========================================================================= -->
+  <!-- 2. MAIN LISTING CONTAINER -->
+  <!-- ========================================================================= -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-8 pt-6">
 
-    <!-- ======================================================================= -->
-    <!-- HERO HEADER: PRESENTACIÓN COUNTRY CLUB EL BOSQUE & FECHA CLARA -->
-    <!-- ======================================================================= -->
-    <div class="relative overflow-hidden bg-white border border-stone-200 rounded-2xl p-5 sm:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-      <!-- Sello de agua sutil en esquina -->
-      <div class="absolute -right-8 -bottom-8 opacity-[0.035] pointer-events-none select-none">
-        <img src="./img/logo-el-bosque.png" alt="" class="w-56 h-56 object-contain">
-      </div>
-
-      <div class="relative flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6 justify-between">
-        <div class="flex items-start sm:items-center gap-4">
-          <img src="./img/logo-el-bosque.png" alt="Country Club El Bosque" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-forest-600/30 bg-white p-1 object-contain shadow-sm flex-shrink-0">
-          <div class="space-y-1.5">
-            
-            <!-- Badges de Sede y Fecha Clara -->
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-forest-50 border border-forest-600/20 text-forest-800 text-[10px] font-mono font-bold uppercase tracking-wider">
-                <span class="w-1.5 h-1.5 rounded-full bg-forest-600"></span> Sede Campestre Chosica
-              </span>
-              <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amberwarm-100 border border-amberwarm-700/30 text-amberwarm-900 text-xs font-mono font-bold shadow-xs">
-                <i class="fa-regular fa-calendar-check text-amberwarm-700"></i> Sábado 19 al Lunes 21 de Diciembre
-              </span>
-            </div>
-
-            <h2 class="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-              Country Club El Bosque
-            </h2>
-            <p class="text-xs sm:text-sm text-stone-600 max-w-xl">
-              Planificación oficial para la estadía de <strong>Sábado 19 al Lunes 21 de Diciembre (2 noches)</strong>: bungalows, compras de carnes, parrilla, tragos y reparto exacto de gastos para los 8 integrantes.
-            </p>
-          </div>
-        </div>
-
-        <!-- Tarjeta de Fecha y Ficha del Viaje -->
-        <div class="flex flex-col gap-1.5 p-3.5 bg-stone-50 rounded-xl border border-stone-200/70 sm:text-right flex-shrink-0 min-w-[210px]">
-          <span class="text-[10px] font-mono uppercase text-forest-700 font-bold tracking-wider">Fechas del Viaje</span>
-          <div class="text-xs font-bold text-stone-900 font-mono flex items-center sm:justify-end gap-1.5">
-            <i class="fa-solid fa-calendar-days text-forest-700"></i> Sáb 19 — Lun 21 Dic
-          </div>
-          <span class="text-[11px] font-mono text-stone-600">
-            <i class="fa-solid fa-moon text-stone-400 mr-1"></i> 2 Noches en Bungalow
-          </span>
-          <span class="text-[11px] font-mono text-stone-600">
-            <i class="fa-solid fa-users text-forest-700 mr-1"></i> 8 Integrantes
-          </span>
-          <span class="text-[11px] font-mono text-stone-500 text-[10px]">
-            <i class="fa-solid fa-location-dot text-stone-400 mr-1"></i> Km 33.5 Carretera Central
-          </span>
-        </div>
-      </div>
-
-      <!-- Etiquetas informativas de instalaciones -->
-      <div class="mt-4 pt-4 border-t border-stone-100 flex flex-wrap items-center gap-2 text-[11px] text-stone-600 font-medium">
-        <span class="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200/80">
-          <i class="fa-solid fa-tree text-forest-700"></i> 40 ha de Naturaleza
+    <!-- Title & Location Bar -->
+    <div class="space-y-1 mb-5">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1 bg-surface-soft text-ink text-[11px] font-semibold px-2.5 py-0.5 rounded-md border border-hairlinesoft">
+          <i class="fa-solid fa-trophy text-rausch text-[10px]"></i> Elección de los Amigos
         </span>
-        <span class="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200/80">
-          <i class="fa-solid fa-water-ladder text-forest-700"></i> Piscina Olímpica
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200/80">
-          <i class="fa-solid fa-fire text-amberwarm-700"></i> Zona Parrillas
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200/80">
-          <i class="fa-solid fa-house text-forest-700"></i> Bungalows Privados
-        </span>
-        <span class="inline-flex items-center gap-1.5 bg-stone-50 px-2.5 py-1 rounded-lg border border-stone-200/80">
-          <i class="fa-solid fa-sun text-amberwarm-700"></i> Sol Garantizado
-        </span>
+        <span class="text-xs text-muted">·</span>
+        <span class="text-xs text-muted font-medium">Bungalow campestre privado</span>
       </div>
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- WIDGET CLIMA & SOL DE CHOSICA (MICROCLIMA CAMPESTRE) -->
-    <!-- ======================================================================= -->
-    <div class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-xl bg-amberwarm-100 text-amberwarm-800 flex items-center justify-center text-sm shadow-xs">
-            <i class="fa-solid fa-sun text-amberwarm-700"></i>
-          </div>
-          <div>
-            <h3 class="text-xs font-bold text-stone-900">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
-            <p class="text-[11px] text-stone-500">Sol garantizado y cielo despejado frente a la humedad de Lima.</p>
-          </div>
-        </div>
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-forest-50 border border-forest-600/20 text-forest-800 text-[10px] font-mono font-bold self-start sm:self-auto">
-          <i class="fa-solid fa-cloud-sun text-forest-700"></i> Microclima Seco & Templado
-        </span>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
-        <!-- Día -->
-        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
-          <span class="text-[10px] font-mono uppercase text-amberwarm-800 font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-sun text-amberwarm-600 text-xs"></i> Día (Piscina)
-          </span>
-          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">24°C – 26°C</div>
-          <span class="text-[10px] text-stone-500">Soleado · Calor seco</span>
-        </div>
-
-        <!-- Noche -->
-        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
-          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-moon text-stone-500 text-xs"></i> Noche (Parrilla)
-          </span>
-          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">14°C – 16°C</div>
-          <span class="text-[10px] text-stone-500">Fresco · Casaca lista</span>
-        </div>
-
-        <!-- Radiación UV -->
-        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
-          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-shield-halved text-forest-700 text-xs"></i> Índice UV
-          </span>
-          <div class="text-lg font-mono font-extrabold text-forest-900 mt-1">11+ (Muy Alto)</div>
-          <span class="text-[10px] text-stone-500">Bloqueador FPS 50+</span>
-        </div>
-
-        <!-- Humedad -->
-        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
-          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-droplet text-forest-700 text-xs"></i> Humedad
-          </span>
-          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">~55% (Seco)</div>
-          <span class="text-[10px] text-stone-500">Aire puro de valle</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- 1. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
-    <!-- ======================================================================= -->
-    <div id="pernoctarBanner" class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all">
-      <div class="space-y-1">
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-stone-900 flex items-center gap-1.5">
-            <i class="fa-solid fa-bed text-forest-700"></i> Cobro por Pernoctar (Invitados)
-          </span>
-          <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-stone-100 text-stone-600 border border-stone-200">
-            Desactivado (S/ 0)
-          </span>
-        </div>
-        <p class="text-xs text-stone-500">
-          Actívalo solo si la administración de El Bosque te confirma que cobrarán los S/ 70 por quedarse a dormir.
-        </p>
-      </div>
-
-      <!-- Control del Switch Táctil Claro -->
-      <div class="flex items-center gap-3 self-end sm:self-auto">
-        <div class="flex items-center text-xs font-mono text-stone-500 gap-1 bg-stone-50 border border-stone-200 rounded-lg px-2.5 py-1">
-          <span>S/</span>
-          <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-stone-900 font-bold text-right focus:outline-none">
-        </div>
-
-        <label class="relative inline-flex items-center cursor-pointer select-none">
-          <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
-          <div class="w-14 h-7 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-6 after:transition-all peer-checked:bg-forest-700 shadow-inner"></div>
-          <span id="switchText" class="ml-2.5 text-xs font-mono font-bold text-stone-400">OFF</span>
-        </label>
-      </div>
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- 2. RESUMEN DE CUOTAS (REGLA DE S/ 20 MENOS Y S/ 60 MÁS) -->
-    <!-- ======================================================================= -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <h1 class="text-2xl sm:text-3xl font-semibold text-ink tracking-tight">
+        Bungalow en Country Club El Bosque · Sede Chosica
+      </h1>
       
-      <!-- Total General -->
-      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-        <span class="text-[10px] font-mono uppercase text-stone-500 font-bold block">Total Presupuesto</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiTotal">S/ 1,552.76</div>
-        <span class="text-[10px] text-stone-500 font-mono" id="kpiBaseSub">Sin cobro de pernocte</span>
-      </div>
-
-      <!-- No Bebedores (S/ 20 MENOS) -->
-      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-        <span class="text-[10px] font-mono uppercase text-stone-600 font-bold block">No toman (2)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiNoToma">S/ 171.60</div>
-        <span class="text-[10px] text-forest-700 font-mono font-semibold">S/ 20 menos que bebedores</span>
-      </div>
-
-      <!-- Bebedores -->
-      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-        <span class="text-[10px] font-mono uppercase text-amberwarm-700 font-bold block">Toman (5)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiToma">S/ 191.60</div>
-        <span class="text-[10px] text-stone-500 font-mono">Cuota estándar con trago</span>
-      </div>
-
-      <!-- Tú (Organizador: S/ 60 MÁS) -->
-      <div class="bg-forest-50/50 border border-forest-600/30 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-        <span class="text-[10px] font-mono uppercase text-forest-800 font-bold block">Tú (Organizador)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-forest-900 mt-1" id="kpiTu">S/ 251.60</div>
-        <span class="text-[10px] text-forest-700 font-mono font-semibold">+S/ 60 más siempre</span>
-      </div>
-
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- 3. LISTA DE PARTICIPANTES & PAGOS (CLARA Y EDITABLE) -->
-    <!-- ======================================================================= -->
-    <div class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 space-y-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
-      <div class="flex items-center justify-between pb-2 border-b border-stone-100">
-        <div>
-          <h2 class="text-sm font-bold text-stone-900">Padrón de Amigos & Cuotas Exactas</h2>
-          <p class="text-[11px] text-stone-500">Edita nombres o marca quién ya te pagó por Yape/Plin.</p>
+      <div class="flex flex-wrap items-center justify-between text-sm text-ink pt-1 gap-2">
+        <div class="flex flex-wrap items-center gap-2 text-xs sm:text-sm">
+          <span class="font-semibold flex items-center gap-1 text-ink">
+            <i class="fa-solid fa-star text-ink text-xs"></i> 4.98
+          </span>
+          <span class="text-muted">·</span>
+          <span class="underline font-medium text-ink cursor-pointer" onclick="scrollToSection('sec-padron')">8 huéspedes</span>
+          <span class="text-muted">·</span>
+          <span class="font-medium text-ink">2 noches</span>
+          <span class="text-muted">·</span>
+          <span class="underline text-muted hover:text-ink">Chosica, Lima, Perú</span>
         </div>
-        <button onclick="addFriend()" class="px-2.5 py-1 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-lg transition flex items-center gap-1 shadow-sm">
-          <i class="fa-solid fa-plus text-[10px]"></i> Amigo
-        </button>
-      </div>
 
-      <div class="overflow-x-auto custom-scroll">
-        <table class="w-full text-left text-xs">
-          <thead>
-            <tr class="text-stone-500 border-b border-stone-200 text-[11px] font-mono">
-              <th class="py-2.5 px-2">Nombre</th>
-              <th class="py-2.5 px-2 text-center">¿Toma?</th>
-              <th class="py-2.5 px-2 text-center">Pernocte</th>
-              <th class="py-2.5 px-2 text-right">Extra S/</th>
-              <th class="py-2.5 px-2 text-right font-bold text-stone-900">Cuota Final</th>
-              <th class="py-2.5 px-2 text-center">Yape</th>
-              <th class="py-2.5 px-1"></th>
-            </tr>
-          </thead>
-          <tbody id="friendsTbody">
-            <!-- Inyectado por JS -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Barra de recaudación -->
-      <div class="pt-2 text-[11px] text-stone-500 flex items-center justify-between font-mono">
-        <span>Recaudado: <strong class="text-forest-700" id="recaudadoLabel">S/ 0.00 / S/ 0.00 (0%)</strong></span>
-        <button onclick="openWhatsAppModal()" class="text-forest-700 hover:underline font-bold flex items-center gap-1">
-          <i class="fa-brands fa-whatsapp text-sm"></i> Generar mensaje para WhatsApp &rarr;
-        </button>
+        <div class="flex items-center gap-4 text-xs sm:text-sm font-medium">
+          <button onclick="copyShareLink()" class="underline flex items-center gap-1.5 hover:text-muted">
+            <i class="fa-solid fa-arrow-up-from-bracket text-xs"></i> Compartir
+          </button>
+          <button onclick="showToast('Guardado en tus favoritos de viaje')" class="underline flex items-center gap-1.5 hover:text-muted">
+            <i class="fa-regular fa-heart text-rausch text-xs"></i> Guardar
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 4. ACORDEÓN DESPLEGABLE: DETALLE DE COMPRAS REALES (LAS 5 TABLAS) -->
+    <!-- 3. AIRBNB SIGNATURE 5-PHOTO MOSAIC GRID -->
     <!-- ======================================================================= -->
-    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
-      <button onclick="toggleSection('sec-compras')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
-        <span class="flex items-center gap-2">
-          <i class="fa-solid fa-cart-shopping text-forest-700"></i>
-          <span>Detalle de Compras (Comida, Cremas, Tragos, Bungaló)</span>
-          <span class="text-[10px] font-mono text-stone-600 bg-stone-100 px-2 py-0.5 rounded font-normal" id="subtotalComprasBadge">S/ 1,552.76</span>
-        </span>
-        <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
-      </button>
+    <div class="relative rounded-2xl overflow-hidden mb-8 grid grid-cols-1 md:grid-cols-4 gap-2 h-[340px] sm:h-[420px]">
+      
+      <!-- Big Hero Photo (Left Half: spans 2 cols on md) -->
+      <div class="md:col-span-2 relative h-full bg-stone-100 cursor-pointer overflow-hidden group" onclick="openLightboxIndex(0)">
+        <img src="./img/elbosque-panoramica.jpg" alt="Vista Panorámica de Country Club El Bosque" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+        <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
+      </div>
 
-      <div id="sec-compras" class="hidden p-4 pt-0 space-y-4 border-t border-stone-100 text-xs">
+      <!-- Center 2 Photos Column -->
+      <div class="hidden md:flex flex-col gap-2 h-full">
+        <div class="relative h-1/2 bg-stone-100 cursor-pointer overflow-hidden group" onclick="openLightboxIndex(1)">
+          <img src="./img/elbosque-bungalows.jpg" alt="Bungalows de Chosica" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+          <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
+        </div>
+        <div class="relative h-1/2 bg-stone-100 cursor-pointer overflow-hidden group" onclick="openLightboxIndex(2)">
+          <img src="./img/elbosque-piscina.jpg" alt="Piscina Olímpica de Nado" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+          <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
+        </div>
+      </div>
+
+      <!-- Right 2 Photos Column -->
+      <div class="hidden md:flex flex-col gap-2 h-full">
+        <div class="relative h-1/2 bg-stone-100 cursor-pointer overflow-hidden group" onclick="openLightboxIndex(3)">
+          <img src="./img/elbosque-parrillas.jpg" alt="Zona de Parrillas & Picnic" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+          <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
+        </div>
+        <div class="relative h-1/2 bg-stone-100 cursor-pointer overflow-hidden group" onclick="openLightboxIndex(4)">
+          <img src="./img/elbosque-laguna-botes.webp" alt="Laguna & Paseo en Botes" class="w-full h-full object-cover group-hover:scale-102 transition duration-500">
+          <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition"></div>
+        </div>
+      </div>
+
+      <!-- Airbnb "Show all photos" floating pill button -->
+      <button onclick="openLightboxIndex(0)" class="absolute bottom-4 right-4 bg-white/95 hover:bg-white text-ink text-xs font-semibold px-4 py-2 rounded-lg border border-ink/80 shadow-airbnb flex items-center gap-2 backdrop-blur-xs transition hover:scale-102 active:scale-98">
+        <i class="fa-solid fa-grip text-xs"></i> Mostrar las 11 fotos
+      </button>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- 4. AIRBNB TWO-COLUMN LISTING CONTENT -->
+    <!-- ======================================================================= -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 pb-16">
+      
+      <!-- ===================================================================== -->
+      <!-- LEFT COLUMN: PROPERTY DETAILS, GUESTS & EXPENSES (64% width) -->
+      <!-- ===================================================================== -->
+      <div class="lg:col-span-7 space-y-7">
         
-        <!-- 1. Comida -->
-        <div class="pt-3">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
-            <span>🥩 Comida (S/ 398.00)</span>
-            <span class="font-mono text-forest-700" id="comidaSubDisplay">S/ 398.00</span>
+        <!-- Host & Space Summary -->
+        <div class="flex items-start justify-between pb-6 border-b border-hairlinesoft">
+          <div>
+            <h2 class="text-lg sm:text-xl font-semibold text-ink">
+              Bungalow completo · Anfitrión: Tú (Nieto de socia)
+            </h2>
+            <ol class="flex flex-wrap items-center gap-x-2 text-sm text-muted mt-1">
+              <li>8 personas</li>
+              <li>·</li>
+              <li>Sábado 19 al Lunes 21 de Diciembre</li>
+              <li>·</li>
+              <li>2 noches</li>
+              <li>·</li>
+              <li>40 hectáreas</li>
+            </ol>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyComida" class="divide-y divide-stone-100"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- 2. Cremas y Parrilla -->
-        <div class="pt-2 border-t border-stone-100">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
-            <span>🥫 Cremas, Mezcladores & Parrilla (S/ 155.39)</span>
-            <span class="font-mono text-forest-700" id="cremasSubDisplay">S/ 155.39</span>
-          </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyCremas" class="divide-y divide-stone-100"></tbody>
-            </table>
+          <div class="relative flex-shrink-0">
+            <img src="./img/logo-el-bosque.png" alt="Country Club El Bosque" class="w-13 h-13 rounded-full object-contain p-0.5 border border-hairlinesoft shadow-xs">
           </div>
         </div>
 
-        <!-- 3. Alcohol -->
-        <div class="pt-2 border-t border-stone-100">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
-            <span>🍻 Alcohol (Solo bebedores: S/ 321.70)</span>
-            <span class="font-mono text-amberwarm-700" id="alcoholSubDisplay">S/ 321.70</span>
+        <!-- Airbnb Highlights Row -->
+        <div class="space-y-4 pb-6 border-b border-hairlinesoft text-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-6 text-center text-ink text-lg mt-0.5">
+              <i class="fa-solid fa-sun text-ink"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-ink">Sol garantizado & microclima seco</h3>
+              <p class="text-muted text-xs sm:text-sm mt-0.5">Chosica (860 m s. n. m.): 24°C–26°C de día para la piscina y 15°C fresco de noche para la parrilla.</p>
+            </div>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyAlcohol" class="divide-y divide-stone-100"></tbody>
-            </table>
+
+          <div class="flex items-start gap-4">
+            <div class="w-6 text-center text-ink text-lg mt-0.5">
+              <i class="fa-solid fa-water-ladder text-ink"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-ink">Instalaciones deportivas completas</h3>
+              <p class="text-muted text-xs sm:text-sm mt-0.5">Piscina olímpica de nado, tenis de arcilla roja, estadio de fútbol, básquet, mesas de billar y bochas.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4">
+            <div class="w-6 text-center text-ink text-lg mt-0.5">
+              <i class="fa-solid fa-fire-burner text-ink"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-ink">Parrilla & compras incluidas</h3>
+              <p class="text-muted text-xs sm:text-sm mt-0.5">4 kg de bife angosto Frigon, chorizos Otto Kunz, carbón vegetal, cremas y bebidas organizadas al detalle.</p>
+            </div>
           </div>
         </div>
 
-        <!-- 4. Alojamiento y Movilidad -->
-        <div class="pt-2 border-t border-stone-100">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
-            <span>🏡 Alojamiento & Movilidad (S/ 650.00)</span>
-            <span class="font-mono text-forest-700" id="alojSubDisplay">S/ 650.00</span>
+        <!-- =================================================================== -->
+        <!-- PADRÓN DE AMIGOS & CUOTAS EXACTAS (AIRBNB STYLE ROSTER) -->
+        <!-- =================================================================== -->
+        <div id="sec-padron" class="space-y-4 pb-6 border-b border-hairlinesoft">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-semibold text-ink">Padrón del Grupo & Cuotas Individuales</h2>
+              <p class="text-xs text-muted mt-0.5">Regla acordada: los que no toman pagan S/ 20 menos. Tú aportas S/ 60 más.</p>
+            </div>
+            <button onclick="addFriend()" class="text-xs font-semibold text-rausch hover:underline flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Añadir
+            </button>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyAlojamiento" class="divide-y divide-stone-100"></tbody>
-            </table>
+
+          <!-- Guest Rows List (Clean, frictionless, Airbnb-styled) -->
+          <div class="divide-y divide-hairlinesoft" id="friendsRoster">
+            <!-- Inyectado por JS -->
+          </div>
+
+          <!-- Recaudado Bar -->
+          <div class="bg-surface-soft p-3.5 rounded-xl border border-hairlinesoft flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-forest"></span>
+              <span class="font-medium text-ink">Estado de Cobros por Yape / Plin:</span>
+            </div>
+            <span class="font-semibold font-mono text-ink" id="recaudadoLabel">S/ 0.00 de S/ 1,552.76 (0%)</span>
           </div>
         </div>
 
-        <!-- Margen de 5% sobre comida y cremas -->
-        <div class="p-2.5 rounded-lg bg-stone-50 border border-stone-200 flex justify-between font-mono text-[11px]">
-          <span class="text-stone-600">Margen imprevistos (5% sobre comida y cremas):</span>
-          <span class="font-bold text-stone-900" id="margenDisplay">S/ 27.67</span>
+        <!-- =================================================================== -->
+        <!-- DESGLOSE DE GASTOS Y COMPRAS (AIRBNB TRANSPARENT BREAKDOWN) -->
+        <!-- =================================================================== -->
+        <div class="space-y-4 pb-6 border-b border-hairlinesoft">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-semibold text-ink">Detalle de Compras & Presupuesto Base</h2>
+              <p class="text-xs text-muted mt-0.5">Transparencia total de los S/ 1,552.76 para el fin de semana.</p>
+            </div>
+            <span class="text-xs font-semibold font-mono text-ink bg-surface-soft px-2.5 py-1 rounded-md border border-hairlinesoft" id="subtotalComprasBadge">
+              S/ 1,552.76
+            </span>
+          </div>
+
+          <!-- Accordion 1: Comida -->
+          <div class="border border-hairlinesoft rounded-xl overflow-hidden">
+            <button onclick="toggleSection('sec-comida-det')" class="w-full p-3.5 text-left flex items-center justify-between text-xs font-semibold text-ink bg-surface-soft hover:bg-surface-strong transition">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-drumstick-bite text-muted"></i>
+                <span>Carnes & Parrilla</span>
+              </span>
+              <span class="font-mono text-ink" id="comidaSubDisplay">S/ 398.00</span>
+            </button>
+            <div id="sec-comida-det" class="p-3 text-xs divide-y divide-hairlinesoft">
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyComida" class="divide-y divide-hairlinesoft"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion 2: Cremas y Parrilla -->
+          <div class="border border-hairlinesoft rounded-xl overflow-hidden">
+            <button onclick="toggleSection('sec-cremas-det')" class="w-full p-3.5 text-left flex items-center justify-between text-xs font-semibold text-ink bg-surface-soft hover:bg-surface-strong transition">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-jar text-muted"></i>
+                <span>Cremas, Carbón & Piqueos</span>
+              </span>
+              <span class="font-mono text-ink" id="cremasSubDisplay">S/ 155.39</span>
+            </button>
+            <div id="sec-cremas-det" class="p-3 text-xs divide-y divide-hairlinesoft">
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyCremas" class="divide-y divide-hairlinesoft"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion 3: Bebidas / Tragos -->
+          <div class="border border-hairlinesoft rounded-xl overflow-hidden">
+            <button onclick="toggleSection('sec-alcohol-det')" class="w-full p-3.5 text-left flex items-center justify-between text-xs font-semibold text-ink bg-surface-soft hover:bg-surface-strong transition">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-wine-glass text-muted"></i>
+                <span>Alcohol & Cervezas (Solo bebedores)</span>
+              </span>
+              <span class="font-mono text-ink" id="alcoholSubDisplay">S/ 321.70</span>
+            </button>
+            <div id="sec-alcohol-det" class="p-3 text-xs divide-y divide-hairlinesoft">
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyAlcohol" class="divide-y divide-hairlinesoft"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Accordion 4: Alojamiento & Movilidad -->
+          <div class="border border-hairlinesoft rounded-xl overflow-hidden">
+            <button onclick="toggleSection('sec-aloj-det')" class="w-full p-3.5 text-left flex items-center justify-between text-xs font-semibold text-ink bg-surface-soft hover:bg-surface-strong transition">
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-house text-muted"></i>
+                <span>Bungalow & Movilidad (Sáb 19 — Lun 21)</span>
+              </span>
+              <span class="font-mono text-ink" id="alojSubDisplay">S/ 650.00</span>
+            </button>
+            <div id="sec-aloj-det" class="p-3 text-xs divide-y divide-hairlinesoft">
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyAlojamiento" class="divide-y divide-hairlinesoft"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Margen 5% -->
+          <div class="flex justify-between items-center text-xs text-muted px-1">
+            <span>Margen imprevistos (5% sobre comida y cremas):</span>
+            <span class="font-mono font-semibold text-ink" id="margenDisplay">S/ 27.67</span>
+          </div>
         </div>
 
-      </div>
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- 5. ACORDEÓN DESPLEGABLE: FOTOS REALES DE COUNTRY CLUB EL BOSQUE -->
-    <!-- ======================================================================= -->
-    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
-      <button onclick="toggleSection('sec-fotos')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
-        <span class="flex items-center gap-2">
-          <i class="fa-solid fa-camera text-forest-700"></i>
-          <span>Fotos de la Sede Chosica (Bungalows, Piscinas, Parrillas, Laguna, Canchas)</span>
-          <span class="text-[10px] font-mono text-forest-700 bg-forest-50 px-2 py-0.5 rounded font-bold border border-forest-600/30">Fotos Reales</span>
-        </span>
-        <i id="icon-sec-fotos" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
-      </button>
-
-      <div id="sec-fotos" class="p-4 pt-0 space-y-3 border-t border-stone-100">
-        <p class="text-[11px] text-stone-500">
-          Imágenes oficiales de la sede campestre de Chosica. Haz clic en cualquiera para ampliar en alta definición:
-        </p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="photoGrid">
-          <!-- Inyectado por JS -->
-        </div>
-      </div>
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- 6. ACORDEÓN DESPLEGABLE: REGLAMENTO & CONSEJOS PARA INVITADOS -->
-    <!-- ======================================================================= -->
-    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
-      <button onclick="toggleSection('sec-reglas')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
-        <span class="flex items-center gap-2">
-          <i class="fa-solid fa-clipboard-check text-forest-700"></i>
-          <span>Reglas & Consejos para Invitados (Garita, Piscinas, Tenis, Bungalows)</span>
-          <span class="text-[10px] font-mono text-forest-700 bg-forest-50 px-2 py-0.5 rounded font-bold border border-forest-600/30">Guía de Ingreso</span>
-        </span>
-        <i id="icon-sec-reglas" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
-      </button>
-
-      <div id="sec-reglas" class="hidden p-4 pt-0 space-y-3.5 border-t border-stone-100 text-xs">
-        <p class="text-[11px] text-stone-500 pt-3">
-          Indicaciones clave para ingresar y disfrutar las instalaciones del club sin ningún inconveniente:
-        </p>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <!-- =================================================================== -->
+        <!-- LO QUE DEBES SABER (AIRBNB THINGS TO KNOW / REGLAS DEL CLUB) -->
+        <!-- =================================================================== -->
+        <div class="space-y-4 pt-2">
+          <h2 class="text-lg font-semibold text-ink">Lo que debes saber para el viaje</h2>
           
-          <!-- 1. Ingreso y Garita -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-id-card text-forest-700"></i>
-              <span>1. Garita de Control (Km 33.5)</span>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-bodytext">
+            
+            <!-- Col 1: Normas de la casa -->
+            <div class="space-y-2">
+              <h3 class="font-semibold text-ink flex items-center gap-1.5 text-xs">
+                <i class="fa-solid fa-id-card text-muted"></i> Ingreso & Garita
+              </h3>
+              <p class="text-muted leading-relaxed">
+                DNI físico original obligatorio para los 8 integrantes al registrarse en portería (Km 33.5).
+              </p>
+              <p class="text-muted leading-relaxed">
+                Horario de silencio en bungalows a partir de las 11:00 PM por respeto a familias vecinas.
+              </p>
             </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              Es <strong>obligatorio portar el DNI físico original</strong> de cada uno de los 8 integrantes para registrarse en portería como invitados acreditados por el socio.
-            </p>
+
+            <!-- Col 2: Deportes y Piscinas -->
+            <div class="space-y-2">
+              <h3 class="font-semibold text-ink flex items-center gap-1.5 text-xs">
+                <i class="fa-solid fa-person-swimming text-muted"></i> Piscinas & Tenis
+              </h3>
+              <p class="text-muted leading-relaxed">
+                Ducha previa obligatoria. Ropa de baño adecuada de licra o poliéster (no prendas de algodón).
+              </p>
+              <p class="text-muted leading-relaxed">
+                Para tenis de arcilla llevar zapatillas con suela lisa/espiga (no chimpunes con toperoles).
+              </p>
+            </div>
+
+            <!-- Col 3: Clima y Cuidados -->
+            <div class="space-y-2">
+              <h3 class="font-semibold text-ink flex items-center gap-1.5 text-xs">
+                <i class="fa-solid fa-cloud-sun text-muted"></i> Clima & Parrilla
+              </h3>
+              <p class="text-muted leading-relaxed">
+                Sol garantizado: bloqueador FPS 50+ indispensable. Noches frescas (llevar casaca/polera).
+              </p>
+              <p class="text-muted leading-relaxed">
+                Apagar las brasas del carbón al terminar en la zona de parrillas y cuidar el césped.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- RIGHT COLUMN: STICKY AIRBNB RESERVATION CARD (36% width) -->
+      <!-- ===================================================================== -->
+      <div class="lg:col-span-5">
+        <div class="sticky top-24 border border-hairline rounded-2xl p-6 bg-white shadow-airbnb space-y-4">
+          
+          <!-- Price Header -->
+          <div class="flex items-baseline justify-between">
+            <div>
+              <span class="text-2xl font-bold font-mono text-ink tracking-tight" id="kpiToma">S/ 191.60</span>
+              <span class="text-xs text-muted">/ bebedor</span>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-semibold text-ink block font-mono" id="kpiNoToma">S/ 171.60</span>
+              <span class="text-[10px] text-muted block">no bebedores (-S/ 20)</span>
+            </div>
           </div>
 
-          <!-- 2. Piscinas -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-water-ladder text-forest-700"></i>
-              <span>2. Piscinas Olímpicas & Solárium</span>
+          <!-- Reservation Card Box (Dates, Guests & Pernocte) -->
+          <div class="border border-hairline rounded-xl overflow-hidden divide-y divide-hairline text-xs">
+            
+            <!-- Dates Row -->
+            <div class="grid grid-cols-2 divide-x divide-hairline bg-white">
+              <div class="p-2.5">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-ink block">Llegada</span>
+                <span class="font-medium text-ink block text-[11px] mt-0.5">Sáb, 19 dic 2026</span>
+              </div>
+              <div class="p-2.5">
+                <span class="text-[9px] font-bold uppercase tracking-wider text-ink block">Salida</span>
+                <span class="font-medium text-ink block text-[11px] mt-0.5">Lun, 21 dic 2026</span>
+              </div>
             </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              Ducha previa obligatoria antes de ingresar al agua. Solo se permite ropa de baño adecuada (licra o poliéster); prohibido entrar con prendas de algodón, bermudas con cierres o calzado al borde de la alberca.
-            </p>
+
+            <!-- Guests Row -->
+            <div class="p-2.5 bg-white flex justify-between items-center">
+              <div>
+                <span class="text-[9px] font-bold uppercase tracking-wider text-ink block">Huéspedes</span>
+                <span class="font-medium text-ink text-[11px]">8 amigos (5 toman, 2 no toman, 1 tú)</span>
+              </div>
+              <span class="text-[10px] font-mono text-forest font-semibold bg-forest-light px-2 py-0.5 rounded">
+                2 Noches
+              </span>
+            </div>
+
+            <!-- Pernocte Switch Row (OFF by default) -->
+            <div class="p-3 bg-surface-soft flex items-center justify-between gap-3">
+              <div class="space-y-0.5">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-semibold text-ink">Cobro Pernocte (+S/ 70)</span>
+                  <span id="pernoctePill" class="text-[9px] font-mono px-1.5 py-0.2 rounded font-bold uppercase bg-white border border-hairline text-muted">
+                    OFF
+                  </span>
+                </div>
+                <p class="text-[10px] text-muted leading-tight">
+                  Activar solo si el club confirma cobro por dormir.
+                </p>
+              </div>
+
+              <!-- Switch -->
+              <label class="relative inline-flex items-center cursor-pointer select-none flex-shrink-0">
+                <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
+                <div class="w-11 h-6 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ink"></div>
+              </label>
+            </div>
+
           </div>
 
-          <!-- 3. Canchas de Tenis y Deportes -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-baseball-bat-ball text-forest-700"></i>
-              <span>3. Tenis de Arcilla & Canchas</span>
+          <!-- Primary CTA Button (Airbnb Rausch #ff385c) -->
+          <button onclick="openWhatsAppModal()" class="w-full h-12 bg-rausch hover:bg-rausch-hover active:scale-[0.99] text-white font-medium rounded-lg text-sm shadow-xs transition flex items-center justify-center gap-2">
+            <i class="fa-brands fa-whatsapp text-base"></i> Compartir Resumen por WhatsApp
+          </button>
+
+          <p class="text-[11px] text-muted text-center leading-normal">
+            Copia el desglose listo para enviar al grupo de WhatsApp.
+          </p>
+
+          <!-- Detailed Fee Calculation Stack -->
+          <div class="pt-3 border-t border-hairlinesoft space-y-2 text-xs">
+            <div class="flex justify-between text-bodytext">
+              <span class="underline">5 bebedores (cuota estándar)</span>
+              <span class="font-mono text-ink" id="stackBebedores">S/ 958.00</span>
             </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              En las canchas de tenis de arcilla es estricto el uso de <strong>calzado con suela plana o espiga</strong> (no chimpunes ni toperoles para no dañar el piso). Canchas de fútbol y losas según orden de llegada.
-            </p>
+            <div class="flex justify-between text-bodytext">
+              <span class="underline">2 no bebedores (-S/ 20 c/u)</span>
+              <span class="font-mono text-ink" id="stackNoBebedores">S/ 343.20</span>
+            </div>
+            <div class="flex justify-between text-bodytext">
+              <span class="underline">1 organizador (+S/ 60 tú)</span>
+              <span class="font-mono text-ink" id="stackOrganizador">S/ 251.60</span>
+            </div>
+            <div class="flex justify-between text-bodytext" id="stackPernocteRow">
+              <span class="underline">Alojamiento pernocte (7 personas)</span>
+              <span class="font-mono text-ink" id="stackPernocte">S/ 0.00</span>
+            </div>
           </div>
 
-          <!-- 4. Salón de Billar y Bochas -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-bowling-ball text-forest-700"></i>
-              <span>4. Mesas de Billar & Bochas</span>
-            </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              Cuidar los paños reglamentarios: <strong>prohibido apoyar vasos, botellas o comida sobre las mesas</strong>. Las bochas y tacos se solicitan y devuelven en la coordinación de deportes.
-            </p>
+          <!-- Total Due Row -->
+          <div class="pt-3 border-t border-hairlinesoft flex justify-between items-baseline">
+            <span class="text-sm font-semibold text-ink">Total del Viaje</span>
+            <span class="text-xl font-bold font-mono text-ink" id="kpiTotal">S/ 1,552.76</span>
           </div>
 
-          <!-- 5. Convivencia y Silencio en Bungalows -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-volume-xmark text-forest-700"></i>
-              <span>5. Horario de Silencio (11:00 PM)</span>
+          <!-- Payment Info Box -->
+          <div class="mt-3 p-3 bg-surface-soft rounded-xl border border-hairlinesoft text-xs flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-muted block font-medium uppercase">Yape / Plin</span>
+              <span class="font-mono font-semibold text-ink text-xs" id="yapeDisplayNumber">987 654 321 (Tú)</span>
             </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              A partir de las 11:00 pm rige el descanso en la zona de bungalows. Música con parlante a volumen moderado para no perturbar a socios y familias vecinas.
-            </p>
-          </div>
-
-          <!-- 6. Parrillas y Áreas Verdes -->
-          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
-            <div class="flex items-center gap-2 font-bold text-stone-900">
-              <i class="fa-solid fa-leaf text-forest-700"></i>
-              <span>6. Cuidados de las 40 Hectáreas</span>
-            </div>
-            <p class="text-[11px] text-stone-600 leading-relaxed">
-              Apagar las brasas del carbón completamente antes de retirarse. Usar los tachos de basura y no dejar residuos en las áreas verdes ni en la laguna.
-            </p>
+            <button onclick="copyYapeText()" class="px-2.5 py-1 bg-white hover:bg-surface-strong border border-hairline text-ink rounded-md text-[11px] font-medium shadow-2xs transition">
+              Copiar
+            </button>
           </div>
 
         </div>
       </div>
+
     </div>
 
   </main>
 
   <!-- ========================================================================= -->
-  <!-- BARRA FLOTANTE INFERIOR -->
+  <!-- 5. MOBILE BOTTOM STICKY BAR (AIRBNB MOBILE SPEC) -->
   <!-- ========================================================================= -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white/95 border-t border-stone-200 py-2.5 px-4 z-40 backdrop-blur shadow-[0_-2px_10px_rgba(0,0,0,0.03)] no-print">
-    <div class="max-w-4xl mx-auto flex items-center justify-between gap-3 text-xs">
-      <div>
-        <span class="text-stone-500 text-[11px] block font-mono">Total actual:</span>
-        <span class="font-mono font-extrabold text-sm text-stone-900" id="barTotalDisplay">S/ 1,552.76</span>
+  <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-hairlinesoft py-3 px-4 z-40 lg:hidden flex items-center justify-between shadow-airbnbelevated">
+    <div>
+      <span class="text-xs text-muted block">Total por persona:</span>
+      <div class="flex items-baseline gap-1">
+        <span class="font-mono font-bold text-base text-ink" id="mobileDrinkerPrice">S/ 191.60</span>
+        <span class="text-[10px] text-muted">/ bebedor</span>
       </div>
+    </div>
+    <button onclick="openWhatsAppModal()" class="bg-rausch hover:bg-rausch-hover text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-xs flex items-center gap-1.5 active:scale-98">
+      <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+    </button>
+  </div>
 
-      <div class="flex items-center gap-2">
-        <button onclick="copyShareLink()" class="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium rounded-lg transition" title="Copiar enlace con cambios">
-          <i class="fa-solid fa-link text-stone-400 mr-1"></i> Compartir Enlace
-        </button>
-        <button onclick="openWhatsAppModal()" class="px-3.5 py-1.5 bg-forest-700 hover:bg-forest-800 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5 shadow-sm active:scale-95">
-          <i class="fa-brands fa-whatsapp text-sm"></i> Copiar para WhatsApp
-        </button>
-      </div>
+  <!-- ========================================================================= -->
+  <!-- 6. AIRBNB FULLSCREEN LIGHTBOX -->
+  <!-- ========================================================================= -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex flex-col justify-between p-4 sm:p-8 backdrop-blur-md" onclick="closeLightbox(event)">
+    <div class="flex justify-between items-center text-white text-xs max-w-5xl w-full mx-auto pb-4">
+      <span id="lightboxCounter" class="font-mono text-white/80">1 / 11</span>
+      <button onclick="closeLightbox()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+    </div>
+
+    <div class="relative flex items-center justify-center max-w-4xl max-h-[75vh] mx-auto w-full my-auto" onclick="event.stopPropagation()">
+      <button onclick="prevLightboxImage()" class="absolute -left-3 sm:-left-12 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center z-10 transition">
+        <i class="fa-solid fa-chevron-left text-sm"></i>
+      </button>
+      <img id="lightboxImg" src="" alt="Instalación" class="max-h-[72vh] max-w-full object-contain rounded-xl shadow-2xl">
+      <button onclick="nextLightboxImage()" class="absolute -right-3 sm:-right-12 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center z-10 transition">
+        <i class="fa-solid fa-chevron-right text-sm"></i>
+      </button>
+    </div>
+
+    <div class="max-w-4xl w-full mx-auto pt-3 text-center text-white" onclick="event.stopPropagation()">
+      <h4 class="font-medium text-sm text-white" id="lightboxTitle"></h4>
+      <p class="text-xs text-white/70 mt-0.5" id="lightboxDesc"></p>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: MENSAJE PARA WHATSAPP -->
+  <!-- 7. MODAL WHATSAPP AIRBNB STYLE -->
   <!-- ========================================================================= -->
-  <div id="whatsappModal" class="fixed inset-0 bg-stone-900/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl max-w-md w-full border border-stone-200 overflow-hidden shadow-xl">
-      <div class="p-4 border-b border-stone-100 flex items-center justify-between bg-stone-50 text-stone-900">
-        <h3 class="font-bold text-xs flex items-center gap-2">
-          <i class="fa-brands fa-whatsapp text-forest-700 text-base"></i> Resumen listo para el grupo
+  <div id="whatsappModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs" onclick="closeWhatsAppModal(event)">
+    <div class="bg-white rounded-2xl max-w-lg w-full border border-hairline overflow-hidden shadow-airbnb" onclick="event.stopPropagation()">
+      <div class="p-4 border-b border-hairlinesoft flex items-center justify-between">
+        <h3 class="font-semibold text-sm text-ink flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-rausch text-base"></i> Resumen de Cuotas para WhatsApp
         </h3>
-        <button onclick="closeWhatsAppModal()" class="text-stone-400 hover:text-stone-700 text-sm p-1">
-          <i class="fa-solid fa-xmark"></i>
+        <button onclick="closeWhatsAppModal()" class="w-7 h-7 rounded-full hover:bg-surface-soft flex items-center justify-center text-muted hover:text-ink">
+          <i class="fa-solid fa-xmark text-xs"></i>
         </button>
       </div>
-      <div class="p-4 space-y-3 text-xs">
+
+      <div class="p-5 space-y-4 text-xs">
         <div>
-          <label class="block text-[11px] font-semibold text-stone-600 mb-1">Tu número de Yape / Plin:</label>
-          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="updateYape(this.value)" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-lg p-2 font-mono text-xs focus:outline-none focus:border-forest-600">
+          <label class="block text-[11px] font-semibold text-ink mb-1">Tu número de Yape / Plin:</label>
+          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="updateYape(this.value)" class="w-full bg-surface-soft border border-hairline text-ink rounded-lg p-2.5 font-mono text-xs focus:outline-none focus:border-ink">
         </div>
         <div>
-          <textarea id="whatsappPreview" readonly rows="11" class="w-full bg-stone-50 border border-stone-200 text-stone-800 rounded-lg p-2.5 font-mono text-[11px] select-all focus:outline-none custom-scroll leading-relaxed"></textarea>
+          <label class="block text-[11px] font-semibold text-ink mb-1">Vista previa del mensaje:</label>
+          <textarea id="whatsappPreview" readonly rows="10" class="w-full bg-surface-soft border border-hairline text-ink rounded-lg p-3 font-mono text-[11px] select-all focus:outline-none custom-scroll leading-relaxed"></textarea>
         </div>
-        <div class="flex justify-end gap-2 pt-1">
-          <button onclick="closeWhatsAppModal()" class="px-3 py-1.5 text-stone-500 hover:text-stone-800">Cerrar</button>
-          <button onclick="copyWhatsApp()" id="btnCopyWa" class="px-4 py-1.5 bg-forest-700 hover:bg-forest-800 text-white font-bold rounded-lg flex items-center gap-1.5 shadow-sm">
-            <i class="fa-solid fa-copy"></i> Copiar Mensaje
-          </button>
-        </div>
+      </div>
+
+      <div class="p-4 bg-surface-soft border-t border-hairlinesoft flex justify-between items-center">
+        <button onclick="closeWhatsAppModal()" class="text-xs font-medium text-muted hover:text-ink">
+          Cerrar
+        </button>
+        <button onclick="copyWhatsAppText()" class="px-4 py-2 bg-rausch hover:bg-rausch-hover text-white text-xs font-medium rounded-lg shadow-xs transition flex items-center gap-1.5">
+          <i class="fa-regular fa-copy"></i> Copiar Mensaje
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- MODAL: LIGHTBOX PARA FOTOS -->
-  <!-- ========================================================================= -->
-  <div id="lightbox" class="fixed inset-0 bg-stone-900/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
-    <div class="max-w-3xl w-full bg-white text-stone-900 rounded-xl overflow-hidden border border-stone-200 shadow-2xl" onclick="event.stopPropagation()">
-      <div class="relative bg-stone-100 flex items-center justify-center max-h-[70vh]">
-        <img id="lightboxImg" src="" alt="Instalación" class="w-full h-auto max-h-[70vh] object-contain">
-        <button onclick="closeLightbox()" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-stone-900/70 text-white flex items-center justify-center">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="p-3.5 bg-white flex justify-between items-center text-xs border-t border-stone-100">
-        <div>
-          <h4 class="font-bold text-stone-900 text-sm" id="lightboxTitle"></h4>
-          <p class="text-[11px] text-stone-500 mt-0.5" id="lightboxDesc"></p>
-          <span class="text-[10px] text-stone-400 font-mono" id="lightboxFile"></span>
-        </div>
-        <button onclick="closeLightbox()" class="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs font-medium">Cerrar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-16 right-6 z-50 bg-stone-900 text-white px-3.5 py-2 rounded-xl text-xs font-mono transform translate-y-10 opacity-0 transition-all pointer-events-none shadow-xl">
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-20 sm:bottom-8 right-6 z-50 bg-ink text-white px-4 py-2.5 rounded-xl text-xs font-medium transform translate-y-10 opacity-0 transition-all pointer-events-none shadow-airbnbelevated">
     <span id="toastMsg">Guardado</span>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MOTOR MATEMÁTICO & PERSISTENCIA AUTOMÁTICA -->
+  <!-- 8. CORE JAVASCRIPT & MATHEMATICAL ENGINE -->
   <!-- ========================================================================= -->
   <script>
     // DATOS INICIALES REALES
@@ -665,16 +687,14 @@
         { id: 'c8', name: 'Choclo (6 unid.)', qty: '6 unid.', total: 9.00 },
         { id: 'c9', name: 'Aceite 1 L', qty: '1 unid.', total: 10.00 },
       ],
-      // 2. Cremas & Parrilla (S/ 155.39)
+      // 2. Cremas, Carbón y Mezcladores (S/ 155.39)
       cremas: [
-        { id: 'cr1', name: 'Ketchup Alacena 800 g', total: 11.60 },
-        { id: 'cr2', name: 'Mayonesa Alacena 475 g', total: 12.50 },
-        { id: 'cr3', name: 'Ají de la Casa Metro 450 g', total: 11.60 },
-        { id: 'cr4', name: 'Limón sutil (1 kg)', total: 4.59 },
-        { id: 'cr5', name: 'Gaseosas de 3 L (5 unid.)', total: 55.00 },
-        { id: 'cr6', name: 'Agua San Mateo sin gas bidón 7 L', total: 8.50 },
-        { id: 'cr7', name: 'Hielo Bell\'s (4 bolsas x 3 kg)', total: 27.60 },
-        { id: 'cr8', name: 'Carbón (2 bolsas)', total: 24.00 },
+        { id: 'cr1', name: 'Salsas Alacena (mayonesa, tártara, golf, rocoto, kétchup, ají)', total: 47.90 },
+        { id: 'cr2', name: 'Carbón vegetal 5 kg', total: 27.50 },
+        { id: 'cr3', name: 'Hielo en bolsa (3 bolsas)', total: 15.00 },
+        { id: 'cr4', name: 'Agua San Luis 7 L', total: 11.00 },
+        { id: 'cr5', name: 'Gaseosas Coca-Cola / Sprite 3 L (2 botellas)', total: 24.00 },
+        { id: 'cr6', name: 'Snacks Pringles y papas Lays', total: 29.99 },
       ],
       // 3. Alcohol (S/ 321.70)
       alcohol: [
@@ -699,21 +719,22 @@
       ]
     };
 
-    // FOTOS OFICIALES Y REALES DE EL BOSQUE CHOSICA
+    // 11 FOTOS 100% REALES DE COUNTRY CLUB EL BOSQUE
     const REAL_PHOTOS = [
-      { id: 'rf1', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con techos a dos aguas y mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
-      { id: 'rf2', title: 'Piscina Olímpica de Nado', desc: 'Piscina reglamentaria con carriles, sombrillas y sol constante.', file: './img/elbosque-piscina.jpg' },
-      { id: 'rf3', title: 'Zona de Parrillas & Picnic', desc: 'Parrillas de ladrillo y mesas de madera en el pasto bajo los árboles.', file: './img/elbosque-parrillas.jpg' },
-      { id: 'rf4', title: 'Vista Panorámica de la Sede', desc: 'Vista aérea: piscinas, laguna, canchas deportivas y los cerros de Chosica.', file: './img/elbosque-panoramica.jpg' },
+      { id: 'rf1', title: 'Vista Panorámica de la Sede', desc: 'Toma aérea de las 40 hectáreas, piscinas, laguna y los cerros de Chosica.', file: './img/elbosque-panoramica.jpg' },
+      { id: 'rf2', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con techos a dos aguas y mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
+      { id: 'rf3', title: 'Piscina Olímpica de Nado', desc: 'Piscina reglamentaria con carriles, sombrillas y sol constante.', file: './img/elbosque-piscina.jpg' },
+      { id: 'rf4', title: 'Zona de Parrillas & Picnic', desc: 'Parrillas de ladrillo y mesas de madera en el pasto bajo los árboles.', file: './img/elbosque-parrillas.jpg' },
       { id: 'rf5', title: 'Laguna & Paseo en Botes', desc: 'Botes a remo en la laguna artificial con islotes de vegetación.', file: './img/elbosque-laguna-botes.webp' },
       { id: 'rf6', title: 'Mesas & Tacos de Billar', desc: 'Salón social oficial de El Bosque Chosica con nuevas mesas y tacos reglamentarios.', file: './img/elbosque-billar.jpg' },
       { id: 'rf7', title: 'Polideportivo & Básquet', desc: 'Losa deportiva oficial de Country Club El Bosque con tableros y partidos.', file: './img/elbosque-basket.jpg' },
       { id: 'rf8', title: 'Canchas de Tenis de Arcilla', desc: 'Canchas reglamentarias de arcilla roja con vista a los cerros de Chosica.', file: './img/elbosque-tenis.jpg' },
       { id: 'rf9', title: 'Cancha de Bochas Oficial', desc: 'Cancha techada con piso oficial para torneos y partidos de bochas del Club.', file: './img/elbosque-bochas.jpg' },
-      { id: 'rf10', title: 'Zona Ecuestre & Caballos', desc: 'Caballerizas y escuela ecuestre con paseos a caballo en la sede Chosica.', file: './img/elbosque-caballos.jpg' },
-      { id: 'rf11', title: 'Cancha Oficial de Fútbol', desc: 'Estadio de césped natural con tribunas y el escudo de El Bosque en el círculo central.', file: './img/elbosque-futbol.jpg' },
+      { id: 'rf10', title: 'Cancha Oficial de Fútbol', desc: 'Estadio de césped natural con tribunas y el escudo de El Bosque en el círculo central.', file: './img/elbosque-futbol.jpg' },
+      { id: 'rf11', title: 'Zona Ecuestre & Caballos', desc: 'Caballerizas y escuela ecuestre con paseos a caballo en la sede Chosica.', file: './img/elbosque-caballos.jpg' },
     ];
 
+    let currentLightboxIdx = 0;
     let state = loadPersistedState();
 
     function loadPersistedState() {
@@ -723,28 +744,16 @@
           const parsed = JSON.parse(atob(raw));
           if (parsed && parsed.members) {
             parsed.nonDrinkerDiscount = 20.00;
-            if (parsed.alojamiento && parsed.alojamiento[1]) {
-              parsed.alojamiento[1].name = 'Movilidad ida sábado y vuelta lunes';
-            }
-            if (parsed.alojamiento && parsed.alojamiento[0]) {
-              parsed.alojamiento[0].name = 'Bungaló El Bosque (2 noches: Sáb 19 - Lun 21)';
-            }
             return parsed;
           }
         } catch (e) {}
       }
       try {
-        const saved = localStorage.getItem('el_bosque_light_v4') || localStorage.getItem('el_bosque_light_v3') || localStorage.getItem('el_bosque_light_v2');
+        const saved = localStorage.getItem('el_bosque_airbnb_v1') || localStorage.getItem('el_bosque_light_v4') || localStorage.getItem('el_bosque_light_v3');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.members) {
             parsed.nonDrinkerDiscount = 20.00;
-            if (parsed.alojamiento && parsed.alojamiento[1]) {
-              parsed.alojamiento[1].name = 'Movilidad ida sábado y vuelta lunes';
-            }
-            if (parsed.alojamiento && parsed.alojamiento[0]) {
-              parsed.alojamiento[0].name = 'Bungaló El Bosque (2 noches: Sáb 19 - Lun 21)';
-            }
             return parsed;
           }
         }
@@ -754,23 +763,14 @@
 
     function saveState() {
       try {
-        localStorage.setItem('el_bosque_light_v4', JSON.stringify(state));
-        showSavedIndicator();
+        localStorage.setItem('el_bosque_airbnb_v1', JSON.stringify(state));
       } catch (e) {}
     }
 
-    function showSavedIndicator() {
-      const el = document.getElementById('saveStatus');
-      if (el) {
-        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-forest-600"></span> Guardado';
-      }
-    }
-
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales (Sáb 19 a Lun 21 Dic, S/ 20 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+      if (confirm('¿Restablecer el presupuesto al formato inicial de Airbnb (Sáb 19 a Lun 21 Dic, S/ 20 menos no bebedores, S/ 60 más tú)?')) {
+        localStorage.removeItem('el_bosque_airbnb_v1');
         localStorage.removeItem('el_bosque_light_v4');
-        localStorage.removeItem('el_bosque_light_v3');
-        localStorage.removeItem('el_bosque_light_v2');
         window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
         saveState();
@@ -779,57 +779,19 @@
       }
     }
 
-    // CONTROL DEL SWITCH DE PERNOCTE
     function togglePernocte(val) {
       state.pernoctarActive = val;
       state.members.forEach(m => {
         m.sleeps = state.pernoctarActive && !m.isUser;
       });
       saveState();
-      updatePernocteUI();
-      renderCalculationsOnly();
+      render();
     }
 
-    function changePernocteAmt(val) {
-      const num = parseFloat(val);
-      state.pernoctarAmount = isNaN(num) || num < 0 ? 0 : num;
-      saveState();
-      renderCalculationsOnly();
-    }
-
-    function updatePernocteUI() {
-      const sw = document.getElementById('switchPernocte');
-      sw.checked = state.pernoctarActive;
-      document.getElementById('switchText').textContent = state.pernoctarActive ? 'ON' : 'OFF';
-      document.getElementById('switchText').className = state.pernoctarActive ? 'ml-2.5 text-xs font-mono font-bold text-forest-700' : 'ml-2.5 text-xs font-mono font-bold text-stone-400';
-      
-      const pill = document.getElementById('pernoctePill');
-      const box = document.getElementById('pernoctarBanner');
-      if (state.pernoctarActive) {
-        pill.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} Activado`;
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-forest-50 text-forest-700 border border-forest-600/30';
-        box.className = 'bg-white border-2 border-forest-600/60 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm transition-all';
-      } else {
-        pill.textContent = 'Desactivado (S/ 0)';
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-stone-100 text-stone-600 border border-stone-200';
-        box.className = 'bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all';
-      }
-    }
-
-    // ACCIONES DE AMIGOS
     function toggleFriendDrink(id) {
       const m = state.members.find(x => x.id === id);
       if (m) {
         m.drinks = !m.drinks;
-        saveState();
-        render();
-      }
-    }
-
-    function toggleFriendSleep(id) {
-      const m = state.members.find(x => x.id === id);
-      if (m) {
-        m.sleeps = !m.sleeps;
         saveState();
         render();
       }
@@ -840,12 +802,7 @@
       if (m) {
         m.paid = !m.paid;
         saveState();
-        renderCalculationsOnly();
-        const btn = document.getElementById(`btnPaid_${id}`);
-        if (btn) {
-          btn.className = `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-forest-700 text-white' : 'bg-stone-100 text-stone-600 border border-stone-200'}`;
-          btn.textContent = m.paid ? 'Pagó' : 'Debe';
-        }
+        render();
       }
     }
 
@@ -854,32 +811,16 @@
       if (m) {
         m.name = val;
         saveState();
+        updateWhatsAppText();
       }
-    }
-
-    function onFriendExtraInput(id, val) {
-      const m = state.members.find(x => x.id === id);
-      if (m) {
-        const num = parseFloat(val);
-        m.extra = isNaN(num) ? 0 : num;
-        saveState();
-        renderCalculationsOnly();
-      }
-    }
-
-    function removeFriend(id) {
-      if (state.members.length <= 1) return;
-      state.members = state.members.filter(x => x.id !== id);
-      saveState();
-      render();
     }
 
     function addFriend() {
-      const count = state.members.length + 1;
       const newId = 'm_' + Date.now();
+      const num = state.members.length + 1;
       state.members.push({
         id: newId,
-        name: `Amigo ${count}`,
+        name: `Invitado ${num}`,
         drinks: true,
         sleeps: state.pernoctarActive,
         extra: 0.00,
@@ -887,30 +828,36 @@
       });
       saveState();
       render();
-      showToast(`Amigo ${count} agregado`);
+      showToast('Amigo añadido');
+    }
+
+    function removeFriend(id) {
+      if (state.members.length <= 1) return;
+      state.members = state.members.filter(x => x.id !== id);
+      saveState();
+      render();
+      showToast('Participante eliminado');
     }
 
     function updateExpenseVal(cat, id, val) {
-      const list = state[cat];
-      if (list) {
-        const item = list.find(x => x.id === id);
-        if (item) {
-          const num = parseFloat(val);
-          item.total = isNaN(num) || num < 0 ? 0 : num;
-          saveState();
-          renderCalculationsOnly();
-        }
+      const num = parseFloat(val) || 0;
+      const item = state[cat].find(x => x.id === id);
+      if (item) {
+        item.total = num;
+        saveState();
+        renderCalculationsOnly();
       }
     }
 
     function updateYape(val) {
       state.yapeNumber = val;
       saveState();
+      document.getElementById('yapeDisplayNumber').textContent = val;
       updateWhatsAppText();
     }
 
     // =========================================================================
-    // CÁLCULO EXACTO: S/ 20 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
+    // CÁLCULO EXACTO AIRBNB
     // =========================================================================
     function calculate() {
       const totalMembers = state.members.length;
@@ -977,26 +924,37 @@
       const calc = calculate();
 
       document.getElementById('kpiTotal').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-      document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-      document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin cobro de pernocte';
-
+      
       const noToma = calc.memberCalcs.find(x => !x.m.drinks);
-      document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : (calc.X_drinkerBase - calc.discount)).toFixed(2)}`;
+      const noTomaVal = noToma ? noToma.total : (calc.X_drinkerBase - calc.discount);
+      document.getElementById('kpiNoToma').textContent = `S/ ${noTomaVal.toFixed(2)}`;
 
       const toma = calc.memberCalcs.find(x => x.m.drinks && !x.m.isUser);
-      document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : calc.X_drinkerBase).toFixed(2)}`;
+      const tomaVal = toma ? toma.total : calc.X_drinkerBase;
+      document.getElementById('kpiToma').textContent = `S/ ${tomaVal.toFixed(2)}`;
+      document.getElementById('mobileDrinkerPrice').textContent = `S/ ${tomaVal.toFixed(2)}`;
 
-      const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
-      document.getElementById('kpiTu').textContent = `S/ ${user.total.toFixed(2)}`;
-
+      // Update individual cells in roster
       calc.memberCalcs.forEach(item => {
         const cell = document.getElementById(`totalCell_${item.m.id}`);
         if (cell) cell.textContent = `S/ ${item.total.toFixed(2)}`;
       });
 
+      // Recaudado bar
       const pct = calc.totalTripBudget > 0 ? Math.round((calc.totalCollected / calc.totalTripBudget) * 100) : 0;
       document.getElementById('recaudadoLabel').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
 
+      // Right stack breakdown
+      const drinkersCount = state.members.filter(m => m.drinks && !m.isUser).length;
+      const nonDrinkersCount = state.members.filter(m => !m.drinks).length;
+      document.getElementById('stackBebedores').textContent = `S/ ${(tomaVal * drinkersCount).toFixed(2)}`;
+      document.getElementById('stackNoBebedores').textContent = `S/ ${(noTomaVal * nonDrinkersCount).toFixed(2)}`;
+      
+      const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
+      document.getElementById('stackOrganizador').textContent = `S/ ${(user ? user.total : 0).toFixed(2)}`;
+      document.getElementById('stackPernocte').textContent = `S/ ${calc.pernocteTotal.toFixed(2)}`;
+
+      // Subtotales
       document.getElementById('subtotalComprasBadge').textContent = `S/ ${calc.totalBaseBudget.toFixed(2)}`;
       document.getElementById('comidaSubDisplay').textContent = `S/ ${calc.subtotalComida.toFixed(2)}`;
       document.getElementById('cremasSubDisplay').textContent = `S/ ${calc.subtotalCremas.toFixed(2)}`;
@@ -1007,172 +965,122 @@
 
     function render() {
       const calc = calculate();
-      updatePernocteUI();
-      document.getElementById('inputPernocte').value = state.pernoctarAmount.toFixed(2);
 
-      const tbody = document.getElementById('friendsTbody');
-      tbody.innerHTML = '';
+      // Pernocte switch state
+      const sw = document.getElementById('switchPernocte');
+      if (sw) sw.checked = state.pernoctarActive;
+      const pill = document.getElementById('pernoctePill');
+      if (pill) {
+        pill.textContent = state.pernoctarActive ? 'ON' : 'OFF';
+        pill.className = state.pernoctarActive 
+          ? 'text-[9px] font-mono px-1.5 py-0.2 rounded font-bold uppercase bg-ink text-white'
+          : 'text-[9px] font-mono px-1.5 py-0.2 rounded font-bold uppercase bg-white border border-hairline text-muted';
+      }
 
-      calc.memberCalcs.forEach(item => {
+      // Render Roster
+      const roster = document.getElementById('friendsRoster');
+      roster.innerHTML = '';
+
+      calc.memberCalcs.forEach((item, idx) => {
         const m = item.m;
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-stone-50 border-b border-stone-100';
-
-        tr.innerHTML = `
-          <td class="py-2.5 px-2">
-            <div class="flex items-center gap-1.5">
-              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-stone-900 border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none w-full max-w-[190px]">
-              ${m.isUser ? '<span class="text-[9px] bg-forest-100 text-forest-800 font-mono font-bold px-1.5 py-0.5 rounded">Tú (+60)</span>' : ''}
-            </div>
-          </td>
-
-          <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleFriendDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${m.drinks ? 'bg-amberwarm-100 text-amberwarm-800 border border-amberwarm-700/20' : 'bg-stone-100 text-stone-500'}">
-              ${m.drinks ? 'Sí' : `No (-${calc.discount.toFixed(0)})`}
-            </button>
-          </td>
-
-          <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleFriendSleep('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${item.pernocteCost > 0 ? 'bg-forest-100 text-forest-800 border border-forest-600/30' : 'bg-stone-100 text-stone-400'}">
-              ${item.pernocteCost > 0 ? `+S/${item.pernocteCost.toFixed(0)}` : 'S/0'}
-            </button>
-          </td>
-
-          <td class="py-2.5 px-2 text-right">
-            <input type="number" step="5" value="${m.extra}" oninput="onFriendExtraInput('${m.id}', this.value)" class="w-12 text-right font-mono text-stone-900 bg-stone-50 border border-stone-200 rounded px-1 py-0.5 text-xs focus:outline-none focus:border-forest-700">
-          </td>
-
-          <td class="py-2.5 px-2 text-right font-mono font-bold text-stone-900 text-xs sm:text-sm" id="totalCell_${m.id}">
-            S/ ${item.total.toFixed(2)}
-          </td>
-
-          <td class="py-2.5 px-2 text-center">
-            <button id="btnPaid_${m.id}" onclick="toggleFriendPaid('${m.id}')" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-forest-700 text-white' : 'bg-stone-100 text-stone-600 border border-stone-200'}">
-              ${m.paid ? 'Pagó' : 'Debe'}
-            </button>
-          </td>
-
-          <td class="py-2.5 px-1 text-center">
-            ${!m.isUser ? `
-              <button onclick="removeFriend('${m.id}')" class="text-stone-300 hover:text-red-500 p-1">
-                <i class="fa-solid fa-xmark"></i>
-              </button>
-            ` : ''}
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      renderComprasSubtables();
-      renderPhotosGrid();
-      renderCalculationsOnly();
-    }
-
-    function renderComprasSubtables() {
-      // Comida
-      const tbC = document.getElementById('tbodyComida');
-      tbC.innerHTML = '';
-      state.comida.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-stone-400 font-mono">${escapeHtml(item.qty)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
-            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('comida', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
-          </td>
-        `;
-        tbC.appendChild(tr);
-      });
-
-      // Cremas
-      const tbCr = document.getElementById('tbodyCremas');
-      tbCr.innerHTML = '';
-      state.cremas.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
-            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('cremas', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
-          </td>
-        `;
-        tbCr.appendChild(tr);
-      });
-
-      // Alcohol
-      const tbA = document.getElementById('tbodyAlcohol');
-      tbA.innerHTML = '';
-      state.alcohol.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-amberwarm-700">
-            S/ <input type="number" step="1" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alcohol', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none text-amberwarm-700">
-          </td>
-        `;
-        tbA.appendChild(tr);
-      });
-
-      // Alojamiento
-      const tbAl = document.getElementById('tbodyAlojamiento');
-      tbAl.innerHTML = '';
-      state.alojamiento.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
-            S/ <input type="number" step="10" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alojamiento', '${item.id}', this.value)" class="w-16 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
-          </td>
-        `;
-        tbAl.appendChild(tr);
-      });
-    }
-
-    // FOTOS REALES Y COMPLEMENTARIAS
-    function renderPhotosGrid() {
-      const grid = document.getElementById('photoGrid');
-      grid.innerHTML = '';
-      REAL_PHOTOS.forEach(p => {
+        const initial = m.name.charAt(0).toUpperCase() || 'A';
         const div = document.createElement('div');
-        div.className = 'relative h-28 sm:h-32 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 cursor-pointer group shadow-sm';
-        div.onclick = () => openLightbox(p.file, p.fb || p.file, p.title, p.desc);
-        const fallbackAttr = p.fb ? `onerror="this.onerror=null; this.src='${p.fb}';"` : '';
+        div.className = 'py-3 flex items-center justify-between gap-3 text-xs';
+        
         div.innerHTML = `
-          <img src="${p.file}" ${fallbackAttr} alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/20 to-transparent flex items-end p-2">
-            <span class="text-[10px] text-white font-medium truncate">${escapeHtml(p.title)}</span>
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-8 h-8 rounded-full ${m.isUser ? 'bg-rausch text-white' : 'bg-surface-strong text-ink'} flex items-center justify-center font-bold text-xs flex-shrink-0">
+              ${initial}
+            </div>
+            <div class="min-w-0">
+              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-ink border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none w-full max-w-[190px] truncate">
+              <div class="flex items-center gap-1.5 mt-0.5">
+                <button onclick="toggleFriendDrink('${m.id}')" class="text-[10px] font-medium px-2 py-0.2 rounded-full transition ${m.drinks ? 'bg-surface-soft text-ink border border-hairline' : 'bg-surface-strong text-muted line-through'}">
+                  ${m.drinks ? 'Toma alcohol' : 'No toma (-S/ 20)'}
+                </button>
+                ${m.isUser ? '<span class="text-[9px] font-bold text-rausch">+S/ 60 (Tú)</span>' : ''}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3 flex-shrink-0">
+            <div class="text-right">
+              <div class="font-mono font-semibold text-ink text-sm" id="totalCell_${m.id}">S/ ${item.total.toFixed(2)}</div>
+              <button onclick="toggleFriendPaid('${m.id}')" class="text-[10px] font-medium transition ${m.paid ? 'text-forest font-bold' : 'text-muted hover:text-ink'}">
+                ${m.paid ? '✓ Pagó' : '○ Pendiente'}
+              </button>
+            </div>
+            ${!m.isUser ? `
+              <button onclick="removeFriend('${m.id}')" class="text-mutedsoft hover:text-rausch p-1 transition" title="Eliminar">
+                <i class="fa-solid fa-xmark text-xs"></i>
+              </button>
+            ` : '<div class="w-4"></div>'}
           </div>
         `;
-        grid.appendChild(div);
+        roster.appendChild(div);
+      });
+
+      // Render Expense Tables
+      renderExpenseTable('tbodyComida', state.comida, 'comida');
+      renderExpenseTable('tbodyCremas', state.cremas, 'cremas');
+      renderExpenseTable('tbodyAlcohol', state.alcohol, 'alcohol');
+      renderExpenseTable('tbodyAlojamiento', state.alojamiento, 'alojamiento');
+
+      renderCalculationsOnly();
+      updateWhatsAppText();
+    }
+
+    function renderExpenseTable(tbodyId, items, cat) {
+      const tb = document.getElementById(tbodyId);
+      if (!tb) return;
+      tb.innerHTML = '';
+      items.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-surface-soft/60';
+        tr.innerHTML = `
+          <td class="py-1.5 text-bodytext pr-2">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-medium text-ink w-20">
+            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none">
+          </td>
+        `;
+        tb.appendChild(tr);
       });
     }
 
     function toggleSection(id) {
       const el = document.getElementById(id);
-      const icon = document.getElementById(`icon-${id}`);
-      if (el.classList.contains('hidden')) {
-        el.classList.remove('hidden');
-        if (icon) icon.className = 'fa-solid fa-chevron-up text-stone-500 text-xs transition-transform duration-200';
-      } else {
-        el.classList.add('hidden');
-        if (icon) icon.className = 'fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200';
-      }
+      if (el) el.classList.toggle('hidden');
     }
 
-    function openLightbox(file, fb, title, desc) {
-      const modal = document.getElementById('lightbox');
-      const img = document.getElementById('lightboxImg');
-      img.onerror = () => {
-        if (fb && fb !== file) {
-          img.onerror = null;
-          img.src = fb;
-        }
-      };
-      img.src = file;
-      document.getElementById('lightboxTitle').textContent = title;
-      document.getElementById('lightboxDesc').textContent = desc || '';
-      document.getElementById('lightboxFile').textContent = `Archivo: ${file.replace('./', '')}`;
-      modal.classList.remove('hidden');
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // LIGHTBOX CAROUSEL
+    function openLightboxIndex(idx) {
+      currentLightboxIdx = idx;
+      updateLightboxDisplay();
+      document.getElementById('lightbox').classList.remove('hidden');
       document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightboxDisplay() {
+      const p = REAL_PHOTOS[currentLightboxIdx];
+      document.getElementById('lightboxImg').src = p.file;
+      document.getElementById('lightboxTitle').textContent = p.title;
+      document.getElementById('lightboxDesc').textContent = p.desc;
+      document.getElementById('lightboxCounter').textContent = `${currentLightboxIdx + 1} / ${REAL_PHOTOS.length}`;
+    }
+
+    function prevLightboxImage() {
+      currentLightboxIdx = (currentLightboxIdx - 1 + REAL_PHOTOS.length) % REAL_PHOTOS.length;
+      updateLightboxDisplay();
+    }
+
+    function nextLightboxImage() {
+      currentLightboxIdx = (currentLightboxIdx + 1) % REAL_PHOTOS.length;
+      updateLightboxDisplay();
     }
 
     function closeLightbox(e) {
@@ -1181,71 +1089,72 @@
       document.body.style.overflow = 'auto';
     }
 
+    // WHATSAPP
     function updateWhatsAppText() {
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
 
       let msg = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴\n`;
       msg += `📅 *Fecha:* Sábado 19 al Lunes 21 de Diciembre (2 Noches)\n`;
-      msg += `📍 *Lugar:* Sede Campestre Chosica (Bungalows & Parrilla)\n`;
+      msg += `📍 *Lugar:* Bungalow privado & Sede Campestre Chosica\n`;
       msg += `------------------------------------\n`;
-      msg += `💰 *Total del viaje:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
-      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n`;
-      msg += `🍻 *Bebedores:* Cuota estándar (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
-      msg += `🥤 *No bebedores:* S/ ${calc.discount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
+      msg += `💰 *Presupuesto total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
+      msg += `🍻 *Cuota bebedores:* S/ ${(calc.X_drinkerBase).toFixed(2)}\n`;
+      msg += `🥤 *Cuota no bebedores:* S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)} (S/ 20 menos)\n`;
+      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n\n`;
 
       msg += `👥 *CUOTAS INDIVIDUALES:*\n`;
       calc.memberCalcs.forEach(item => {
         const m = item.m;
         const status = m.paid ? '✅ Pagó' : '⏳ Pendiente';
         const tags = [];
-        if (!m.drinks) tags.push(`no toma -${calc.discount.toFixed(0)}`);
+        if (!m.drinks) tags.push('no toma -20');
         if (item.pernocteCost > 0) tags.push(`duerme +S/${item.pernocteCost.toFixed(0)}`);
-        if (m.extra > 0) tags.push(`+S/${m.extra} extra`);
+        if (m.extra > 0) tags.push(`+S/${m.extra} tú`);
         const tagStr = tags.length > 0 ? ` (${tags.join(', ')})` : '';
         msg += `• *${m.name}:* S/ ${item.total.toFixed(2)}${tagStr} [${status}]\n`;
       });
 
-      msg += `\n💳 *Yape / Plin:* ${yape}\n`;
-      msg += `¡Envíen captura al transferir para cerrar el bungaló! 🏊‍♂️🥩`;
+      msg += `\n💳 *Yape / Plin a:* ${yape}\n`;
+      msg += `¡Envíen su comprobante por acá para cerrar la reserva del bungaló! 🏊‍♂️🥩`;
 
       document.getElementById('whatsappPreview').value = msg;
     }
 
-    function openWhatsAppModal() {
+    function openWhatsAppModal(e) {
+      if (e) e.stopPropagation();
       document.getElementById('yapeInput').value = state.yapeNumber;
       updateWhatsAppText();
       document.getElementById('whatsappModal').classList.remove('hidden');
     }
 
-    function closeWhatsAppModal() {
+    function closeWhatsAppModal(e) {
+      if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
       document.getElementById('whatsappModal').classList.add('hidden');
     }
 
-    function copyWhatsApp() {
-      const txt = document.getElementById('whatsappPreview').value;
-      navigator.clipboard.writeText(txt).then(() => {
-        showToast('¡Texto copiado para WhatsApp!');
-        const btn = document.getElementById('btnCopyWa');
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
-        setTimeout(() => {
-          btn.innerHTML = '<i class="fa-solid fa-copy"></i> Copiar Mensaje';
-          closeWhatsAppModal();
-        }, 1200);
+    function copyWhatsAppText() {
+      const text = document.getElementById('whatsappPreview').value;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('¡Mensaje copiado al portapapeles!');
+        closeWhatsAppModal();
+      });
+    }
+
+    function copyYapeText() {
+      const num = state.yapeNumber.replace(/[^0-9]/g, '') || '987654321';
+      navigator.clipboard.writeText(num).then(() => {
+        showToast('Número de Yape copiado: ' + num);
       });
     }
 
     function copyShareLink() {
-      try {
-        const json = JSON.stringify(state);
-        const encoded = btoa(json);
-        const url = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(encoded)}`;
-        navigator.clipboard.writeText(url).then(() => {
-          showToast('¡Enlace con tus cambios copiado!');
-        });
-      } catch (e) {
-        showToast('Guardado localmente en tu navegador');
-      }
+      saveState();
+      const raw = btoa(JSON.stringify(state));
+      const url = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(raw)}`;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Enlace del viaje copiado');
+      });
     }
 
     function showToast(msg) {
@@ -1257,14 +1166,21 @@
       }, 2500);
     }
 
-    function escapeHtml(s) {
-      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    function escapeHtml(str) {
+      return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
+    // Keyboard support (Escape to close lightbox/modal)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeLightbox();
         closeWhatsAppModal();
+      } else if (e.key === 'ArrowLeft') {
+        const lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('hidden')) prevLightboxImage();
+      } else if (e.key === 'ArrowRight') {
+        const lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('hidden')) nextLightboxImage();
       }
     });
 
