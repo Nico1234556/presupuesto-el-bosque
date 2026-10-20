@@ -20,17 +20,26 @@ Aplicación web rápida, interactiva y con persistencia en tiempo real para calc
 
 ---
 
-## 🎨 Sistema de Diseño & Skills Guardadas
+## 🎨 Paleta de Color Clara & Mate (Anti-Deslumbramiento)
 
-Este repositorio incluye en la carpeta [`/skills`](./skills) las dos directrices de diseño seguidas para la interfaz:
+Se ha reemplazado el blanco puro reflectante de Airbnb por una paleta mate, orgánica y suave ("opaca pero clara"), perfectamente integrada con la naturaleza del Country Club El Bosque:
 
-1. **[`skills/airbnb-design-system.md`](./skills/airbnb-design-system.md)**:
-   - Paleta de colores oficial: Lienzo blanco puro (`#ffffff`), superficie de apoyo (`#f7f7f7`), texto principal tinta (`#222222`), texto secundario (`#717171`), bordes hairlines de 1px (`#ebebeb`, `#dddddd`), acento Airbnb Rausch (`#ff385c`).
-   - Tipografía limpia con pesos equilibrados (Inter / Sans-serif) y monospace reservado exclusivamente para números financieros.
-   - Un único nivel de elevación sutil (`box-shadow` Airbnb).
+- **Lienzo de fondo mate (`#ebe7df`):** Tono lino/piedra suave que elimina por completo el deslumbramiento y la fatiga visual.
+- **Superficie de tarjetas (`#f7f6f1`):** Tono marfil suave que resalta limpiamente sin deslumbrar.
+- **Cajas secundarias e inputs (`#eeeae1`):** Jerarquía visual sutil en tablas, widgets del clima y controles.
+- **Bordes nítidos de 1px (`#d5d0c2` / `#e2ddd0`):** Definición elegante sin sombras pesadas.
+- **Tinta tipográfica (`#1c221e` / `#3a423d`):** Grafito profundo de alto contraste y legibilidad óptima (WCAG AAA).
+- **Acentos oficiales del club:**
+  - **Verde Bosque (`#1e5631`):** Acento campestre en botones principales, estados activos y WhatsApp.
+  - **Terracota mate (`#b8541c`):** Inspirado en el ladrillo tradicional de los bungalows de Chosica, para destacar la cuota del organizador.
 
-2. **[`skills/avoid-ai-design.md`](./skills/avoid-ai-design.md)**:
-   - Eliminación de clichés de IA ("AI slop"): cero "card soup" (sin tarjetas dentro de tarjetas ni bordes innecesarios), sin iconos en cajitas redondeadas de colores, sin badges decorativos `font-mono uppercase` injustificados, y jerarquía visual nítida basada en tipografía e información real.
+---
+
+## 📁 Skills Guardadas en el Repositorio
+
+En [`/skills`](./skills) se encuentran documentadas las referencias de diseño:
+1. **[`skills/airbnb-design-system.md`](./skills/airbnb-design-system.md)**: Estructura de paneles, tipografía jerárquica y espaciados funcionales.
+2. **[`skills/avoid-ai-design.md`](./skills/avoid-ai-design.md)**: Eliminación de clichés de IA (cero *card soup*, sin cajitas de colores flotantes para iconos y sin tipografías mono en mayúsculas decorativas).
 
 ---
 
