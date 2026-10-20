@@ -20,18 +20,14 @@ Aplicación web rápida, interactiva y con persistencia en tiempo real para calc
 
 ---
 
-## 🎨 Paleta de Color Clara & Mate (Anti-Deslumbramiento)
+## ☁️ Diseño Inspirado en Travelio (Framer Template)
 
-Se ha reemplazado el blanco puro reflectante de Airbnb por una paleta mate, orgánica y suave ("opaca pero clara"), perfectamente integrada con la naturaleza del Country Club El Bosque:
-
-- **Lienzo de fondo mate (`#ebe7df`):** Tono lino/piedra suave que elimina por completo el deslumbramiento y la fatiga visual.
-- **Superficie de tarjetas (`#f7f6f1`):** Tono marfil suave que resalta limpiamente sin deslumbrar.
-- **Cajas secundarias e inputs (`#eeeae1`):** Jerarquía visual sutil en tablas, widgets del clima y controles.
-- **Bordes nítidos de 1px (`#d5d0c2` / `#e2ddd0`):** Definición elegante sin sombras pesadas.
-- **Tinta tipográfica (`#1c221e` / `#3a423d`):** Grafito profundo de alto contraste y legibilidad óptima (WCAG AAA).
-- **Acentos oficiales del club:**
-  - **Verde Bosque (`#1e5631`):** Acento campestre en botones principales, estados activos y WhatsApp.
-  - **Terracota mate (`#b8541c`):** Inspirado en el ladrillo tradicional de los bungalows de Chosica, para destacar la cuota del organizador.
+Se ha integrado la estética cinematográfica de **Travelio (Framer)**, destacando:
+- **Hero de Aventura & Paisaje:** Fondo panorámico con van de viaje y pinos campestres, con textos de alto impacto.
+- **Capa de Nubes Flotantes Realistas (*Cloud Transition*):** Nubes volumétricas animadas con suave balanceo que disuelven gradualmente el hero en la sección de contenido claro.
+- **Sellos Postales Vintage:** Sellos ilustrados en las esquinas que flotan e inclinan suavemente al interactuar.
+- **Tipografía Editorial:** Combinación de **Geist** (sans moderno y legible), **Source Serif 4** (cursiva editorial elegante para destacar palabras clave) y **JetBrains Mono** (números financieros).
+- **Paleta Travelio:** Lienzo suave y descansado (`#faf9f5`), tarjetas limpias (`#ffffff`), tinta de carbón cálido (`#1a1a17`), verde bosque campestre (`#1b5e32`) y acento cálido ámbar (`#d97706`).
 
 ---
 
