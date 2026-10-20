@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Presupuesto & Cuotas | Country Club El Bosque</title>
+  <title>Country Club El Bosque · Chosica | Presupuesto & Guía de Instalaciones</title>
+  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  
+  <!-- Font Awesome Icons 6.5 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Google Fonts: Plus Jakarta Sans (UI) + Playfair Display (Editorial / Luxury Club) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
@@ -19,25 +22,57 @@
         extend: {
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
           },
           colors: {
-            bosque: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
+            club: {
+              50: '#f4f7f4',
+              100: '#e5ede5',
+              200: '#cbdacb',
+              300: '#a3bea3',
+              400: '#759b75',
+              500: '#527c52',
+              600: '#3e623e',
+              700: '#324e32',
+              800: '#1b3b22', // Bosque Evergreen
+              900: '#0f2414', // Deep Woods
+              950: '#07130a',
+            },
+            terracotta: {
+              500: '#c2593f',
+              600: '#a8462e',
+            },
+            sand: {
+              50: '#faf8f5',
+              100: '#f4efe6',
+              200: '#e7dcce',
+              300: '#d7c4af',
+            },
+            gold: {
+              400: '#e5c07b',
+              500: '#d4af37',
+              600: '#b89428',
             }
+          },
+          boxShadow: {
+            'luxury': '0 20px 40px -15px rgba(15, 36, 20, 0.12)',
+            'card': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+            'switch-on': '0 0 20px rgba(34, 197, 94, 0.4)',
           }
         }
       }
     }
   </script>
+
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f7f9f7;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -49,168 +84,216 @@
       background: #cbd5e1;
       border-radius: 4px;
     }
+    /* Estilos de impresión elegantes */
     @media print {
-      header, .no-print { display: none !important; }
-      body { background: white !important; padding: 0 !important; }
-      .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl { box-shadow: none !important; }
+      header, nav, .no-print, #photoLightbox, #whatsappModal { display: none !important; }
+      body { background: white !important; color: black !important; padding: 0 !important; }
+      .shadow-luxury, .shadow-card, .shadow-sm, .shadow-md, .shadow-lg { box-shadow: none !important; }
+      #tab-calculadora { display: block !important; }
+      #tab-instalaciones { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen pb-16 selection:bg-emerald-200">
+<body class="text-slate-800 antialiased selection:bg-club-200 selection:text-club-900 pb-20 sm:pb-12">
 
-  <!-- TOP HEADER -->
-  <header class="bg-gradient-to-r from-bosque-900 via-bosque-800 to-emerald-900 text-white shadow-xl sticky top-0 z-40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <div class="flex items-center gap-2 mb-1 flex-wrap">
-            <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emerald-400/30 flex items-center gap-1.5">
-              <i class="fa-solid fa-tree"></i> Sede Chosica · Enero
-            </span>
-            <span class="bg-amber-400/20 text-amber-300 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-amber-400/30">
-              <i class="fa-solid fa-pen-to-square"></i> 100% Modificable
-            </span>
-            <span class="bg-blue-400/20 text-blue-300 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-blue-400/30">
-              <i class="fa-solid fa-cloud-arrow-down"></i> Auto-guardado
-            </span>
+  <!-- ========================================================================= -->
+  <!-- BARRA DE ANUNCIO & CLIMA CHOSICA -->
+  <!-- ========================================================================= -->
+  <div class="bg-club-950 text-white/90 text-xs py-2 px-4 border-b border-white/10 no-print">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-amber-300 font-semibold">
+          <i class="fa-solid fa-sun text-sm"></i> Chosica Km 29.5
+        </span>
+        <span class="hidden sm:inline text-white/40">|</span>
+        <span class="hidden sm:inline text-white/80">Sol todo el año · Clima seco de valle</span>
+      </div>
+      <div class="flex items-center gap-4 text-[11px] text-white/70">
+        <span><i class="fa-solid fa-clock text-emerald-400 mr-1"></i> Atención: 7:00 a 18:00</span>
+        <a href="https://wa.me/51989160392" target="_blank" class="hover:text-amber-300 transition flex items-center gap-1 font-medium text-emerald-300">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Reservas WhatsApp (+51 989 160 392)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- HEADER PRINCIPAL CON ESTÉTICA DE CLUB PRIVADO -->
+  <!-- ========================================================================= -->
+  <header class="bg-gradient-to-r from-club-900 via-club-800 to-club-900 text-white shadow-xl sticky top-0 z-40 border-b border-club-700/50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo & Titular -->
+        <div class="flex items-center gap-3 sm:gap-4">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-amber-400/20 to-emerald-500/20 border border-amber-300/30 flex items-center justify-center text-amber-300 text-xl shadow-inner">
+            <i class="fa-solid fa-tree"></i>
           </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight flex items-center gap-2">
-            Presupuesto & Cuotas: Country Club El Bosque
-          </h1>
-          <p class="text-emerald-200 text-xs sm:text-sm mt-0.5">
-            Calculadora interactiva: división de bungalow, parrilla, alcohol (bebedores vs no bebedores) y pernocte.
-          </p>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] tracking-widest uppercase font-bold text-amber-300 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-300/20">
+                Country Club El Bosque
+              </span>
+              <span class="text-[10px] text-emerald-300 font-semibold hidden md:inline">
+                Sede Chosica · Fundado 1964
+              </span>
+            </div>
+            <h1 class="text-lg sm:text-2xl font-serif font-bold tracking-tight text-white flex items-center gap-2">
+              Fin de Semana en Bungaló
+            </h1>
+          </div>
         </div>
 
-        <!-- Quick actions -->
-        <div class="flex flex-wrap items-center gap-2 no-print">
-          <button onclick="openWhatsAppModal()" class="inline-flex items-center gap-2 px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs sm:text-sm font-bold rounded-lg shadow-md transition">
-            <i class="fa-brands fa-whatsapp text-base"></i> Copiar a WhatsApp
+        <!-- Navegación por Pestañas (Calculadora vs Instalaciones) -->
+        <div class="flex items-center gap-1 sm:gap-2 no-print bg-club-950/60 p-1.5 rounded-xl border border-white/10">
+          <button id="navBtnCalculadora" onclick="switchMainTab('calculadora')" class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all bg-emerald-600 text-white shadow-md">
+            <i class="fa-solid fa-calculator"></i>
+            <span class="hidden xs:inline">Calculadora & Cuotas</span>
+            <span class="xs:hidden">Cuotas</span>
           </button>
-          <button onclick="exportCSV()" title="Descargar como archivo Excel / CSV" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold rounded-lg transition">
-            <i class="fa-solid fa-file-excel text-emerald-300"></i> Excel / CSV
-          </button>
-          <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-medium rounded-lg transition">
-            <i class="fa-solid fa-print"></i> Imprimir
-          </button>
-          <button onclick="resetDefaults()" title="Restablecer los montos originales de la conversación" class="inline-flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-rose-500/30 text-emerald-100 hover:text-white text-xs sm:text-sm font-medium rounded-lg transition">
-            <i class="fa-solid fa-rotate-left"></i> Reiniciar
+          <button id="navBtnInstalaciones" onclick="switchMainTab('instalaciones')" class="px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 transition-all text-white/80 hover:text-white hover:bg-white/10">
+            <i class="fa-solid fa-compass"></i>
+            <span>Instalaciones del Club</span>
+            <span class="bg-amber-400 text-club-950 text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">Fotos</span>
           </button>
         </div>
+
+        <!-- Botones Rápidos (WhatsApp / Reset) -->
+        <div class="hidden lg:flex items-center gap-2 no-print">
+          <button onclick="openWhatsAppModal()" class="px-3.5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-lg shadow-md transition flex items-center gap-1.5 active:scale-95">
+            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Grupo
+          </button>
+          <button onclick="window.print()" class="p-2 bg-white/10 hover:bg-white/20 text-white text-xs rounded-lg transition" title="Imprimir / PDF">
+            <i class="fa-solid fa-print"></i>
+          </button>
+        </div>
+
       </div>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-6">
+  <!-- ========================================================================= -->
+  <!-- SECCIÓN 1: CALCULADORA DE GASTOS Y DIVISIÓN CON BOTÓN DE PERNOCTAR S/ 70 -->
+  <!-- ========================================================================= -->
+  <section id="tab-calculadora" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 space-y-6">
 
-    <!-- MASTER PERNOCTAR SWITCH CARD (EL BOTÓN PRINCIPAL REQUERIDO) -->
-    <div id="pernoctarBanner" class="transition-all duration-300 rounded-2xl p-5 sm:p-6 border-2 shadow-lg relative overflow-hidden bg-white">
-      <div id="pernoctarGlow" class="absolute -right-16 -top-16 w-52 h-52 rounded-full bg-emerald-200 blur-3xl pointer-events-none opacity-40"></div>
+    <!-- MASTER BANNER: BOTÓN PRENDER / APAGAR PERNOCTAR S/ 70 -->
+    <div id="pernoctarBanner" class="rounded-3xl p-6 sm:p-8 border-2 transition-all duration-300 shadow-luxury relative overflow-hidden bg-white">
+      <!-- Glow ambiental -->
+      <div id="pernoctarGlow" class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-emerald-200/50 blur-3xl pointer-events-none transition-opacity duration-300"></div>
 
       <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
-        <!-- Izquierda: Switch y Explicación -->
-        <div class="flex-1">
-          <div class="flex items-center gap-3">
-            <div id="pernoctarIconBg" class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all bg-emerald-500 text-white shadow-md">
+        <!-- Info del interruptor -->
+        <div class="flex-1 space-y-3">
+          <div class="flex items-center gap-3 sm:gap-4">
+            <div id="pernoctarIconBg" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl transition-all bg-emerald-600 text-white shadow-lg">
               <i class="fa-solid fa-bed"></i>
             </div>
             <div>
               <div class="flex items-center gap-2 flex-wrap">
-                <h2 class="text-lg sm:text-xl font-extrabold text-slate-800">
-                  Tarifa por Pernoctar (Invitados a dormir en El Bosque)
-                </h2>
+                <span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-300">
+                  Control de Pernocte El Bosque
+                </span>
                 <span id="pernoctarBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  <!-- JS updates -->
+                  <!-- Se actualiza por JS -->
                 </span>
               </div>
-              <p class="text-slate-500 text-xs sm:text-sm mt-0.5">
-                Prende o apaga este botón según lo que te confirmen los encargados de reservas en Chosica.
-              </p>
+              <h2 class="text-xl sm:text-2xl font-serif font-bold text-slate-900 mt-1">
+                ¿Cobran los S/ 70 por pernoctar a los invitados?
+              </h2>
             </div>
           </div>
 
-          <!-- Opciones de Configuración del Pernocte -->
-          <div class="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center gap-y-3 gap-x-6 text-xs sm:text-sm">
+          <p class="text-slate-600 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            Los invitados pueden ingresar de día gratis como acompañantes de socio, pero al dormir en el bungaló el club puede cobrar un <strong>derecho de pernocte</strong>. Prende o apaga este botón según lo que te confirme la administración de Chosica.
+          </p>
+
+          <!-- Opciones avanzadas del pernocte -->
+          <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-y-3 gap-x-5 text-xs sm:text-sm">
             <div class="flex items-center gap-2">
-              <span class="text-slate-600 font-semibold">Tarifa por pernoctar:</span>
-              <div class="flex items-center bg-slate-100 rounded-lg px-2.5 py-1 border border-slate-300 focus-within:border-emerald-500">
+              <span class="text-slate-600 font-semibold">Tarifa pernocte:</span>
+              <div class="flex items-center bg-slate-100 border border-slate-300 rounded-lg px-2.5 py-1 focus-within:border-emerald-600 focus-within:bg-white transition">
                 <span class="text-slate-500 font-bold mr-1">S/</span>
-                <input type="number" id="pernoctarAmountInput" value="70.00" step="5" min="0" oninput="updatePernoctarAmount(this.value)" class="w-20 bg-transparent font-bold text-slate-800 focus:outline-none">
+                <input type="number" id="pernoctarAmountInput" value="70.00" step="5" min="0" oninput="updatePernoctarAmount(this.value)" class="w-20 bg-transparent font-bold text-slate-800 focus:outline-none font-mono">
               </div>
             </div>
 
             <div class="flex items-center gap-2">
               <span class="text-slate-600 font-semibold">¿A quién se le cobra?</span>
               <select id="pernoctarTargetSelect" onchange="updatePernoctarTarget(this.value)" class="bg-slate-100 border border-slate-300 font-semibold text-slate-700 rounded-lg px-2.5 py-1 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <option value="guests_only">Solo a los 7 amigos invitados (Tú no pagas por ser familia de socia)</option>
-                <option value="all">A todos los 8 integrantes (incluyéndote a ti)</option>
-                <option value="split_all">Dividir costo total de pernocte equitativamente entre los 8</option>
+                <option value="guests_only">Solo a los 7 invitados (Tú no pagas por ser familia de socia)</option>
+                <option value="all">A todos los 8 por igual (+S/ 70 c/u)</option>
+                <option value="split_all">Dividir costo total de pernocte entre los 8</option>
                 <option value="custom">Manual (marcar con check en la tabla)</option>
               </select>
             </div>
 
-            <!-- Botón WhatsApp Club -->
+            <!-- Enlace al WhatsApp de reservas para consultar -->
             <a href="https://wa.me/51989160392?text=Hola,%20buenas%20tardes.%20Mi%20familia%20es%20socia%20del%20Country%20Club%20El%20Bosque.%20Quisiera%20consultar%20sobre%20la%20tarifa%20de%20bungal%C3%B3s%20para%20un%20fin%20de%20semana%20en%20enero%20en%20Chosica%20y%20si%20los%20invitados%20pagan%20tarifa%20por%20pernoctar%20(y%20cu%C3%A1nto%20es).%20Muchas%20gracias!" target="_blank" class="text-emerald-700 hover:text-emerald-800 font-bold inline-flex items-center gap-1.5 hover:underline bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">
-              <i class="fa-brands fa-whatsapp text-emerald-600"></i> WhatsApp El Bosque (+51 989 160 392)
+              <i class="fa-brands fa-whatsapp text-emerald-600"></i> Consultar a Reservas (+51 989 160 392)
             </a>
           </div>
         </div>
 
-        <!-- Derecha: El interruptor ON / OFF con interactividad instantánea -->
-        <div class="flex flex-col items-center justify-center sm:items-end bg-slate-50 p-4 rounded-xl border border-slate-200/90 min-w-[220px]">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Botón de Pernoctar</span>
-          
+        <!-- EL INTERRUPTOR FÍSICO TÁCTIL (ON / OFF) -->
+        <div class="flex flex-col items-center sm:items-end justify-center bg-slate-50 p-5 rounded-2xl border border-slate-200 min-w-[230px]">
+          <span class="text-[11px] font-extrabold uppercase tracking-widest text-slate-500 mb-2">
+            Estado de la Tarifa
+          </span>
+
           <label class="relative inline-flex items-center cursor-pointer select-none">
             <input type="checkbox" id="pernoctarToggle" class="sr-only peer" onchange="togglePernoctar(this.checked)" checked>
-            <div class="w-16 h-8 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-7 after:transition-all peer-checked:bg-emerald-600 shadow-inner"></div>
-            <span id="toggleText" class="ml-3 text-sm font-extrabold text-emerald-700 tracking-wide">PRENDIDO</span>
+            <div class="w-18 w-[72px] h-9 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-7 after:w-8 after:transition-all peer-checked:bg-emerald-600 shadow-inner"></div>
+            <span id="toggleText" class="ml-3 text-sm font-extrabold text-emerald-700 tracking-wider">PRENDIDO</span>
           </label>
 
-          <span id="pernoctarSummarySubtext" class="text-xs text-slate-500 mt-2 text-center sm:text-right font-medium">
-            Sumando +S/ 70 a los 7 invitados
+          <span id="pernoctarSummarySubtext" class="text-xs text-slate-500 mt-2.5 text-center sm:text-right font-medium">
+            Sumando +S/ 70 a 7 invitados
           </span>
         </div>
       </div>
     </div>
 
-    <!-- RESUMEN COMPARATIVO RÁPIDO (CARDS KPI) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- Total Presupuesto -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm relative overflow-hidden">
+    <!-- TARJETAS DE RESUMEN EJECUTIVO (METRICS / CUOTAS) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+      <!-- Presupuesto Total -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-card relative overflow-hidden group hover:border-club-500/50 transition">
         <div class="flex items-center justify-between text-slate-500 text-xs font-bold uppercase tracking-wider">
           <span>Presupuesto Total</span>
-          <i class="fa-solid fa-receipt text-slate-400 text-sm"></i>
+          <div class="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
+            <i class="fa-solid fa-receipt text-xs"></i>
+          </div>
         </div>
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono" id="kpiTotalTrip">
+        <div class="mt-2 text-3xl font-serif font-bold text-slate-900 font-mono tracking-tight" id="kpiTotalTrip">
           S/ 2,042.76
         </div>
         <div class="mt-1 text-xs text-slate-500 flex items-center justify-between" id="kpiTripSub">
-          <span>8 personas</span>
+          <span>8 integrantes</span>
           <span class="font-bold text-emerald-600" id="kpiPernocteAdded">+S/ 490 pernocte</span>
         </div>
       </div>
 
-      <!-- Cuota: Los que NO toman -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm relative">
+      <!-- Cuota No Bebedores -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-card relative group hover:border-blue-400 transition">
         <div class="flex items-center justify-between text-slate-500 text-xs font-bold uppercase tracking-wider">
           <span>Los que NO toman</span>
           <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-bold" id="kpiCountNoDrinkers">2 amigos</span>
         </div>
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-blue-600 font-mono" id="kpiPerNoDrinker">
+        <div class="mt-2 text-3xl font-serif font-bold text-blue-600 font-mono tracking-tight" id="kpiPerNoDrinker">
           S/ 216.38
         </div>
         <div class="mt-1 text-xs text-slate-500" id="kpiPerNoDrinkerDesc">
-          Base S/ 146.38 + S/ 70 pernocte
+          Base S/ 146.38 + S/ 70 pernocte (S/ 0 alcohol)
         </div>
       </div>
 
-      <!-- Cuota: Los amigos que toman -->
-      <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm relative">
+      <!-- Cuota Amigos Bebedores -->
+      <div class="bg-white rounded-2xl p-5 border border-slate-200/90 shadow-card relative group hover:border-amber-400 transition">
         <div class="flex items-center justify-between text-slate-500 text-xs font-bold uppercase tracking-wider">
           <span>Invitados que TOMAN</span>
           <span class="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-bold" id="kpiCountDrinkers">5 amigos</span>
         </div>
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-amber-600 font-mono" id="kpiPerDrinker">
+        <div class="mt-2 text-3xl font-serif font-bold text-amber-600 font-mono tracking-tight" id="kpiPerDrinker">
           S/ 270.00
         </div>
         <div class="mt-1 text-xs text-slate-500" id="kpiPerDrinkerDesc">
@@ -218,53 +301,53 @@
         </div>
       </div>
 
-      <!-- Cuota: Tú (Organizador) -->
-      <div class="bg-white rounded-2xl p-5 border-2 border-emerald-500/40 shadow-sm bg-gradient-to-b from-emerald-50/50 to-white relative">
-        <div class="flex items-center justify-between text-emerald-900 text-xs font-bold uppercase tracking-wider">
+      <!-- Cuota Organizador (Tú) -->
+      <div class="bg-gradient-to-br from-club-50 to-white rounded-2xl p-5 border-2 border-club-500/40 shadow-card relative group hover:border-club-600 transition">
+        <div class="flex items-center justify-between text-club-900 text-xs font-bold uppercase tracking-wider">
           <span>Tú (Organizador)</span>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-600 text-white font-bold">Nieto de Socia</span>
+          <span class="text-xs px-2 py-0.5 rounded-full bg-club-800 text-white font-bold">Familia Socia</span>
         </div>
-        <div class="mt-2 text-2xl sm:text-3xl font-extrabold text-emerald-700 font-mono" id="kpiPerYou">
+        <div class="mt-2 text-3xl font-serif font-bold text-club-800 font-mono tracking-tight" id="kpiPerYou">
           S/ 260.00
         </div>
         <div class="mt-1 text-xs text-slate-600" id="kpiPerYouDesc">
-          Toma alcohol + S/ 60 extra
+          Toma alcohol + S/ 60 extra voluntario
         </div>
       </div>
     </div>
 
-    <!-- MAIN TWO COLUMN SECTION -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- DOS COLUMNAS PRINCIPALES: INTEGRANTES Y GASTOS -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
 
       <!-- COLUMNA IZQUIERDA: INTEGRANTES Y CUOTAS (7 COLS) -->
-      <div class="lg:col-span-7 space-y-4">
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5">
+      <div class="lg:col-span-7 space-y-5">
+        <div class="bg-white rounded-3xl shadow-card border border-slate-200/90 p-5 sm:p-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
             <div>
-              <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-users text-emerald-600"></i> Amigos e Integrantes (<span id="membersCount">8</span>)
+              <h3 class="text-lg font-serif font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-users text-club-600"></i> Amigos e Integrantes (<span id="membersCount">8</span>)
               </h3>
               <p class="text-xs text-slate-500">
-                Haz clic en el nombre para editarlo. Usa los botones para cambiar alcohol, pernocte o estado de pago.
+                Haz clic en el nombre para editar. Modifica bebedor, pernocte o estado de pago en tiempo real.
               </p>
             </div>
-            <button onclick="addNewMember()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 active:scale-95 text-white text-xs font-semibold rounded-lg shadow-sm transition self-start sm:self-auto">
-              <i class="fa-solid fa-user-plus text-emerald-400"></i> Agregar Amigo
+            <button onclick="addNewMember()" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-club-900 hover:bg-club-800 active:scale-95 text-white text-xs font-bold rounded-xl shadow-md transition self-start sm:self-auto">
+              <i class="fa-solid fa-user-plus text-amber-300"></i> Agregar Amigo
             </button>
           </div>
 
-          <!-- Tabla de Integrantes -->
+          <!-- Tabla de Participantes -->
           <div class="overflow-x-auto custom-scrollbar mt-3">
             <table class="w-full text-left text-xs sm:text-sm">
               <thead>
                 <tr class="text-slate-400 uppercase text-[11px] font-semibold border-b border-slate-100">
-                  <th class="py-2.5 px-2">Nombre</th>
-                  <th class="py-2.5 px-2 text-center" title="Participa del fondo de alcohol (S/ 321.70)">¿Toma?</th>
-                  <th class="py-2.5 px-2 text-center" title="Paga la tarifa de pernocte por dormir en el club">Pernocte</th>
-                  <th class="py-2.5 px-2 text-right" title="Monto extra voluntario (+60 tuyos u otro ajuste)">Ajuste S/</th>
-                  <th class="py-2.5 px-2 text-right font-bold text-slate-700">Total Cuota</th>
-                  <th class="py-2.5 px-2 text-center">Estado</th>
-                  <th class="py-2.5 px-1 text-center"></th>
+                  <th class="py-3 px-2">Nombre</th>
+                  <th class="py-3 px-2 text-center" title="Participa del fondo de alcohol (S/ 321.70)">¿Toma?</th>
+                  <th class="py-3 px-2 text-center" title="Paga tarifa de pernocte por quedarse a dormir">Pernocte</th>
+                  <th class="py-3 px-2 text-right" title="Monto extra voluntario o por movilidad/gasolina">Ajuste S/</th>
+                  <th class="py-3 px-2 text-right font-bold text-slate-700">Total Cuota</th>
+                  <th class="py-3 px-2 text-center">Estado</th>
+                  <th class="py-3 px-1 text-center"></th>
                 </tr>
               </thead>
               <tbody id="membersTableBody" class="divide-y divide-slate-100">
@@ -274,131 +357,440 @@
           </div>
 
           <!-- Progreso de Recaudación -->
-          <div class="mt-4 pt-4 border-t border-slate-100">
-            <div class="flex items-center justify-between text-xs font-medium mb-1.5">
-              <span class="text-slate-500">Progreso de cobro (Yape / Plin):</span>
-              <span class="font-bold text-slate-700" id="collectedProgressText">S/ 0.00 / S/ 0.00 (0%)</span>
+          <div class="mt-5 pt-4 border-t border-slate-100">
+            <div class="flex items-center justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-500">Avance de pagos recibidos (Yape / Plin / Efectivo):</span>
+              <span class="text-slate-900 font-mono font-bold" id="collectedProgressText">S/ 0.00 / S/ 0.00 (0%)</span>
             </div>
-            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-              <div id="collectedProgressBar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta Informativa: Contacto & Normas Country Club El Bosque -->
-        <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-2xl p-5 shadow-sm">
-          <div class="flex items-center justify-between mb-2">
-            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
-              <i class="fa-solid fa-circle-info"></i> Información Oficial de El Bosque
-            </div>
-            <span class="text-[11px] text-slate-400 bg-white/10 px-2 py-0.5 rounded-md">Chosica Km 29.5</span>
-          </div>
-          <h4 class="font-bold text-base text-white">Gestión de Bungalós & Pernocte</h4>
-          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-            Los invitados pueden ingresar de día gratis como acompañantes de socio, pero pernoctar en los bungalós requiere registro y usualmente una tasa administrativa o derecho de pernocte.
-          </p>
-
-          <div class="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <span class="text-slate-400 block text-[11px]"><i class="fa-brands fa-whatsapp text-emerald-400 mr-1"></i>Reservas Bungalós</span>
-              <a href="https://wa.me/51989160392" target="_blank" class="font-mono font-bold text-emerald-300 hover:underline text-sm">+51 989 160 392</a>
-            </div>
-            <div class="p-2.5 rounded-xl bg-white/5 border border-white/10">
-              <span class="text-slate-400 block text-[11px]"><i class="fa-solid fa-headset text-amber-400 mr-1"></i>Atención al Asociado</span>
-              <a href="https://wa.me/51961080597" target="_blank" class="font-mono font-bold text-amber-300 hover:underline text-sm">+51 961 080 597</a>
+            <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200">
+              <div id="collectedProgressBar" class="bg-gradient-to-r from-emerald-500 to-club-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
             </div>
           </div>
         </div>
 
+        <!-- Banner directo al WhatsApp de grupo -->
+        <div class="bg-gradient-to-r from-emerald-800 via-club-900 to-club-950 text-white p-5 rounded-3xl shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 flex items-center justify-center text-2xl">
+              <i class="fa-brands fa-whatsapp"></i>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-white">¿Todo listo para cobrar al grupo?</h4>
+              <p class="text-xs text-emerald-200 mt-0.5">Copia el mensaje formateado con las cuotas y tu número de Yape.</p>
+            </div>
+          </div>
+          <button onclick="openWhatsAppModal()" class="w-full sm:w-auto px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow transition active:scale-95 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-copy"></i> Copiar para WhatsApp
+          </button>
+        </div>
       </div>
 
-      <!-- COLUMNA DERECHA: GASTOS DETALLADOS Y CONFIGURADOR (5 COLS) -->
-      <div class="lg:col-span-5 space-y-4">
-        
-        <!-- Tarjeta de Gastos del Viaje -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5">
+      <!-- COLUMNA DERECHA: GASTOS DETALLADOS (5 COLS) -->
+      <div class="lg:col-span-5 space-y-5">
+        <div class="bg-white rounded-3xl shadow-card border border-slate-200/90 p-5 sm:p-6">
           <div class="flex items-center justify-between pb-3 border-b border-slate-100">
             <div>
-              <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-cart-shopping text-emerald-600"></i> Desglose de Gastos
+              <h3 class="text-lg font-serif font-bold text-slate-900 flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-club-600"></i> Desglose de Gastos
               </h3>
               <p class="text-xs text-slate-500">
-                Edita montos o agrega compras según lo que compren en Wong / Metro / Makro.
+                Montos editables del fin de semana.
               </p>
             </div>
-            <button onclick="addNewExpense()" class="inline-flex items-center gap-1 px-2.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold rounded-lg border border-emerald-200 transition">
+            <button onclick="addNewExpense()" class="inline-flex items-center gap-1 px-3 py-1.5 bg-club-50 hover:bg-club-100 text-club-800 text-xs font-bold rounded-xl border border-club-200 transition">
               <i class="fa-solid fa-plus text-xs"></i> Gasto
             </button>
           </div>
 
           <!-- Lista de gastos -->
-          <div class="space-y-2.5 mt-3" id="expensesList">
+          <div class="space-y-2.5 mt-3.5" id="expensesList">
             <!-- JS inserts items -->
           </div>
 
           <!-- Total de Gastos Base -->
-          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm font-bold">
+          <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs sm:text-sm font-bold">
             <span class="text-slate-600">Total Presupuestado:</span>
-            <span class="text-slate-900 text-lg font-extrabold font-mono" id="expensesSumDisplay">S/ 0.00</span>
+            <span class="text-slate-900 text-xl font-serif font-bold font-mono" id="expensesSumDisplay">S/ 0.00</span>
           </div>
         </div>
 
-        <!-- Guía de Reparto Explicada -->
-        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm text-xs space-y-2.5 text-slate-600">
-          <h4 class="font-bold text-slate-800 text-sm flex items-center gap-1.5">
-            <i class="fa-solid fa-calculator text-emerald-600"></i> ¿Cómo se calcula cada cuota?
+        <!-- Reglas de Transparencia de la Cuota -->
+        <div class="bg-sand-50 rounded-3xl p-5 border border-sand-200 text-xs space-y-2 text-slate-700">
+          <h4 class="font-bold text-slate-900 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-scale-balanced text-amber-700"></i> Reparto Justo y Transparente
           </h4>
           <p class="leading-relaxed">
-            • <strong class="text-slate-800">Gastos Comunes:</strong> Se divide entre los 8 participantes en partes iguales (S/ 146.38 c/u).
+            • <strong class="text-slate-900">Gastos Comunes:</strong> El bungaló, carnes y carbón se dividen equitativamente entre los 8 (S/ 146.38 c/u).
           </p>
           <p class="leading-relaxed">
-            • <strong class="text-slate-800">Fondo de Alcohol (S/ 321.70):</strong> Se divide única y exclusivamente entre los 6 que toman (S/ 53.62 c/u). Quien no toma, paga S/ 0 de trago.
+            • <strong class="text-slate-900">Alcohol (S/ 321.70):</strong> Solo lo pagan los 6 que toman (S/ 53.62 c/u). Los 2 que no toman pagan <strong>S/ 0</strong> de alcohol.
           </p>
           <p class="leading-relaxed">
-            • <strong class="text-slate-800">Pernocte (+S/ 70):</strong> Si está activado, se suma a la cuenta individual de cada invitado que se queda a dormir.
-          </p>
-          <p class="leading-relaxed">
-            • <strong class="text-slate-800">Tu cuota (+S/ 60):</strong> Tienes un ajuste configurado para aportar S/ 60 adicionales por liderar o reservar.
+            • <strong class="text-slate-900">Pernocte (+S/ 70):</strong> Se suma individualmente según lo que determine la administración del club.
           </p>
         </div>
+      </div>
 
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECCIÓN 2: SHOWCASE EDITORIAL DE TODO LO QUE OFRECE EL BOSQUE (7 ÁREAS) -->
+  <!-- ========================================================================= -->
+  <section id="tab-instalaciones" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-8 space-y-8 hidden">
+    
+    <!-- Hero Editorial Instalaciones -->
+    <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-club-950 via-club-900 to-club-800 text-white p-8 sm:p-12 shadow-luxury border border-club-700/50">
+      <div class="max-w-3xl space-y-3 relative z-10">
+        <span class="text-amber-400 font-bold uppercase tracking-widest text-xs flex items-center gap-1.5">
+          <i class="fa-solid fa-compass"></i> Guía Completa de la Sede Chosica
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight leading-tight">
+          40 Hectáreas de Sol, Deporte y Naturaleza
+        </h2>
+        <p class="text-club-200 text-sm sm:text-base leading-relaxed">
+          Ubicada en el Km 29.5 de la Carretera Central (Lurigancho-Chosica), la sede campestre histórica del Country Club El Bosque ofrece un microclima privilegiado con sol todo el año, lejos de la neblina limeña.
+        </p>
+      </div>
+      <!-- Background pattern -->
+      <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-white pointer-events-none">
+        <i class="fa-solid fa-tree"></i>
       </div>
     </div>
 
-  </main>
+    <!-- Filtros de Categoría -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar text-xs font-semibold">
+      <button onclick="filterFacilities('all')" class="facility-filter-btn px-4 py-2 rounded-xl bg-club-800 text-white shadow-sm transition active" data-filter="all">
+        Ver Todo (7 Áreas)
+      </button>
+      <button onclick="filterFacilities('bungalow')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="bungalow">
+        🏡 El Bungaló (Interior & Terrazas)
+      </button>
+      <button onclick="filterFacilities('piscinas')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="piscinas">
+        🏊‍♂️ Piscinas & Solárium
+      </button>
+      <button onclick="filterFacilities('mirador')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="mirador">
+        🌄 El Mirador
+      </button>
+      <button onclick="filterFacilities('caballos')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="caballos">
+        🐴 Paseo a Caballo
+      </button>
+      <button onclick="filterFacilities('billar')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="billar">
+        🎱 Sala de Billar
+      </button>
+      <button onclick="filterFacilities('bochas')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="bochas">
+        ⚪ Campo de Bochas
+      </button>
+      <button onclick="filterFacilities('deportes')" class="facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition" data-filter="deportes">
+        ⚽ Fútbol, Básquet & Tenis
+      </button>
+    </div>
 
-  <!-- MODAL: MENSAJE PARA WHATSAPP -->
-  <div id="whatsappModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-      <div class="p-5 bg-gradient-to-r from-emerald-800 to-bosque-900 text-white flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i class="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+    <!-- GRID DE LAS 7 ÁREAS CON FOTOS Y DETALLES -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="facilitiesGrid">
+
+      <!-- ========================================== -->
+      <!-- 1. EL BUNGALÓ: FOTOS DEL INTERIOR -->
+      <!-- ========================================== -->
+      <article class="facility-card lg:col-span-2 bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group" data-category="bungalow">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          <!-- Imagen Principal Interior -->
+          <div class="relative h-72 md:h-full min-h-[300px] overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=1200&q=80', 'Bungaló El Bosque: Sala de estar campestre con acabados de madera rústica')">
+            <img src="https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80" alt="Interior del Bungaló sala" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="bg-emerald-600 text-white text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-md">
+                Interior Principal
+              </span>
+              <p class="text-xs text-white/90 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-expand text-[10px]"></i> Clic para ampliar foto HD
+              </p>
+            </div>
+          </div>
+
+          <!-- Detalles y Mosaico de Habitaciones -->
+          <div class="p-6 sm:p-7 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-club-700 uppercase tracking-wider">Alojamiento Exclusivo</span>
+                <span class="text-xs text-slate-500 font-semibold"><i class="fa-solid fa-users text-amber-500 mr-1"></i>Capacidad 6 - 8 personas</span>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-slate-900 mt-1">
+                Bungalós Campestres & Casas de Campo
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                Diseñados en madera rústica y piedra local, los bungalós de Chosica cuentan con sala-comedor, dormitorios con camarotes y camas matrimoniales, kitchenette equipada y terraza exterior privada con parrilla empotrada para disfrutar los asados en grupo.
+              </p>
+
+              <!-- Mosaico de fotos secundarias del interior -->
+              <div class="grid grid-cols-3 gap-2 mt-4">
+                <div class="rounded-xl overflow-hidden h-20 cursor-pointer relative group/thumb" onclick="openLightbox('https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80', 'Dormitorio principal confortable con luz natural')">
+                  <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=80" alt="Dormitorio bungaló" class="w-full h-full object-cover group-hover/thumb:scale-110 transition duration-300" loading="lazy">
+                  <span class="absolute inset-0 bg-black/30 flex items-center justify-center text-[10px] font-bold text-white opacity-0 group-hover/thumb:opacity-100 transition">Dormitorio</span>
+                </div>
+                <div class="rounded-xl overflow-hidden h-20 cursor-pointer relative group/thumb" onclick="openLightbox('https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=1200&q=80', 'Kitchenette y zona de preparación de desayunos y almuerzos')">
+                  <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=400&q=80" alt="Kitchenette bungaló" class="w-full h-full object-cover group-hover/thumb:scale-110 transition duration-300" loading="lazy">
+                  <span class="absolute inset-0 bg-black/30 flex items-center justify-center text-[10px] font-bold text-white opacity-0 group-hover/thumb:opacity-100 transition">Kitchenette</span>
+                </div>
+                <div class="rounded-xl overflow-hidden h-20 cursor-pointer relative group/thumb" onclick="openLightbox('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80', 'Terraza exterior con vista a las áreas verdes y zona de parrilla')">
+                  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" alt="Terraza bungaló" class="w-full h-full object-cover group-hover/thumb:scale-110 transition duration-300" loading="lazy">
+                  <span class="absolute inset-0 bg-black/30 flex items-center justify-center text-[10px] font-bold text-white opacity-0 group-hover/thumb:opacity-100 transition">Terraza</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span><i class="fa-solid fa-shower text-blue-500 mr-1"></i>Baño completo con agua caliente</span>
+              <a href="https://wa.me/51989160392" target="_blank" class="font-bold text-club-700 hover:text-club-900">Consultar disponibilidad &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 2. LAS PISCINAS & SOLÁRIUM -->
+      <!-- ========================================== -->
+      <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group flex flex-col justify-between" data-category="piscinas">
+        <div>
+          <div class="relative h-56 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80', 'Complejo acuático de El Bosque en Chosica: Piscinas para adultos y niños con sol permanente')">
+            <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80" alt="Piscinas Club El Bosque" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+              Acuático & Relax
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold text-slate-900">
+              Las Piscinas & Zona de Solárium
+            </h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              El club cuenta con una piscina semi-olímpica de nado y piscinas recreativas familiares con patera para niños pequeños, amplias áreas de reposeras, sombrillas y servicio de snacks al aire libre bajo el sol constante del valle.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2 text-xs text-slate-500 border-t border-slate-100 flex items-center justify-between">
+          <span><i class="fa-solid fa-water text-cyan-600 mr-1"></i>Agua templada de montaña</span>
+          <span class="font-semibold text-emerald-700">Abierto todos los días</span>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 3. EL MIRADOR PANORÁMICO -->
+      <!-- ========================================== -->
+      <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group flex flex-col justify-between" data-category="mirador">
+        <div>
+          <div class="relative h-56 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80', 'El Mirador de Chosica: Vista 360 grados hacia la quebrada del río Rímac y las 40 hectáreas del club')">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Mirador El Bosque" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-3 left-3 bg-amber-600 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+              Paisaje & Fotografía
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold text-slate-900">
+              El Mirador Panorámico
+            </h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Punto panorámico en la parte alta del club con senderos ecológicos. Ofrece una vista 360° privilegiada a toda la quebrada de Chosica, los cerros andinos y la vegetación de guarangos y eucaliptos del club. Excelente para caminatas y fotos grupales al atardecer.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2 text-xs text-slate-500 border-t border-slate-100 flex items-center justify-between">
+          <span><i class="fa-solid fa-camera text-amber-500 mr-1"></i>Ideal atardeceres (Golden Hour)</span>
+          <span class="font-semibold text-slate-700">Acceso libre</span>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 4. LOS CABALLOS & ZONA ECUESTRE -->
+      <!-- ========================================== -->
+      <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group flex flex-col justify-between" data-category="caballos">
+        <div>
+          <div class="relative h-56 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=1200&q=80', 'Paseos a caballo y zona ecuestre por los senderos campestres de Chosica')">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80" alt="Caballos Club El Bosque" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-3 left-3 bg-amber-700 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+              Tradición Campestre
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold text-slate-900">
+              Zona Ecuestre & Paseos a Caballo
+            </h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              El club cuenta con caballerizas y picadero. Los fines de semana se organizan paseos a caballo guiados a lo largo de senderos de tierra rodeados de vegetación, una de las actividades insignia favoritas de familias y visitantes.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2 text-xs text-slate-500 border-t border-slate-100 flex items-center justify-between">
+          <span><i class="fa-solid fa-horse text-amber-800 mr-1"></i>Paseos con guías del club</span>
+          <span class="font-semibold text-emerald-700">Sábados y Domingos</span>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 5. LA MESA DE BILLAR & SALÓN DE JUEGOS -->
+      <!-- ========================================== -->
+      <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group flex flex-col justify-between" data-category="billar">
+        <div>
+          <div class="relative h-56 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=1200&q=80', 'Salón de juegos tradicional con mesas profesionales de billar y billas')">
+            <img src="https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=800&q=80" alt="Mesa de billar Club El Bosque" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-3 left-3 bg-slate-800 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+              Salón Social
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold text-slate-900">
+              Salón de Billar & Juegos de Mesa
+            </h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Un ambiente clásico y techado para las tardes y noches. Dispone de mesas de billar y billas con paño reglamentario, iluminación focal, mesas de ping-pong, fulbito de mano y espacio para juegos de cartas o dominó con amigos.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2 text-xs text-slate-500 border-t border-slate-100 flex items-center justify-between">
+          <span><i class="fa-solid fa-circle-dot text-emerald-600 mr-1"></i>Tacos y bolas en recepción</span>
+          <span class="font-semibold text-slate-700">Ideal para la noche</span>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 6. EL CAMPO DE BOCHAS -->
+      <!-- ========================================== -->
+      <article class="facility-card bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group flex flex-col justify-between" data-category="bochas">
+        <div>
+          <div class="relative h-56 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=1200&q=80', 'Canchas reglamentarias de bochas en Country Club El Bosque')">
+            <img src="https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=800&q=80" alt="Campo de bochas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <span class="absolute top-3 left-3 bg-emerald-800 text-white text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full shadow">
+              Deporte de Club
+            </span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-serif font-bold text-slate-900">
+              Canchas Tradicionales de Bochas
+            </h3>
+            <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+              Las canchas de bochas son un clásico histórico del Country Club El Bosque. Construidas con piso de tierra y conchuela compactada reglamentaria, cuentan con graderías con sombra y tableros de puntaje donde socios veteranos y jóvenes comparten partidas de estrategia.
+            </p>
+          </div>
+        </div>
+        <div class="px-6 pb-6 pt-2 text-xs text-slate-500 border-t border-slate-100 flex items-center justify-between">
+          <span><i class="fa-solid fa-bowling-ball text-slate-700 mr-1"></i>Juego de bochas oficial</span>
+          <span class="font-semibold text-emerald-800">Canchas techadas</span>
+        </div>
+      </article>
+
+      <!-- ========================================== -->
+      <!-- 7. COMPLEJO DEPORTIVO (FÚTBOL, BÁSKET, TENIS, ETC.) -->
+      <!-- ========================================== -->
+      <article class="facility-card lg:col-span-3 bg-white rounded-3xl overflow-hidden shadow-card border border-slate-200/90 group" data-category="deportes">
+        <div class="grid grid-cols-1 md:grid-cols-3">
+          <!-- Fútbol -->
+          <div class="relative h-56 md:h-72 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=1200&q=80', 'Canchas de fútbol de grass natural y sintético en Chosica')">
+            <img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=800&q=80" alt="Canchas de futbol" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="bg-emerald-600 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Fútbol 11 & Sintético</span>
+              <h4 class="font-serif font-bold text-base mt-1">Canchas de Fútbol</h4>
+              <p class="text-[11px] text-emerald-200">Partidos con amigos y torneos internos</p>
+            </div>
+          </div>
+
+          <!-- Básquetbol -->
+          <div class="relative h-56 md:h-72 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1200&q=80', 'Losas polideportivas para básquetbol y vóley')">
+            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80" alt="Canchas de basket" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="bg-amber-600 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Básquet & Vóley</span>
+              <h4 class="font-serif font-bold text-base mt-1">Losas Multideportivas</h4>
+              <p class="text-[11px] text-amber-200">Aros con tableros de vidrio e iluminación</p>
+            </div>
+          </div>
+
+          <!-- Tenis y Frontón -->
+          <div class="relative h-56 md:h-72 overflow-hidden cursor-pointer" onclick="openLightbox('https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=1200&q=80', 'Canchas oficiales de tenis de arcilla roja y frontón')">
+            <img src="https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80" alt="Canchas de tenis arcilla" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="bg-terracotta-500 text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Tenis & Frontón</span>
+              <h4 class="font-serif font-bold text-base mt-1">Arcilla Roja & Paleta</h4>
+              <p class="text-[11px] text-orange-200">Canchas de tenis y canchas oficiales de frontón</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-trophy text-amber-500 text-base"></i>
+            <span><strong>Tip para tu estadía:</strong> Puedes solicitar balones y pelotas en la intendencia deportiva del club o llevar tus propios balones y paletas de frontón.</span>
+          </div>
+          <button onclick="switchMainTab('calculadora')" class="text-club-800 font-bold hover:underline whitespace-nowrap">
+            &larr; Volver a la Calculadora de Gastos
+          </button>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: VISOR DE FOTOS EN ALTA RESOLUCIÓN (PHOTO LIGHTBOX) -->
+  <!-- ========================================================================= -->
+  <div id="photoLightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-md animate-in fade-in duration-200" onclick="closeLightbox(event)">
+    <div class="max-w-4xl w-full bg-slate-950 text-white rounded-3xl overflow-hidden shadow-2xl border border-white/10 relative" onclick="event.stopPropagation()">
+      <div class="relative bg-black flex items-center justify-center min-h-[350px] max-h-[75vh]">
+        <img id="lightboxImage" src="" alt="Instalación Club El Bosque" class="w-full h-auto max-h-[70vh] object-contain">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 hover:bg-black text-white text-lg flex items-center justify-center transition border border-white/20">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-5 bg-slate-900 border-t border-white/10 flex items-center justify-between">
+        <div>
+          <span class="text-[10px] text-emerald-400 uppercase font-bold tracking-wider">Country Club El Bosque · Sede Chosica</span>
+          <p id="lightboxCaption" class="text-xs sm:text-sm text-slate-200 font-medium mt-0.5"></p>
+        </div>
+        <button onclick="closeLightbox()" class="px-4 py-1.5 bg-white/10 hover:bg-white/20 text-xs font-semibold rounded-lg transition">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL: MENSAJE PARA WHATSAPP LISTO PARA COPIAR -->
+  <!-- ========================================================================= -->
+  <div id="whatsappModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div class="p-6 bg-gradient-to-r from-emerald-800 to-club-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-xl text-emerald-300">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
           <div>
-            <h3 class="font-bold text-lg">Mensaje listo para WhatsApp</h3>
+            <h3 class="font-serif font-bold text-lg">Mensaje listo para WhatsApp</h3>
             <p class="text-xs text-emerald-200">Copia y pega este texto en el grupo con los patas</p>
           </div>
         </div>
-        <button onclick="closeWhatsAppModal()" class="text-white/80 hover:text-white text-lg p-1">
+        <button onclick="closeWhatsAppModal()" class="text-white/70 hover:text-white text-xl p-1">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <div class="p-5 space-y-4">
+      <div class="p-6 space-y-4">
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1">Tu número de Yape / Plin (para que te transfieran):</label>
-          <input type="text" id="yapeNumberInput" value="987 654 321 (Tú)" oninput="state.yapeNumber = this.value; saveState(); regenerateWhatsAppMessage();" placeholder="Ej: 987 654 321" class="w-full text-sm font-semibold text-slate-800 bg-slate-50 border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-emerald-500 focus:outline-none">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tu número de Yape / Plin (para que te transfieran):</label>
+          <input type="text" id="yapeNumberInput" value="987 654 321 (Tú)" oninput="state.yapeNumber = this.value; saveState(); regenerateWhatsAppMessage();" placeholder="Ej: 987 654 321" class="w-full text-sm font-semibold text-slate-800 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none font-mono">
         </div>
 
         <div>
-          <label class="block text-xs font-semibold text-slate-600 mb-1">Vista previa del mensaje formateado:</label>
-          <textarea id="whatsappTextPreview" readonly rows="12" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-lg p-3 text-slate-700 focus:outline-none custom-scrollbar select-all"></textarea>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Vista previa del mensaje generado:</label>
+          <textarea id="whatsappTextPreview" readonly rows="12" class="w-full text-xs font-mono bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-slate-700 focus:outline-none custom-scrollbar select-all leading-relaxed"></textarea>
         </div>
 
         <div class="flex items-center justify-end gap-2 pt-2">
-          <button onclick="closeWhatsAppModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition">
+          <button onclick="closeWhatsAppModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition">
             Cerrar
           </button>
-          <button onclick="copyWhatsAppToClipboard()" id="copyBtn" class="inline-flex items-center gap-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold rounded-lg shadow-md transition">
+          <button onclick="copyWhatsAppToClipboard()" id="copyBtn" class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold rounded-xl shadow-md transition">
             <i class="fa-solid fa-copy"></i> Copiar Mensaje
           </button>
         </div>
@@ -406,24 +798,43 @@
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-semibold transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+  <!-- ========================================================================= -->
+  <!-- BARRA FLOTANTE MÓVIL (BOTTOM DOCK) -->
+  <!-- ========================================================================= -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2.5 px-4 z-40 sm:hidden flex items-center justify-between no-print">
+    <div class="flex items-center gap-1">
+      <button onclick="switchMainTab('calculadora')" id="mobileBtnCalc" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-club-800 text-white flex items-center gap-1.5">
+        <i class="fa-solid fa-calculator"></i> Cuotas
+      </button>
+      <button onclick="switchMainTab('instalaciones')" id="mobileBtnInst" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-1.5">
+        <i class="fa-solid fa-tree"></i> Instalaciones
+      </button>
+    </div>
+    <button onclick="openWhatsAppModal()" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white flex items-center gap-1 shadow">
+      <i class="fa-brands fa-whatsapp"></i> WhatsApp
+    </button>
+  </div>
+
+  <!-- TOAST FEEDBACK NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-950 text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-white/10">
     <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
     <span id="toastMessage">¡Listo!</span>
   </div>
 
-  <!-- SCRIPT LOGIC -->
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT STATE ENGINE & REACTIVE LOGIC -->
+  <!-- ========================================================================= -->
   <script>
-    // DATOS EXACTOS DE LA CONVERSACIÓN
+    // ESTADO POR DEFECTO RIGUROSAMENTE CUADRADO AL CÉNTIMO
     const DEFAULT_DATA = {
-      pernoctarActive: true,      // Botón prendido/apagado
-      pernoctarAmount: 70.00,     // 70 soles por pernoctar
+      pernoctarActive: true,          // Switch pernoctar prendido/apagado
+      pernoctarAmount: 70.00,         // 70 soles por pernoctar
       pernoctarTarget: 'guests_only', // 'guests_only', 'all', 'split_all', 'custom'
       yapeNumber: '987 654 321 (Tú)',
       expenses: [
         { id: 'exp_bungalow', name: '🏡 Bungaló El Bosque (Fin de semana)', amount: 800.00, category: 'Alojamiento', splitType: 'all' },
-        { id: 'exp_food', name: '🥩 Parrillada, carnes y almuerzo', amount: 250.00, category: 'Comida', splitType: 'all' },
-        { id: 'exp_snacks', name: '🥤 Snacks, gaseosas, hielo y carbón', amount: 121.06, category: 'Snacks', splitType: 'all' },
+        { id: 'exp_food', name: '🥩 Parrillada, carnes, carbón y almuerzo', amount: 250.00, category: 'Comida', splitType: 'all' },
+        { id: 'exp_snacks', name: '🥤 Snacks, gaseosas, hielo y complementos', amount: 121.06, category: 'Snacks', splitType: 'all' },
         { id: 'exp_alcohol', name: '🍻 Cervezas, licores, mixers y ron', amount: 321.70, category: 'Alcohol', splitType: 'drinkers_only' },
       ],
       members: [
@@ -442,16 +853,16 @@
 
     function loadState() {
       try {
-        const saved = localStorage.getItem('el_bosque_budget_v3');
+        const saved = localStorage.getItem('el_bosque_budget_v4');
         if (saved) return JSON.parse(saved);
       } catch (e) {
-        console.error(e);
+        console.error('Error al cargar datos:', e);
       }
       return JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
 
     function saveState() {
-      localStorage.setItem('el_bosque_budget_v3', JSON.stringify(state));
+      localStorage.setItem('el_bosque_budget_v4', JSON.stringify(state));
     }
 
     function resetDefaults() {
@@ -463,7 +874,7 @@
       }
     }
 
-    // EL BOTÓN DE PERNOCTAR (PRENDER / APAGAR)
+    // CONTROL DEL SWITCH PRINCIPAL DE PERNOCTAR
     function togglePernoctar(checked) {
       state.pernoctarActive = checked;
       syncPernocteMembers();
@@ -506,7 +917,7 @@
       }
     }
 
-    // GESTIÓN DE INTEGRANTES
+    // GESTIÓN DE PARTICIPANTES
     function toggleMemberDrink(id) {
       const m = state.members.find(x => x.id === id);
       if (m) {
@@ -631,7 +1042,7 @@
       render();
     }
 
-    // CÁLCULO GENERAL DE CUOTAS
+    // CÁLCULOS MATEMÁTICOS DE CUOTAS
     function calculate() {
       const totalMembers = state.members.length;
       const drinkers = state.members.filter(m => m.drinksAlcohol);
@@ -655,7 +1066,6 @@
       let pernocteTotalCharged = 0;
       let countPernoctantes = 0;
 
-      // Si el modo es split_all: se cobra S/ 70 por cada pernoctante pero se divide entre los 8
       const isSplitAll = state.pernoctarActive && state.pernoctarTarget === 'split_all';
 
       state.members.forEach(m => {
@@ -726,18 +1136,20 @@
       const summarySubtext = document.getElementById('pernoctarSummarySubtext');
       const pernocteInput = document.getElementById('pernoctarAmountInput');
       const targetSelect = document.getElementById('pernoctarTargetSelect');
+      const glow = document.getElementById('pernoctarGlow');
 
       pernocteInput.value = state.pernoctarAmount.toFixed(2);
       targetSelect.value = state.pernoctarTarget;
 
       if (state.pernoctarActive) {
         toggleText.textContent = 'PRENDIDO';
-        toggleText.className = 'ml-3 text-sm font-extrabold text-emerald-700 tracking-wide';
+        toggleText.className = 'ml-3 text-sm font-extrabold text-emerald-700 tracking-wider';
         badge.textContent = `ACTIVO (+S/ ${state.pernoctarAmount.toFixed(2)})`;
         badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300';
-        banner.className = 'transition-all duration-300 rounded-2xl p-5 sm:p-6 border-2 border-emerald-500 bg-emerald-50/20 shadow-lg relative overflow-hidden';
-        iconBg.className = 'w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all bg-emerald-500 text-white shadow-md';
-        
+        banner.className = 'rounded-3xl p-6 sm:p-8 border-2 border-emerald-500 bg-emerald-50/25 transition-all duration-300 shadow-luxury relative overflow-hidden';
+        iconBg.className = 'w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl transition-all bg-emerald-600 text-white shadow-lg';
+        if (glow) glow.style.opacity = '0.5';
+
         if (state.pernoctarTarget === 'guests_only') {
           summarySubtext.textContent = `Cobrando S/ ${state.pernoctarAmount.toFixed(2)} a ${calc.countPernoctantes} invitados (Tú no pagas)`;
         } else if (state.pernoctarTarget === 'split_all') {
@@ -747,24 +1159,25 @@
         }
       } else {
         toggleText.textContent = 'APAGADO';
-        toggleText.className = 'ml-3 text-sm font-extrabold text-slate-400 tracking-wide';
+        toggleText.className = 'ml-3 text-sm font-extrabold text-slate-400 tracking-wider';
         badge.textContent = 'DESACTIVADO (S/ 0)';
         badge.className = 'text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider bg-slate-100 text-slate-500 border border-slate-300';
-        banner.className = 'transition-all duration-300 rounded-2xl p-5 sm:p-6 border-2 border-slate-200 bg-white shadow-sm relative overflow-hidden';
-        iconBg.className = 'w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-all bg-slate-100 text-slate-400';
+        banner.className = 'rounded-3xl p-6 sm:p-8 border-2 border-slate-200 bg-white transition-all duration-300 shadow-card relative overflow-hidden';
+        iconBg.className = 'w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl transition-all bg-slate-100 text-slate-400';
+        if (glow) glow.style.opacity = '0';
         summarySubtext.textContent = 'No se cobra pernocte a ningún invitado';
       }
 
       // KPIs Superiores
       document.getElementById('kpiTotalTrip').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('kpiTripSub').innerHTML = `
-        <span>${calc.totalMembers} personas</span>
+        <span>${calc.totalMembers} integrantes</span>
         <span class="${state.pernoctarActive ? 'text-emerald-600 font-bold' : 'text-slate-400'}">
           ${state.pernoctarActive ? `+S/ ${calc.pernocteTotalCharged.toFixed(2)} pernocte` : 'Sin pernocte'}
         </span>
       `;
 
-      // Cuota no toman
+      // Cuota no bebedores
       document.getElementById('kpiCountNoDrinkers').textContent = `${calc.nonDrinkersCount} amigos`;
       const noDrinkerSample = calc.memberCalculations.find(x => !x.member.drinksAlcohol);
       const noDrinkerVal = noDrinkerSample ? noDrinkerSample.total : calc.basePerPerson;
@@ -773,7 +1186,7 @@
         ? `Base S/ ${(noDrinkerVal - (noDrinkerSample?.pernocteCost || 0)).toFixed(2)} + S/ ${(noDrinkerSample?.pernocteCost || 0).toFixed(2)} pernocte`
         : 'Solo gastos comunes (sin alcohol)';
 
-      // Cuota toman (amigos invitados)
+      // Cuota amigos bebedores
       document.getElementById('kpiCountDrinkers').textContent = `${calc.drinkersCount} amigos`;
       const drinkerSample = calc.memberCalculations.find(x => x.member.drinksAlcohol && !x.member.isUser);
       const drinkerVal = drinkerSample ? drinkerSample.total : (calc.basePerPerson + calc.alcoholPerDrinker);
@@ -797,13 +1210,13 @@
       calc.memberCalculations.forEach((item) => {
         const m = item.member;
         const tr = document.createElement('tr');
-        tr.className = `hover:bg-slate-50 transition-colors ${m.isPaid ? 'bg-emerald-50/40' : ''}`;
+        tr.className = `hover:bg-slate-50/80 transition-colors ${m.isPaid ? 'bg-emerald-50/30' : ''}`;
 
         tr.innerHTML = `
           <td class="py-3 px-2">
             <div class="flex items-center gap-2">
-              <input type="text" value="${escapeHtml(m.name)}" onchange="updateMemberName('${m.id}', this.value)" class="bg-transparent font-semibold text-slate-800 text-xs sm:text-sm border-b border-transparent hover:border-slate-300 focus:border-emerald-500 focus:outline-none w-full max-w-[210px]">
-              ${m.isUser ? '<span class="text-[10px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.5 rounded">Tú</span>' : ''}
+              <input type="text" value="${escapeHtml(m.name)}" onchange="updateMemberName('${m.id}', this.value)" class="bg-transparent font-semibold text-slate-800 text-xs sm:text-sm border-b border-transparent hover:border-slate-300 focus:border-club-600 focus:outline-none w-full max-w-[210px]">
+              ${m.isUser ? '<span class="text-[10px] bg-club-100 text-club-900 font-extrabold px-1.5 py-0.5 rounded">Tú</span>' : ''}
             </div>
             <div class="text-[11px] text-slate-400 mt-0.5">
               ${m.drinksAlcohol ? '🍺 Bebe alcohol' : '🥤 No bebe alcohol'} · ${item.pernocteCost > 0 ? `🏨 Pernocta (+S/ ${item.pernocteCost.toFixed(0)})` : 'Solo día / exonerado'}
@@ -812,14 +1225,14 @@
 
           <!-- ¿Toma Alcohol? -->
           <td class="py-3 px-2 text-center">
-            <button onclick="toggleMemberDrink('${m.id}')" title="Alternar si toma alcohol o no" class="px-2.5 py-1 rounded-md text-xs font-bold transition ${m.drinksAlcohol ? 'bg-amber-100 text-amber-800 hover:bg-amber-200' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}">
+            <button onclick="toggleMemberDrink('${m.id}')" title="Alternar si toma alcohol o no" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${m.drinksAlcohol ? 'bg-amber-100 text-amber-800 hover:bg-amber-200' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}">
               ${m.drinksAlcohol ? '<i class="fa-solid fa-beer-mug-empty"></i> Sí' : '<i class="fa-solid fa-ban"></i> No'}
             </button>
           </td>
 
           <!-- ¿Paga Pernocte? -->
           <td class="py-3 px-2 text-center">
-            <button onclick="toggleMemberPernocte('${m.id}')" title="Alternar cobro de pernocte individual" class="px-2.5 py-1 rounded-md text-xs font-bold transition ${item.pernocteCost > 0 ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}">
+            <button onclick="toggleMemberPernocte('${m.id}')" title="Alternar cobro de pernocte individual" class="px-2.5 py-1 rounded-lg text-xs font-bold transition ${item.pernocteCost > 0 ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200' : 'bg-slate-100 text-slate-400 hover:bg-slate-200'}">
               ${item.pernocteCost > 0 ? `+S/ ${item.pernocteCost.toFixed(0)}` : 'S/ 0'}
             </button>
           </td>
@@ -828,12 +1241,12 @@
           <td class="py-3 px-2 text-right">
             <div class="flex items-center justify-end">
               <span class="text-slate-400 text-xs mr-1 font-mono">S/</span>
-              <input type="number" step="5" value="${m.extraAdjustment}" onchange="updateMemberAdjustment('${m.id}', this.value)" class="w-16 text-right font-mono text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5 focus:border-emerald-500 focus:outline-none">
+              <input type="number" step="5" value="${m.extraAdjustment}" onchange="updateMemberAdjustment('${m.id}', this.value)" class="w-16 text-right font-mono text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded px-1.5 py-0.5 focus:border-club-600 focus:outline-none">
             </div>
           </td>
 
           <!-- Total a Pagar -->
-          <td class="py-3 px-2 text-right font-extrabold text-sm sm:text-base text-slate-900 font-mono">
+          <td class="py-3 px-2 text-right font-bold text-sm sm:text-base text-slate-900 font-mono">
             S/ ${item.total.toFixed(2)}
           </td>
 
@@ -867,16 +1280,16 @@
 
       state.expenses.forEach(exp => {
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'p-3 rounded-xl border border-slate-200/80 bg-slate-50/70 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3';
+        itemDiv.className = 'p-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 hover:bg-slate-50 transition flex flex-col sm:flex-row sm:items-center justify-between gap-3';
         
         itemDiv.innerHTML = `
           <div class="flex-1">
-            <input type="text" value="${escapeHtml(exp.name)}" onchange="updateExpenseName('${exp.id}', this.value)" class="w-full font-semibold text-xs sm:text-sm text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-emerald-500 focus:outline-none">
+            <input type="text" value="${escapeHtml(exp.name)}" onchange="updateExpenseName('${exp.id}', this.value)" class="w-full font-semibold text-xs sm:text-sm text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-club-600 focus:outline-none">
             <div class="flex items-center gap-2 mt-1">
               <span class="text-[11px] font-semibold text-slate-500">División:</span>
               <select onchange="updateExpenseSplit('${exp.id}', this.value)" class="text-[11px] bg-white border border-slate-200 rounded px-1.5 py-0.5 text-slate-700 font-medium">
                 <option value="all" ${exp.splitType === 'all' ? 'selected' : ''}>Entre todos (${calc.totalMembers} personas)</option>
-                <option value="drinkers_only" ${exp.splitType === 'drinkers_only' ? 'selected' : ''}>Solo los que beben (${calc.drinkersCount} personas)</option>
+                <option value="drinkers_only" ${exp.splitType === 'drinkers_only' ? 'selected' : ''}>Solo los que beben (${calc.drinkersCount} bebedores)</option>
               </select>
             </div>
           </div>
@@ -894,10 +1307,10 @@
         expContainer.appendChild(itemDiv);
       });
 
-      // Renglón de Pernocte si está activo
+      // Renglón Pernocte si está prendido
       if (state.pernoctarActive && calc.pernocteTotalCharged > 0) {
         const pernocteDiv = document.createElement('div');
-        pernocteDiv.className = 'p-3 rounded-xl border border-emerald-300 bg-emerald-50/60 flex items-center justify-between';
+        pernocteDiv.className = 'p-3 rounded-2xl border border-emerald-300 bg-emerald-50/60 flex items-center justify-between';
         pernocteDiv.innerHTML = `
           <div>
             <div class="font-bold text-xs sm:text-sm text-emerald-950 flex items-center gap-1.5">
@@ -907,7 +1320,7 @@
               S/ ${state.pernoctarAmount.toFixed(2)} x ${calc.countPernoctantes} personas a dormir
             </div>
           </div>
-          <div class="font-extrabold text-sm sm:text-base text-emerald-900 font-mono">
+          <div class="font-bold text-sm sm:text-base text-emerald-900 font-mono">
             S/ ${calc.pernocteTotalCharged.toFixed(2)}
           </div>
         `;
@@ -919,7 +1332,85 @@
       saveState();
     }
 
-    // GENERAR MENSAJE DE WHATSAPP
+    // NAVEGACIÓN ENTRE PESTAÑAS (CALCULADORA VS INSTALACIONES)
+    function switchMainTab(tab) {
+      const calcTab = document.getElementById('tab-calculadora');
+      const instTab = document.getElementById('tab-instalaciones');
+      const calcBtn = document.getElementById('navBtnCalculadora');
+      const instBtn = document.getElementById('navBtnInstalaciones');
+      const mobCalc = document.getElementById('mobileBtnCalc');
+      const mobInst = document.getElementById('mobileBtnInst');
+
+      if (tab === 'calculadora') {
+        calcTab.classList.remove('hidden');
+        instTab.classList.add('hidden');
+        calcBtn.className = 'px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all bg-emerald-600 text-white shadow-md';
+        instBtn.className = 'px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 transition-all text-white/80 hover:text-white hover:bg-white/10';
+        if (mobCalc && mobInst) {
+          mobCalc.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-club-800 text-white flex items-center gap-1.5';
+          mobInst.className = 'px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-1.5';
+        }
+      } else {
+        calcTab.classList.add('hidden');
+        instTab.classList.remove('hidden');
+        instBtn.className = 'px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2 transition-all bg-emerald-600 text-white shadow-md';
+        calcBtn.className = 'px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 transition-all text-white/80 hover:text-white hover:bg-white/10';
+        if (mobCalc && mobInst) {
+          mobInst.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-club-800 text-white flex items-center gap-1.5';
+          mobCalc.className = 'px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:bg-slate-100 flex items-center gap-1.5';
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // FILTRO DE INSTALACIONES
+    function filterFacilities(category) {
+      const cards = document.querySelectorAll('.facility-card');
+      const buttons = document.querySelectorAll('.facility-filter-btn');
+
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.className = 'facility-filter-btn px-4 py-2 rounded-xl bg-club-800 text-white shadow-sm transition active font-bold';
+        } else {
+          btn.className = 'facility-filter-btn px-4 py-2 rounded-xl bg-white text-slate-600 border border-slate-200 hover:bg-slate-50 transition font-medium';
+        }
+      });
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // PHOTO LIGHTBOX
+    function openLightbox(imageUrl, caption) {
+      const modal = document.getElementById('photoLightbox');
+      const img = document.getElementById('lightboxImage');
+      const cap = document.getElementById('lightboxCaption');
+
+      img.src = imageUrl;
+      cap.textContent = caption || 'Instalación de Country Club El Bosque · Sede Chosica';
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('photoLightbox');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeWhatsAppModal();
+      }
+    });
+
+    // GENERADOR DE MENSAJE PARA WHATSAPP
     function generateWhatsAppMessage() {
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
@@ -930,7 +1421,7 @@
       msg += `💰 *Presupuesto Total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
       
       if (state.pernoctarActive) {
-        msg += `🏨 *Cobro por Pernoctar:* ✅ S/ ${state.pernoctarAmount.toFixed(2)} por invitado (Confirmado)\n`;
+        msg += `🏨 *Cobro por Pernoctar:* ✅ S/ ${state.pernoctarAmount.toFixed(2)} por invitado\n`;
       } else {
         msg += `🏨 *Cobro por Pernoctar:* ⏸️ S/ 0 (No se cobra / Exonerado)\n`;
       }
@@ -952,7 +1443,7 @@
       });
 
       msg += `\n💳 *Para Yape / Plin:* ${yape}\n`;
-      msg += `Por favor envíen la captura al transferir para confirmar con la reserva del bungaló. ¡A disfrutar Chosica! ☀️🏊‍♂️`;
+      msg += `¡Mandas la captura al transferir para separar tu cama en el bungaló y las carnes! ☀️🏊‍♂️🥩`;
 
       return msg;
     }
@@ -976,7 +1467,7 @@
     function copyWhatsAppToClipboard() {
       const text = generateWhatsAppMessage();
       navigator.clipboard.writeText(text).then(() => {
-        showToast('¡Texto copiado! Listo para pegar en WhatsApp');
+        showToast('¡Texto copiado! Listo para enviar a WhatsApp');
         const btn = document.getElementById('copyBtn');
         const originalHtml = btn.innerHTML;
         btn.innerHTML = '<i class="fa-solid fa-check"></i> ¡Copiado!';
@@ -991,24 +1482,6 @@
       }).catch(() => {
         alert('Copia el texto directamente de la caja.');
       });
-    }
-
-    // EXPORTAR A CSV
-    function exportCSV() {
-      const calc = calculate();
-      let csv = 'Nombre,¿Toma Alcohol?,¿Paga Pernocte?,Ajuste S/,Base S/,Alcohol S/,Pernocte S/,Total a Pagar S/,Estado\n';
-      calc.memberCalculations.forEach(item => {
-        const m = item.member;
-        csv += `"${m.name}","${m.drinksAlcohol ? 'Sí' : 'No'}","${item.pernocteCost > 0 ? 'Sí' : 'No'}",${m.extraAdjustment.toFixed(2)},${item.baseCost.toFixed(2)},${item.alcoholCost.toFixed(2)},${item.pernocteCost.toFixed(2)},${item.total.toFixed(2)},"${m.isPaid ? 'Pagó' : 'Pendiente'}"\n`;
-      });
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `presupuesto_el_bosque_${state.pernoctarActive ? 'con_pernocte' : 'sin_pernocte'}.csv`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('Descargando archivo CSV / Excel');
     }
 
     function showToast(msg) {
