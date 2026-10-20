@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Country Club El Bosque · Presupuesto Oficial Chosica</title>
+  <title>Country Club El Bosque · Presupuesto Chosica</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,7 +14,7 @@
   <!-- Google Fonts: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
@@ -24,16 +24,6 @@
           fontFamily: {
             sans: ['"Inter"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              dark: '#0c0e12',
-              card: '#14171f',
-              border: '#242a38',
-              hover: '#1b202c',
-              accent: '#10b981',
-              amber: '#f59e0b',
-            }
           }
         }
       }
@@ -42,82 +32,58 @@
 
   <style>
     body {
-      background-color: #0c0e12;
+      background-color: #090a0f;
       color: #e2e8f0;
       font-family: 'Inter', sans-serif;
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
     }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: #14171f;
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #11131a;
     }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #2a3244;
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #232733;
       border-radius: 4px;
     }
-    .data-table th {
-      border-bottom: 1px solid #242a38;
-      color: #94a3b8;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .data-table td {
-      border-bottom: 1px solid #1a202c;
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none; 
+      margin: 0; 
     }
     @media print {
-      header, nav, .no-print, #lightbox, #whatsappModal { display: none !important; }
+      header, .no-print, #lightbox, #whatsappModal { display: none !important; }
       body { background: white !important; color: black !important; }
-      .data-table td, .data-table th { border-color: #cbd5e1 !important; color: black !important; }
+      .print-border { border-color: #000 !important; }
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-emerald-500 selection:text-white pb-20">
+<body class="min-h-screen selection:bg-emerald-500 selection:text-white pb-28 sm:pb-20">
 
   <!-- ========================================================================= -->
-  <!-- BARRA SUPERIOR -->
+  <!-- HEADER MINIMALISTA -->
   <!-- ========================================================================= -->
-  <header class="bg-[#10131a] border-b border-[#242a38] sticky top-0 z-30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+  <header class="border-b border-slate-800/80 bg-[#0c0e14]/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
       
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold font-mono text-sm">
-          EB
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Country Club El Bosque</span>
+          <span class="text-slate-600 text-xs">/</span>
+          <span class="text-[11px] text-slate-400">Chosica · 2 Noches</span>
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-mono tracking-widest uppercase font-bold text-emerald-400">Country Club El Bosque</span>
-            <span class="text-slate-600 text-xs">/</span>
-            <span class="text-[11px] text-slate-400">Sede Chosica · 2 Noches (Enero)</span>
-          </div>
-          <h1 class="text-base sm:text-lg font-bold text-white tracking-tight">
-            Presupuesto Oficial del Viaje
-          </h1>
-        </div>
+        <h1 class="text-base sm:text-lg font-bold text-white tracking-tight">
+          Presupuesto & Cuotas
+        </h1>
       </div>
 
-      <!-- Pestañas de Navegación -->
-      <div class="flex items-center gap-1 bg-[#0c0e12] p-1 rounded-xl border border-[#242a38] text-xs font-semibold no-print">
-        <button id="navBtnResumen" onclick="switchTab('resumen')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white font-bold transition flex items-center gap-1.5 shadow">
-          <i class="fa-solid fa-calculator"></i> Reparto & Cuotas
-        </button>
-        <button id="navBtnCompras" onclick="switchTab('compras')" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-list-check"></i> Detalle de Compras (Capturas)
-        </button>
-        <button id="navBtnFotos" onclick="switchTab('fotos')" class="px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-images text-amber-400"></i> Fotos Sede (<span id="photoBadge">12</span>)
-        </button>
-      </div>
-
-      <!-- Acciones Rápidas -->
-      <div class="hidden sm:flex items-center gap-2 no-print">
-        <button onclick="openWhatsAppModal()" class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow active:scale-95">
-          <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
-        </button>
-        <button onclick="resetDefaults()" class="p-1.5 text-slate-400 hover:text-white rounded-lg transition text-xs" title="Restablecer valores originales">
+      <!-- Estado de auto-guardado e indicador -->
+      <div class="flex items-center gap-2.5 text-xs font-mono">
+        <span id="saveStatus" class="inline-flex items-center gap-1.5 text-slate-400 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Guardado
+        </span>
+        <button onclick="resetDefaults()" title="Restablecer valores originales" class="text-slate-500 hover:text-slate-300 p-1.5 transition">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
       </div>
@@ -125,535 +91,263 @@
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 mt-6 space-y-6">
+  <main class="max-w-4xl mx-auto px-4 mt-6 space-y-6">
 
     <!-- ======================================================================= -->
-    <!-- MASTER CARD: BOTÓN DE PERNOCTAR (S/ 70) CONMUTABLE ON / OFF -->
+    <!-- 1. EL BOTÓN DE PERNOCTAR S/ 70 (SIMPLE Y DIRECTO) -->
     <!-- ======================================================================= -->
-    <div id="pernoctarBanner" class="bg-[#14171f] rounded-2xl p-5 sm:p-6 border-2 border-emerald-500/80 shadow-lg relative transition-all">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        
-        <div class="space-y-2 flex-1">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span id="pernoctarBadge" class="text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-              Pernocte ACTIVADO (+S/ 70 por invitado)
-            </span>
-            <span class="text-xs text-slate-400">
-              Sujeto a confirmación con la administración de El Bosque (+51 989 160 392)
-            </span>
-          </div>
-
-          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
-            Tarifa de Pernocte para Invitados (S/ 70)
-          </h2>
-
-          <p class="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-            Los amigos entran gratis de día como invitados de socio, pero si se quedan a dormir en el bungaló el club puede cobrar un <strong>derecho de pernocte</strong>. 
-            Prende o apaga este botón según lo que te confirmen los patas del club.
-          </p>
-
-          <!-- Configuración del pernocte -->
-          <div class="pt-3 border-t border-[#242a38] flex flex-wrap items-center gap-4 text-xs">
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-400 font-medium">Monto por pernocte:</span>
-              <span class="font-mono text-emerald-400 font-bold">S/</span>
-              <input type="number" id="inputPernocteMonto" value="70.00" step="5" min="0" oninput="updatePernocteMonto(this.value)" class="w-16 bg-[#0c0e12] border border-[#242a38] font-mono font-bold text-white px-2 py-0.5 rounded text-xs focus:border-emerald-500 focus:outline-none">
-            </div>
-
-            <div class="flex items-center gap-1.5">
-              <span class="text-slate-400 font-medium">Cobrar a:</span>
-              <select id="selectPernocteTarget" onchange="updatePernocteTarget(this.value)" class="bg-[#0c0e12] border border-[#242a38] text-white font-medium px-2 py-0.5 rounded text-xs focus:border-emerald-500 focus:outline-none">
-                <option value="guests_only">Solo a los 7 amigos invitados (Tú no pagas por ser familia de socia)</option>
-                <option value="all">A todos los 8 integrantes (+S/ 70 c/u)</option>
-                <option value="split_all">Dividir costo de pernocte equitativamente entre los 8</option>
-                <option value="custom">Manual (marcar check por persona)</option>
-              </select>
-            </div>
-
-            <a href="https://wa.me/51989160392?text=Hola,%20buenas%20tardes.%20Mi%20familia%20es%20socia%20del%20Country%20Club%20El%20Bosque.%20Quisiera%20consultar%20sobre%20la%20tarifa%20de%20bungal%C3%B3s%20para%20un%20fin%20de%20semana%20en%20enero%20en%20Chosica%20y%20si%20los%20invitados%20pagan%20tarifa%20por%20pernoctar%20(y%20cu%C3%A1nto%20es).%20Muchas%20gracias!" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold inline-flex items-center gap-1 ml-auto">
-              <i class="fa-brands fa-whatsapp text-emerald-400"></i> Preguntar a Reservas (+51 989 160 392) &rarr;
-            </a>
-          </div>
-        </div>
-
-        <!-- EL INTERRUPTOR FÍSICO ON / OFF -->
-        <div class="flex flex-col items-center justify-center p-4 bg-[#0c0e12] border border-[#242a38] rounded-xl min-w-[210px]">
-          <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-slate-400 mb-2">
-            Control de Pernocte
+    <div class="bg-[#11131a] border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-bed text-emerald-400"></i> Cobro por Pernoctar (El Bosque)
           </span>
-
-          <label class="relative inline-flex items-center cursor-pointer select-none">
-            <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)" checked>
-            <div class="w-16 h-8 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-7 after:transition-all peer-checked:bg-emerald-600 shadow-inner"></div>
-            <span id="switchPernocteText" class="ml-3 text-sm font-mono font-extrabold text-emerald-400 tracking-wider">ON</span>
-          </label>
-
-          <span id="pernocteSubinfo" class="text-[11px] text-slate-400 mt-2 font-mono text-center">
-            +S/ 70 x 7 = S/ 490.00
+          <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+            +S/ 70 Activado
           </span>
         </div>
+        <p class="text-xs text-slate-400">
+          Prende o apaga si el club cobra los S/ 70 por quedarse a dormir a los invitados.
+        </p>
+      </div>
 
+      <!-- El Switch Táctil Minimalista -->
+      <div class="flex items-center gap-3 self-end sm:self-auto">
+        <div class="flex items-center text-xs font-mono text-slate-400 gap-1 bg-[#090a0f] border border-slate-800 rounded-lg px-2 py-1">
+          <span>S/</span>
+          <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-white font-bold text-right focus:outline-none">
+        </div>
+
+        <label class="relative inline-flex items-center cursor-pointer select-none">
+          <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)" checked>
+          <div class="w-14 h-7 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-6 after:transition-all peer-checked:bg-emerald-600"></div>
+          <span id="switchText" class="ml-2.5 text-xs font-mono font-bold text-emerald-400">ON</span>
+        </label>
       </div>
     </div>
 
     <!-- ======================================================================= -->
-    <!-- VISTA 1: RESUMEN DE CUOTAS Y GASTOS (TAB PRINCIPAL) -->
+    <!-- 2. CUADRO RESUMEN DE CUOTAS (3 DATOS CLAVE) -->
     <!-- ======================================================================= -->
-    <div id="view-resumen" class="space-y-6">
-
-      <!-- TARJETAS DE TOTALES Y CUOTAS EXACTAS -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-        
-        <!-- Total General -->
-        <div class="bg-[#14171f] p-4 rounded-xl border border-[#242a38]">
-          <div class="text-[11px] font-mono uppercase text-slate-400 font-bold">Total del Grupo</div>
-          <div class="text-2xl sm:text-3xl font-mono font-extrabold text-white mt-1" id="statTotalPresupuesto">
-            S/ 2,042.76
-          </div>
-          <div class="text-[11px] text-slate-400 mt-0.5 flex justify-between">
-            <span>Base S/ 1,552.76</span>
-            <span class="text-emerald-400 font-bold" id="statPernocteTotalSub">+S/ 490</span>
-          </div>
-        </div>
-
-        <!-- Cuota No Bebedores -->
-        <div class="bg-[#14171f] p-4 rounded-xl border border-blue-500/30">
-          <div class="text-[11px] font-mono uppercase text-blue-400 font-bold">Los 2 que NO toman</div>
-          <div class="text-2xl sm:text-3xl font-mono font-extrabold text-blue-400 mt-1" id="statCuotaNoToma">
-            S/ 216.38
-          </div>
-          <div class="text-[11px] text-slate-400 mt-0.5" id="statCuotaNoTomaDesc">
-            Base S/ 146.38 (+S/ 70 pernocte)
-          </div>
-        </div>
-
-        <!-- Cuota Bebedores -->
-        <div class="bg-[#14171f] p-4 rounded-xl border border-amber-500/30">
-          <div class="text-[11px] font-mono uppercase text-amber-400 font-bold">Los 5 que TOMAN</div>
-          <div class="text-2xl sm:text-3xl font-mono font-extrabold text-amber-400 mt-1" id="statCuotaToma">
-            S/ 270.00
-          </div>
-          <div class="text-[11px] text-slate-400 mt-0.5" id="statCuotaTomaDesc">
-            Base S/ 200.00 (+S/ 70 pernocte)
-          </div>
-        </div>
-
-        <!-- Cuota Tú (Organizador) -->
-        <div class="bg-[#14171f] p-4 rounded-xl border-2 border-emerald-500/80">
-          <div class="text-[11px] font-mono uppercase text-emerald-400 font-bold">Tú (Organizador)</div>
-          <div class="text-2xl sm:text-3xl font-mono font-extrabold text-emerald-400 mt-1" id="statCuotaTu">
-            S/ 260.00
-          </div>
-          <div class="text-[11px] text-slate-400 mt-0.5">
-            Toma + S/ 60 extra voluntario
-          </div>
-        </div>
-
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      
+      <!-- Total General -->
+      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
+        <span class="text-[10px] font-mono uppercase text-slate-400 font-bold block">Total Viaje</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-white mt-1" id="kpiTotal">S/ 2,042.76</div>
+        <span class="text-[10px] text-slate-500 font-mono" id="kpiBaseSub">Base S/ 1,552.76</span>
       </div>
 
-      <!-- DOS COLUMNAS: PADRÓN DE AMIGOS Y RESUMEN DE TOTALES -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- COLUMNA IZQUIERDA: PADRÓN DE PARTICIPANTES (7 COLS) -->
-        <div class="lg:col-span-7 bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-[#242a38]">
-            <div>
-              <h3 class="font-bold text-base text-white">
-                Padrón de Amigos & Cuotas Individuales (<span id="countAmigos">8</span>)
-              </h3>
-              <p class="text-xs text-slate-400">Haz clic en el nombre para cambiarlo o registra quién ya pagó por Yape.</p>
-            </div>
-            <button onclick="addMember()" class="px-2.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1 shadow">
-              <i class="fa-solid fa-plus text-[10px]"></i> Amigo
-            </button>
-          </div>
+      <!-- No Bebedores -->
+      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
+        <span class="text-[10px] font-mono uppercase text-blue-400 font-bold block">No toman (2)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-blue-400 mt-1" id="kpiNoToma">S/ 216.38</div>
+        <span class="text-[10px] text-slate-500 font-mono">S/ 0 alcohol</span>
+      </div>
 
-          <div class="overflow-x-auto custom-scrollbar">
-            <table class="w-full text-left data-table text-xs">
-              <thead>
-                <tr>
-                  <th class="py-2.5 px-2">Amigo</th>
-                  <th class="py-2.5 px-2 text-center">¿Toma?</th>
-                  <th class="py-2.5 px-2 text-center">Pernocte</th>
-                  <th class="py-2.5 px-2 text-right">Ajuste S/</th>
-                  <th class="py-2.5 px-2 text-right font-bold text-white">Cuota Final</th>
-                  <th class="py-2.5 px-2 text-center">Yape</th>
-                  <th class="py-2.5 px-1"></th>
-                </tr>
-              </thead>
-              <tbody id="amigosTbody">
-                <!-- Inyectado por JS -->
-              </tbody>
+      <!-- Bebedores -->
+      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
+        <span class="text-[10px] font-mono uppercase text-amber-400 font-bold block">Toman (5)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-amber-400 mt-1" id="kpiToma">S/ 270.00</div>
+        <span class="text-[10px] text-slate-500 font-mono">Con trago</span>
+      </div>
+
+      <!-- Tú -->
+      <div class="bg-[#11131a] border border-emerald-500/50 p-3.5 rounded-xl">
+        <span class="text-[10px] font-mono uppercase text-emerald-400 font-bold block">Tú (Organizador)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-emerald-400 mt-1" id="kpiTu">S/ 260.00</div>
+        <span class="text-[10px] text-slate-500 font-mono">+S/ 60 extra</span>
+      </div>
+
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- 3. LISTA DE AMIGOS Y PAGOS (EDITABLE Y CON PERSISTENCIA) -->
+    <!-- ======================================================================= -->
+    <div class="bg-[#11131a] border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <div>
+          <h2 class="text-sm font-bold text-white">Amigos & Cuotas Individuales</h2>
+          <p class="text-[11px] text-slate-400">Edita nombres o marca quién ya pagó por Yape/Plin.</p>
+        </div>
+        <button onclick="addFriend()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-lg transition flex items-center gap-1">
+          <i class="fa-solid fa-plus text-[10px]"></i> Amigo
+        </button>
+      </div>
+
+      <div class="overflow-x-auto custom-scroll">
+        <table class="w-full text-left text-xs">
+          <thead>
+            <tr class="text-slate-400 border-b border-slate-800 text-[11px] font-mono">
+              <th class="py-2 px-2">Nombre</th>
+              <th class="py-2 px-2 text-center">¿Toma?</th>
+              <th class="py-2 px-2 text-center">Pernocte</th>
+              <th class="py-2 px-2 text-right">Extra S/</th>
+              <th class="py-2 px-2 text-right font-bold text-white">Cuota Final</th>
+              <th class="py-2 px-2 text-center">Yape</th>
+              <th class="py-2 px-1"></th>
+            </tr>
+          </thead>
+          <tbody id="friendsTbody">
+            <!-- Inyectado por JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Barra de recaudación -->
+      <div class="pt-2 text-[11px] text-slate-400 flex items-center justify-between font-mono">
+        <span>Recaudado: <strong class="text-emerald-400" id="recaudadoLabel">S/ 0.00 / S/ 0.00 (0%)</strong></span>
+        <button onclick="openWhatsAppModal()" class="text-emerald-400 hover:underline font-bold">
+          <i class="fa-brands fa-whatsapp"></i> Generar mensaje para WhatsApp &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- 4. ACORDEÓN 1: DETALLE DE COMPRAS REALES (LAS 5 TABLAS DE CLAUDE) -->
+    <!-- ======================================================================= -->
+    <div class="border border-slate-800 rounded-2xl overflow-hidden bg-[#11131a] transition-all">
+      <button onclick="toggleSection('sec-compras')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/40 transition">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-cart-shopping text-emerald-400"></i>
+          <span>Detalle de Compras (Comida, Cremas, Tragos, Bungaló)</span>
+          <span class="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded font-normal" id="subtotalComprasBadge">S/ 1,552.76</span>
+        </span>
+        <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200"></i>
+      </button>
+
+      <div id="sec-compras" class="hidden p-4 pt-0 space-y-4 border-t border-slate-800/80 text-xs">
+        
+        <!-- 1. Comida -->
+        <div class="pt-3">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+            <span>🥩 Comida (S/ 398.00)</span>
+            <span class="font-mono text-emerald-400" id="comidaSubDisplay">S/ 398.00</span>
+          </div>
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-[11px]">
+              <tbody id="tbodyComida" class="divide-y divide-slate-800/60"></tbody>
             </table>
           </div>
+        </div>
 
-          <!-- Progreso de Recaudación -->
-          <div class="pt-3 border-t border-[#242a38] text-xs flex items-center justify-between">
-            <span class="text-slate-400">Progreso de pagos (Yape / Plin):</span>
-            <span class="font-mono font-bold text-emerald-400" id="recaudadoText">S/ 0.00 / S/ 0.00 (0%)</span>
+        <!-- 2. Cremas y Parrilla -->
+        <div class="pt-2 border-t border-slate-800/60">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+            <span>🥫 Cremas, Mezcladores & Parrilla (S/ 155.39)</span>
+            <span class="font-mono text-emerald-400" id="cremasSubDisplay">S/ 155.39</span>
           </div>
-          <div class="w-full bg-[#0c0e12] rounded-full h-2 border border-[#242a38] overflow-hidden">
-            <div id="recaudadoBar" class="bg-emerald-500 h-2 transition-all duration-300" style="width: 0%"></div>
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-[11px]">
+              <tbody id="tbodyCremas" class="divide-y divide-slate-800/60"></tbody>
+            </table>
           </div>
         </div>
 
-        <!-- COLUMNA DERECHA: CONCEPTO DE GASTOS Y MARGEN (5 COLS) -->
-        <div class="lg:col-span-5 bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-[#242a38]">
-            <div>
-              <h3 class="font-bold text-base text-white">
-                Resumen de Gastos del Viaje
-              </h3>
-              <p class="text-xs text-slate-400">Basado en las capturas reales de compra.</p>
-            </div>
-            <button onclick="switchTab('compras')" class="text-xs text-emerald-400 hover:underline font-semibold">
-              Ver detalle completo &rarr;
-            </button>
+        <!-- 3. Alcohol -->
+        <div class="pt-2 border-t border-slate-800/60">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+            <span>🍻 Alcohol (Solo bebedores: S/ 321.70)</span>
+            <span class="font-mono text-amber-400" id="alcoholSubDisplay">S/ 321.70</span>
           </div>
-
-          <!-- Mini desglose de categorías -->
-          <div class="space-y-2.5 text-xs">
-            
-            <div class="p-3 bg-[#0c0e12] border border-[#242a38] rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
-                  <i class="fa-solid fa-utensils text-amber-400"></i> Comida (Carnes, embutidos, panes)
-                </div>
-                <div class="text-[11px] text-slate-400">9 productos (Otto Kunz, Bife Frigon, etc.)</div>
-              </div>
-              <div class="font-mono font-bold text-white">S/ 398.00</div>
-            </div>
-
-            <div class="p-3 bg-[#0c0e12] border border-[#242a38] rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
-                  <i class="fa-solid fa-fire-burner text-orange-400"></i> Cremas, Mezcladores & Carbón
-                </div>
-                <div class="text-[11px] text-slate-400">Alacena, carbón, hielo Bell's, gaseosas</div>
-              </div>
-              <div class="font-mono font-bold text-white">S/ 155.39</div>
-            </div>
-
-            <div class="p-3 bg-[#0c0e12] border border-[#242a38] rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
-                  <i class="fa-solid fa-shield-halved text-blue-400"></i> Margen de 5% sobre Comida
-                </div>
-                <div class="text-[11px] text-slate-400">Fondo de reserva para imprevistos / redondeos</div>
-              </div>
-              <div class="font-mono font-bold text-white">S/ 27.67</div>
-            </div>
-
-            <div class="p-3 bg-[#0c0e12] border border-[#242a38] rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
-                  <i class="fa-solid fa-beer-mug-empty text-amber-400"></i> Alcohol (Solo para los que beben)
-                </div>
-                <div class="text-[11px] text-slate-400">5 botellas Bar Express (S/ 250) + 18 cervezas (S/ 71.70)</div>
-              </div>
-              <div class="font-mono font-bold text-amber-400">S/ 321.70</div>
-            </div>
-
-            <div class="p-3 bg-[#0c0e12] border border-[#242a38] rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-white flex items-center gap-1.5">
-                  <i class="fa-solid fa-house-chimney text-emerald-400"></i> Alojamiento & Movilidad
-                </div>
-                <div class="text-[11px] text-slate-400">Bungaló 2 noches (S/ 350) + Van ida/vuelta (S/ 300)</div>
-              </div>
-              <div class="font-mono font-bold text-white">S/ 650.00</div>
-            </div>
-
-            <!-- Fila pernocte -->
-            <div id="resumenPernocteRow" class="p-3 bg-emerald-500/10 border border-emerald-500/40 rounded-xl flex items-center justify-between">
-              <div>
-                <div class="font-bold text-emerald-300 flex items-center gap-1.5">
-                  <i class="fa-solid fa-bed text-emerald-400"></i> Tarifa Pernocte Club El Bosque
-                </div>
-                <div class="text-[11px] text-emerald-400/80" id="resumenPernocteSub">S/ 70 x 7 invitados</div>
-              </div>
-              <div class="font-mono font-bold text-emerald-300" id="resumenPernocteTotal">S/ 490.00</div>
-            </div>
-
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-[11px]">
+              <tbody id="tbodyAlcohol" class="divide-y divide-slate-800/60"></tbody>
+            </table>
           </div>
+        </div>
 
-          <div class="pt-3 border-t border-[#242a38] flex items-center justify-between text-xs font-bold">
-            <span class="text-slate-300">Total presupuestado con pernocte:</span>
-            <span class="font-mono text-lg text-emerald-400 font-extrabold" id="resumenTotalDisplay">S/ 2,042.76</span>
+        <!-- 4. Alojamiento y Movilidad -->
+        <div class="pt-2 border-t border-slate-800/60">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+            <span>🏡 Alojamiento & Movilidad (S/ 650.00)</span>
+            <span class="font-mono text-emerald-400" id="alojSubDisplay">S/ 650.00</span>
           </div>
+          <div class="overflow-x-auto custom-scroll">
+            <table class="w-full text-left text-[11px]">
+              <tbody id="tbodyAlojamiento" class="divide-y divide-slate-800/60"></tbody>
+            </table>
+          </div>
+        </div>
 
+        <!-- Margen de 5% sobre comida y cremas -->
+        <div class="p-2.5 rounded-lg bg-[#090a0f] border border-slate-800 flex justify-between font-mono text-[11px]">
+          <span class="text-slate-400">Margen imprevistos (5% sobre comida y cremas):</span>
+          <span class="font-bold text-slate-200" id="margenDisplay">S/ 27.67</span>
         </div>
 
       </div>
-
     </div>
 
     <!-- ======================================================================= -->
-    <!-- VISTA 2: DETALLE COMPLETO DE COMPRAS (LAS 5 TABLAS DE LAS CAPTURAS) -->
+    <!-- 5. ACORDEÓN 2: INSTALACIONES DE EL BOSQUE (FOTOS DEL CLUB) -->
     <!-- ======================================================================= -->
-    <div id="view-compras" class="space-y-6 hidden">
-      
-      <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-[#242a38]">
-        <div>
-          <h2 class="text-xl font-bold text-white">Lista de Productos & Capturas de Precios</h2>
-          <p class="text-xs text-slate-400">Todos los productos son modificables en cantidad o precio unitario.</p>
-        </div>
-        <button onclick="switchTab('resumen')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold">
-          &larr; Volver al Reparto de Cuotas
-        </button>
-      </div>
+    <div class="border border-slate-800 rounded-2xl overflow-hidden bg-[#11131a] transition-all">
+      <button onclick="toggleSection('sec-fotos')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/40 transition">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-tree text-emerald-400"></i>
+          <span>Instalaciones del Club (Bungaló, Piscinas, Caballos, Mirador, Billar, Bochas, Deportes)</span>
+        </span>
+        <i id="icon-sec-fotos" class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200"></i>
+      </button>
 
-      <!-- TABLA 1: COMIDA -->
-      <div class="bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-base text-white flex items-center gap-2">
-            <i class="fa-solid fa-drumstick-bite text-amber-400"></i> Comida
-          </h3>
-          <span class="font-mono font-bold text-sm text-emerald-400" id="subtotalComidaDisplay">Subtotal: S/ 398.00</span>
-        </div>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full text-left data-table text-xs">
-            <thead>
-              <tr>
-                <th class="py-2 px-2">Producto</th>
-                <th class="py-2 px-2">Cantidad</th>
-                <th class="py-2 px-2 text-right">Precio unit.</th>
-                <th class="py-2 px-2 text-right">Total</th>
-                <th class="py-2 px-2 text-center">Fuente</th>
-                <th class="py-2 px-1"></th>
-              </tr>
-            </thead>
-            <tbody id="tbodyComida">
-              <!-- Inyectado por JS -->
-            </tbody>
-          </table>
+      <div id="sec-fotos" class="hidden p-4 pt-0 space-y-3 border-t border-slate-800/80">
+        <p class="text-[11px] text-slate-400">
+          Fotos cargadas desde <code>presupuesto-el-bosque/img/</code>. Haz clic en cualquiera para ampliar en HD:
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="photoGrid">
+          <!-- Inyectado por JS -->
         </div>
       </div>
-
-      <!-- TABLA 2: CREMAS, MEZCLADORES Y PARRILLA -->
-      <div class="bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-base text-white flex items-center gap-2">
-            <i class="fa-solid fa-bottle-droplet text-orange-400"></i> Cremas, mezcladores y parrilla
-          </h3>
-          <span class="font-mono font-bold text-sm text-emerald-400" id="subtotalCremasDisplay">Subtotal: S/ 155.39</span>
-        </div>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full text-left data-table text-xs">
-            <thead>
-              <tr>
-                <th class="py-2 px-2">Producto</th>
-                <th class="py-2 px-2">Cantidad</th>
-                <th class="py-2 px-2 text-right">Precio unit.</th>
-                <th class="py-2 px-2 text-right">Total</th>
-                <th class="py-2 px-2 text-center">Fuente</th>
-                <th class="py-2 px-1"></th>
-              </tr>
-            </thead>
-            <tbody id="tbodyCremas">
-              <!-- Inyectado por JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- TABLA 3: ALCOHOL -->
-      <div class="bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-base text-white flex items-center gap-2">
-            <i class="fa-solid fa-wine-bottle text-amber-400"></i> Alcohol (Se divide solo entre los 6 que toman)
-          </h3>
-          <span class="font-mono font-bold text-sm text-amber-400" id="subtotalAlcoholDisplay">Subtotal: S/ 321.70</span>
-        </div>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full text-left data-table text-xs">
-            <thead>
-              <tr>
-                <th class="py-2 px-2">Producto</th>
-                <th class="py-2 px-2">Cantidad</th>
-                <th class="py-2 px-2 text-right">Precio</th>
-                <th class="py-2 px-2 text-right">Total</th>
-                <th class="py-2 px-2 text-center">Fuente</th>
-                <th class="py-2 px-1"></th>
-              </tr>
-            </thead>
-            <tbody id="tbodyAlcohol">
-              <!-- Inyectado por JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- TABLA 4: ALOJAMIENTO Y MOVILIDAD -->
-      <div class="bg-[#14171f] rounded-2xl border border-[#242a38] p-5 space-y-3">
-        <div class="flex items-center justify-between">
-          <h3 class="font-bold text-base text-white flex items-center gap-2">
-            <i class="fa-solid fa-van-shuttle text-emerald-400"></i> Alojamiento y movilidad
-          </h3>
-          <span class="font-mono font-bold text-sm text-emerald-400" id="subtotalAlojamientoDisplay">Subtotal: S/ 650.00</span>
-        </div>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full text-left data-table text-xs">
-            <thead>
-              <tr>
-                <th class="py-2 px-2">Concepto</th>
-                <th class="py-2 px-2 text-right">Total</th>
-                <th class="py-2 px-1"></th>
-              </tr>
-            </thead>
-            <tbody id="tbodyAlojamiento">
-              <!-- Inyectado por JS -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- TABLA 5: CUADRO DE TOTALES OFICIALES -->
-      <div class="bg-[#14171f] rounded-2xl border border-emerald-500/50 p-5 space-y-3">
-        <h3 class="font-bold text-base text-white flex items-center gap-2">
-          <i class="fa-solid fa-calculator text-emerald-400"></i> Totales Oficiales del Grupo
-        </h3>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full text-left data-table text-xs font-mono">
-            <thead>
-              <tr>
-                <th class="py-2 px-2">Concepto</th>
-                <th class="py-2 px-2 text-right">Total S/</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="py-2.5 px-2 text-slate-300">Comida (S/ 398.00) y cremas, mezcladores y parrilla (S/ 155.39)</td>
-                <td class="py-2.5 px-2 text-right font-bold text-white">S/ 553.39</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-2 text-slate-300">Margen de 5% sobre eso (imprevistos / redondeos)</td>
-                <td class="py-2.5 px-2 text-right font-bold text-white">S/ 27.67</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-2 text-amber-400 font-semibold">Alcohol</td>
-                <td class="py-2.5 px-2 text-right font-bold text-amber-400">S/ 321.70</td>
-              </tr>
-              <tr>
-                <td class="py-2.5 px-2 text-slate-300">Bungaló y movilidad</td>
-                <td class="py-2.5 px-2 text-right font-bold text-white">S/ 650.00</td>
-              </tr>
-              <tr class="bg-[#0c0e12] font-bold text-sm">
-                <td class="py-3 px-2 text-white">Total del grupo (Sin Pernocte)</td>
-                <td class="py-3 px-2 text-right font-extrabold text-emerald-400">S/ 1,552.76</td>
-              </tr>
-              <tr class="bg-emerald-500/10 font-bold text-sm text-emerald-300">
-                <td class="py-3 px-2">Total del grupo (Con Pernocte de 7 invitados)</td>
-                <td class="py-3 px-2 text-right font-extrabold text-emerald-300">S/ 2,042.76</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ======================================================================= -->
-    <!-- VISTA 3: FOTOS DE LAS INSTALACIONES (CONEXIÓN ./img/ Y PLACEHOLDERS) -->
-    <!-- ======================================================================= -->
-    <div id="view-fotos" class="space-y-6 hidden">
-      
-      <div class="bg-[#14171f] border border-[#242a38] rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div>
-          <span class="text-[10px] font-mono font-bold uppercase text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
-            Carpeta de Imágenes Lista
-          </span>
-          <h3 class="text-base font-bold text-white mt-1">
-            Instalaciones de Country Club El Bosque · Sede Chosica
-          </h3>
-          <p class="text-xs text-slate-400 mt-0.5">
-            Las fotos se leen directamente desde <code>presupuesto-el-bosque/img/</code>. Puedes pegar tus fotos ahí con los nombres sugeridos y se mostrarán al instante.
-          </p>
-        </div>
-        <button onclick="switchTab('resumen')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition whitespace-nowrap">
-          &larr; Volver al Reparto
-        </button>
-      </div>
-
-      <!-- Filtros de Categorías -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold custom-scrollbar">
-        <button onclick="filterPhotos('all')" class="photo-btn px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold" data-cat="all">Todas (7 Áreas)</button>
-        <button onclick="filterPhotos('bungalow')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="bungalow">Bungaló (Interior & Parrilla)</button>
-        <button onclick="filterPhotos('piscinas')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="piscinas">Piscinas</button>
-        <button onclick="filterPhotos('mirador')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="mirador">El Mirador</button>
-        <button onclick="filterPhotos('caballos')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="caballos">Caballos</button>
-        <button onclick="filterPhotos('billar')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="billar">Mesa de Billar</button>
-        <button onclick="filterPhotos('bochas')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="bochas">Campo de Bochas</button>
-        <button onclick="filterPhotos('deportes')" class="photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300" data-cat="deportes">Fútbol & Básquet</button>
-      </div>
-
-      <!-- Grid de Fotos -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="photoCardsGrid">
-        <!-- Generado por JS -->
-      </div>
-
     </div>
 
   </main>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: LIGHTBOX PARA AMPLIAR FOTOS EN HD -->
+  <!-- BARRA FLOTANTE INFERIOR MINIMALISTA -->
   <!-- ========================================================================= -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
-    <div class="max-w-4xl w-full bg-[#14171f] text-white rounded-2xl overflow-hidden shadow-2xl border border-[#242a38]" onclick="event.stopPropagation()">
-      <div class="relative bg-black flex items-center justify-center min-h-[300px] max-h-[75vh]">
-        <img id="lightboxImg" src="" alt="Instalación" class="w-full h-auto max-h-[72vh] object-contain">
-        <button onclick="closeLightbox()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center border border-white/20">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <div class="fixed bottom-0 left-0 right-0 bg-[#0c0e14]/95 border-t border-slate-800 py-2.5 px-4 z-40 backdrop-blur no-print">
+    <div class="max-w-4xl mx-auto flex items-center justify-between gap-3 text-xs">
+      <div>
+        <span class="text-slate-400 text-[11px] block font-mono">Total a pagar:</span>
+        <span class="font-mono font-extrabold text-sm text-white" id="barTotalDisplay">S/ 2,042.76</span>
       </div>
-      <div class="p-4 bg-[#0c0e12] flex items-center justify-between text-xs border-t border-[#242a38]">
-        <div>
-          <span class="text-[10px] text-emerald-400 font-mono uppercase font-bold" id="lightboxTag">El Bosque Chosica</span>
-          <h4 class="font-bold text-sm text-white mt-0.5" id="lightboxTitle"></h4>
-          <p class="text-slate-400 mt-0.5 font-mono" id="lightboxFile"></p>
-        </div>
-        <button onclick="closeLightbox()" class="px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white font-semibold">
-          Cerrar
+
+      <div class="flex items-center gap-2">
+        <button onclick="copyShareLink()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition" title="Copiar enlace con los cambios guardados">
+          <i class="fa-solid fa-link text-slate-400 mr-1"></i> Compartir Enlace
+        </button>
+        <button onclick="openWhatsAppModal()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5 shadow active:scale-95">
+          <i class="fa-brands fa-whatsapp"></i> Copiar a WhatsApp
         </button>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL: MENSAJE FORMATEADO PARA WHATSAPP -->
+  <!-- MODAL: MENSAJE PARA WHATSAPP -->
   <!-- ========================================================================= -->
-  <div id="whatsappModal" class="fixed inset-0 bg-black/75 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-[#14171f] rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl border border-[#242a38]">
-      <div class="p-4 bg-[#10131a] border-b border-[#242a38] text-white flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
-          <h3 class="font-bold text-sm">Mensaje para el grupo de WhatsApp</h3>
-        </div>
-        <button onclick="closeWhatsAppModal()" class="text-slate-400 hover:text-white p-1">
+  <div id="whatsappModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-[#11131a] rounded-2xl max-w-md w-full border border-slate-800 overflow-hidden shadow-2xl">
+      <div class="p-4 border-b border-slate-800 flex items-center justify-between text-white">
+        <h3 class="font-bold text-xs flex items-center gap-2">
+          <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Resumen listo para el grupo
+        </h3>
+        <button onclick="closeWhatsAppModal()" class="text-slate-400 hover:text-white text-sm p-1">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      
-      <div class="p-5 space-y-4">
+      <div class="p-4 space-y-3 text-xs">
         <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Tu número de Yape / Plin (editable):</label>
-          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="state.yapeNumber = this.value; saveState(); updateWhatsAppPreview();" class="w-full text-xs font-mono font-bold bg-[#0c0e12] border border-[#242a38] text-white rounded-lg p-2.5 focus:border-emerald-500 focus:outline-none">
+          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Tu número de Yape / Plin:</label>
+          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="updateYape(this.value)" class="w-full bg-[#090a0f] border border-slate-800 text-white rounded-lg p-2 font-mono text-xs focus:outline-none focus:border-emerald-500">
         </div>
-
         <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Texto generado para copiar y pegar:</label>
-          <textarea id="whatsappPreview" readonly rows="12" class="w-full text-xs font-mono bg-[#0c0e12] border border-[#242a38] rounded-lg p-3 text-slate-200 focus:outline-none custom-scrollbar select-all leading-relaxed"></textarea>
+          <textarea id="whatsappPreview" readonly rows="11" class="w-full bg-[#090a0f] border border-slate-800 text-slate-300 rounded-lg p-2.5 font-mono text-[11px] select-all focus:outline-none custom-scroll leading-relaxed"></textarea>
         </div>
-
         <div class="flex justify-end gap-2 pt-1">
-          <button onclick="closeWhatsAppModal()" class="px-3.5 py-1.5 text-xs text-slate-400 hover:text-white rounded-lg">Cerrar</button>
-          <button onclick="copyWhatsApp()" id="btnCopyWa" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg shadow flex items-center gap-1.5 active:scale-95">
+          <button onclick="closeWhatsAppModal()" class="px-3 py-1.5 text-slate-400 hover:text-white">Cerrar</button>
+          <button onclick="copyWhatsApp()" id="btnCopyWa" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg flex items-center gap-1.5">
             <i class="fa-solid fa-copy"></i> Copiar Mensaje
           </button>
         </div>
@@ -661,72 +355,75 @@
     </div>
   </div>
 
+  <!-- ========================================================================= -->
+  <!-- MODAL: LIGHTBOX PARA FOTOS -->
+  <!-- ========================================================================= -->
+  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
+    <div class="max-w-3xl w-full bg-[#11131a] text-white rounded-xl overflow-hidden border border-slate-800" onclick="event.stopPropagation()">
+      <div class="relative bg-black flex items-center justify-center max-h-[70vh]">
+        <img id="lightboxImg" src="" alt="Instalación" class="w-full h-auto max-h-[70vh] object-contain">
+        <button onclick="closeLightbox()" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/70 text-white flex items-center justify-center">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-3 bg-[#090a0f] flex justify-between items-center text-xs">
+        <div>
+          <h4 class="font-bold text-white text-xs" id="lightboxTitle"></h4>
+          <span class="text-[10px] text-slate-500 font-mono" id="lightboxFile"></span>
+        </div>
+        <button onclick="closeLightbox()" class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded text-xs">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
   <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-[#14171f] border border-emerald-500/50 text-white px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-mono transform translate-y-20 opacity-0 transition-all pointer-events-none">
-    <i class="fa-solid fa-circle-check text-emerald-400"></i>
-    <span id="toastMsg">Listo</span>
+  <div id="toast" class="fixed bottom-16 right-6 z-50 bg-slate-900 border border-slate-700 text-white px-3.5 py-2 rounded-xl text-xs font-mono transform translate-y-10 opacity-0 transition-all pointer-events-none shadow-xl">
+    <span id="toastMsg">Guardado</span>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MOTOR DE ESTADO Y DATOS REALES (DESDE LAS CAPTURAS DE CLAUDE) -->
+  <!-- MOTOR DE DATOS REALES & PERSISTENCIA AUTOMÁTICA -->
   <!-- ========================================================================= -->
   <script>
-    // FOTOS CON RUTAS A ./img/ Y FALLBACKS
-    const CLUB_PHOTOS = [
-      { id: 'bungalow_sala', category: 'bungalow', title: 'Bungaló: Interior de la Sala', desc: 'Sala campestre con acabados rústicos de madera.', file: './img/bungalow-sala.jpg', fallback: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=800&q=80', tag: 'Bungaló' },
-      { id: 'bungalow_dormitorio', category: 'bungalow', title: 'Bungaló: Dormitorios & Camas', desc: 'Camarotes y camas dobles (capacidad para 6 a 8 personas).', file: './img/bungalow-dormitorio.jpg', fallback: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80', tag: 'Bungaló' },
-      { id: 'bungalow_cocina', category: 'bungalow', title: 'Bungaló: Kitchenette & Comedor', desc: 'Kitchenette equipada y mesa de comedor.', file: './img/bungalow-cocina.jpg', fallback: 'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=800&q=80', tag: 'Bungaló' },
-      { id: 'bungalow_parrilla', category: 'bungalow', title: 'Bungaló: Terraza & Parrilla', desc: 'Terraza exterior privada con parrilla empotrada.', file: './img/bungalow-parrilla.jpg', fallback: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80', tag: 'Bungaló' },
-      { id: 'piscinas_club', category: 'piscinas', title: 'Las Piscinas & Solárium', desc: 'Piscina semi-olímpica y recreativa con sol constante.', file: './img/piscinas.jpg', fallback: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=800&q=80', tag: 'Acuático' },
-      { id: 'mirador_chosica', category: 'mirador', title: 'El Mirador Panorámico', desc: 'Vista 360° a toda la quebrada y los cerros de Chosica.', file: './img/mirador.jpg', fallback: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80', tag: 'Paisaje' },
-      { id: 'caballos_zona', category: 'caballos', title: 'Los Caballos & Zona Ecuestre', desc: 'Caballerizas, picadero y paseos a caballo por senderos.', file: './img/caballos.jpg', fallback: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', tag: 'Ecuestre' },
-      { id: 'billar_salon', category: 'billar', title: 'Mesa de Billar & Juegos de Salón', desc: 'Mesas reglamentarias de billar y billas con paño verde.', file: './img/billar.jpg', fallback: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=800&q=80', tag: 'Salón Social' },
-      { id: 'bochas_campo', category: 'bochas', title: 'El Campo de Bochas', desc: 'Canchas reglamentarias con graderías sombreadas.', file: './img/bochas.jpg', fallback: 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=800&q=80', tag: 'Tradición' },
-      { id: 'deportes_futbol', category: 'deportes', title: 'Canchas de Fútbol', desc: 'Césped natural y sintético para pichangas.', file: './img/deportes-futbol.jpg', fallback: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=800&q=80', tag: 'Deportes' },
-      { id: 'deportes_basket', category: 'deportes', title: 'Losas de Básquetbol & Vóley', desc: 'Losas polideportivas iluminadas.', file: './img/deportes-basket.jpg', fallback: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=800&q=80', tag: 'Deportes' },
-      { id: 'deportes_tenis', category: 'deportes', title: 'Canchas de Tenis & Frontón', desc: 'Canchas de arcilla roja y frontón oficial.', file: './img/deportes-tenis.jpg', fallback: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=800&q=80', tag: 'Deportes' },
-    ];
-
-    // DATOS EXACTOS DE LAS CAPTURAS DE PANTALLA DE CLAUDE
+    // DATOS INICIALES EXACTOS DE LAS CAPTURAS
     const DEFAULT_DATA = {
       pernoctarActive: true,
       pernoctarAmount: 70.00,
-      pernoctarTarget: 'guests_only',
       yapeNumber: '987 654 321 (Tú)',
-      // 1. COMIDA (Subtotal S/ 398.00)
-      comidaItems: [
-        { id: 'c1', name: 'Chorizo parrillero Otto Kunz 400 g', qty: '5 paquetes', unitPrice: 13.90, total: 69.50, fuente: 'Captura' },
-        { id: 'c2', name: 'Hot dog Suiza ahumado (pack de 15)', qty: '2 paquetes', unitPrice: 11.50, total: 23.00, fuente: 'Captura' },
-        { id: 'c3', name: 'Bife angosto Frigon', qty: '4 kg', unitPrice: 45.50, total: 182.00, fuente: 'Captura' },
-        { id: 'c4', name: 'Alitas de pollo', qty: '3 kg', unitPrice: 18.00, total: 54.00, fuente: 'Estimado' },
-        { id: 'c5', name: 'Papa cóctel', qty: '4 kg', unitPrice: 6.00, total: 24.00, fuente: 'Estimado' },
-        { id: 'c6', name: 'Pan de hot dog', qty: '30', unitPrice: 0.60, total: 18.00, fuente: 'Estimado' },
-        { id: 'c7', name: 'Pan francés', qty: '10', unitPrice: 0.85, total: 8.50, fuente: 'Estimado' },
-        { id: 'c8', name: 'Choclo', qty: '6', unitPrice: 1.50, total: 9.00, fuente: 'Estimado' },
-        { id: 'c9', name: 'Aceite 1 L', qty: '1', unitPrice: 10.00, total: 10.00, fuente: 'Estimado' },
+      // Comida (Subtotal S/ 398.00)
+      comida: [
+        { id: 'c1', name: 'Chorizo parrillero Otto Kunz 400 g', qty: '5 paq.', total: 69.50 },
+        { id: 'c2', name: 'Hot dog Suiza ahumado (pack 15)', qty: '2 paq.', total: 23.00 },
+        { id: 'c3', name: 'Bife angosto Frigon (4 kg)', qty: '4 kg', total: 182.00 },
+        { id: 'c4', name: 'Alitas de pollo (3 kg)', qty: '3 kg', total: 54.00 },
+        { id: 'c5', name: 'Papa cóctel (4 kg)', qty: '4 kg', total: 24.00 },
+        { id: 'c6', name: 'Pan de hot dog (30 unid.)', qty: '30 unid.', total: 18.00 },
+        { id: 'c7', name: 'Pan francés (10 unid.)', qty: '10 unid.', total: 8.50 },
+        { id: 'c8', name: 'Choclo (6 unid.)', qty: '6 unid.', total: 9.00 },
+        { id: 'c9', name: 'Aceite 1 L', qty: '1 unid.', total: 10.00 },
       ],
-      // 2. CREMAS, MEZCLADORES Y PARRILLA (Subtotal S/ 155.39)
-      cremasItems: [
-        { id: 'cr1', name: 'Ketchup Alacena 800 g', qty: '1', unitPrice: 11.60, total: 11.60, fuente: 'Captura' },
-        { id: 'cr2', name: 'Mayonesa Alacena 475 g', qty: '1', unitPrice: 12.50, total: 12.50, fuente: 'Captura' },
-        { id: 'cr3', name: 'Ají de la Casa Metro 450 g', qty: '1', unitPrice: 11.60, total: 11.60, fuente: 'Captura' },
-        { id: 'cr4', name: 'Limón sutil', qty: '1 kg', unitPrice: 4.59, total: 4.59, fuente: 'Captura' },
-        { id: 'cr5', name: 'Gaseosas de 3 L', qty: '5', unitPrice: 11.00, total: 55.00, fuente: 'Estimado' },
-        { id: 'cr6', name: 'Agua San Mateo sin gas, bidón 7 L', qty: '1', unitPrice: 8.50, total: 8.50, fuente: 'Captura' },
-        { id: 'cr7', name: 'Hielo Bell\'s, bolsa de 3 kg', qty: '4', unitPrice: 6.90, total: 27.60, fuente: 'Captura' },
-        { id: 'cr8', name: 'Carbón (bolsa)', qty: '2', unitPrice: 12.00, total: 24.00, fuente: 'Estimado' },
+      // Cremas & Parrilla (Subtotal S/ 155.39)
+      cremas: [
+        { id: 'cr1', name: 'Ketchup Alacena 800 g', total: 11.60 },
+        { id: 'cr2', name: 'Mayonesa Alacena 475 g', total: 12.50 },
+        { id: 'cr3', name: 'Ají de la Casa Metro 450 g', total: 11.60 },
+        { id: 'cr4', name: 'Limón sutil (1 kg)', total: 4.59 },
+        { id: 'cr5', name: 'Gaseosas de 3 L (5 unid.)', total: 55.00 },
+        { id: 'cr6', name: 'Agua San Mateo sin gas bidón 7 L', total: 8.50 },
+        { id: 'cr7', name: 'Hielo Bell\'s (4 bolsas x 3 kg)', total: 27.60 },
+        { id: 'cr8', name: 'Carbón (2 bolsas)', total: 24.00 },
       ],
-      // 3. ALCOHOL (Subtotal S/ 321.70 - solo para bebedores)
-      alcoholItems: [
-        { id: 'a1', name: '5 botellas de 750 ml a elegir (Jose Cuervo, Jägermeister, Black Label, Absolut)', qty: '5', price: 'oferta Bar Express', total: 250.00, fuente: 'Captura' },
-        { id: 'a2', name: 'Cerveza Flying Fish lima limón, 6 latas', qty: '3 packs (18 latas)', price: 'S/ 23.90', total: 71.70, fuente: 'Captura' },
+      // Alcohol (Subtotal S/ 321.70)
+      alcohol: [
+        { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, Black Label, Absolut)', total: 250.00 },
+        { id: 'a2', name: 'Cerveza Flying Fish lima limón (3 packs / 18 latas)', total: 71.70 },
       ],
-      // 4. ALOJAMIENTO Y MOVILIDAD (Subtotal S/ 650.00)
-      alojamientoItems: [
-        { id: 'al1', name: 'Bungaló, 2 noches', total: 350.00 },
-        { id: 'al2', name: 'Movilidad (los lleva el viernes y los recoge el domingo)', total: 300.00 },
+      // Alojamiento & Movilidad (Subtotal S/ 650.00)
+      alojamiento: [
+        { id: 'al1', name: 'Bungaló El Bosque (2 noches)', total: 350.00 },
+        { id: 'al2', name: 'Movilidad ida viernes y vuelta domingo', total: 300.00 },
       ],
-      // 5. PADRÓN DE AMIGOS
+      // 8 Participantes
       members: [
         { id: 'm1', name: 'Tú (Organizador / Nieto de socia)', drinks: true, sleeps: false, extra: 60.00, paid: false, isUser: true },
         { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
@@ -739,66 +436,106 @@
       ]
     };
 
-    let state = loadState();
+    // 12 Fotos de Instalaciones
+    const PHOTOS = [
+      { id: 'p1', title: 'Bungaló: Sala Interior', file: './img/bungalow-sala.jpg', fb: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p2', title: 'Bungaló: Dormitorios', file: './img/bungalow-dormitorio.jpg', fb: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p3', title: 'Bungaló: Kitchenette', file: './img/bungalow-cocina.jpg', fb: 'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p4', title: 'Bungaló: Terraza & Parrilla', file: './img/bungalow-parrilla.jpg', fb: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p5', title: 'Piscinas & Solárium', file: './img/piscinas.jpg', fb: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p6', title: 'El Mirador de Chosica', file: './img/mirador.jpg', fb: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p7', title: 'Caballos & Paseos', file: './img/caballos.jpg', fb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p8', title: 'Mesa de Billar', file: './img/billar.jpg', fb: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p9', title: 'Campo de Bochas', file: './img/bochas.jpg', fb: 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p10', title: 'Canchas de Fútbol', file: './img/deportes-futbol.jpg', fb: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p11', title: 'Losas de Básquet', file: './img/deportes-basket.jpg', fb: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80' },
+      { id: 'p12', title: 'Tenis & Frontón', file: './img/deportes-tenis.jpg', fb: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80' },
+    ];
 
-    function loadState() {
+    // CARGA DE ESTADO: COMPRUEBA HASH URL PRIMERO, LUEGO LOCALSTORAGE, LUEGO DEFAULT
+    let state = loadPersistedState();
+
+    function loadPersistedState() {
+      // 1. Intentar desde URL hash si se compartió
+      if (window.location.hash && window.location.hash.startsWith('#s=')) {
+        try {
+          const raw = decodeURIComponent(window.location.hash.replace('#s=', ''));
+          const parsed = JSON.parse(atob(raw));
+          if (parsed && parsed.members) return parsed;
+        } catch (e) {}
+      }
+      // 2. Intentar desde LocalStorage
       try {
-        const saved = localStorage.getItem('el_bosque_capturas_v1');
-        if (saved) return JSON.parse(saved);
+        const saved = localStorage.getItem('el_bosque_minimal_v1');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.members) return parsed;
+        }
       } catch (e) {}
       return JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
 
     function saveState() {
-      localStorage.setItem('el_bosque_capturas_v1', JSON.stringify(state));
+      try {
+        localStorage.setItem('el_bosque_minimal_v1', JSON.stringify(state));
+        showSavedIndicator();
+      } catch (e) {}
+    }
+
+    function showSavedIndicator() {
+      const el = document.getElementById('saveStatus');
+      if (el) {
+        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Guardado';
+      }
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto con los números exactos de las capturas?')) {
+      if (confirm('¿Restablecer el presupuesto a los valores originales de las capturas?')) {
+        localStorage.removeItem('el_bosque_minimal_v1');
+        window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
         saveState();
         render();
-        showToast('Presupuesto restablecido a las capturas oficiales');
+        showToast('Presupuesto restablecido');
       }
     }
 
-    // EL BOTÓN DE PERNOCTAR (S/ 70)
-    function togglePernocte(checked) {
-      state.pernoctarActive = checked;
-      syncSleepers();
+    // CONTROL DEL SWITCH DE PERNOCTE
+    function togglePernocte(val) {
+      state.pernoctarActive = val;
+      state.members.forEach(m => {
+        m.sleeps = state.pernoctarActive && !m.isUser;
+      });
       saveState();
-      render();
-      showToast(checked ? 'Pernocte (+S/ 70) ACTIVADO' : 'Pernocte DESACTIVADO (S/ 0)');
+      renderCalculationsOnly();
+      updatePernocteUI();
     }
 
-    function updatePernocteMonto(val) {
+    function changePernocteAmt(val) {
       const num = parseFloat(val);
       state.pernoctarAmount = isNaN(num) || num < 0 ? 0 : num;
       saveState();
-      render();
+      renderCalculationsOnly();
     }
 
-    function updatePernocteTarget(val) {
-      state.pernoctarTarget = val;
-      syncSleepers();
-      saveState();
-      render();
-    }
-
-    function syncSleepers() {
-      if (!state.pernoctarActive) {
-        state.members.forEach(m => m.sleeps = false);
+    function updatePernocteUI() {
+      const sw = document.getElementById('switchPernocte');
+      sw.checked = state.pernoctarActive;
+      document.getElementById('switchText').textContent = state.pernoctarActive ? 'ON' : 'OFF';
+      document.getElementById('switchText').className = state.pernoctarActive ? 'ml-2.5 text-xs font-mono font-bold text-emerald-400' : 'ml-2.5 text-xs font-mono font-bold text-slate-500';
+      
+      const pill = document.getElementById('pernoctePill');
+      if (state.pernoctarActive) {
+        pill.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} Activado`;
+        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
       } else {
-        if (state.pernoctarTarget === 'guests_only') {
-          state.members.forEach(m => m.sleeps = !m.isUser);
-        } else if (state.pernoctarTarget === 'all' || state.pernoctarTarget === 'split_all') {
-          state.members.forEach(m => m.sleeps = true);
-        }
+        pill.textContent = 'Desactivado (S/ 0)';
+        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-slate-800 text-slate-400 border border-slate-700';
       }
     }
 
-    // GESTIÓN DE AMIGOS
-    function toggleDrink(id) {
+    // ACCIONES DE AMIGOS
+    function toggleFriendDrink(id) {
       const m = state.members.find(x => x.id === id);
       if (m) {
         m.drinks = !m.drinks;
@@ -807,53 +544,56 @@
       }
     }
 
-    function toggleSleep(id) {
+    function toggleFriendSleep(id) {
       const m = state.members.find(x => x.id === id);
       if (m) {
         m.sleeps = !m.sleeps;
-        state.pernoctarTarget = 'custom';
-        document.getElementById('selectPernocteTarget').value = 'custom';
         saveState();
         render();
       }
     }
 
-    function togglePaid(id) {
+    function toggleFriendPaid(id) {
       const m = state.members.find(x => x.id === id);
       if (m) {
         m.paid = !m.paid;
         saveState();
-        render();
+        renderCalculationsOnly();
+        // Solo actualizar el botón visual sin redibujar la tabla entera
+        const btn = document.getElementById(`btnPaid_${id}`);
+        if (btn) {
+          btn.className = `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'}`;
+          btn.textContent = m.paid ? 'Pagó' : 'Debe';
+        }
       }
     }
 
-    function updateMemberName(id, val) {
+    function onFriendNameInput(id, val) {
       const m = state.members.find(x => x.id === id);
       if (m) {
-        m.name = val.trim() || 'Amigo';
+        m.name = val;
         saveState();
-        render();
       }
     }
 
-    function updateMemberExtra(id, val) {
+    function onFriendExtraInput(id, val) {
       const m = state.members.find(x => x.id === id);
       if (m) {
         const num = parseFloat(val);
         m.extra = isNaN(num) ? 0 : num;
         saveState();
-        render();
+        renderCalculationsOnly();
       }
     }
 
-    function removeMember(id) {
+    function removeFriend(id) {
       if (state.members.length <= 1) return;
       state.members = state.members.filter(x => x.id !== id);
       saveState();
       render();
     }
 
-    function addMember() {
+    function addFriend() {
       const count = state.members.length + 1;
       const newId = 'm_' + Date.now();
       state.members.push({
@@ -869,86 +609,47 @@
       showToast(`Amigo ${count} agregado`);
     }
 
-    // EDICIÓN EN LAS TABLAS DE COMPRAS
-    function updateComidaItemTotal(id, val) {
-      const item = state.comidaItems.find(x => x.id === id);
-      if (item) {
-        const num = parseFloat(val);
-        item.total = isNaN(num) || num < 0 ? 0 : num;
-        saveState();
-        render();
+    // EDICIÓN DE GASTOS
+    function updateExpenseVal(cat, id, val) {
+      const list = state[cat];
+      if (list) {
+        const item = list.find(x => x.id === id);
+        if (item) {
+          const num = parseFloat(val);
+          item.total = isNaN(num) || num < 0 ? 0 : num;
+          saveState();
+          renderCalculationsOnly();
+        }
       }
     }
 
-    function updateCremasItemTotal(id, val) {
-      const item = state.cremasItems.find(x => x.id === id);
-      if (item) {
-        const num = parseFloat(val);
-        item.total = isNaN(num) || num < 0 ? 0 : num;
-        saveState();
-        render();
-      }
+    function updateYape(val) {
+      state.yapeNumber = val;
+      saveState();
+      updateWhatsAppText();
     }
 
-    function updateAlcoholItemTotal(id, val) {
-      const item = state.alcoholItems.find(x => x.id === id);
-      if (item) {
-        const num = parseFloat(val);
-        item.total = isNaN(num) || num < 0 ? 0 : num;
-        saveState();
-        render();
-      }
-    }
-
-    function updateAlojamientoItemTotal(id, val) {
-      const item = state.alojamientoItems.find(x => x.id === id);
-      if (item) {
-        const num = parseFloat(val);
-        item.total = isNaN(num) || num < 0 ? 0 : num;
-        saveState();
-        render();
-      }
-    }
-
-    // MOTOR DE CÁLCULO
+    // MOTOR MATEMÁTICO EXACTO
     function calculate() {
       const totalMembers = state.members.length;
       const drinkers = state.members.filter(m => m.drinks);
       const drinkersCount = drinkers.length;
-      const nonDrinkersCount = totalMembers - drinkersCount;
 
-      // 1. Subtotales exactos de las listas
-      const subtotalComida = state.comidaItems.reduce((acc, c) => acc + c.total, 0);
-      const subtotalCremas = state.cremasItems.reduce((acc, c) => acc + c.total, 0);
+      const subtotalComida = state.comida.reduce((acc, c) => acc + c.total, 0);
+      const subtotalCremas = state.cremas.reduce((acc, c) => acc + c.total, 0);
       const sumaComidaCremas = subtotalComida + subtotalCremas;
-      
-      // Margen de 5% sobre comida y cremas
       const margen5Pct = Math.round(sumaComidaCremas * 0.05 * 100) / 100;
 
-      // Alcohol
-      const subtotalAlcohol = state.alcoholItems.reduce((acc, c) => acc + c.total, 0);
+      const subtotalAlcohol = state.alcohol.reduce((acc, c) => acc + c.total, 0);
+      const subtotalAlojamiento = state.alojamiento.reduce((acc, c) => acc + c.total, 0);
 
-      // Alojamiento y movilidad
-      const subtotalAlojamiento = state.alojamientoItems.reduce((acc, c) => acc + c.total, 0);
-
-      // Total general sin alcohol
-      // En la captura: Comida y cremas (553.39) + Margen 5% (27.67) + Alojamiento y movilidad (650.00) = 1,231.06
       const generalSharedPool = sumaComidaCremas + margen5Pct + subtotalAlojamiento;
-
-      // Cuota base por persona (se reparte entre los 8)
-      // Claude consideró que el organizador aportaba S/ 60 adicionales voluntarios que compensaban el total:
-      // Cuota base para amigos = (generalSharedPool - sumaExtras) / totalMembers
       const totalExtras = state.members.reduce((acc, m) => acc + (m.extra || 0), 0);
       const basePerPerson = totalMembers > 0 ? ((generalSharedPool - totalExtras) / totalMembers) : 0;
-
-      // Cuota de alcohol por bebedor
       const alcoholPerDrinker = drinkersCount > 0 ? (subtotalAlcohol / drinkersCount) : 0;
 
-      // Pernocte
       let pernocteTotal = 0;
       let sleepersCount = 0;
-      const isSplitAll = state.pernoctarActive && state.pernoctarTarget === 'split_all';
-
       state.members.forEach(m => {
         if (state.pernoctarActive && m.sleeps) {
           sleepersCount++;
@@ -956,38 +657,19 @@
         }
       });
 
-      const pernocteSplitEach = (isSplitAll && totalMembers > 0) ? (pernocteTotal / totalMembers) : 0;
-
-      // Cuota exacta por integrante
-      const memberCalculations = state.members.map(m => {
-        let pernocteCost = 0;
-        if (state.pernoctarActive) {
-          if (isSplitAll) {
-            pernocteCost = pernocteSplitEach;
-          } else if (m.sleeps) {
-            pernocteCost = state.pernoctarAmount;
-          }
-        }
-
-        const alcoholCost = m.drinks ? alcoholPerDrinker : 0;
-        const total = basePerPerson + alcoholCost + m.extra + pernocteCost;
-
-        return {
-          m,
-          baseCost: basePerPerson,
-          alcoholCost: alcoholCost,
-          pernocteCost: pernocteCost,
-          total: total
-        };
+      const memberCalcs = state.members.map(m => {
+        const pernocteCost = (state.pernoctarActive && m.sleeps) ? state.pernoctarAmount : 0;
+        const alcCost = m.drinks ? alcoholPerDrinker : 0;
+        const total = basePerPerson + alcCost + m.extra + pernocteCost;
+        return { m, basePerPerson, alcCost, pernocteCost, total };
       });
 
       const totalTripBudget = generalSharedPool + subtotalAlcohol + pernocteTotal;
-      const totalCollected = memberCalculations.filter(x => x.m.paid).reduce((acc, c) => acc + c.total, 0);
+      const totalCollected = memberCalcs.filter(x => x.m.paid).reduce((acc, c) => acc + c.total, 0);
 
       return {
         totalMembers,
         drinkersCount,
-        nonDrinkersCount,
         subtotalComida,
         subtotalCremas,
         sumaComidaCremas,
@@ -999,123 +681,100 @@
         alcoholPerDrinker,
         pernocteTotal,
         sleepersCount,
-        memberCalculations,
+        memberCalcs,
         totalTripBudget,
         totalCollected
       };
     }
 
-    // RENDERIZADO COMPLETO
-    function render() {
+    // RENDERIZAR SOLO TOTALES Y CIFRAS (SIN RE-CREAR INPUTS PARA NO PERDER FOCO)
+    function renderCalculationsOnly() {
       const calc = calculate();
 
-      // 1. Switch Pernocte UI
-      const sw = document.getElementById('switchPernocte');
-      sw.checked = state.pernoctarActive;
+      document.getElementById('kpiTotal').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
+      document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
+      document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Base S/ 1,552.76';
 
-      const swText = document.getElementById('switchPernocteText');
-      const box = document.getElementById('pernoctarBanner');
-      const badge = document.getElementById('pernoctarBadge');
-      const sub = document.getElementById('pernocteSubinfo');
-      const resumenRow = document.getElementById('resumenPernocteRow');
+      const noToma = calc.memberCalcs.find(x => !x.m.drinks);
+      document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : calc.basePerPerson).toFixed(2)}`;
 
-      document.getElementById('inputPernocteMonto').value = state.pernoctarAmount.toFixed(2);
-      document.getElementById('selectPernocteTarget').value = state.pernoctarTarget;
+      const toma = calc.memberCalcs.find(x => x.m.drinks && !x.m.isUser);
+      document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : (calc.basePerPerson + calc.alcoholPerDrinker)).toFixed(2)}`;
 
-      if (state.pernoctarActive) {
-        swText.textContent = 'ON';
-        swText.className = 'ml-3 text-sm font-mono font-extrabold text-emerald-400 tracking-wider';
-        badge.textContent = `Pernocte ACTIVADO (+S/ ${state.pernoctarAmount.toFixed(0)} por invitado)`;
-        badge.className = 'text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
-        box.className = 'bg-[#14171f] rounded-2xl p-5 sm:p-6 border-2 border-emerald-500/80 shadow-lg relative transition-all';
-        sub.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} x ${calc.sleepersCount} = S/ ${calc.pernocteTotal.toFixed(2)}`;
-        resumenRow.classList.remove('hidden');
-        document.getElementById('resumenPernocteSub').textContent = `S/ ${state.pernoctarAmount.toFixed(0)} x ${calc.sleepersCount} invitados que duermen`;
-        document.getElementById('resumenPernocteTotal').textContent = `S/ ${calc.pernocteTotal.toFixed(2)}`;
-      } else {
-        swText.textContent = 'OFF';
-        swText.className = 'ml-3 text-sm font-mono font-extrabold text-slate-500 tracking-wider';
-        badge.textContent = 'Pernocte DESACTIVADO (S/ 0)';
-        badge.className = 'text-[10px] font-mono font-bold uppercase px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-400 border border-slate-700';
-        box.className = 'bg-[#14171f] rounded-2xl p-5 sm:p-6 border-2 border-[#242a38] shadow-sm relative transition-all';
-        sub.textContent = 'No se cobra pernocte a invitados';
-        resumenRow.classList.add('hidden');
-      }
+      const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
+      document.getElementById('kpiTu').textContent = `S/ ${user.total.toFixed(2)}`;
 
-      // 2. Tarjetas Superiores
-      document.getElementById('statTotalPresupuesto').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-      document.getElementById('statPernocteTotalSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin pernocte';
+      // Actualizar columna total de cada amigo
+      calc.memberCalcs.forEach(item => {
+        const cell = document.getElementById(`totalCell_${item.m.id}`);
+        if (cell) cell.textContent = `S/ ${item.total.toFixed(2)}`;
+      });
 
-      // No bebedores
-      const noToma = calc.memberCalculations.find(x => !x.m.drinks);
-      const noTomaVal = noToma ? noToma.total : calc.basePerPerson;
-      document.getElementById('statCuotaNoToma').textContent = `S/ ${noTomaVal.toFixed(2)}`;
-      document.getElementById('statCuotaNoTomaDesc').textContent = state.pernoctarActive
-        ? `Base S/ ${(noTomaVal - (noToma?.pernocteCost || 0)).toFixed(2)} (+S/ ${(noToma?.pernocteCost || 0).toFixed(0)} pernocte)`
-        : 'Solo gastos comunes (sin alcohol)';
+      // Recaudado
+      const pct = calc.totalTripBudget > 0 ? Math.round((calc.totalCollected / calc.totalTripBudget) * 100) : 0;
+      document.getElementById('recaudadoLabel').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
 
-      // Bebedores
-      const toma = calc.memberCalculations.find(x => x.m.drinks && !x.m.isUser);
-      const tomaVal = toma ? toma.total : (calc.basePerPerson + calc.alcoholPerDrinker);
-      document.getElementById('statCuotaToma').textContent = `S/ ${tomaVal.toFixed(2)}`;
-      document.getElementById('statCuotaTomaDesc').textContent = state.pernoctarActive
-        ? `Base S/ ${(tomaVal - (toma?.pernocteCost || 0)).toFixed(2)} (+S/ ${(toma?.pernocteCost || 0).toFixed(0)} pernocte)`
-        : `Base S/ ${calc.basePerPerson.toFixed(2)} + S/ ${calc.alcoholPerDrinker.toFixed(2)} alcohol`;
+      // Subtotales acordeón
+      document.getElementById('subtotalComprasBadge').textContent = `S/ ${(calc.generalSharedPool + calc.subtotalAlcohol).toFixed(2)}`;
+      document.getElementById('comidaSubDisplay').textContent = `S/ ${calc.subtotalComida.toFixed(2)}`;
+      document.getElementById('cremasSubDisplay').textContent = `S/ ${calc.subtotalCremas.toFixed(2)}`;
+      document.getElementById('alcoholSubDisplay').textContent = `S/ ${calc.subtotalAlcohol.toFixed(2)}`;
+      document.getElementById('alojSubDisplay').textContent = `S/ ${calc.subtotalAlojamiento.toFixed(2)}`;
+      document.getElementById('margenDisplay').textContent = `S/ ${calc.margen5Pct.toFixed(2)}`;
+    }
 
-      // Tú
-      const user = calc.memberCalculations.find(x => x.m.isUser) || calc.memberCalculations[0];
-      document.getElementById('statCuotaTu').textContent = `S/ ${user.total.toFixed(2)}`;
+    // RENDERIZADO COMPLETO DEL PADRÓN Y TABLAS
+    function render() {
+      const calc = calculate();
+      updatePernocteUI();
+      document.getElementById('inputPernocte').value = state.pernoctarAmount.toFixed(2);
 
-      // 3. Tabla de Amigos
-      document.getElementById('countAmigos').textContent = calc.totalMembers;
-      const tbody = document.getElementById('amigosTbody');
+      // Tabla de Amigos
+      const tbody = document.getElementById('friendsTbody');
       tbody.innerHTML = '';
 
-      calc.memberCalculations.forEach(item => {
+      calc.memberCalcs.forEach(item => {
         const m = item.m;
         const tr = document.createElement('tr');
-        tr.className = `hover:bg-[#1b202c] ${m.paid ? 'bg-emerald-500/10' : ''}`;
+        tr.className = 'hover:bg-slate-800/30 border-b border-slate-800/50';
 
         tr.innerHTML = `
           <td class="py-2.5 px-2">
             <div class="flex items-center gap-1.5">
-              <input type="text" value="${escapeHtml(m.name)}" onchange="updateMemberName('${m.id}', this.value)" class="bg-transparent font-semibold text-white border-b border-transparent hover:border-slate-500 focus:border-emerald-500 focus:outline-none w-full max-w-[190px]">
-              ${m.isUser ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-400 font-mono font-bold px-1 rounded border border-emerald-500/30">Tú</span>' : ''}
-            </div>
-            <div class="text-[10px] text-slate-400 font-mono">
-              ${m.drinks ? '🍺 Bebe' : '🥤 No bebe'} · ${item.pernocteCost > 0 ? `🏨 Duerme (+S/ ${item.pernocteCost.toFixed(0)})` : 'Solo día'}
+              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-white border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none w-full max-w-[190px]">
+              ${m.isUser ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-400 font-mono font-bold px-1 rounded">Tú</span>' : ''}
             </div>
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-bold font-mono transition ${m.drinks ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40' : 'bg-slate-800 text-slate-500'}">
+            <button onclick="toggleFriendDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${m.drinks ? 'bg-amber-500/20 text-amber-400' : 'bg-slate-800 text-slate-500'}">
               ${m.drinks ? 'Sí' : 'No'}
             </button>
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleSleep('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-bold font-mono transition ${item.pernocteCost > 0 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-slate-800 text-slate-500'}">
-              ${item.pernocteCost > 0 ? `+S/ ${item.pernocteCost.toFixed(0)}` : 'S/ 0'}
+            <button onclick="toggleFriendSleep('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${item.pernocteCost > 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'}">
+              ${item.pernocteCost > 0 ? `+S/${item.pernocteCost.toFixed(0)}` : 'S/0'}
             </button>
           </td>
 
           <td class="py-2.5 px-2 text-right">
-            <input type="number" step="5" value="${m.extra}" onchange="updateMemberExtra('${m.id}', this.value)" class="w-14 text-right font-mono text-white bg-[#0c0e12] border border-[#242a38] rounded px-1 py-0.5 text-xs focus:outline-none focus:border-emerald-500">
+            <input type="number" step="5" value="${m.extra}" oninput="onFriendExtraInput('${m.id}', this.value)" class="w-12 text-right font-mono text-white bg-[#090a0f] border border-slate-800 rounded px-1 py-0.5 text-xs focus:outline-none focus:border-emerald-500">
           </td>
 
-          <td class="py-2.5 px-2 text-right font-mono font-bold text-white text-xs sm:text-sm">
+          <td class="py-2.5 px-2 text-right font-mono font-bold text-white text-xs sm:text-sm" id="totalCell_${m.id}">
             S/ ${item.total.toFixed(2)}
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button onclick="togglePaid('${m.id}')" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'}">
+            <button id="btnPaid_${m.id}" onclick="toggleFriendPaid('${m.id}')" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'}">
               ${m.paid ? 'Pagó' : 'Debe'}
             </button>
           </td>
 
           <td class="py-2.5 px-1 text-center">
             ${!m.isUser ? `
-              <button onclick="removeMember('${m.id}')" class="text-slate-500 hover:text-red-400 text-xs">
+              <button onclick="removeFriend('${m.id}')" class="text-slate-600 hover:text-red-400 p-1">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             ` : ''}
@@ -1124,179 +783,110 @@
         tbody.appendChild(tr);
       });
 
-      // Progreso Yape
-      const pct = calc.totalTripBudget > 0 ? Math.round((calc.totalCollected / calc.totalTripBudget) * 100) : 0;
-      document.getElementById('recaudadoText').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
-      document.getElementById('recaudadoBar').style.width = `${pct}%`;
-      document.getElementById('resumenTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-
-      // 4. Renderizar las Tablas de Compras
-      renderComprasTables(calc);
-
-      saveState();
+      // Tablas de compras detalladas
+      renderComprasSubtables();
+      renderPhotosGrid();
+      renderCalculationsOnly();
     }
 
-    // RENDER DE LAS 4 TABLAS DE COMPRAS (CAPTURAS)
-    function renderComprasTables(calc) {
-      // 1. Comida
-      const tbComida = document.getElementById('tbodyComida');
-      tbComida.innerHTML = '';
-      state.comidaItems.forEach(item => {
+    function renderComprasSubtables() {
+      // Comida
+      const tbC = document.getElementById('tbodyComida');
+      tbC.innerHTML = '';
+      state.comida.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-2 px-2 text-slate-200 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-2 px-2 text-slate-400 font-mono">${escapeHtml(item.qty)}</td>
-          <td class="py-2 px-2 text-right font-mono text-slate-400">S/ ${item.unitPrice.toFixed(2)}</td>
-          <td class="py-2 px-2 text-right font-mono font-bold text-white">
-            <input type="number" step="0.5" value="${item.total.toFixed(2)}" onchange="updateComidaItemTotal('${item.id}', this.value)" class="w-18 w-20 text-right bg-[#0c0e12] border border-[#242a38] rounded px-1 text-xs text-white focus:outline-none">
+          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-slate-500 font-mono">${escapeHtml(item.qty)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-white">
+            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('comida', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
           </td>
-          <td class="py-2 px-2 text-center text-[11px] font-mono ${item.fuente === 'Captura' ? 'text-emerald-400' : 'text-slate-400'}">${escapeHtml(item.fuente)}</td>
         `;
-        tbComida.appendChild(tr);
+        tbC.appendChild(tr);
       });
-      document.getElementById('subtotalComidaDisplay').textContent = `Subtotal: S/ ${calc.subtotalComida.toFixed(2)}`;
 
-      // 2. Cremas y mezcladores
-      const tbCremas = document.getElementById('tbodyCremas');
-      tbCremas.innerHTML = '';
-      state.cremasItems.forEach(item => {
+      // Cremas
+      const tbCr = document.getElementById('tbodyCremas');
+      tbCr.innerHTML = '';
+      state.cremas.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-2 px-2 text-slate-200 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-2 px-2 text-slate-400 font-mono">${escapeHtml(item.qty)}</td>
-          <td class="py-2 px-2 text-right font-mono text-slate-400">S/ ${item.unitPrice.toFixed(2)}</td>
-          <td class="py-2 px-2 text-right font-mono font-bold text-white">
-            <input type="number" step="0.5" value="${item.total.toFixed(2)}" onchange="updateCremasItemTotal('${item.id}', this.value)" class="w-18 w-20 text-right bg-[#0c0e12] border border-[#242a38] rounded px-1 text-xs text-white focus:outline-none">
+          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-white">
+            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('cremas', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
           </td>
-          <td class="py-2 px-2 text-center text-[11px] font-mono ${item.fuente === 'Captura' ? 'text-emerald-400' : 'text-slate-400'}">${escapeHtml(item.fuente)}</td>
         `;
-        tbCremas.appendChild(tr);
+        tbCr.appendChild(tr);
       });
-      document.getElementById('subtotalCremasDisplay').textContent = `Subtotal: S/ ${calc.subtotalCremas.toFixed(2)}`;
 
-      // 3. Alcohol
-      const tbAlcohol = document.getElementById('tbodyAlcohol');
-      tbAlcohol.innerHTML = '';
-      state.alcoholItems.forEach(item => {
+      // Alcohol
+      const tbA = document.getElementById('tbodyAlcohol');
+      tbA.innerHTML = '';
+      state.alcohol.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-2 px-2 text-slate-200 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-2 px-2 text-slate-400 font-mono">${escapeHtml(item.qty)}</td>
-          <td class="py-2 px-2 text-right font-mono text-slate-400">${escapeHtml(item.price)}</td>
-          <td class="py-2 px-2 text-right font-mono font-bold text-amber-400">
-            <input type="number" step="1" value="${item.total.toFixed(2)}" onchange="updateAlcoholItemTotal('${item.id}', this.value)" class="w-18 w-20 text-right bg-[#0c0e12] border border-[#242a38] rounded px-1 text-xs text-amber-400 font-bold focus:outline-none">
+          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-amber-400">
+            S/ <input type="number" step="1" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alcohol', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none text-amber-400">
           </td>
-          <td class="py-2 px-2 text-center text-[11px] font-mono text-emerald-400">${escapeHtml(item.fuente)}</td>
         `;
-        tbAlcohol.appendChild(tr);
+        tbA.appendChild(tr);
       });
-      document.getElementById('subtotalAlcoholDisplay').textContent = `Subtotal: S/ ${calc.subtotalAlcohol.toFixed(2)}`;
 
-      // 4. Alojamiento y Movilidad
-      const tbAloj = document.getElementById('tbodyAlojamiento');
-      tbAloj.innerHTML = '';
-      state.alojamientoItems.forEach(item => {
+      // Alojamiento
+      const tbAl = document.getElementById('tbodyAlojamiento');
+      tbAl.innerHTML = '';
+      state.alojamiento.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-2.5 px-2 text-slate-200 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-2.5 px-2 text-right font-mono font-bold text-white">
-            <input type="number" step="10" value="${item.total.toFixed(2)}" onchange="updateAlojamientoItemTotal('${item.id}', this.value)" class="w-20 text-right bg-[#0c0e12] border border-[#242a38] rounded px-1 text-xs text-white focus:outline-none">
+          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-white">
+            S/ <input type="number" step="10" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alojamiento', '${item.id}', this.value)" class="w-16 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
           </td>
         `;
-        tbAloj.appendChild(tr);
+        tbAl.appendChild(tr);
       });
-      document.getElementById('subtotalAlojamientoDisplay').textContent = `Subtotal: S/ ${calc.subtotalAlojamiento.toFixed(2)}`;
     }
 
-    // NAVEGACIÓN ENTRE PESTAÑAS
-    function switchTab(tab) {
-      const vResumen = document.getElementById('view-resumen');
-      const vCompras = document.getElementById('view-compras');
-      const vFotos = document.getElementById('view-fotos');
-
-      const bResumen = document.getElementById('navBtnResumen');
-      const bCompras = document.getElementById('navBtnCompras');
-      const bFotos = document.getElementById('navBtnFotos');
-
-      [vResumen, vCompras, vFotos].forEach(el => el.classList.add('hidden'));
-      [bResumen, bCompras, bFotos].forEach(btn => {
-        btn.className = 'px-3.5 py-1.5 rounded-lg text-slate-400 hover:text-white transition flex items-center gap-1.5';
-      });
-
-      if (tab === 'resumen') {
-        vResumen.classList.remove('hidden');
-        bResumen.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white font-bold transition flex items-center gap-1.5 shadow';
-      } else if (tab === 'compras') {
-        vCompras.classList.remove('hidden');
-        bCompras.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white font-bold transition flex items-center gap-1.5 shadow';
-      } else if (tab === 'fotos') {
-        vFotos.classList.remove('hidden');
-        bFotos.className = 'px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white font-bold transition flex items-center gap-1.5 shadow';
-        renderPhotos('all');
-      }
-
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // RENDERIZADO DE FOTOS CON RUTAS A ./img/
-    function renderPhotos(filterCat) {
-      const grid = document.getElementById('photoCardsGrid');
+    // FOTOS DEL CLUB
+    function renderPhotosGrid() {
+      const grid = document.getElementById('photoGrid');
       grid.innerHTML = '';
-
-      const list = filterCat === 'all' ? CLUB_PHOTOS : CLUB_PHOTOS.filter(x => x.category === filterCat);
-
-      list.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'bg-[#14171f] rounded-2xl overflow-hidden border border-[#242a38] flex flex-col justify-between group';
-
-        card.innerHTML = `
-          <div>
-            <div class="relative h-48 bg-[#0c0e12] overflow-hidden cursor-pointer" onclick="openLightbox('${item.file}', '${item.fallback}', '${escapeHtml(item.title)}', '${item.tag}')">
-              <img src="${item.file}" onerror="this.onerror=null; this.src='${item.fallback}';" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-              <span class="absolute top-2 left-2 bg-black/80 text-white text-[10px] font-mono px-2 py-0.5 rounded font-bold border border-white/10">
-                ${item.tag}
-              </span>
-              <span class="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition">
-                <i class="fa-solid fa-expand"></i> Ampliar
-              </span>
-            </div>
-            <div class="p-4">
-              <h4 class="font-bold text-sm text-white">${escapeHtml(item.title)}</h4>
-              <p class="text-xs text-slate-400 mt-1 leading-relaxed">${escapeHtml(item.desc)}</p>
-            </div>
-          </div>
-          <div class="p-3 bg-[#10131a] border-t border-[#242a38] text-[11px] text-slate-400 font-mono flex items-center justify-between">
-            <span class="truncate">Archivo: ${item.file.replace('./', '')}</span>
-            <span class="text-emerald-400 font-bold">Chosica</span>
+      PHOTOS.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'relative h-28 bg-black rounded-xl overflow-hidden border border-slate-800 cursor-pointer group';
+        div.onclick = () => openLightbox(p.file, p.fb, p.title);
+        div.innerHTML = `
+          <img src="${p.file}" onerror="this.onerror=null; this.src='${p.fb}';" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+            <span class="text-[10px] text-white font-medium truncate">${escapeHtml(p.title)}</span>
           </div>
         `;
-        grid.appendChild(card);
+        grid.appendChild(div);
       });
     }
 
-    function filterPhotos(cat) {
-      document.querySelectorAll('.photo-btn').forEach(btn => {
-        if (btn.getAttribute('data-cat') === cat) {
-          btn.className = 'photo-btn px-3 py-1.5 rounded-lg bg-emerald-600 text-white font-bold';
-        } else {
-          btn.className = 'photo-btn px-3 py-1.5 rounded-lg bg-[#14171f] border border-[#242a38] text-slate-300';
-        }
-      });
-      renderPhotos(cat);
+    // ACORDEONES
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      const icon = document.getElementById(`icon-${id}`);
+      if (el.classList.contains('hidden')) {
+        el.classList.remove('hidden');
+        if (icon) icon.className = 'fa-solid fa-chevron-up text-slate-400 text-xs transition-transform duration-200';
+      } else {
+        el.classList.add('hidden');
+        if (icon) icon.className = 'fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200';
+      }
     }
 
     // LIGHTBOX
-    function openLightbox(localSrc, fallbackSrc, title, tag) {
+    function openLightbox(file, fb, title) {
       const modal = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
-      img.onerror = function() {
-        this.onerror = null;
-        this.src = fallbackSrc;
-      };
-      img.src = localSrc;
+      img.onerror = () => { img.onerror = null; img.src = fb; };
+      img.src = file;
       document.getElementById('lightboxTitle').textContent = title;
-      document.getElementById('lightboxTag').textContent = tag;
-      document.getElementById('lightboxFile').textContent = `Ruta: ${localSrc}`;
+      document.getElementById('lightboxFile').textContent = `Archivo: ${file.replace('./', '')}`;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
     }
@@ -1307,15 +897,8 @@
       document.body.style.overflow = 'auto';
     }
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-        closeWhatsAppModal();
-      }
-    });
-
     // WHATSAPP
-    function updateWhatsAppPreview() {
+    function updateWhatsAppText() {
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
 
@@ -1323,31 +906,30 @@
       msg += `Presupuesto & Cuotas para el grupo:\n`;
       msg += `------------------------------------\n`;
       msg += `💰 *Total del viaje:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
-      msg += `🏨 *Pernoctar invitados:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona (Confirmado)` : 'S/ 0 (No aplica)'}\n`;
-      msg += `🍻 *Fondo Alcohol:* S/ ${calc.subtotalAlcohol.toFixed(2)} (dividido solo entre los ${calc.drinkersCount} que toman = S/ ${calc.alcoholPerDrinker.toFixed(2)} c/u)\n\n`;
+      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (No aplica)'}\n`;
+      msg += `🍻 *Alcohol:* S/ ${calc.subtotalAlcohol.toFixed(2)} (dividido solo entre los ${calc.drinkersCount} bebedores = S/ ${calc.alcoholPerDrinker.toFixed(2)} c/u)\n\n`;
 
-      msg += `👥 *CUOTAS INDIVIDUALES EXACTAS:*\n`;
-      calc.memberCalculations.forEach(item => {
+      msg += `👥 *CUOTAS EXACTAS:*\n`;
+      calc.memberCalcs.forEach(item => {
         const m = item.m;
         const status = m.paid ? '✅ Pagó' : '⏳ Pendiente';
         const tags = [];
         if (!m.drinks) tags.push('no toma');
         if (item.pernocteCost > 0) tags.push(`duerme +S/${item.pernocteCost.toFixed(0)}`);
         if (m.extra > 0) tags.push(`+S/${m.extra} extra`);
-
         const tagStr = tags.length > 0 ? ` (${tags.join(', ')})` : '';
         msg += `• *${m.name}:* S/ ${item.total.toFixed(2)}${tagStr} [${status}]\n`;
       });
 
-      msg += `\n💳 *Para Yape / Plin:* ${yape}\n`;
-      msg += `¡Manden la captura al transferir para cerrar el bungaló y las carnes! 🏊‍♂️🥩`;
+      msg += `\n💳 *Yape / Plin:* ${yape}\n`;
+      msg += `¡Envíen captura al transferir para cerrar el bungaló! 🏊‍♂️🥩`;
 
       document.getElementById('whatsappPreview').value = msg;
     }
 
     function openWhatsAppModal() {
       document.getElementById('yapeInput').value = state.yapeNumber;
-      updateWhatsAppPreview();
+      updateWhatsAppText();
       document.getElementById('whatsappModal').classList.remove('hidden');
     }
 
@@ -1368,18 +950,39 @@
       });
     }
 
+    // COMPARTIR ENLACE CON CAMBIOS GUARDADOS
+    function copyShareLink() {
+      try {
+        const json = JSON.stringify(state);
+        const encoded = btoa(json);
+        const url = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(encoded)}`;
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('¡Enlace con tus cambios copiado!');
+        });
+      } catch (e) {
+        showToast('Guardado localmente en tu navegador');
+      }
+    }
+
     function showToast(msg) {
       const t = document.getElementById('toast');
       document.getElementById('toastMsg').textContent = msg;
-      t.classList.remove('translate-y-20', 'opacity-0');
+      t.classList.remove('translate-y-10', 'opacity-0');
       setTimeout(() => {
-        t.classList.add('translate-y-20', 'opacity-0');
+        t.classList.add('translate-y-10', 'opacity-0');
       }, 2500);
     }
 
     function escapeHtml(s) {
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeLightbox();
+        closeWhatsAppModal();
+      }
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
       render();
