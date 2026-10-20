@@ -153,7 +153,7 @@
   <!-- 1. CABECERA FLOTANTE TRAVELIO STICKY -->
   <!-- ========================================================================= -->
   <header class="border-b border-hairline/80 bg-card/90 backdrop-blur-md sticky top-0 z-40 shadow-xs">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-2.5 flex items-center justify-between">
       
       <div class="flex items-center gap-3">
         <!-- Logo Oficial Country Club El Bosque -->
@@ -200,7 +200,7 @@
     </div>
 
     <!-- Contenido del Hero (z-30 para estar siempre por encima de las nubes) -->
-    <div class="relative z-30 max-w-4xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-36 sm:pb-44 text-center text-white space-y-4">
+    <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-8 pt-16 sm:pt-24 pb-36 sm:pb-44 text-center text-white space-y-4">
       
       <!-- Badge con borde discontinuo Travelio -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-dashed border-white/40 bg-white/10 backdrop-blur-md text-amber-200 text-xs font-medium shadow-xs">
@@ -253,7 +253,7 @@
   <!-- ========================================================================= -->
   <!-- 3. CONTENIDO PRINCIPAL: GESTIÓN DE CUOTAS, CALCULADORA & SERVICIOS -->
   <!-- ========================================================================= -->
-  <main class="relative z-30 max-w-4xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-10 space-y-6">
+  <main class="relative z-30 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 -mt-6 sm:-mt-10 space-y-8">
 
     <!-- ======================================================================= -->
     <!-- 3. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
@@ -291,7 +291,7 @@
     <!-- ======================================================================= -->
     <!-- 4. RESUMEN DE CUOTAS (REGLA DE S/ 20 MENOS Y S/ 60 MÁS) -->
     <!-- ======================================================================= -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       
       <!-- Total General -->
       <div class="bg-card border border-hairline p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
@@ -394,62 +394,74 @@
         <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-muted text-xs transition-transform duration-200"></i>
       </button>
 
-      <div id="sec-compras" class="hidden p-4 pt-0 space-y-4 border-t border-hairlinesoft text-xs">
+      <div id="sec-compras" class="hidden p-4 sm:p-5 pt-0 space-y-4 border-t border-hairlinesoft text-xs">
         
-        <!-- 1. Comida -->
-        <div class="pt-3">
-          <div class="flex justify-between items-center mb-1.5 font-semibold text-ink">
-            <span>🥩 Comida (Carnes & Parrilla)</span>
-            <span class="font-mono text-ink" id="comidaSubDisplay">S/ 398.00</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 pt-3">
+          
+          <!-- 1. Comida -->
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+            <div>
+              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+                <span>🥩 Carnes & Parrilla</span>
+                <span class="font-mono text-ink text-xs" id="comidaSubDisplay">S/ 398.00</span>
+              </div>
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyComida" class="divide-y divide-hairlinesoft/70"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-xs">
-              <tbody id="tbodyComida" class="divide-y divide-hairlinesoft"></tbody>
-            </table>
-          </div>
-        </div>
 
-        <!-- 2. Cremas y Parrilla -->
-        <div class="pt-2 border-t border-hairlinesoft">
-          <div class="flex justify-between items-center mb-1.5 font-semibold text-ink">
-            <span>🥫 Cremas, Carbón & Mezcladores</span>
-            <span class="font-mono text-ink" id="cremasSubDisplay">S/ 155.39</span>
+          <!-- 2. Cremas y Parrilla -->
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+            <div>
+              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+                <span>🥫 Cremas & Carbón</span>
+                <span class="font-mono text-ink text-xs" id="cremasSubDisplay">S/ 155.39</span>
+              </div>
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyCremas" class="divide-y divide-hairlinesoft/70"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-xs">
-              <tbody id="tbodyCremas" class="divide-y divide-hairlinesoft"></tbody>
-            </table>
-          </div>
-        </div>
 
-        <!-- 3. Alcohol -->
-        <div class="pt-2 border-t border-hairlinesoft">
-          <div class="flex justify-between items-center mb-1.5 font-semibold text-ink">
-            <span>🍻 Alcohol & Cervezas (Solo bebedores)</span>
-            <span class="font-mono text-brand font-semibold" id="alcoholSubDisplay">S/ 321.70</span>
+          <!-- 3. Alcohol -->
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+            <div>
+              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+                <span>🍻 Tragos & Bebidas</span>
+                <span class="font-mono text-brand font-semibold text-xs" id="alcoholSubDisplay">S/ 321.70</span>
+              </div>
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyAlcohol" class="divide-y divide-hairlinesoft/70"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-xs">
-              <tbody id="tbodyAlcohol" class="divide-y divide-hairlinesoft"></tbody>
-            </table>
-          </div>
-        </div>
 
-        <!-- 4. Alojamiento y Movilidad -->
-        <div class="pt-2 border-t border-hairlinesoft">
-          <div class="flex justify-between items-center mb-1.5 font-semibold text-ink">
-            <span>🏡 Alojamiento & Movilidad (Vie 18 — Lun 21)</span>
-            <span class="font-mono text-ink" id="alojSubDisplay">S/ 800.00</span>
+          <!-- 4. Alojamiento y Movilidad -->
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+            <div>
+              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+                <span>🏡 Bungalow & Van</span>
+                <span class="font-mono text-ink text-xs" id="alojSubDisplay">S/ 800.00</span>
+              </div>
+              <div class="overflow-x-auto custom-scroll">
+                <table class="w-full text-left text-xs">
+                  <tbody id="tbodyAlojamiento" class="divide-y divide-hairlinesoft/70"></tbody>
+                </table>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto custom-scroll">
-            <table class="w-full text-left text-xs">
-              <tbody id="tbodyAlojamiento" class="divide-y divide-hairlinesoft"></tbody>
-            </table>
-          </div>
+
         </div>
 
         <!-- Margen de 5% sobre comida y cremas -->
-        <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft flex justify-between font-mono text-xs">
+        <div class="p-3.5 rounded-xl bg-surface-soft border border-hairlinesoft flex justify-between font-mono text-xs">
           <span class="text-bodytext">Margen imprevistos (5% sobre comida y cremas):</span>
           <span class="font-semibold text-ink" id="margenDisplay">S/ 27.67</span>
         </div>
@@ -474,7 +486,7 @@
         <p class="text-xs text-muted pt-3">
           Imágenes oficiales de la sede campestre de Chosica. Haz clic en cualquiera para ampliar en alta definición:
         </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5" id="photoGrid">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6" id="photoGrid">
           <!-- Inyectado por JS con estilo Travelio Cards -->
         </div>
       </div>
@@ -500,7 +512,7 @@
       </svg>
     </div>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 space-y-8">
 
       <!-- Encabezado del Footer -->
       <div class="text-center space-y-2">
@@ -511,137 +523,142 @@
         <h2 class="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight">
           Clima de Chosica & <span class="font-serif italic font-normal text-emerald-800">Reglamento del Club</span>
         </h2>
-        <p class="text-xs text-muted max-w-lg mx-auto leading-relaxed">
+        <p class="text-xs text-muted max-w-xl mx-auto leading-relaxed">
           Consulta el pronóstico satelital en vivo para armar tu maleta y las indicaciones clave para el ingreso por garita y uso de instalaciones.
         </p>
       </div>
 
-      <!-- 1. COMPONENTE REACT: PRONÓSTICO & CLIMA EN VIVO · VALLE DE CHOSICA -->
-      <div id="weather-react-root">
-        <!-- Fallback elegante mientras React hidrata -->
-        <div class="bg-card border border-hairline rounded-2xl p-5 shadow-xs">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairlinesoft">
-            <div class="flex items-center gap-2.5">
-              <i class="fa-solid fa-cloud-sun text-amber-600 text-lg"></i>
-              <div>
-                <h3 class="text-xs font-semibold text-ink">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
-                <p class="text-[11px] text-muted">Sol garantizado y microclima seco frente a la humedad de Lima.</p>
+      <!-- Contenedor Widescreen de 2 Columnas Balanceadas: Clima (Izq) + Reglas (Der) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+
+        <!-- 1. COMPONENTE REACT: PRONÓSTICO & CLIMA EN VIVO · VALLE DE CHOSICA -->
+        <div id="weather-react-root">
+          <!-- Fallback elegante mientras React hidrata -->
+          <div class="bg-card border border-hairline rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairlinesoft">
+              <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-cloud-sun text-amber-600 text-lg"></i>
+                <div>
+                  <h3 class="text-xs font-semibold text-ink">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
+                  <p class="text-[11px] text-muted">Sol garantizado y microclima seco frente a la humedad de Lima.</p>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-medium self-start sm:self-auto">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Cargando datos en vivo (React)...
+              </span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+              <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                <span class="text-xs font-medium text-muted block">Día (Piscina)</span>
+                <div class="text-lg font-semibold text-ink font-mono mt-0.5">24°C – 26°C</div>
+                <span class="text-[11px] text-muted">Soleado · Calor seco</span>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                <span class="text-xs font-medium text-muted block">Noche (Parrilla)</span>
+                <div class="text-lg font-semibold text-ink font-mono mt-0.5">14°C – 16°C</div>
+                <span class="text-[11px] text-muted">Fresco · Casaca lista</span>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                <span class="text-xs font-medium text-muted block">Índice UV</span>
+                <div class="text-lg font-semibold text-ink font-mono mt-0.5">11+ (Muy Alto)</div>
+                <span class="text-[11px] text-muted">Bloqueador FPS 50+</span>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                <span class="text-xs font-medium text-muted block">Humedad</span>
+                <div class="text-lg font-semibold text-ink font-mono mt-0.5">~55% (Seco)</div>
+                <span class="text-[11px] text-muted">Aire puro de valle</span>
               </div>
             </div>
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-medium self-start sm:self-auto">
-              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Cargando datos en vivo (React)...
+          </div>
+        </div>
+
+        <!-- 2. REGLAMENTO & CONSEJOS PARA EL CLUB (Los 6 consejos clave) -->
+        <div class="bg-card border border-hairline rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
+          <div class="flex items-center justify-between pb-3 border-b border-hairlinesoft">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-surface-soft border border-hairlinesoft flex items-center justify-center text-ink text-base">
+                <i class="fa-solid fa-clipboard-check text-muted"></i>
+              </div>
+              <div>
+                <h3 class="text-xs font-bold text-ink">Reglas Oficiales para Invitados</h3>
+                <p class="text-[11px] text-muted">Garita, Piscinas, Tenis, Canchas y Bungalows</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-semibold">
+              6 Normas Clave
             </span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
-            <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-              <span class="text-xs font-medium text-muted block">Día (Piscina)</span>
-              <div class="text-lg font-semibold text-ink font-mono mt-0.5">24°C – 26°C</div>
-              <span class="text-[11px] text-muted">Soleado · Calor seco</span>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <!-- 1. Garita -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-id-card text-muted"></i>
+                <span>1. Garita Km 33.5</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                <strong>DNI físico original obligatorio</strong> de cada uno de los 8 integrantes para registrarse en portería como invitados acreditados.
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-              <span class="text-xs font-medium text-muted block">Noche (Parrilla)</span>
-              <div class="text-lg font-semibold text-ink font-mono mt-0.5">14°C – 16°C</div>
-              <span class="text-[11px] text-muted">Fresco · Casaca lista</span>
+
+            <!-- 2. Piscinas -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-water-ladder text-muted"></i>
+                <span>2. Piscinas & Solárium</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                Ducha previa obligatoria. Solo se permite ropa de baño de licra/poliéster; prohibido entrar con prendas de algodón o bermudas con cierres.
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-              <span class="text-xs font-medium text-muted block">Índice UV</span>
-              <div class="text-lg font-semibold text-ink font-mono mt-0.5">11+ (Muy Alto)</div>
-              <span class="text-[11px] text-muted">Bloqueador FPS 50+</span>
+
+            <!-- 3. Canchas de Tenis -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-baseball-bat-ball text-muted"></i>
+                <span>3. Tenis de Arcilla</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                Uso de <strong>calzado de suela plana o espiga</strong> (no chimpunes ni toperoles para no dañar el piso). Losas y fútbol por orden de llegada.
+              </p>
             </div>
-            <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-              <span class="text-xs font-medium text-muted block">Humedad</span>
-              <div class="text-lg font-semibold text-ink font-mono mt-0.5">~55% (Seco)</div>
-              <span class="text-[11px] text-muted">Aire puro de valle</span>
+
+            <!-- 4. Billar & Bochas -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-bowling-ball text-muted"></i>
+                <span>4. Billar & Bochas</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                Cuidar los paños reglamentarios: <strong>prohibido apoyar vasos o bebidas sobre las mesas</strong>. Bochas y tacos en coordinación deportiva.
+              </p>
+            </div>
+
+            <!-- 5. Silencio Bungalows -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-volume-xmark text-muted"></i>
+                <span>5. Silencio (11:00 PM)</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                A partir de las 11:00 pm rige el descanso en bungalows. Parlantes a volumen moderado para convivir con socios y familias vecinas.
+              </p>
+            </div>
+
+            <!-- 6. Parrillas & Áreas Verdes -->
+            <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
+              <div class="flex items-center gap-2 font-semibold text-ink">
+                <i class="fa-solid fa-leaf text-muted"></i>
+                <span>6. Áreas Verdes & Fuego</span>
+              </div>
+              <p class="text-[11px] text-bodytext leading-relaxed">
+                Apagar las brasas del carbón completamente antes de retirarse. Usar los tachos de basura y no dejar residuos en la laguna.
+              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- 2. REGLAMENTO & CONSEJOS PARA EL CLUB (Los 6 consejos clave) -->
-      <div class="bg-card border border-hairline rounded-3xl p-5 sm:p-6 shadow-xs space-y-4">
-        <div class="flex items-center justify-between pb-3 border-b border-hairlinesoft">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-surface-soft border border-hairlinesoft flex items-center justify-center text-ink text-base">
-              <i class="fa-solid fa-clipboard-check text-muted"></i>
-            </div>
-            <div>
-              <h3 class="text-xs font-bold text-ink">Reglas Oficiales para Invitados (Garita, Piscinas, Tenis, Bungalows)</h3>
-              <p class="text-[11px] text-muted">Indicaciones de administración para disfrutar del club sin ningún inconveniente.</p>
-            </div>
-          </div>
-          <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-semibold">
-            6 Normas Clave
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <!-- 1. Garita -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-id-card text-muted"></i>
-              <span>1. Garita de Control (Km 33.5)</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              Es <strong>obligatorio portar el DNI físico original</strong> de cada uno de los 8 integrantes para registrarse en portería como invitados acreditados por el socio.
-            </p>
-          </div>
-
-          <!-- 2. Piscinas -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-water-ladder text-muted"></i>
-              <span>2. Piscinas Olímpicas & Solárium</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              Ducha previa obligatoria antes de ingresar al agua. Solo se permite ropa de baño adecuada (licra o poliéster); prohibido entrar con prendas de algodón o bermudas con cierres.
-            </p>
-          </div>
-
-          <!-- 3. Canchas de Tenis -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-baseball-bat-ball text-muted"></i>
-              <span>3. Tenis de Arcilla & Canchas</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              En las canchas de tenis de arcilla es estricto el uso de <strong>calzado con suela plana o espiga</strong> (no chimpunes ni toperoles para no dañar el piso). Canchas de fútbol y losas según orden de llegada.
-            </p>
-          </div>
-
-          <!-- 4. Billar & Bochas -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-bowling-ball text-muted"></i>
-              <span>4. Mesas de Billar & Bochas</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              Cuidar los paños reglamentarios: <strong>prohibido apoyar vasos, botellas o comida sobre las mesas</strong>. Las bochas y tacos se solicitan y devuelven en la coordinación de deportes.
-            </p>
-          </div>
-
-          <!-- 5. Silencio Bungalows -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-volume-xmark text-muted"></i>
-              <span>5. Horario de Silencio (11:00 PM)</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              A partir de las 11:00 pm rige el descanso en la zona de bungalows. Música con parlante a volumen moderado para no perturbar a socios y familias vecinas.
-            </p>
-          </div>
-
-          <!-- 6. Parrillas & Áreas Verdes -->
-          <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
-            <div class="flex items-center gap-2 font-semibold text-ink">
-              <i class="fa-solid fa-leaf text-muted"></i>
-              <span>6. Cuidados de las 40 Hectáreas</span>
-            </div>
-            <p class="text-[11px] text-bodytext leading-relaxed">
-              Apagar las brasas del carbón completamente antes de retirarse. Usar los tachos de basura y no dejar residuos en las áreas verdes ni en la laguna.
-            </p>
-          </div>
-        </div>
       </div>
 
       <!-- Pie institucional / Brand -->
@@ -666,7 +683,7 @@
   <!-- 11. BARRA FLOTANTE INFERIOR (Matte bottom bar) -->
   <!-- ========================================================================= -->
   <div class="fixed bottom-0 left-0 right-0 bg-card/95 border-t border-hairlinesoft py-3 px-4 z-40 backdrop-blur-md shadow-mattedrop no-print">
-    <div class="max-w-4xl mx-auto flex items-center justify-between gap-3 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-3 text-xs">
       <div>
         <span class="text-muted text-[11px] block">Presupuesto total:</span>
         <span class="font-mono font-bold text-sm sm:text-base text-ink" id="barTotalDisplay">S/ 1,702.76</span>
