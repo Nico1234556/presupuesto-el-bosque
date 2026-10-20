@@ -309,6 +309,9 @@
               <button onclick="stepNights(1)" class="w-6 h-6 rounded-md bg-surface-soft hover:bg-surface-strong border border-hairline flex items-center justify-center text-ink text-xs font-bold transition" title="Agregar 1 noche">+</button>
             </div>
           </div>
+          <button onclick="saveSection('fechas')" class="w-full mt-2 py-1.5 px-2 bg-ink hover:bg-black text-white rounded-lg text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-xs active:scale-98" title="Guardar días y actualizar cuotas">
+            <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar Días
+          </button>
         </div>
       </div>
 
@@ -328,17 +331,22 @@
           </p>
         </div>
 
-        <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft">
-          <div class="flex items-center text-xs font-mono text-muted gap-1 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
-            <span>S/</span>
-            <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none">
-          </div>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft">
+            <div class="flex items-center text-xs font-mono text-muted gap-1 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
+              <span>S/</span>
+              <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none">
+            </div>
 
-          <label class="relative inline-flex items-center cursor-pointer select-none">
-            <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
-            <div class="w-13 h-7 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-5.5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
-            <span id="switchText" class="ml-2.5 text-xs font-semibold font-mono text-muted">OFF</span>
-          </label>
+            <label class="relative inline-flex items-center cursor-pointer select-none">
+              <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
+              <div class="w-13 h-7 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-5.5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
+              <span id="switchText" class="ml-2.5 text-xs font-semibold font-mono text-muted">OFF</span>
+            </label>
+          </div>
+          <button onclick="saveSection('pernocte')" class="w-full py-1.5 px-2 bg-surface-strong hover:bg-ink hover:text-white border border-hairline rounded-lg text-ink text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-xs active:scale-98" title="Guardar configuración de pernocte">
+            <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar Pernocte
+          </button>
         </div>
       </div>
 
@@ -430,9 +438,14 @@
           <h2 class="text-sm font-semibold text-ink">Padrón de Amigos & Cuotas Exactas</h2>
           <p class="text-xs text-muted">Agrega o quita amigos, edita nombres y marca quién ya te pagó por Yape/Plin.</p>
         </div>
-        <button onclick="addFriend()" class="px-3 py-1.5 bg-card hover:bg-surface-soft border border-hairline rounded-lg text-xs font-medium text-ink transition flex items-center gap-1.5 shadow-xs">
-          <i class="fa-solid fa-plus text-[10px]"></i> Añadir Amigo
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="addFriend()" class="px-3 py-1.5 bg-card hover:bg-surface-soft border border-hairline rounded-lg text-xs font-medium text-ink transition flex items-center gap-1.5 shadow-xs">
+            <i class="fa-solid fa-plus text-[10px]"></i> Añadir Amigo
+          </button>
+          <button onclick="saveSection('amigos')" class="px-3.5 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-semibold shadow-xs flex items-center gap-1.5 transition active:scale-98" title="Guardar participantes y actualizar cuotas">
+            <i class="fa-solid fa-floppy-disk text-[11px]"></i> Guardar Amigos & Cuotas
+          </button>
+        </div>
       </div>
 
       <div class="overflow-x-auto custom-scroll">
@@ -467,14 +480,17 @@
     <!-- 6. ACORDEÓN DESPLEGABLE: DETALLE DE COMPRAS REALES -->
     <!-- ======================================================================= -->
     <div class="border border-hairline rounded-2xl overflow-hidden bg-card shadow-xs transition-all">
-      <button onclick="toggleSection('sec-compras')" class="w-full p-4 text-left flex items-center justify-between text-xs font-semibold text-ink hover:bg-surface-soft transition">
-        <span class="flex items-center gap-2">
+      <div class="w-full p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-semibold text-ink bg-card">
+        <button onclick="toggleSection('sec-compras')" class="flex items-center gap-2 text-left flex-1 hover:text-brand transition cursor-pointer">
           <i class="fa-solid fa-cart-shopping text-muted"></i>
           <span>Detalle de Compras (Comida, Cremas, Tragos, Bungalow)</span>
           <span class="text-[11px] font-mono text-ink bg-surface-soft px-2.5 py-0.5 rounded-full border border-hairline font-medium" id="subtotalComprasBadge">S/ 1,702.76</span>
-        </span>
-        <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-muted text-xs transition-transform duration-200"></i>
-      </button>
+          <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-muted text-xs transition-transform duration-200 ml-1"></i>
+        </button>
+        <button onclick="saveSection('compras')" class="px-3.5 py-1.5 bg-brand hover:bg-brand-hover text-white rounded-lg text-xs font-semibold shadow-xs flex items-center gap-1.5 transition active:scale-98 self-start sm:self-auto" title="Guardar todo el detalle de compras y actualizar cuotas">
+          <i class="fa-solid fa-floppy-disk text-[11px]"></i> Guardar Todo Compras
+        </button>
+      </div>
 
       <div id="sec-compras" class="hidden p-4 sm:p-5 pt-0 space-y-4 border-t border-hairlinesoft text-xs">
         
@@ -493,9 +509,12 @@
                 </table>
               </div>
             </div>
-            <div class="pt-2 border-t border-hairlinesoft/70">
-              <button onclick="addExpenseItem('comida')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
-                <i class="fa-solid fa-plus text-[10px]"></i> Añadir carne / comida
+            <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
+              <button onclick="addExpenseItem('comida')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir carne
+              </button>
+              <button onclick="saveSection('comida')" class="py-1.5 px-3 bg-ink hover:bg-black text-white rounded-lg text-[11px] font-semibold transition flex items-center gap-1 shadow-xs active:scale-98" title="Guardar lista de carnes y actualizar cuotas">
+                <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar
               </button>
             </div>
           </div>
@@ -513,9 +532,12 @@
                 </table>
               </div>
             </div>
-            <div class="pt-2 border-t border-hairlinesoft/70">
-              <button onclick="addExpenseItem('cremas')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
-                <i class="fa-solid fa-plus text-[10px]"></i> Añadir crema / carbón
+            <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
+              <button onclick="addExpenseItem('cremas')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir crema
+              </button>
+              <button onclick="saveSection('cremas')" class="py-1.5 px-3 bg-ink hover:bg-black text-white rounded-lg text-[11px] font-semibold transition flex items-center gap-1 shadow-xs active:scale-98" title="Guardar lista de cremas y actualizar cuotas">
+                <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar
               </button>
             </div>
           </div>
@@ -533,9 +555,12 @@
                 </table>
               </div>
             </div>
-            <div class="pt-2 border-t border-hairlinesoft/70">
-              <button onclick="addExpenseItem('alcohol')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-brand text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-2xs">
-                <i class="fa-solid fa-plus text-[10px]"></i> Añadir trago / bebida
+            <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
+              <button onclick="addExpenseItem('alcohol')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-brand text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir trago
+              </button>
+              <button onclick="saveSection('alcohol')" class="py-1.5 px-3 bg-brand hover:bg-brand-hover text-white rounded-lg text-[11px] font-semibold transition flex items-center gap-1 shadow-xs active:scale-98" title="Guardar lista de tragos y actualizar cuotas">
+                <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar
               </button>
             </div>
           </div>
@@ -553,9 +578,12 @@
                 </table>
               </div>
             </div>
-            <div class="pt-2 border-t border-hairlinesoft/70">
-              <button onclick="addExpenseItem('alojamiento')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
-                <i class="fa-solid fa-plus text-[10px]"></i> Añadir estadía / pasaje
+            <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
+              <button onclick="addExpenseItem('alojamiento')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir estadía
+              </button>
+              <button onclick="saveSection('alojamiento')" class="py-1.5 px-3 bg-ink hover:bg-black text-white rounded-lg text-[11px] font-semibold transition flex items-center gap-1 shadow-xs active:scale-98" title="Guardar alojamiento y actualizar cuotas">
+                <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar
               </button>
             </div>
           </div>
@@ -1094,8 +1122,9 @@
               return;
             }
 
-            // Si los datos de la nube son más recientes o no hay versión local v7
-            if (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v7')) {
+            // Solo adoptar cambios de la nube si trae datos completos válidos
+            const cloudHasProducts = Array.isArray(result.data.comida) && result.data.comida.length > 0;
+            if (cloudHasProducts && (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v7'))) {
               state = sanitizeLoadedState(result.data);
               localStorage.setItem('el_bosque_v7', JSON.stringify(state));
               render();
@@ -1326,6 +1355,25 @@
       saveState();
       render();
       showToast('Participante eliminado');
+    }
+
+    // GUARDAR SEGMENTO ESPECÍFICO Y REFRESCAR REPARTO & PRESUPUESTO
+    function saveSection(sec) {
+      saveState(true);
+      renderCalculationsOnly();
+      render();
+
+      let label = 'Cambios';
+      if (sec === 'fechas') label = 'Fechas y días';
+      else if (sec === 'pernocte') label = 'Cobro de pernocte';
+      else if (sec === 'amigos') label = 'Padrón de amigos y cuotas';
+      else if (sec === 'comida') label = 'Carnes y comida';
+      else if (sec === 'cremas') label = 'Cremas y carbón';
+      else if (sec === 'alcohol') label = 'Tragos y bebidas';
+      else if (sec === 'alojamiento') label = 'Alojamiento y movilidad';
+      else if (sec === 'compras') label = 'Detalle de compras';
+
+      showToast(`💾 ¡${label} guardado! Presupuesto y reparto actualizados`);
     }
 
     // CONTROL DE PRODUCTOS Y GASTOS (CRUD COMPLETO)
@@ -1628,34 +1676,36 @@
       const tb = document.getElementById(tbodyId);
       tb.innerHTML = '';
       if (!items || items.length === 0) {
-        tb.innerHTML = `<tr><td colspan="4" class="py-3 text-center text-muted text-xs italic">Sin productos aún</td></tr>`;
+        tb.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-muted text-xs italic">Sin productos aún</td></tr>`;
         return;
       }
       items.forEach(item => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-surface-soft/80 group transition-colors';
+        tr.className = 'hover:bg-surface-soft/80 group transition-colors border-b border-hairlinesoft/70';
         tr.innerHTML = `
-          <td class="py-1.5 pr-1 align-middle">
+          <td class="py-1.5 pr-1.5 align-middle">
             <input type="text" value="${escapeHtml(item.name)}" 
               oninput="updateExpenseName('${cat}', '${item.id}', this.value)" 
-              class="w-full bg-transparent text-ink text-xs font-medium border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none py-0.5 truncate" 
-              placeholder="Nombre...">
+              class="w-full bg-white border border-hairline hover:border-ink/40 focus:border-ink rounded-lg px-2 py-1 text-ink text-xs font-medium focus:outline-none transition shadow-2xs truncate" 
+              placeholder="Nombre del producto...">
           </td>
-          <td class="py-1.5 px-1 w-16 align-middle">
+          <td class="py-1.5 px-1 w-20 align-middle">
             <input type="text" value="${escapeHtml(item.qty || '')}" 
               oninput="updateExpenseQty('${cat}', '${item.id}', this.value)" 
-              class="w-full bg-surface-soft border border-hairlinesoft rounded px-1 py-0.5 text-[11px] text-muted text-center focus:outline-none focus:border-ink font-mono" 
+              class="w-full bg-white border border-hairline hover:border-ink/40 focus:border-ink rounded-lg px-1.5 py-1 text-[11px] text-muted text-center focus:outline-none font-mono transition shadow-2xs" 
               placeholder="Cant.">
           </td>
-          <td class="py-1.5 px-1 text-right font-mono font-medium text-ink w-20 whitespace-nowrap align-middle">
-            <span class="text-[10px] text-muted">S/</span> 
-            <input type="number" step="0.5" min="0" value="${(parseFloat(item.total) || 0).toFixed(2)}" 
-              oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" 
-              class="w-14 text-right bg-transparent border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none">
+          <td class="py-1.5 px-1 text-right font-mono font-medium text-ink w-24 whitespace-nowrap align-middle">
+            <div class="flex items-center justify-end bg-white border border-hairline hover:border-ink/40 focus-within:border-ink rounded-lg px-1.5 py-1 shadow-2xs transition">
+              <span class="text-[10px] text-muted font-normal mr-1 select-none">S/</span> 
+              <input type="number" step="0.5" min="0" value="${(parseFloat(item.total) || 0).toFixed(2)}" 
+                oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" 
+                class="w-16 text-right bg-transparent focus:outline-none font-mono text-xs text-ink font-semibold">
+            </div>
           </td>
           <td class="py-1.5 pl-1 w-6 text-center align-middle">
             <button onclick="removeExpenseItem('${cat}', '${item.id}')" 
-              class="text-muted/40 group-hover:text-muted hover:!text-terracotta transition p-1" 
+              class="w-6 h-6 rounded-md hover:bg-terracotta/10 text-muted/40 hover:text-terracotta transition flex items-center justify-center mx-auto" 
               title="Eliminar producto">
               <i class="fa-solid fa-trash-can text-[11px]"></i>
             </button>
@@ -1822,6 +1872,13 @@
         closeLightbox();
         closeWhatsAppModal();
       }
+    });
+
+    // Auto-guardado de seguridad al cerrar o refrescar
+    window.addEventListener('beforeunload', () => {
+      try {
+        localStorage.setItem('el_bosque_v7', JSON.stringify(state));
+      } catch (e) {}
     });
 
     document.addEventListener('DOMContentLoaded', () => {
