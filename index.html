@@ -304,20 +304,21 @@
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 5. ACORDEÓN DESPLEGABLE: FOTOS DE LAS INSTALACIONES -->
+    <!-- 5. ACORDEÓN DESPLEGABLE: FOTOS REALES DE COUNTRY CLUB EL BOSQUE -->
     <!-- ======================================================================= -->
     <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
       <button onclick="toggleSection('sec-fotos')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
         <span class="flex items-center gap-2">
-          <i class="fa-solid fa-tree text-forest-700"></i>
-          <span>Instalaciones del Club (Bungaló, Piscinas, Caballos, Mirador, Billar, Bochas, Deportes)</span>
+          <i class="fa-solid fa-camera text-forest-700"></i>
+          <span>Fotos de la Sede Chosica (Bungalows, Piscinas, Parrillas, Laguna, Canchas)</span>
+          <span class="text-[10px] font-mono text-forest-700 bg-forest-50 px-2 py-0.5 rounded font-bold border border-forest-600/30">Fotos Reales</span>
         </span>
         <i id="icon-sec-fotos" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
       </button>
 
-      <div id="sec-fotos" class="hidden p-4 pt-0 space-y-3 border-t border-stone-100">
+      <div id="sec-fotos" class="p-4 pt-0 space-y-3 border-t border-stone-100">
         <p class="text-[11px] text-stone-500">
-          Fotos cargadas desde <code>presupuesto-el-bosque/img/</code>. Haz clic en cualquiera para ampliar:
+          Imágenes oficiales de la sede campestre de Chosica. Haz clic en cualquiera para ampliar en alta definición:
         </p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="photoGrid">
           <!-- Inyectado por JS -->
@@ -411,13 +412,11 @@
   <script>
     // DATOS INICIALES REALES
     const DEFAULT_DATA = {
-      pernoctarActive: false,      // DESACTIVADO POR DEFAULT SEGÚN LA SOLICITUD
+      pernoctarActive: false,      // DESACTIVADO POR DEFAULT
       pernoctarAmount: 70.00,
       yapeNumber: '987 654 321 (Tú)',
-      // Descuento para los que no toman: S/ 30 menos que los que toman
-      nonDrinkerDiscount: 30.00,
-      // Extra voluntario tuyo: mínimo S/ 60 más que los que toman
-      userExtra: 60.00,
+      nonDrinkerDiscount: 30.00,   // S/ 30 MENOS PARA NO BEBEDORES
+      userExtra: 60.00,            // MÍNIMO S/ 60 MÁS PARA EL ORGANIZADOR
       // 1. Comida (S/ 398.00)
       comida: [
         { id: 'c1', name: 'Chorizo parrillero Otto Kunz 400 g', qty: '5 paq.', total: 69.50 },
@@ -464,20 +463,19 @@
       ]
     };
 
-    // 12 Fotos de Instalaciones
-    const PHOTOS = [
-      { id: 'p1', title: 'Bungaló: Sala Interior', file: './img/bungalow-sala.jpg', fb: 'https://images.unsplash.com/photo-1587061949409-02df41d5e562?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p2', title: 'Bungaló: Dormitorios', file: './img/bungalow-dormitorio.jpg', fb: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p3', title: 'Bungaló: Kitchenette', file: './img/bungalow-cocina.jpg', fb: 'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p4', title: 'Bungaló: Terraza & Parrilla', file: './img/bungalow-parrilla.jpg', fb: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p5', title: 'Piscinas & Solárium', file: './img/piscinas.jpg', fb: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p6', title: 'El Mirador de Chosica', file: './img/mirador.jpg', fb: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p7', title: 'Caballos & Paseos', file: './img/caballos.jpg', fb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p8', title: 'Mesa de Billar', file: './img/billar.jpg', fb: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p9', title: 'Campo de Bochas', file: './img/bochas.jpg', fb: 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p10', title: 'Canchas de Fútbol', file: './img/deportes-futbol.jpg', fb: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p11', title: 'Losas de Básquet', file: './img/deportes-basket.jpg', fb: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80' },
-      { id: 'p12', title: 'Tenis & Frontón', file: './img/deportes-tenis.jpg', fb: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80' },
+    // FOTOS OFICIALES Y REALES DE EL BOSQUE CHOSICA
+    const REAL_PHOTOS = [
+      { id: 'rf1', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
+      { id: 'rf2', title: 'Piscina Olímpica de Nado', desc: 'Piscina reglamentaria con carriles, sombrillas y sol constante.', file: './img/elbosque-piscina.jpg' },
+      { id: 'rf3', title: 'Zona de Parrillas & Picnic', desc: 'Parrillas de ladrillo y mesas de madera en el pasto bajo los árboles.', file: './img/elbosque-parrillas.jpg' },
+      { id: 'rf4', title: 'Vista Panorámica de la Sede', desc: 'Vista aérea: piscinas, laguna, canchas deportivas y los cerros.', file: './img/elbosque-panoramica.jpg' },
+      { id: 'rf5', title: 'Laguna & Paseo en Botes', desc: 'Botes a remo en la laguna artificial con islotes de vegetación.', file: './img/elbosque-laguna-botes.webp' },
+      { id: 'rf6', title: 'Mesa de Billar', desc: 'Mesas reglamentarias de paño verde en el salón social.', file: './img/billar.jpg', fb: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf7', title: 'Campo de Bochas', desc: 'Canchas tradicionales con piso de conchuela y sombra.', file: './img/bochas.jpg', fb: 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf8', title: 'Zona Ecuestre & Caballos', desc: 'Paseos a caballo guiados por senderos campestres.', file: './img/caballos.jpg', fb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf9', title: 'Canchas de Fútbol', desc: 'Canchas de fútbol en césped natural y sintético.', file: './img/deportes-futbol.jpg', fb: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf10', title: 'Losas de Básquet & Vóley', desc: 'Polideportivo con tableros de básquetbol.', file: './img/deportes-basket.jpg', fb: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf11', title: 'Tenis de Arcilla & Frontón', desc: 'Canchas de arcilla roja y frontón oficial.', file: './img/deportes-tenis.jpg', fb: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80' },
     ];
 
     let state = loadPersistedState();
@@ -491,7 +489,7 @@
         } catch (e) {}
       }
       try {
-        const saved = localStorage.getItem('el_bosque_light_v1');
+        const saved = localStorage.getItem('el_bosque_light_v2');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.members) return parsed;
@@ -502,7 +500,7 @@
 
     function saveState() {
       try {
-        localStorage.setItem('el_bosque_light_v1', JSON.stringify(state));
+        localStorage.setItem('el_bosque_light_v2', JSON.stringify(state));
         showSavedIndicator();
       } catch (e) {}
     }
@@ -515,8 +513,8 @@
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales (S/ 30 menos a no bebedores, S/ 60 más tú y pernocte apagado)?')) {
-        localStorage.removeItem('el_bosque_light_v1');
+      if (confirm('¿Restablecer el presupuesto a los valores originales (S/ 30 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+        localStorage.removeItem('el_bosque_light_v2');
         window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
         saveState();
@@ -525,7 +523,7 @@
       }
     }
 
-    // CONTROL DEL SWITCH DE PERNOCTE (DEFAULT: OFF)
+    // CONTROL DEL SWITCH DE PERNOCTE
     function togglePernocte(val) {
       state.pernoctarActive = val;
       state.members.forEach(m => {
@@ -656,7 +654,7 @@
     }
 
     // =========================================================================
-    // MATEMÁTICA EXACTA: S/ 30 MENOS NO BEBEDORES & S/ 60 MÁS EL ORGANIZADOR
+    // CÁLCULO EXACTO: S/ 30 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
     // =========================================================================
     function calculate() {
       const totalMembers = state.members.length;
@@ -671,23 +669,12 @@
 
       const totalBaseBudget = sumaComidaCremas + margen5Pct + subtotalAlcohol + subtotalAlojamiento;
 
-      // Descuento para los que no toman: S/ 30 menos
       const discount = state.nonDrinkerDiscount || 30.00;
-
-      // Conteo de bebedores y no bebedores
       const nonDrinkers = state.members.filter(m => !m.drinks);
       const drinkers = state.members.filter(m => m.drinks);
 
-      // Suma de extras manuales (tú tienes +S/ 60 por default)
       const totalManualExtras = state.members.reduce((acc, m) => acc + (m.extra || 0), 0);
 
-      // Ecuación:
-      // Sea X la cuota base de los que toman (sin extras ni pernoctes).
-      // Cada no bebedor paga: (X - discount)
-      // Cada bebedor paga: X + extraIndividual
-      // Suma total = nonDrinkers.length * (X - discount) + drinkers.length * X + totalManualExtras = totalBaseBudget
-      // totalMembers * X - nonDrinkers.length * discount + totalManualExtras = totalBaseBudget
-      // X = (totalBaseBudget + nonDrinkers.length * discount - totalManualExtras) / totalMembers
       const X_drinkerBase = totalMembers > 0 
         ? ((totalBaseBudget + (nonDrinkers.length * discount) - totalManualExtras) / totalMembers) 
         : 0;
@@ -737,29 +724,23 @@
       document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin cobro de pernocte';
 
-      // No bebedores (S/ 30 menos)
       const noToma = calc.memberCalcs.find(x => !x.m.drinks);
       document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : (calc.X_drinkerBase - calc.discount)).toFixed(2)}`;
 
-      // Bebedores
       const toma = calc.memberCalcs.find(x => x.m.drinks && !x.m.isUser);
       document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : calc.X_drinkerBase).toFixed(2)}`;
 
-      // Tú (+S/ 60 más)
       const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
       document.getElementById('kpiTu').textContent = `S/ ${user.total.toFixed(2)}`;
 
-      // Actualizar columna total de cada amigo
       calc.memberCalcs.forEach(item => {
         const cell = document.getElementById(`totalCell_${item.m.id}`);
         if (cell) cell.textContent = `S/ ${item.total.toFixed(2)}`;
       });
 
-      // Recaudado
       const pct = calc.totalTripBudget > 0 ? Math.round((calc.totalCollected / calc.totalTripBudget) * 100) : 0;
       document.getElementById('recaudadoLabel').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
 
-      // Subtotales acordeón
       document.getElementById('subtotalComprasBadge').textContent = `S/ ${calc.totalBaseBudget.toFixed(2)}`;
       document.getElementById('comidaSubDisplay').textContent = `S/ ${calc.subtotalComida.toFixed(2)}`;
       document.getElementById('cremasSubDisplay').textContent = `S/ ${calc.subtotalCremas.toFixed(2)}`;
@@ -773,7 +754,6 @@
       updatePernocteUI();
       document.getElementById('inputPernocte').value = state.pernoctarAmount.toFixed(2);
 
-      // Tabla de Amigos
       const tbody = document.getElementById('friendsTbody');
       tbody.innerHTML = '';
 
@@ -891,16 +871,18 @@
       });
     }
 
+    // FOTOS REALES Y COMPLEMENTARIAS
     function renderPhotosGrid() {
       const grid = document.getElementById('photoGrid');
       grid.innerHTML = '';
-      PHOTOS.forEach(p => {
+      REAL_PHOTOS.forEach(p => {
         const div = document.createElement('div');
-        div.className = 'relative h-28 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 cursor-pointer group shadow-sm';
-        div.onclick = () => openLightbox(p.file, p.fb, p.title);
+        div.className = 'relative h-28 sm:h-32 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 cursor-pointer group shadow-sm';
+        div.onclick = () => openLightbox(p.file, p.fb || p.file, p.title);
+        const fallbackAttr = p.fb ? `onerror="this.onerror=null; this.src='${p.fb}';"` : '';
         div.innerHTML = `
-          <img src="${p.file}" onerror="this.onerror=null; this.src='${p.fb}';" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent flex items-end p-2">
+          <img src="${p.file}" ${fallbackAttr} alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/20 to-transparent flex items-end p-2">
             <span class="text-[10px] text-white font-medium truncate">${escapeHtml(p.title)}</span>
           </div>
         `;
@@ -923,7 +905,12 @@
     function openLightbox(file, fb, title) {
       const modal = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
-      img.onerror = () => { img.onerror = null; img.src = fb; };
+      img.onerror = () => {
+        if (fb && fb !== file) {
+          img.onerror = null;
+          img.src = fb;
+        }
+      };
       img.src = file;
       document.getElementById('lightboxTitle').textContent = title;
       document.getElementById('lightboxFile').textContent = `Archivo: ${file.replace('./', '')}`;
