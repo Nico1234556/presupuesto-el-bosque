@@ -151,7 +151,7 @@
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 2. RESUMEN DE CUOTAS (REGLA DE S/ 30 MENOS Y S/ 60 MÁS) -->
+    <!-- 2. RESUMEN DE CUOTAS (REGLA DE S/ 20 MENOS Y S/ 60 MÁS) -->
     <!-- ======================================================================= -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       
@@ -162,24 +162,24 @@
         <span class="text-[10px] text-stone-500 font-mono" id="kpiBaseSub">Sin cobro de pernocte</span>
       </div>
 
-      <!-- No Bebedores (S/ 30 MENOS) -->
+      <!-- No Bebedores (S/ 20 MENOS) -->
       <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
         <span class="text-[10px] font-mono uppercase text-stone-600 font-bold block">No toman (2)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiNoToma">S/ 164.10</div>
-        <span class="text-[10px] text-forest-700 font-mono font-semibold">S/ 30 menos que bebedores</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiNoToma">S/ 171.60</div>
+        <span class="text-[10px] text-forest-700 font-mono font-semibold">S/ 20 menos que bebedores</span>
       </div>
 
       <!-- Bebedores -->
       <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
         <span class="text-[10px] font-mono uppercase text-amberwarm-700 font-bold block">Toman (5)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiToma">S/ 194.10</div>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiToma">S/ 191.60</div>
         <span class="text-[10px] text-stone-500 font-mono">Cuota estándar con trago</span>
       </div>
 
       <!-- Tú (Organizador: S/ 60 MÁS) -->
       <div class="bg-forest-50/50 border border-forest-600/30 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
         <span class="text-[10px] font-mono uppercase text-forest-800 font-bold block">Tú (Organizador)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-forest-900 mt-1" id="kpiTu">S/ 254.10</div>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-forest-900 mt-1" id="kpiTu">S/ 251.60</div>
         <span class="text-[10px] text-forest-700 font-mono font-semibold">+S/ 60 más siempre</span>
       </div>
 
@@ -415,7 +415,7 @@
       pernoctarActive: false,      // DESACTIVADO POR DEFAULT
       pernoctarAmount: 70.00,
       yapeNumber: '987 654 321 (Tú)',
-      nonDrinkerDiscount: 30.00,   // S/ 30 MENOS PARA NO BEBEDORES
+      nonDrinkerDiscount: 20.00,   // S/ 20 MENOS PARA NO BEBEDORES
       userExtra: 60.00,            // MÍNIMO S/ 60 MÁS PARA EL ORGANIZADOR
       // 1. Comida (S/ 398.00)
       comida: [
@@ -485,14 +485,21 @@
         try {
           const raw = decodeURIComponent(window.location.hash.replace('#s=', ''));
           const parsed = JSON.parse(atob(raw));
-          if (parsed && parsed.members) return parsed;
+          if (parsed && parsed.members) {
+            parsed.nonDrinkerDiscount = 20.00;
+            return parsed;
+          }
         } catch (e) {}
       }
       try {
-        const saved = localStorage.getItem('el_bosque_light_v2');
+        const saved = localStorage.getItem('el_bosque_light_v3') || localStorage.getItem('el_bosque_light_v2');
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (parsed && parsed.members) return parsed;
+          if (parsed && parsed.members) {
+            // Actualizar regla de no bebedores a S/ 20 menos
+            parsed.nonDrinkerDiscount = 20.00;
+            return parsed;
+          }
         }
       } catch (e) {}
       return JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -500,7 +507,7 @@
 
     function saveState() {
       try {
-        localStorage.setItem('el_bosque_light_v2', JSON.stringify(state));
+        localStorage.setItem('el_bosque_light_v3', JSON.stringify(state));
         showSavedIndicator();
       } catch (e) {}
     }
@@ -513,7 +520,8 @@
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales (S/ 30 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+      if (confirm('¿Restablecer el presupuesto a los valores originales (S/ 20 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+        localStorage.removeItem('el_bosque_light_v3');
         localStorage.removeItem('el_bosque_light_v2');
         window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
@@ -654,7 +662,7 @@
     }
 
     // =========================================================================
-    // CÁLCULO EXACTO: S/ 30 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
+    // CÁLCULO EXACTO: S/ 20 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
     // =========================================================================
     function calculate() {
       const totalMembers = state.members.length;
@@ -669,7 +677,7 @@
 
       const totalBaseBudget = sumaComidaCremas + margen5Pct + subtotalAlcohol + subtotalAlojamiento;
 
-      const discount = state.nonDrinkerDiscount || 30.00;
+      const discount = (state.nonDrinkerDiscount !== undefined) ? state.nonDrinkerDiscount : 20.00;
       const nonDrinkers = state.members.filter(m => !m.drinks);
       const drinkers = state.members.filter(m => m.drinks);
 
@@ -772,7 +780,7 @@
 
           <td class="py-2.5 px-2 text-center">
             <button onclick="toggleFriendDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${m.drinks ? 'bg-amberwarm-100 text-amberwarm-800 border border-amberwarm-700/20' : 'bg-stone-100 text-stone-500'}">
-              ${m.drinks ? 'Sí' : 'No (-30)'}
+              ${m.drinks ? 'Sí' : `No (-${calc.discount.toFixed(0)})`}
             </button>
           </td>
 
@@ -934,14 +942,14 @@
       msg += `💰 *Total del viaje:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
       msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n`;
       msg += `🍻 *Bebedores:* Cuota estándar (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
-      msg += `🥤 *No bebedores:* S/ ${state.nonDrinkerDiscount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
+      msg += `🥤 *No bebedores:* S/ ${calc.discount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
 
       msg += `👥 *CUOTAS INDIVIDUALES:*\n`;
       calc.memberCalcs.forEach(item => {
         const m = item.m;
         const status = m.paid ? '✅ Pagó' : '⏳ Pendiente';
         const tags = [];
-        if (!m.drinks) tags.push('no toma -30');
+        if (!m.drinks) tags.push(`no toma -${calc.discount.toFixed(0)}`);
         if (item.pernocteCost > 0) tags.push(`duerme +S/${item.pernocteCost.toFixed(0)}`);
         if (m.extra > 0) tags.push(`+S/${m.extra} extra`);
         const tagStr = tags.length > 0 ? ` (${tags.join(', ')})` : '';
