@@ -205,6 +205,64 @@
     </div>
 
     <!-- ======================================================================= -->
+    <!-- WIDGET CLIMA & SOL DE CHOSICA (MICROCLIMA CAMPESTRE) -->
+    <!-- ======================================================================= -->
+    <div class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-stone-100">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-amberwarm-100 text-amberwarm-800 flex items-center justify-center text-sm shadow-xs">
+            <i class="fa-solid fa-sun text-amberwarm-700"></i>
+          </div>
+          <div>
+            <h3 class="text-xs font-bold text-stone-900">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
+            <p class="text-[11px] text-stone-500">Sol garantizado y cielo despejado frente a la humedad de Lima.</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-forest-50 border border-forest-600/20 text-forest-800 text-[10px] font-mono font-bold self-start sm:self-auto">
+          <i class="fa-solid fa-cloud-sun text-forest-700"></i> Microclima Seco & Templado
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+        <!-- Día -->
+        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
+          <span class="text-[10px] font-mono uppercase text-amberwarm-800 font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-sun text-amberwarm-600 text-xs"></i> Día (Piscina)
+          </span>
+          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">24°C – 26°C</div>
+          <span class="text-[10px] text-stone-500">Soleado · Calor seco</span>
+        </div>
+
+        <!-- Noche -->
+        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
+          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-moon text-stone-500 text-xs"></i> Noche (Parrilla)
+          </span>
+          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">14°C – 16°C</div>
+          <span class="text-[10px] text-stone-500">Fresco · Casaca lista</span>
+        </div>
+
+        <!-- Radiación UV -->
+        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
+          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-shield-halved text-forest-700 text-xs"></i> Índice UV
+          </span>
+          <div class="text-lg font-mono font-extrabold text-forest-900 mt-1">11+ (Muy Alto)</div>
+          <span class="text-[10px] text-stone-500">Bloqueador FPS 50+</span>
+        </div>
+
+        <!-- Humedad -->
+        <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/70">
+          <span class="text-[10px] font-mono uppercase text-stone-600 font-bold flex items-center gap-1.5">
+            <i class="fa-solid fa-droplet text-forest-700 text-xs"></i> Humedad
+          </span>
+          <div class="text-lg font-mono font-extrabold text-stone-900 mt-1">~55% (Seco)</div>
+          <span class="text-[10px] text-stone-500">Aire puro de valle</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
     <!-- 1. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
     <!-- ======================================================================= -->
     <div id="pernoctarBanner" class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all">
@@ -409,6 +467,96 @@
         </p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="photoGrid">
           <!-- Inyectado por JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- 6. ACORDEÓN DESPLEGABLE: REGLAMENTO & CONSEJOS PARA INVITADOS -->
+    <!-- ======================================================================= -->
+    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
+      <button onclick="toggleSection('sec-reglas')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-clipboard-check text-forest-700"></i>
+          <span>Reglas & Consejos para Invitados (Garita, Piscinas, Tenis, Bungalows)</span>
+          <span class="text-[10px] font-mono text-forest-700 bg-forest-50 px-2 py-0.5 rounded font-bold border border-forest-600/30">Guía de Ingreso</span>
+        </span>
+        <i id="icon-sec-reglas" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
+      </button>
+
+      <div id="sec-reglas" class="hidden p-4 pt-0 space-y-3.5 border-t border-stone-100 text-xs">
+        <p class="text-[11px] text-stone-500 pt-3">
+          Indicaciones clave para ingresar y disfrutar las instalaciones del club sin ningún inconveniente:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          
+          <!-- 1. Ingreso y Garita -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-id-card text-forest-700"></i>
+              <span>1. Garita de Control (Km 33.5)</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              Es <strong>obligatorio portar el DNI físico original</strong> de cada uno de los 8 integrantes para registrarse en portería como invitados acreditados por el socio.
+            </p>
+          </div>
+
+          <!-- 2. Piscinas -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-water-ladder text-forest-700"></i>
+              <span>2. Piscinas Olímpicas & Solárium</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              Ducha previa obligatoria antes de ingresar al agua. Solo se permite ropa de baño adecuada (licra o poliéster); prohibido entrar con prendas de algodón, bermudas con cierres o calzado al borde de la alberca.
+            </p>
+          </div>
+
+          <!-- 3. Canchas de Tenis y Deportes -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-baseball-bat-ball text-forest-700"></i>
+              <span>3. Tenis de Arcilla & Canchas</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              En las canchas de tenis de arcilla es estricto el uso de <strong>calzado con suela plana o espiga</strong> (no chimpunes ni toperoles para no dañar el piso). Canchas de fútbol y losas según orden de llegada.
+            </p>
+          </div>
+
+          <!-- 4. Salón de Billar y Bochas -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-bowling-ball text-forest-700"></i>
+              <span>4. Mesas de Billar & Bochas</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              Cuidar los paños reglamentarios: <strong>prohibido apoyar vasos, botellas o comida sobre las mesas</strong>. Las bochas y tacos se solicitan y devuelven en la coordinación de deportes.
+            </p>
+          </div>
+
+          <!-- 5. Convivencia y Silencio en Bungalows -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-volume-xmark text-forest-700"></i>
+              <span>5. Horario de Silencio (11:00 PM)</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              A partir de las 11:00 pm rige el descanso en la zona de bungalows. Música con parlante a volumen moderado para no perturbar a socios y familias vecinas.
+            </p>
+          </div>
+
+          <!-- 6. Parrillas y Áreas Verdes -->
+          <div class="p-3 rounded-xl bg-stone-50/70 border border-stone-200/80 space-y-1">
+            <div class="flex items-center gap-2 font-bold text-stone-900">
+              <i class="fa-solid fa-leaf text-forest-700"></i>
+              <span>6. Cuidados de las 40 Hectáreas</span>
+            </div>
+            <p class="text-[11px] text-stone-600 leading-relaxed">
+              Apagar las brasas del carbón completamente antes de retirarse. Usar los tachos de basura y no dejar residuos en las áreas verdes ni en la laguna.
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
