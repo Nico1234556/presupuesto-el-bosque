@@ -499,15 +499,11 @@
           <!-- 1. Comida -->
           <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
-              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+              <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🥩 Carnes & Parrilla</span>
-                <span class="font-mono text-ink text-xs" id="comidaSubDisplay">S/ 398.00</span>
+                <span class="font-mono text-ink text-xs font-semibold" id="comidaSubDisplay">S/ 398.00</span>
               </div>
-              <div class="overflow-x-auto custom-scroll">
-                <table class="w-full text-left text-xs">
-                  <tbody id="tbodyComida" class="divide-y divide-hairlinesoft/70"></tbody>
-                </table>
-              </div>
+              <div id="listComida" class="space-y-2"></div>
             </div>
             <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
               <button onclick="addExpenseItem('comida')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
@@ -522,15 +518,11 @@
           <!-- 2. Cremas y Parrilla -->
           <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
-              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+              <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🥫 Cremas & Carbón</span>
-                <span class="font-mono text-ink text-xs" id="cremasSubDisplay">S/ 155.39</span>
+                <span class="font-mono text-ink text-xs font-semibold" id="cremasSubDisplay">S/ 155.39</span>
               </div>
-              <div class="overflow-x-auto custom-scroll">
-                <table class="w-full text-left text-xs">
-                  <tbody id="tbodyCremas" class="divide-y divide-hairlinesoft/70"></tbody>
-                </table>
-              </div>
+              <div id="listCremas" class="space-y-2"></div>
             </div>
             <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
               <button onclick="addExpenseItem('cremas')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
@@ -545,15 +537,11 @@
           <!-- 3. Alcohol -->
           <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
-              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+              <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🍻 Tragos & Bebidas</span>
                 <span class="font-mono text-brand font-semibold text-xs" id="alcoholSubDisplay">S/ 321.70</span>
               </div>
-              <div class="overflow-x-auto custom-scroll">
-                <table class="w-full text-left text-xs">
-                  <tbody id="tbodyAlcohol" class="divide-y divide-hairlinesoft/70"></tbody>
-                </table>
-              </div>
+              <div id="listAlcohol" class="space-y-2"></div>
             </div>
             <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
               <button onclick="addExpenseItem('alcohol')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-brand text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-2xs">
@@ -568,15 +556,11 @@
           <!-- 4. Alojamiento y Movilidad -->
           <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
-              <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
+              <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🏡 Bungalow & Van</span>
-                <span class="font-mono text-ink text-xs" id="alojSubDisplay">S/ 800.00</span>
+                <span class="font-mono text-ink text-xs font-semibold" id="alojSubDisplay">S/ 800.00</span>
               </div>
-              <div class="overflow-x-auto custom-scroll">
-                <table class="w-full text-left text-xs">
-                  <tbody id="tbodyAlojamiento" class="divide-y divide-hairlinesoft/70"></tbody>
-                </table>
-              </div>
+              <div id="listAlojamiento" class="space-y-2"></div>
             </div>
             <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
               <button onclick="addExpenseItem('alojamiento')" class="flex-1 py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
@@ -1594,10 +1578,10 @@
         tr.className = 'hover:bg-surface-soft border-b border-hairlinesoft';
 
         tr.innerHTML = `
-          <td class="py-2.5 px-2">
+          <td class="py-2.5 px-2 min-w-[170px]">
             <div class="flex items-center gap-1.5">
-              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-ink border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none w-full max-w-[190px]">
-              ${m.isUser ? '<span class="text-[10px] bg-terracotta-subtle text-terracotta font-semibold px-2 py-0.5 rounded-full border border-terracotta/20">Tú (+60)</span>' : ''}
+              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-white border border-hairline hover:border-ink/40 focus:border-ink rounded-lg px-2 py-1 text-ink text-xs font-semibold focus:outline-none transition shadow-2xs w-full max-w-[170px]" placeholder="Nombre amigo...">
+              ${m.isUser ? '<span class="text-[10px] bg-terracotta-subtle text-terracotta font-semibold px-2 py-0.5 rounded-full border border-terracotta/20 shrink-0">Tú (+60)</span>' : ''}
             </div>
           </td>
 
@@ -1638,10 +1622,10 @@
         tbody.appendChild(tr);
       });
 
-      renderExpenseTable('tbodyComida', state.comida, 'comida');
-      renderExpenseTable('tbodyCremas', state.cremas, 'cremas');
-      renderExpenseTable('tbodyAlcohol', state.alcohol, 'alcohol');
-      renderExpenseTable('tbodyAlojamiento', state.alojamiento, 'alojamiento');
+      renderExpenseTable('listComida', state.comida, 'comida');
+      renderExpenseTable('listCremas', state.cremas, 'cremas');
+      renderExpenseTable('listAlcohol', state.alcohol, 'alcohol');
+      renderExpenseTable('listAlojamiento', state.alojamiento, 'alojamiento');
 
       renderPhotosGrid();
       renderCalculationsOnly();
@@ -1671,47 +1655,52 @@
       }
     }
 
-    // RENDERIZADO DE TABLA DE GASTOS CON EDICIÓN DE NOMBRE, CANTIDAD, PRECIO Y ELIMINAR
-    function renderExpenseTable(tbodyId, items, cat) {
-      const tb = document.getElementById(tbodyId);
-      tb.innerHTML = '';
+    // RENDERIZADO DE PRODUCTOS EN MINI-TARJETAS (NOMBRE 100% VISIBLE, CANTIDAD Y PRECIO EDITABLES)
+    function renderExpenseTable(containerId, items, cat) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
       if (!items || items.length === 0) {
-        tb.innerHTML = `<tr><td colspan="4" class="py-4 text-center text-muted text-xs italic">Sin productos aún</td></tr>`;
+        container.innerHTML = `<div class="py-4 text-center text-muted text-xs italic bg-white/70 rounded-xl border border-dashed border-hairline">Sin productos aún</div>`;
         return;
       }
       items.forEach(item => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-surface-soft/80 group transition-colors border-b border-hairlinesoft/70';
-        tr.innerHTML = `
-          <td class="py-1.5 pr-1.5 align-middle">
+        const card = document.createElement('div');
+        card.className = 'bg-white border border-hairline hover:border-ink/30 focus-within:border-ink/50 focus-within:shadow-xs rounded-xl p-2.5 transition shadow-2xs group space-y-1.5';
+        card.innerHTML = `
+          <!-- Fila 1: Nombre completo del producto (100% visible sin cortes) + botón eliminar -->
+          <div class="flex items-center gap-1.5">
             <input type="text" value="${escapeHtml(item.name)}" 
               oninput="updateExpenseName('${cat}', '${item.id}', this.value)" 
-              class="w-full bg-white border border-hairline hover:border-ink/40 focus:border-ink rounded-lg px-2 py-1 text-ink text-xs font-medium focus:outline-none transition shadow-2xs truncate" 
-              placeholder="Nombre del producto...">
-          </td>
-          <td class="py-1.5 px-1 w-20 align-middle">
-            <input type="text" value="${escapeHtml(item.qty || '')}" 
-              oninput="updateExpenseQty('${cat}', '${item.id}', this.value)" 
-              class="w-full bg-white border border-hairline hover:border-ink/40 focus:border-ink rounded-lg px-1.5 py-1 text-[11px] text-muted text-center focus:outline-none font-mono transition shadow-2xs" 
-              placeholder="Cant.">
-          </td>
-          <td class="py-1.5 px-1 text-right font-mono font-medium text-ink w-24 whitespace-nowrap align-middle">
-            <div class="flex items-center justify-end bg-white border border-hairline hover:border-ink/40 focus-within:border-ink rounded-lg px-1.5 py-1 shadow-2xs transition">
-              <span class="text-[10px] text-muted font-normal mr-1 select-none">S/</span> 
-              <input type="number" step="0.5" min="0" value="${(parseFloat(item.total) || 0).toFixed(2)}" 
-                oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" 
-                class="w-16 text-right bg-transparent focus:outline-none font-mono text-xs text-ink font-semibold">
-            </div>
-          </td>
-          <td class="py-1.5 pl-1 w-6 text-center align-middle">
+              class="flex-1 min-w-0 bg-transparent text-ink text-xs font-semibold hover:bg-surface-soft/60 focus:bg-surface-soft px-1.5 py-1 rounded-md border border-transparent focus:border-ink/30 focus:outline-none transition" 
+              placeholder="Nombre del producto..."
+              title="${escapeHtml(item.name)}">
             <button onclick="removeExpenseItem('${cat}', '${item.id}')" 
-              class="w-6 h-6 rounded-md hover:bg-terracotta/10 text-muted/40 hover:text-terracotta transition flex items-center justify-center mx-auto" 
+              class="w-6 h-6 rounded-md hover:bg-terracotta/10 text-muted/30 hover:text-terracotta transition flex items-center justify-center shrink-0" 
               title="Eliminar producto">
               <i class="fa-solid fa-trash-can text-[11px]"></i>
             </button>
-          </td>
+          </div>
+
+          <!-- Fila 2: Cantidad y Precio ordenados en badges/inputs nítidos -->
+          <div class="flex items-center justify-between gap-2 pt-1 border-t border-hairlinesoft/70">
+            <div class="flex items-center gap-1 bg-surface-soft border border-hairlinesoft rounded-lg px-2 py-0.5 text-muted text-[11px] flex-1 max-w-[115px]" title="Cantidad / presentación">
+              <span class="text-[10px] text-muted/60 select-none">📦</span>
+              <input type="text" value="${escapeHtml(item.qty || '')}" 
+                oninput="updateExpenseQty('${cat}', '${item.id}', this.value)" 
+                class="w-full bg-transparent text-muted focus:text-ink font-mono text-[11px] focus:outline-none" 
+                placeholder="Cant.">
+            </div>
+
+            <div class="flex items-center bg-surface-soft border border-hairline hover:border-ink/40 focus-within:border-ink focus-within:bg-white rounded-lg px-2 py-0.5 shadow-2xs transition" title="Precio total del ítem">
+              <span class="text-[10px] text-muted font-normal mr-1 select-none">S/</span> 
+              <input type="number" step="0.5" min="0" value="${(parseFloat(item.total) || 0).toFixed(2)}" 
+                oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" 
+                class="w-16 text-right bg-transparent focus:outline-none font-mono text-xs text-ink font-bold">
+            </div>
+          </div>
         `;
-        tb.appendChild(tr);
+        container.appendChild(card);
       });
     }
 
