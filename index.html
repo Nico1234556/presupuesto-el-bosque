@@ -391,12 +391,13 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="p-3 bg-white flex justify-between items-center text-xs border-t border-stone-100">
+      <div class="p-3.5 bg-white flex justify-between items-center text-xs border-t border-stone-100">
         <div>
-          <h4 class="font-bold text-stone-900 text-xs" id="lightboxTitle"></h4>
+          <h4 class="font-bold text-stone-900 text-sm" id="lightboxTitle"></h4>
+          <p class="text-[11px] text-stone-500 mt-0.5" id="lightboxDesc"></p>
           <span class="text-[10px] text-stone-400 font-mono" id="lightboxFile"></span>
         </div>
-        <button onclick="closeLightbox()" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded text-xs">Cerrar</button>
+        <button onclick="closeLightbox()" class="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-lg text-xs font-medium">Cerrar</button>
       </div>
     </div>
   </div>
@@ -465,17 +466,17 @@
 
     // FOTOS OFICIALES Y REALES DE EL BOSQUE CHOSICA
     const REAL_PHOTOS = [
-      { id: 'rf1', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
+      { id: 'rf1', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con techos a dos aguas y mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
       { id: 'rf2', title: 'Piscina Olímpica de Nado', desc: 'Piscina reglamentaria con carriles, sombrillas y sol constante.', file: './img/elbosque-piscina.jpg' },
       { id: 'rf3', title: 'Zona de Parrillas & Picnic', desc: 'Parrillas de ladrillo y mesas de madera en el pasto bajo los árboles.', file: './img/elbosque-parrillas.jpg' },
-      { id: 'rf4', title: 'Vista Panorámica de la Sede', desc: 'Vista aérea: piscinas, laguna, canchas deportivas y los cerros.', file: './img/elbosque-panoramica.jpg' },
+      { id: 'rf4', title: 'Vista Panorámica de la Sede', desc: 'Vista aérea: piscinas, laguna, canchas deportivas y los cerros de Chosica.', file: './img/elbosque-panoramica.jpg' },
       { id: 'rf5', title: 'Laguna & Paseo en Botes', desc: 'Botes a remo en la laguna artificial con islotes de vegetación.', file: './img/elbosque-laguna-botes.webp' },
-      { id: 'rf6', title: 'Mesa de Billar', desc: 'Mesas reglamentarias de paño verde en el salón social.', file: './img/billar.jpg', fb: 'https://images.unsplash.com/photo-1534158914592-062992fbe900?auto=format&fit=crop&w=600&q=80' },
-      { id: 'rf7', title: 'Campo de Bochas', desc: 'Canchas tradicionales con piso de conchuela y sombra.', file: './img/bochas.jpg', fb: 'https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?auto=format&fit=crop&w=600&q=80' },
-      { id: 'rf8', title: 'Zona Ecuestre & Caballos', desc: 'Paseos a caballo guiados por senderos campestres.', file: './img/caballos.jpg', fb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80' },
-      { id: 'rf9', title: 'Canchas de Fútbol', desc: 'Canchas de fútbol en césped natural y sintético.', file: './img/deportes-futbol.jpg', fb: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80' },
-      { id: 'rf10', title: 'Losas de Básquet & Vóley', desc: 'Polideportivo con tableros de básquetbol.', file: './img/deportes-basket.jpg', fb: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=600&q=80' },
-      { id: 'rf11', title: 'Tenis de Arcilla & Frontón', desc: 'Canchas de arcilla roja y frontón oficial.', file: './img/deportes-tenis.jpg', fb: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf6', title: 'Mesas & Tacos de Billar', desc: 'Salón social oficial de El Bosque Chosica con nuevas mesas y tacos reglamentarios.', file: './img/elbosque-billar.jpg' },
+      { id: 'rf7', title: 'Polideportivo & Básquet', desc: 'Losa deportiva oficial de Country Club El Bosque con tableros y partidos.', file: './img/elbosque-basket.jpg' },
+      { id: 'rf8', title: 'Canchas de Tenis de Arcilla', desc: 'Canchas reglamentarias de arcilla roja con vista a los cerros de Chosica.', file: './img/elbosque-tenis.jpg' },
+      { id: 'rf9', title: 'Cancha de Bochas Oficial', desc: 'Cancha techada con piso oficial para torneos y partidos de bochas del Club.', file: './img/elbosque-bochas.jpg' },
+      { id: 'rf10', title: 'Zona Ecuestre & Caballos', desc: 'Paseos a caballo guiados por senderos campestres.', file: './img/caballos.jpg', fb: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80' },
+      { id: 'rf11', title: 'Canchas de Fútbol', desc: 'Canchas de fútbol en césped natural y sintético.', file: './img/deportes-futbol.jpg', fb: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&w=600&q=80' },
     ];
 
     let state = loadPersistedState();
@@ -886,7 +887,7 @@
       REAL_PHOTOS.forEach(p => {
         const div = document.createElement('div');
         div.className = 'relative h-28 sm:h-32 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 cursor-pointer group shadow-sm';
-        div.onclick = () => openLightbox(p.file, p.fb || p.file, p.title);
+        div.onclick = () => openLightbox(p.file, p.fb || p.file, p.title, p.desc);
         const fallbackAttr = p.fb ? `onerror="this.onerror=null; this.src='${p.fb}';"` : '';
         div.innerHTML = `
           <img src="${p.file}" ${fallbackAttr} alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
@@ -910,7 +911,7 @@
       }
     }
 
-    function openLightbox(file, fb, title) {
+    function openLightbox(file, fb, title, desc) {
       const modal = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
       img.onerror = () => {
@@ -921,6 +922,7 @@
       };
       img.src = file;
       document.getElementById('lightboxTitle').textContent = title;
+      document.getElementById('lightboxDesc').textContent = desc || '';
       document.getElementById('lightboxFile').textContent = `Archivo: ${file.replace('./', '')}`;
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
