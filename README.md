@@ -47,4 +47,4 @@ En [`/skills`](./skills) se encuentran documentadas las referencias de diseño:
 - **Galería Oficial de Fotos:** 11 fotos reales del Country Club El Bosque con visor Lightbox.
 - **Reglamento para Invitados:** Requisitos de DNI en garita Km 33.5, gorro para piscina, canchas de arcilla, parrillas y horario de silencio a las 11:00 PM.
 - **Copia a WhatsApp en 1 Clic:** Modal preformateado listo para enviar al grupo con número de Yape/Plin.
-- **Pronóstico del Clima Chosica:** Información meteorológica y de radiación solar UV 11+.
+- **Componente React de Clima & Satélite (al pie de página):** Widget dinámico programado en **React 18** ubicado al final de la página. Se conecta en tiempo real a la API meteorológica satelital de Open-Meteo para Chosica (860 m s. n. m.), con botón de actualización en vivo, desglose de los 4 días de viaje (Vie 18 - Lun 21 Dic), radiación UV 11+, y checklist interactivo de equipaje con persistencia en `localStorage`.

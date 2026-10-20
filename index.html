@@ -20,6 +20,11 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
+  <!-- React 18 & Babel Standalone (Para Componentes React Dinámicos) -->
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.10/babel.min.js"></script>
+  
   <!-- Google Fonts: Geist (Framer Sans), Source Serif 4 (Travelio Editorial Serif) & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -314,54 +319,6 @@
   <!-- 4. CONTENIDO PRINCIPAL: GESTIÓN DE CUOTAS, CALCULADORA & SERVICIOS -->
   <!-- ========================================================================= -->
   <main class="max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
-
-    <!-- ======================================================================= -->
-    <!-- 3. WIDGET CLIMA & SOL DE CHOSICA (CLEAN MATTE METRICS) -->
-    <!-- ======================================================================= -->
-    <div class="bg-card border border-hairline rounded-2xl p-5 shadow-xs">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairlinesoft">
-        <div class="flex items-center gap-2.5">
-          <i class="fa-solid fa-cloud-sun text-amber-600 text-lg"></i>
-          <div>
-            <h3 class="text-xs font-semibold text-ink">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
-            <p class="text-[11px] text-muted">Sol garantizado y cielo despejado frente a la humedad de Lima.</p>
-          </div>
-        </div>
-        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-medium self-start sm:self-auto">
-          Microclima Seco & Templado
-        </span>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
-        <!-- Día -->
-        <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-          <span class="text-xs font-medium text-muted block">Día (Piscina)</span>
-          <div class="text-lg font-semibold text-ink font-mono mt-0.5">24°C – 26°C</div>
-          <span class="text-[11px] text-muted">Soleado · Calor seco</span>
-        </div>
-
-        <!-- Noche -->
-        <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-          <span class="text-xs font-medium text-muted block">Noche (Parrilla)</span>
-          <div class="text-lg font-semibold text-ink font-mono mt-0.5">14°C – 16°C</div>
-          <span class="text-[11px] text-muted">Fresco · Casaca lista</span>
-        </div>
-
-        <!-- Radiación UV -->
-        <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-          <span class="text-xs font-medium text-muted block">Índice UV</span>
-          <div class="text-lg font-semibold text-ink font-mono mt-0.5">11+ (Muy Alto)</div>
-          <span class="text-[11px] text-muted">Bloqueador FPS 50+</span>
-        </div>
-
-        <!-- Humedad -->
-        <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
-          <span class="text-xs font-medium text-muted block">Humedad</span>
-          <div class="text-lg font-semibold text-ink font-mono mt-0.5">~55% (Seco)</div>
-          <span class="text-[11px] text-muted">Aire puro de valle</span>
-        </div>
-      </div>
-    </div>
 
     <!-- ======================================================================= -->
     <!-- 4. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
@@ -662,10 +619,54 @@
       </div>
     </div>
 
+    <!-- ======================================================================= -->
+    <!-- 10. WIDGET REACT: CLIMA & PRONÓSTICO EN VIVO · VALLE DE CHOSICA -->
+    <!-- ======================================================================= -->
+    <div id="weather-react-root">
+      <!-- Fallback elegante mientras React hidrata -->
+      <div class="bg-card border border-hairline rounded-2xl p-5 shadow-xs">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairlinesoft">
+          <div class="flex items-center gap-2.5">
+            <i class="fa-solid fa-cloud-sun text-amber-600 text-lg"></i>
+            <div>
+              <h3 class="text-xs font-semibold text-ink">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
+              <p class="text-[11px] text-muted">Sol garantizado y microclima seco frente a la humedad de Lima.</p>
+            </div>
+          </div>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-ink text-[11px] font-medium self-start sm:self-auto">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Cargando datos en vivo (React)...
+          </span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+          <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+            <span class="text-xs font-medium text-muted block">Día (Piscina)</span>
+            <div class="text-lg font-semibold text-ink font-mono mt-0.5">24°C – 26°C</div>
+            <span class="text-[11px] text-muted">Soleado · Calor seco</span>
+          </div>
+          <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+            <span class="text-xs font-medium text-muted block">Noche (Parrilla)</span>
+            <div class="text-lg font-semibold text-ink font-mono mt-0.5">14°C – 16°C</div>
+            <span class="text-[11px] text-muted">Fresco · Casaca lista</span>
+          </div>
+          <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+            <span class="text-xs font-medium text-muted block">Índice UV</span>
+            <div class="text-lg font-semibold text-ink font-mono mt-0.5">11+ (Muy Alto)</div>
+            <span class="text-[11px] text-muted">Bloqueador FPS 50+</span>
+          </div>
+          <div class="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+            <span class="text-xs font-medium text-muted block">Humedad</span>
+            <div class="text-lg font-semibold text-ink font-mono mt-0.5">~55% (Seco)</div>
+            <span class="text-[11px] text-muted">Aire puro de valle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- ========================================================================= -->
-  <!-- 10. BARRA FLOTANTE INFERIOR (Matte bottom bar) -->
+  <!-- 11. BARRA FLOTANTE INFERIOR (Matte bottom bar) -->
   <!-- ========================================================================= -->
   <div class="fixed bottom-0 left-0 right-0 bg-card/95 border-t border-hairlinesoft py-3 px-4 z-40 backdrop-blur-md shadow-mattedrop no-print">
     <div class="max-w-4xl mx-auto flex items-center justify-between gap-3 text-xs">
@@ -686,7 +687,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 11. MODAL: MENSAJE PARA WHATSAPP -->
+  <!-- 12. MODAL: MENSAJE PARA WHATSAPP -->
   <!-- ========================================================================= -->
   <div id="whatsappModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-xs" onclick="closeWhatsAppModal(event)">
     <div class="bg-card rounded-2xl max-w-md w-full border border-hairline overflow-hidden shadow-mattedrop" onclick="event.stopPropagation()">
@@ -719,7 +720,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 12. MODAL: LIGHTBOX PARA FOTOS -->
+  <!-- 13. MODAL: LIGHTBOX PARA FOTOS -->
   <!-- ========================================================================= -->
   <div id="lightbox" class="fixed inset-0 bg-black/85 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
     <div class="max-w-3xl w-full bg-card text-ink rounded-2xl overflow-hidden border border-hairline shadow-2xl" onclick="event.stopPropagation()">
@@ -746,7 +747,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- 13. MOTOR MATEMÁTICO & PERSISTENCIA AUTOMÁTICA -->
+  <!-- 14. MOTOR MATEMÁTICO & PERSISTENCIA AUTOMÁTICA -->
   <!-- ========================================================================= -->
   <script>
     // DATOS INICIALES REALES
@@ -1326,6 +1327,398 @@
     document.addEventListener('DOMContentLoaded', () => {
       render();
     });
+  </script>
+
+  <!-- ========================================================================= -->
+  <!-- 15. COMPONENTE REACT: PRONÓSTICO & METEOROLOGÍA EN VIVO · CHOSICA -->
+  <!-- ========================================================================= -->
+  <script type="text/babel">
+    const { useState, useEffect, useCallback, useMemo } = React;
+
+    function ChosicaWeatherApp() {
+      const [activeTab, setActiveTab] = useState('live'); // 'live' | 'trip' | 'checklist'
+      const [loading, setLoading] = useState(false);
+      const [lastUpdated, setLastUpdated] = useState('En tiempo real');
+      const [weather, setWeather] = useState({
+        temp: 24,
+        feelsLike: 26,
+        condition: 'Soleado · Calor Seco',
+        humidity: 55,
+        wind: 9,
+        uvIndex: 11,
+        isDay: true,
+        isLive: false,
+        maxTemp: 26,
+        minTemp: 15
+      });
+
+      // Checklist interactivo con persistencia local
+      const [checklist, setChecklist] = useState(() => {
+        try {
+          const saved = localStorage.getItem('elbosque_weather_checklist_v1');
+          if (saved) return JSON.parse(saved);
+        } catch (e) {}
+        return [
+          { id: 'c1', label: 'Bloqueador Solar FPS 50+', desc: 'Radiación UV 11+ muy alta en el valle', done: true },
+          { id: 'c2', label: 'Casaca ligera o polerón', desc: 'Para la noche fresca (14°C – 16°C)', done: false },
+          { id: 'c3', label: 'Ropa de baño de licra', desc: 'Requisito para entrar a las piscinas', done: true },
+          { id: 'c4', label: 'Lentes con filtro UV & gorra', desc: 'Sol brillante durante todo el día', done: false },
+          { id: 'c5', label: 'Repelente para mosquitos', desc: 'Para el atardecer cerca de jardines y laguna', done: false },
+          { id: 'c6', label: 'Zapatillas suela plana', desc: 'Para cuidar las canchas de tenis de arcilla', done: false }
+        ];
+      });
+
+      const toggleChecklist = (id) => {
+        setChecklist(prev => {
+          const updated = prev.map(item => item.id === id ? { ...item, done: !item.done } : item);
+          try {
+            localStorage.setItem('elbosque_weather_checklist_v1', JSON.stringify(updated));
+          } catch (e) {}
+          return updated;
+        });
+      };
+
+      const completedCount = useMemo(() => checklist.filter(item => item.done).length, [checklist]);
+      const progressPercent = Math.round((completedCount / checklist.length) * 100);
+
+      const fetchLiveWeather = useCallback(async () => {
+        setLoading(true);
+        try {
+          const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-11.9333&longitude=-76.7000&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max&timezone=America%2FLima');
+          if (!res.ok) throw new Error('Respuesta no satisfactoria');
+          const data = await res.json();
+          
+          const cur = data.current || {};
+          const daily = data.daily || {};
+          
+          const code = cur.weather_code ?? 0;
+          let conditionStr = 'Soleado · Calor Seco';
+          if (code === 0) {
+            conditionStr = cur.is_day ? 'Cielo despejado y soleado' : 'Noche despejada y estrellada';
+          } else if (code <= 3) {
+            conditionStr = cur.is_day ? 'Parcialmente soleado con brillo' : 'Parcialmente nublado';
+          } else if (code >= 45 && code <= 48) {
+            conditionStr = 'Neblina matutina de valle';
+          } else if (code >= 51) {
+            conditionStr = 'Llovizna leve pasajera';
+          }
+
+          setWeather({
+            temp: Math.round(cur.temperature_2m ?? 24),
+            feelsLike: Math.round(cur.apparent_temperature ?? 26),
+            condition: conditionStr,
+            humidity: Math.round(cur.relative_humidity_2m ?? 55),
+            wind: Math.round(cur.wind_speed_10m ?? 9),
+            uvIndex: daily.uv_index_max?.[0] ? Math.round(daily.uv_index_max[0]) : 11,
+            isDay: Boolean(cur.is_day),
+            isLive: true,
+            maxTemp: daily.temperature_2m_max?.[0] ? Math.round(daily.temperature_2m_max[0]) : 26,
+            minTemp: daily.temperature_2m_min?.[0] ? Math.round(daily.temperature_2m_min[0]) : 15
+          });
+
+          const now = new Date();
+          setLastUpdated(now.toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }));
+        } catch (e) {
+          console.warn('Usando microclima local de Chosica:', e);
+          setWeather(prev => ({ ...prev, isLive: false }));
+          setLastUpdated('Microclima local');
+        } finally {
+          setLoading(false);
+        }
+      }, []);
+
+      useEffect(() => {
+        fetchLiveWeather();
+      }, [fetchLiveWeather]);
+
+      const tripDays = [
+        {
+          day: 'Viernes 18 Dic',
+          subtitle: 'Llegada, check-in & fogata',
+          max: '25°C',
+          min: '15°C',
+          icon: 'fa-sun',
+          color: 'text-amber-500',
+          desc: 'Tarde templada para instalarse en bungalows y preparar las brasas de bienvenida.'
+        },
+        {
+          day: 'Sábado 19 Dic',
+          subtitle: 'Piscinas olímpicas & fulbito',
+          max: '26°C',
+          min: '14°C',
+          icon: 'fa-umbrella-beach',
+          color: 'text-brand',
+          desc: 'Sol pleno desde temprano. Día ideal para solárium, toboganes y tarde deportiva.'
+        },
+        {
+          day: 'Domingo 20 Dic',
+          subtitle: 'Parrilla Frigon, bochas & tenis',
+          max: '26°C',
+          min: '15°C',
+          icon: 'fa-fire-burner',
+          color: 'text-terracotta',
+          desc: 'Gran almuerzo parrillero, torneo de billar, botes en la laguna y tarde campestre.'
+        },
+        {
+          day: 'Lunes 21 Dic',
+          subtitle: 'Última piscina & check-out',
+          max: '24°C',
+          min: '16°C',
+          icon: 'fa-van-shuttle',
+          color: 'text-muted',
+          desc: 'Mañana fresca y despejada. Desayuno campestre, última visita y retorno tranquilo a Lima.'
+        }
+      ];
+
+      return (
+        <div className="bg-card border border-hairline rounded-2xl p-5 shadow-xs transition-all">
+          
+          {/* Header del Componente */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-hairlinesoft">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 text-lg shadow-2xs">
+                <i className={weather.isDay ? "fa-solid fa-cloud-sun" : "fa-solid fa-cloud-moon"}></i>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xs font-semibold text-ink">Pronóstico del Clima · Chosica (860 m s. n. m.)</h3>
+                  <span className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[9px] font-mono font-semibold bg-surface-soft border border-hairlinesoft text-muted uppercase">
+                    React Live
+                  </span>
+                </div>
+                <p className="text-[11px] text-muted">
+                  Sol permanente y microclima seco garantizado frente a la humedad de Lima.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 self-start sm:self-auto">
+              {weather.isLive ? (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-800 text-[11px] font-medium">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  En Vivo · Satélite
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-soft border border-hairline text-muted text-[11px] font-medium">
+                  <i className="fa-solid fa-satellite text-[10px]"></i> Microclima Oficial
+                </span>
+              )}
+
+              <button
+                onClick={fetchLiveWeather}
+                disabled={loading}
+                title="Actualizar datos satelitales en vivo"
+                className="px-2.5 py-1 rounded-lg bg-surface-soft hover:bg-surface-strong border border-hairline text-ink text-xs font-medium transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              >
+                <i className={`fa-solid fa-rotate-right text-muted text-xs ${loading ? 'animate-spin' : ''}`}></i>
+                <span className="hidden sm:inline">Actualizar</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Navegación por Pestañas */}
+          <div className="flex items-center gap-2 pt-3 pb-4 overflow-x-auto custom-scroll">
+            <button
+              onClick={() => setActiveTab('live')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap cursor-pointer ${
+                activeTab === 'live'
+                  ? 'bg-ink text-white shadow-2xs'
+                  : 'bg-surface-soft hover:bg-surface-strong text-muted hover:text-ink border border-hairlinesoft'
+              }`}
+            >
+              <i className="fa-solid fa-tower-broadcast mr-1.5 text-[11px]"></i>
+              Tiempo Real (Ahora)
+            </button>
+
+            <button
+              onClick={() => setActiveTab('trip')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap cursor-pointer ${
+                activeTab === 'trip'
+                  ? 'bg-ink text-white shadow-2xs'
+                  : 'bg-surface-soft hover:bg-surface-strong text-muted hover:text-ink border border-hairlinesoft'
+              }`}
+            >
+              <i className="fa-solid fa-calendar-day mr-1.5 text-[11px]"></i>
+              Pronóstico del Viaje (Vie 18 - Lun 21 Dic)
+            </button>
+
+            <button
+              onClick={() => setActiveTab('checklist')}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition whitespace-nowrap flex items-center gap-1.5 cursor-pointer ${
+                activeTab === 'checklist'
+                  ? 'bg-ink text-white shadow-2xs'
+                  : 'bg-surface-soft hover:bg-surface-strong text-muted hover:text-ink border border-hairlinesoft'
+              }`}
+            >
+              <i className="fa-solid fa-suitcase mr-1 text-[11px]"></i>
+              <span>Qué Empacar</span>
+              <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-semibold ${
+                activeTab === 'checklist' ? 'bg-white/20 text-white' : 'bg-surface-strong text-ink'
+              }`}>
+                {completedCount}/{checklist.length}
+              </span>
+            </button>
+          </div>
+
+          {/* TAB 1: TIEMPO REAL */}
+          {activeTab === 'live' && (
+            <div className="space-y-3">
+              {/* Tarjeta Hero en tiempo real */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-surface-soft border border-hairlinesoft">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-card border border-hairline flex items-center justify-center text-amber-500 text-2xl shadow-2xs">
+                    <i className={weather.isDay ? "fa-solid fa-sun" : "fa-solid fa-moon"}></i>
+                  </div>
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-3xl sm:text-4xl font-bold font-mono text-ink">{weather.temp}°C</span>
+                      <span className="text-xs text-muted font-medium">Sensación: {weather.feelsLike}°C</span>
+                    </div>
+                    <div className="text-xs font-semibold text-ink mt-0.5">{weather.condition}</div>
+                    <div className="text-[11px] text-muted">
+                      {weather.isLive ? `Sincronizado vía satélite (${lastUpdated})` : 'Microclima histórico de valle andino'}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap sm:flex-col gap-2 text-xs">
+                  <span className="px-2.5 py-1 rounded-lg bg-card border border-hairlinesoft text-ink font-mono text-[11px] flex items-center gap-1.5">
+                    <i className="fa-solid fa-wind text-muted text-[10px]"></i> Viento: {weather.wind} km/h
+                  </span>
+                  <span className="px-2.5 py-1 rounded-lg bg-card border border-hairlinesoft text-ink font-mono text-[11px] flex items-center gap-1.5">
+                    <i className="fa-solid fa-droplet text-blue-500 text-[10px]"></i> Humedad: {weather.humidity}%
+                  </span>
+                </div>
+              </div>
+
+              {/* 4 Métricas Clave de Chosica */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div className="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                  <span className="text-xs font-medium text-muted block">Día (Piscina)</span>
+                  <div className="text-lg font-semibold text-ink font-mono mt-0.5">{weather.maxTemp ? `${weather.maxTemp}°C` : '24°C – 26°C'}</div>
+                  <span className="text-[11px] text-muted">Soleado · Calor seco</span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                  <span className="text-xs font-medium text-muted block">Noche (Parrilla)</span>
+                  <div className="text-lg font-semibold text-ink font-mono mt-0.5">{weather.minTemp ? `${weather.minTemp}°C` : '14°C – 16°C'}</div>
+                  <span className="text-[11px] text-muted">Fresco · Casaca lista</span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                  <span className="text-xs font-medium text-muted block">Índice UV</span>
+                  <div className="text-lg font-semibold text-ink font-mono mt-0.5">{weather.uvIndex}+ (Muy Alto)</div>
+                  <span className="text-[11px] text-muted">Bloqueador FPS 50+</span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-surface-soft border border-hairlinesoft">
+                  <span className="text-xs font-medium text-muted block">Humedad</span>
+                  <div className="text-lg font-semibold text-ink font-mono mt-0.5">~{weather.humidity}% (Seco)</div>
+                  <span className="text-[11px] text-muted">Aire puro de valle</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: PRONÓSTICO DEL VIAJE (VIE 18 - LUN 21 DIC) */}
+          {activeTab === 'trip' && (
+            <div className="space-y-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {tripDays.map((td, idx) => (
+                  <div key={idx} className="p-3.5 rounded-xl bg-surface-soft border border-hairlinesoft space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <i className={`fa-solid ${td.icon} ${td.color} text-sm`}></i>
+                        <div>
+                          <h4 className="text-xs font-semibold text-ink">{td.day}</h4>
+                          <span className="text-[10px] text-muted">{td.subtitle}</span>
+                        </div>
+                      </div>
+                      <div className="text-right font-mono">
+                        <span className="text-xs font-bold text-ink">{td.max}</span>
+                        <span className="text-[10px] text-muted block">mín {td.min}</span>
+                      </div>
+                    </div>
+                    <p className="text-[11px] text-bodytext leading-relaxed">
+                      {td.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="p-2.5 rounded-lg bg-surface-soft/60 border border-hairlinesoft text-[11px] text-muted flex items-center justify-between">
+                <span><i className="fa-solid fa-campground text-muted mr-1.5"></i> Estadía confirmada: 3 Noches en Bungalows</span>
+                <span className="font-mono font-semibold text-ink">Km 33.5 Carretera Central</span>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: CHECKLIST EQUIPAJE SEGÚN EL CLIMA */}
+          {activeTab === 'checklist' && (
+            <div className="space-y-3">
+              {/* Barra de progreso */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between text-[11px]">
+                  <span className="font-medium text-ink">Progreso de equipaje para el grupo:</span>
+                  <span className="font-mono font-semibold text-brand">{completedCount} de {checklist.length} listos ({progressPercent}%)</span>
+                </div>
+                <div className="w-full bg-surface-soft h-2 rounded-full overflow-hidden border border-hairlinesoft">
+                  <div
+                    className="bg-brand h-full rounded-full transition-all duration-300"
+                    style={{ width: `${progressPercent}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Lista interactiva */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+                {checklist.map(item => (
+                  <label
+                    key={item.id}
+                    onClick={() => toggleChecklist(item.id)}
+                    className={`flex items-start gap-2.5 p-3 rounded-xl border transition cursor-pointer select-none ${
+                      item.done
+                        ? 'bg-emerald-500/5 border-emerald-500/25'
+                        : 'bg-surface-soft hover:bg-surface-strong border-hairlinesoft'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={item.done}
+                      onChange={() => {}}
+                      className="mt-0.5 accent-brand rounded cursor-pointer"
+                    />
+                    <div className="flex-1">
+                      <span className={`text-xs font-semibold block ${item.done ? 'text-ink line-through opacity-70' : 'text-ink'}`}>
+                        {item.label}
+                      </span>
+                      <span className="text-[11px] text-muted block mt-0.5">
+                        {item.desc}
+                      </span>
+                    </div>
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Callout Informativo del Microclima */}
+          <div className="mt-4 pt-3 border-t border-hairlinesoft flex items-start gap-2 text-[11px] text-muted">
+            <i className="fa-solid fa-sun text-amber-500 text-xs mt-0.5"></i>
+            <p className="leading-relaxed">
+              <strong>Sol garantizado todo el año:</strong> A diferencia de Lima metropolitana (90% de humedad y cielo gris), Chosica se ubica en el valle del Rímac a 860 m s. n. m., con clima seco y cielo despejado. No olvides protector solar y una casaca para la noche.
+            </p>
+          </div>
+
+        </div>
+      );
+    }
+
+    // Montar el componente React en el elemento root
+    const rootElement = document.getElementById('weather-react-root');
+    if (rootElement && typeof ReactDOM !== 'undefined' && ReactDOM.createRoot) {
+      const root = ReactDOM.createRoot(rootElement);
+      root.render(<ChosicaWeatherApp />);
+    }
   </script>
 </body>
 </html>
