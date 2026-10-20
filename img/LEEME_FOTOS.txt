@@ -1,0 +1,37 @@
+============================================================
+📸 CARPETA DE IMÁGENES - COUNTRY CLUB EL BOSQUE (CHOSICA)
+============================================================
+
+Pega tus fotos en esta carpeta con los siguientes nombres exactos
+(pueden ser .jpg, .png o .webp). El sistema las detectará automáticamente:
+
+1. BUNGALOWS:
+   • bungalow-sala.jpg         -> Foto del interior de la sala
+   • bungalow-dormitorio.jpg   -> Foto de los dormitorios / camas
+   • bungalow-cocina.jpg       -> Foto de la cocina / comedor
+   • bungalow-parrilla.jpg     -> Foto de la terraza / parrilla
+   • bungalow-principal.jpg    -> Foto general del bungaló
+
+2. PISCINAS:
+   • piscinas.jpg              -> Foto de las piscinas / solárium
+
+3. MIRADOR:
+   • mirador.jpg               -> Foto del mirador de Chosica
+
+4. CABALLOS:
+   • caballos.jpg              -> Foto de los caballos / zona ecuestre
+
+5. BILLAR:
+   • billar.jpg                -> Foto de la mesa de billar / salón
+
+6. BOCHAS:
+   • bochas.jpg                -> Foto del campo de bochas
+
+7. DEPORTES:
+   • deportes-futbol.jpg       -> Foto de canchas de fútbol
+   • deportes-basket.jpg       -> Foto de canchas de básquet
+   • deportes-tenis.jpg        -> Foto de canchas de tenis / frontón
+
+* Si tus fotos tienen otros nombres, no te preocupes: cuando me las pases
+  yo mismo actualizaré las rutas en el código de inmediato.
+============================================================
