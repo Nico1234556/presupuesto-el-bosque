@@ -163,7 +163,7 @@
             <span class="text-xs font-semibold text-ink">Country Club El Bosque</span>
             <span class="text-hairline text-xs">·</span>
             <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-brand bg-brand-subtle px-2.5 py-0.5 rounded-full border border-brand/20">
-              <i class="fa-regular fa-calendar-days text-[10px]"></i> Vie 18 — Lun 21 Dic
+              <i class="fa-regular fa-calendar-days text-[10px]"></i> <span id="headerDateText">Vie 18 — Lun 21 Dic</span>
             </span>
           </div>
           <h1 class="text-xs sm:text-sm font-medium text-muted tracking-tight">
@@ -172,12 +172,22 @@
         </div>
       </div>
 
-      <!-- Estado de guardado y acciones -->
-      <div class="flex items-center gap-2 text-xs">
-        <span id="saveStatus" class="hidden sm:inline-flex items-center gap-1.5 text-muted text-[11px] bg-surface-soft px-3 py-1 rounded-full border border-hairline">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand"></span> Guardado
+      <!-- Estado de sincronización, backup JSON y acciones -->
+      <div class="flex items-center gap-1.5 sm:gap-2 text-xs">
+        <span id="cloudStatusBadge" class="inline-flex items-center gap-1.5 text-muted text-[11px] bg-surface-soft px-2.5 sm:px-3 py-1 rounded-full border border-hairline" title="Sincronización en vivo con la nube del grupo">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span id="cloudStatusText">Nube activa</span>
         </span>
-        <button onclick="resetDefaults()" title="Restablecer valores originales" class="px-3 py-1.5 text-muted hover:text-ink bg-card hover:bg-surface-soft border border-hairline rounded-lg transition text-xs flex items-center gap-1.5 shadow-2xs">
+        <button onclick="downloadJSONBackup()" title="Descargar copia del presupuesto en archivo JSON" class="px-2.5 py-1.5 text-muted hover:text-ink bg-card hover:bg-surface-soft border border-hairline rounded-lg transition text-xs flex items-center gap-1 shadow-2xs">
+          <i class="fa-solid fa-download text-[11px]"></i>
+          <span class="hidden md:inline">JSON</span>
+        </button>
+        <label title="Cargar archivo JSON guardado" class="px-2.5 py-1.5 text-muted hover:text-ink bg-card hover:bg-surface-soft border border-hairline rounded-lg transition text-xs flex items-center gap-1 shadow-2xs cursor-pointer">
+          <i class="fa-solid fa-upload text-[11px]"></i>
+          <span class="hidden md:inline">Cargar</span>
+          <input type="file" id="jsonFileInput" accept=".json" onchange="importJSONBackup(event)" class="hidden">
+        </label>
+        <button onclick="resetDefaults()" title="Restablecer valores originales" class="px-2.5 py-1.5 text-muted hover:text-ink bg-card hover:bg-surface-soft border border-hairline rounded-lg transition text-xs flex items-center gap-1 shadow-2xs">
           <i class="fa-solid fa-rotate-left text-[11px]"></i>
           <span class="hidden sm:inline">Reiniciar</span>
         </button>
@@ -215,19 +225,19 @@
       </h1>
 
       <p class="text-xs sm:text-sm md:text-base text-white/85 max-w-2xl mx-auto leading-relaxed drop-shadow-sm font-normal">
-        Planificación del fin de semana largo en bungalows: compras de carnes, parrilla, tragos y reparto exacto de gastos para los 8 integrantes.
+        Planificación del viaje en bungalows: compras de carnes, parrilla, tragos y reparto exacto de gastos para los participantes.
       </p>
 
       <!-- Barra de resumen rápido Travelio -->
       <div class="pt-2 flex flex-wrap items-center justify-center gap-2 text-xs">
         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white font-medium">
-          <i class="fa-regular fa-calendar-check text-amber-300"></i> Viernes 18 al Lunes 21 Dic (3 Noches)
+          <i class="fa-regular fa-calendar-check text-amber-300"></i> <span id="heroDateDisplay">Viernes 18 al Lunes 21 Dic (3 Noches)</span>
         </span>
         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white font-medium">
-          <i class="fa-solid fa-users text-amber-300"></i> 8 Participantes
+          <i class="fa-solid fa-users text-amber-300"></i> <span id="heroMembersDisplay">8 Participantes</span>
         </span>
         <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white font-medium">
-          <i class="fa-solid fa-receipt text-amber-300"></i> Total S/ 1,702.76
+          <i class="fa-solid fa-receipt text-amber-300"></i> <span id="heroTotalDisplay">Total S/ 1,702.76</span>
         </span>
       </div>
 
@@ -256,36 +266,108 @@
   <main class="relative z-30 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 -mt-6 sm:-mt-10 space-y-8">
 
     <!-- ======================================================================= -->
-    <!-- 3. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
+    <!-- 3. PANEL DE CONTROL: DURACIÓN DE DÍAS, PERNOCTE & NUBE COMPARTIDA -->
     <!-- ======================================================================= -->
-    <div id="pernoctarBanner" class="bg-card border border-hairline rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs transition-all">
-      <div class="space-y-1">
-        <div class="flex items-center gap-2">
-          <span class="text-xs font-semibold text-ink flex items-center gap-1.5">
-            <i class="fa-solid fa-bed text-muted"></i> Cobro por Pernoctar (Invitados)
-          </span>
-          <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline">
-            Desactivado (S/ 0)
-          </span>
-        </div>
-        <p class="text-xs text-muted">
-          Actívalo solo si la administración de El Bosque confirma cobro de S/ 70 por quedarse a dormir.
-        </p>
-      </div>
-
-      <!-- Control del Switch Táctil Airbnb -->
-      <div class="flex items-center gap-3 self-end sm:self-auto">
-        <div class="flex items-center text-xs font-mono text-muted gap-1 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
-          <span>S/</span>
-          <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      
+      <!-- 1. Duración del Viaje (Quitar o Poner Días) -->
+      <div class="bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink flex items-center gap-1.5">
+              <i class="fa-regular fa-calendar-days text-amber-600"></i> Duración & Días
+            </span>
+            <span id="nightsPill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-amber-500/10 text-amber-700 border border-amber-500/20">
+              3 Noches
+            </span>
+          </div>
+          <p class="text-xs text-muted mt-1">
+            Elige los días de viaje. Las cuotas, fechas y mensajes se recalculan al instante:
+          </p>
         </div>
 
-        <label class="relative inline-flex items-center cursor-pointer select-none">
-          <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
-          <div class="w-13 h-7 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-5.5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
-          <span id="switchText" class="ml-2.5 text-xs font-semibold font-mono text-muted">OFF</span>
-        </label>
+        <!-- Presets rápidos -->
+        <div class="space-y-2">
+          <div class="grid grid-cols-3 gap-1.5">
+            <button onclick="setTripPreset('vie-dom')" id="btnPreset_vie_dom" class="px-2 py-1.5 rounded-lg text-center text-[11px] font-medium border border-hairline bg-surface-soft text-ink hover:bg-surface-strong transition">
+              Vie-Dom<br><span class="text-[10px] text-muted">2 Noches</span>
+            </button>
+            <button onclick="setTripPreset('vie-lun')" id="btnPreset_vie_lun" class="px-2 py-1.5 rounded-lg text-center text-[11px] font-semibold border-2 border-brand bg-brand-subtle text-brand transition shadow-2xs">
+              Vie-Lun<br><span class="text-[10px] font-normal">3 Noches ★</span>
+            </button>
+            <button onclick="setTripPreset('sab-dom')" id="btnPreset_sab_dom" class="px-2 py-1.5 rounded-lg text-center text-[11px] font-medium border border-hairline bg-surface-soft text-ink hover:bg-surface-strong transition">
+              Sáb-Dom<br><span class="text-[10px] text-muted">1 Noche</span>
+            </button>
+          </div>
+
+          <!-- Stepper manual de noches -->
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft text-xs">
+            <span class="text-muted text-[11px]">Ajustar noches (+ / -):</span>
+            <div class="flex items-center gap-1.5">
+              <button onclick="stepNights(-1)" class="w-6 h-6 rounded-md bg-surface-soft hover:bg-surface-strong border border-hairline flex items-center justify-center text-ink text-xs font-bold transition" title="Quitar 1 noche">-</button>
+              <span id="stepperNightsCount" class="font-mono font-bold text-xs text-ink px-1.5">3</span>
+              <button onclick="stepNights(1)" class="w-6 h-6 rounded-md bg-surface-soft hover:bg-surface-strong border border-hairline flex items-center justify-center text-ink text-xs font-bold transition" title="Agregar 1 noche">+</button>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- 2. Switch de Pernocte S/ 70 -->
+      <div id="pernoctarBanner" class="bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink flex items-center gap-1.5">
+              <i class="fa-solid fa-bed text-muted"></i> Cobro por Pernoctar
+            </span>
+            <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline">
+              Desactivado (S/ 0)
+            </span>
+          </div>
+          <p class="text-xs text-muted mt-1">
+            Solo si administración confirma cobro por dormir a los invitados del socio:
+          </p>
+        </div>
+
+        <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft">
+          <div class="flex items-center text-xs font-mono text-muted gap-1 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
+            <span>S/</span>
+            <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none">
+          </div>
+
+          <label class="relative inline-flex items-center cursor-pointer select-none">
+            <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
+            <div class="w-13 h-7 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-5.5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
+            <span id="switchText" class="ml-2.5 text-xs font-semibold font-mono text-muted">OFF</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- 3. Nube Compartida en Tiempo Real & Copia JSON -->
+      <div class="bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between md:col-span-2 lg:col-span-1">
+        <div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink flex items-center gap-1.5">
+              <i class="fa-solid fa-cloud-arrow-up text-emerald-600"></i> Nube del Grupo
+            </span>
+            <span id="cloudCardPill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20">
+              En Vivo
+            </span>
+          </div>
+          <p class="text-xs text-muted mt-1">
+            Todos pueden editar productos, cuotas y fechas; se sincroniza para todos sin pagar servidores.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1 border-t border-hairlinesoft">
+          <button onclick="forceCloudSync()" class="flex-1 py-1.5 px-2 bg-surface-soft hover:bg-surface-strong border border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1.5 shadow-2xs" title="Enviar cambios a la nube">
+            <i class="fa-solid fa-rotate text-emerald-600 text-[10px]" id="syncSpinner"></i> Sincronizar
+          </button>
+          <button onclick="downloadJSONBackup()" class="py-1.5 px-2 bg-surface-soft hover:bg-surface-strong border border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs" title="Descargar backup JSON">
+            <i class="fa-solid fa-download text-[10px]"></i> .JSON
+          </button>
+        </div>
+      </div>
+
     </div>
 
     <!-- ======================================================================= -->
@@ -307,7 +389,7 @@
       <!-- No Bebedores (S/ 20 MENOS) -->
       <div class="bg-card border border-hairline p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
         <div class="flex items-center justify-between">
-          <span class="text-xs text-muted font-medium block">No toman (2)</span>
+          <span class="text-xs text-muted font-medium block">No toman (<span id="kpiCountNoToma">2</span>)</span>
           <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-brand-subtle text-brand border border-brand/20 font-semibold">-S/ 20</span>
         </div>
         <div class="text-xl sm:text-2xl font-mono font-bold text-ink mt-1.5" id="kpiNoToma">S/ 190.35</div>
@@ -318,7 +400,7 @@
       <!-- Bebedores -->
       <div class="bg-card border border-hairline p-4 sm:p-5 rounded-2xl sm:rounded-3xl shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
         <div class="flex items-center justify-between">
-          <span class="text-xs text-muted font-medium block">Toman (5)</span>
+          <span class="text-xs text-muted font-medium block">Toman (<span id="kpiCountToma">5</span>)</span>
           <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-surface-soft text-muted border border-hairlinesoft font-semibold">Estándar</span>
         </div>
         <div class="text-xl sm:text-2xl font-mono font-bold text-ink mt-1.5" id="kpiToma">S/ 210.35</div>
@@ -346,10 +428,10 @@
       <div class="flex items-center justify-between pb-3 border-b border-hairlinesoft">
         <div>
           <h2 class="text-sm font-semibold text-ink">Padrón de Amigos & Cuotas Exactas</h2>
-          <p class="text-xs text-muted">Edita nombres o marca quién ya te pagó por Yape/Plin.</p>
+          <p class="text-xs text-muted">Agrega o quita amigos, edita nombres y marca quién ya te pagó por Yape/Plin.</p>
         </div>
         <button onclick="addFriend()" class="px-3 py-1.5 bg-card hover:bg-surface-soft border border-hairline rounded-lg text-xs font-medium text-ink transition flex items-center gap-1.5 shadow-xs">
-          <i class="fa-solid fa-plus text-[10px]"></i> Añadir
+          <i class="fa-solid fa-plus text-[10px]"></i> Añadir Amigo
         </button>
       </div>
 
@@ -375,7 +457,7 @@
           <span class="w-2 h-2 rounded-full bg-brand"></span>
           <span>Recaudado: <strong class="text-ink font-mono" id="recaudadoLabel">S/ 0.00 de S/ 1,702.76 (0%)</strong></span>
         </span>
-        <span class="text-[11px]">
+        <span class="text-[11px]" id="formulaDisplay">
           Fórmula: 2(X - 20) + 5X + (X + 60) = Total Base
         </span>
       </div>
@@ -399,7 +481,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5 pt-3">
           
           <!-- 1. Comida -->
-          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
               <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🥩 Carnes & Parrilla</span>
@@ -411,10 +493,15 @@
                 </table>
               </div>
             </div>
+            <div class="pt-2 border-t border-hairlinesoft/70">
+              <button onclick="addExpenseItem('comida')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir carne / comida
+              </button>
+            </div>
           </div>
 
           <!-- 2. Cremas y Parrilla -->
-          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
               <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🥫 Cremas & Carbón</span>
@@ -426,10 +513,15 @@
                 </table>
               </div>
             </div>
+            <div class="pt-2 border-t border-hairlinesoft/70">
+              <button onclick="addExpenseItem('cremas')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir crema / carbón
+              </button>
+            </div>
           </div>
 
           <!-- 3. Alcohol -->
-          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
               <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🍻 Tragos & Bebidas</span>
@@ -441,10 +533,15 @@
                 </table>
               </div>
             </div>
+            <div class="pt-2 border-t border-hairlinesoft/70">
+              <button onclick="addExpenseItem('alcohol')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-brand text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir trago / bebida
+              </button>
+            </div>
           </div>
 
           <!-- 4. Alojamiento y Movilidad -->
-          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-2">
+          <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
               <div class="flex justify-between items-center mb-2 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🏡 Bungalow & Van</span>
@@ -455,6 +552,11 @@
                   <tbody id="tbodyAlojamiento" class="divide-y divide-hairlinesoft/70"></tbody>
                 </table>
               </div>
+            </div>
+            <div class="pt-2 border-t border-hairlinesoft/70">
+              <button onclick="addExpenseItem('alojamiento')" class="w-full py-1.5 px-2 bg-card hover:bg-surface-soft border border-dashed border-hairline rounded-lg text-ink text-[11px] font-medium transition flex items-center justify-center gap-1 shadow-2xs">
+                <i class="fa-solid fa-plus text-[10px]"></i> Añadir estadía / pasaje
+              </button>
             </div>
           </div>
 
@@ -671,7 +773,7 @@
           </div>
         </div>
         <div class="text-center sm:text-right text-[11px]">
-          <span class="font-medium text-ink block">Viernes 18 al Lunes 21 de Diciembre (3 Noches)</span>
+          <span class="font-medium text-ink block" id="footerDateText">Viernes 18 al Lunes 21 de Diciembre (3 Noches)</span>
           <span class="text-muted">Calculadora de cuotas para el grupo de amigos</span>
         </div>
       </div>
@@ -764,13 +866,62 @@
   <!-- 14. MOTOR MATEMÁTICO & PERSISTENCIA AUTOMÁTICA -->
   <!-- ========================================================================= -->
   <script>
+    // PRESETS DE DURACIÓN DE VIAJE (DÍAS Y NOCHES CONFIGURABLES)
+    const TRIP_PRESETS = {
+      'vie-dom': {
+        preset: 'vie-dom',
+        startDate: '2026-12-18',
+        endDate: '2026-12-20',
+        startDay: 'Viernes',
+        endDay: 'Domingo',
+        nights: 2,
+        label: 'Viernes 18 al Domingo 20 Dic (2 Noches)',
+        shortLabel: 'Vie 18 — Dom 20 Dic'
+      },
+      'vie-lun': {
+        preset: 'vie-lun',
+        startDate: '2026-12-18',
+        endDate: '2026-12-21',
+        startDay: 'Viernes',
+        endDay: 'Lunes',
+        nights: 3,
+        label: 'Viernes 18 al Lunes 21 Dic (3 Noches)',
+        shortLabel: 'Vie 18 — Lun 21 Dic'
+      },
+      'sab-dom': {
+        preset: 'sab-dom',
+        startDate: '2026-12-19',
+        endDate: '2026-12-20',
+        startDay: 'Sábado',
+        endDay: 'Domingo',
+        nights: 1,
+        label: 'Sábado 19 al Domingo 20 Dic (1 Noche)',
+        shortLabel: 'Sáb 19 — Dom 20 Dic'
+      }
+    };
+
+    // ID DE OBJETO NUBE PARA COMPARTIR EN TIEMPO REAL ENTRE AMIGOS (SIN SERVIDOR)
+    const CLOUD_OBJECT_ID = 'ff808181a09d98f701a15a82699c32cf';
+    const CLOUD_API_URL = 'https://api.restful-api.dev/objects/' + CLOUD_OBJECT_ID;
+
     // DATOS INICIALES REALES
     const DEFAULT_DATA = {
+      tripDates: {
+        preset: 'vie-lun',
+        startDate: '2026-12-18',
+        endDate: '2026-12-21',
+        startDay: 'Viernes',
+        endDay: 'Lunes',
+        nights: 3,
+        label: 'Viernes 18 al Lunes 21 Dic (3 Noches)',
+        shortLabel: 'Vie 18 — Lun 21 Dic'
+      },
       pernoctarActive: false,      // DESACTIVADO POR DEFAULT
       pernoctarAmount: 70.00,
       yapeNumber: '987 654 321 (Tú)',
       nonDrinkerDiscount: 20.00,   // S/ 20 MENOS PARA NO BEBEDORES
       userExtra: 60.00,            // MÍNIMO S/ 60 MÁS PARA EL ORGANIZADOR
+      _clientTimestamp: 0,
       // 1. Comida (S/ 398.00)
       comida: [
         { id: 'c1', name: 'Chorizo parrillero Otto Kunz 400 g', qty: '5 paq.', total: 69.50 },
@@ -785,22 +936,22 @@
       ],
       // 2. Cremas, Carbón y Mezcladores (S/ 155.39)
       cremas: [
-        { id: 'cr1', name: 'Salsas Alacena (mayonesa, tártara, golf, rocoto, kétchup, ají)', total: 47.90 },
-        { id: 'cr2', name: 'Carbón vegetal 5 kg', total: 27.50 },
-        { id: 'cr3', name: 'Hielo en bolsa (3 bolsas)', total: 15.00 },
-        { id: 'cr4', name: 'Agua San Luis 7 L', total: 11.00 },
-        { id: 'cr5', name: 'Gaseosas Coca-Cola / Sprite 3 L (2 botellas)', total: 24.00 },
-        { id: 'cr6', name: 'Snacks Pringles y papas Lays', total: 29.99 },
+        { id: 'cr1', name: 'Salsas Alacena (mayonesa, tártara, etc.)', qty: '6 sachets', total: 47.90 },
+        { id: 'cr2', name: 'Carbón vegetal 5 kg', qty: '5 kg', total: 27.50 },
+        { id: 'cr3', name: 'Hielo en bolsa (3 bolsas)', qty: '3 bolsas', total: 15.00 },
+        { id: 'cr4', name: 'Agua San Luis 7 L', qty: '1 bidón', total: 11.00 },
+        { id: 'cr5', name: 'Gaseosas Coca-Cola / Sprite 3 L (2 bot.)', qty: '2 botellas', total: 24.00 },
+        { id: 'cr6', name: 'Snacks Pringles y papas Lays', qty: '4 paq.', total: 29.99 },
       ],
       // 3. Alcohol (S/ 321.70)
       alcohol: [
-        { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, Black Label, Absolut)', total: 250.00 },
-        { id: 'a2', name: 'Cerveza Flying Fish lima limón (3 packs / 18 latas)', total: 71.70 },
+        { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, etc.)', qty: '5 botellas', total: 250.00 },
+        { id: 'a2', name: 'Cerveza Flying Fish lima limón (18 latas)', qty: '18 latas', total: 71.70 },
       ],
       // 4. Alojamiento & Movilidad (S/ 800.00)
       alojamiento: [
-        { id: 'al1', name: 'Bungaló El Bosque (3 noches: Vie 18 - Lun 21)', total: 500.00 },
-        { id: 'al2', name: 'Movilidad ida viernes y vuelta lunes', total: 300.00 },
+        { id: 'al1', name: 'Bungaló El Bosque (3 noches: Vie 18 - Lun 21)', qty: '3 noches', total: 500.00 },
+        { id: 'al2', name: 'Movilidad ida viernes y vuelta lunes', qty: 'Ida y vuelta', total: 300.00 },
       ],
       // 5. Los 8 Participantes
       members: [
@@ -832,69 +983,262 @@
 
     let state = loadPersistedState();
 
+    function sanitizeLoadedState(parsed) {
+      if (!parsed || typeof parsed !== 'object') return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      const res = JSON.parse(JSON.stringify(DEFAULT_DATA));
+      if (parsed.tripDates && typeof parsed.tripDates === 'object') res.tripDates = parsed.tripDates;
+      if (typeof parsed.pernoctarActive === 'boolean') res.pernoctarActive = parsed.pernoctarActive;
+      if (typeof parsed.pernoctarAmount === 'number') res.pernoctarAmount = parsed.pernoctarAmount;
+      if (parsed.yapeNumber) res.yapeNumber = parsed.yapeNumber;
+      if (typeof parsed.nonDrinkerDiscount === 'number') res.nonDrinkerDiscount = parsed.nonDrinkerDiscount;
+      if (typeof parsed.userExtra === 'number') res.userExtra = parsed.userExtra;
+      if (Array.isArray(parsed.comida) && parsed.comida.length > 0) res.comida = parsed.comida;
+      if (Array.isArray(parsed.cremas) && parsed.cremas.length > 0) res.cremas = parsed.cremas;
+      if (Array.isArray(parsed.alcohol) && parsed.alcohol.length > 0) res.alcohol = parsed.alcohol;
+      if (Array.isArray(parsed.alojamiento) && parsed.alojamiento.length > 0) res.alojamiento = parsed.alojamiento;
+      if (Array.isArray(parsed.members) && parsed.members.length > 0) res.members = parsed.members;
+      if (parsed._clientTimestamp) res._clientTimestamp = parsed._clientTimestamp;
+      return res;
+    }
+
     function loadPersistedState() {
+      // 1. Carga desde URL Hash (#s=...)
       if (window.location.hash && window.location.hash.startsWith('#s=')) {
         try {
           const raw = decodeURIComponent(window.location.hash.replace('#s=', ''));
-          const parsed = JSON.parse(atob(raw));
+          const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
           if (parsed && parsed.members) {
-            parsed.nonDrinkerDiscount = 20.00;
-            if (parsed.alojamiento && parsed.alojamiento[0]) {
-              if (parsed.alojamiento[0].total === 350.00) parsed.alojamiento[0].total = 500.00;
-              parsed.alojamiento[0].name = 'Bungaló El Bosque (3 noches: Vie 18 - Lun 21)';
-            }
-            if (parsed.alojamiento && parsed.alojamiento[1]) {
-              parsed.alojamiento[1].name = 'Movilidad ida viernes y vuelta lunes';
-            }
-            return parsed;
+            return sanitizeLoadedState(parsed);
           }
         } catch (e) {}
       }
+      // 2. Carga desde LocalStorage
       try {
-        const saved = localStorage.getItem('el_bosque_v6') || localStorage.getItem('el_bosque_v5') || localStorage.getItem('el_bosque_airbnb_v1') || localStorage.getItem('el_bosque_light_v4');
+        const saved = localStorage.getItem('el_bosque_v7') || localStorage.getItem('el_bosque_v6') || localStorage.getItem('el_bosque_v5');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.members) {
-            parsed.nonDrinkerDiscount = 20.00;
-            if (parsed.alojamiento && parsed.alojamiento[0]) {
-              if (parsed.alojamiento[0].total === 350.00) parsed.alojamiento[0].total = 500.00;
-              parsed.alojamiento[0].name = 'Bungaló El Bosque (3 noches: Vie 18 - Lun 21)';
-            }
-            if (parsed.alojamiento && parsed.alojamiento[1]) {
-              parsed.alojamiento[1].name = 'Movilidad ida viernes y vuelta lunes';
-            }
-            return parsed;
+            return sanitizeLoadedState(parsed);
           }
         }
       } catch (e) {}
       return JSON.parse(JSON.stringify(DEFAULT_DATA));
     }
 
-    function saveState() {
+    let cloudSyncDebounceTimer = null;
+
+    function saveState(shouldSyncCloud = true) {
       try {
-        localStorage.setItem('el_bosque_v6', JSON.stringify(state));
+        state._clientTimestamp = Date.now();
+        localStorage.setItem('el_bosque_v7', JSON.stringify(state));
         showSavedIndicator();
+        if (shouldSyncCloud) {
+          triggerCloudSync();
+        }
       } catch (e) {}
     }
 
     function showSavedIndicator() {
       const el = document.getElementById('saveStatus');
       if (el) {
-        el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-forest"></span> Guardado';
+        el.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Guardado';
       }
+    }
+
+    function triggerCloudSync() {
+      if (cloudSyncDebounceTimer) clearTimeout(cloudSyncDebounceTimer);
+      updateCloudBadge('saving');
+      cloudSyncDebounceTimer = setTimeout(() => {
+        saveToCloud();
+      }, 1200);
+    }
+
+    async function saveToCloud() {
+      try {
+        updateCloudBadge('saving');
+        const payload = {
+          name: 'Presupuesto El Bosque Chosica',
+          data: {
+            ...state,
+            _clientTimestamp: Date.now()
+          }
+        };
+        const res = await fetch(CLOUD_API_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          updateCloudBadge('synced');
+        } else {
+          updateCloudBadge('local');
+        }
+      } catch (e) {
+        updateCloudBadge('local');
+      }
+    }
+
+    async function loadFromCloud(isInitial = false) {
+      try {
+        updateCloudBadge('loading');
+        const res = await fetch(CLOUD_API_URL);
+        if (res.ok) {
+          const result = await res.json();
+          if (result && result.data && result.data.members && result.data.members.length > 0) {
+            const cloudTimestamp = result.data._clientTimestamp || 0;
+            const localTimestamp = state._clientTimestamp || 0;
+
+            // Si el URL tiene hash explícito, el hash manda en la primera carga
+            if (isInitial && window.location.hash && window.location.hash.startsWith('#s=')) {
+              updateCloudBadge('synced');
+              return;
+            }
+
+            // Si los datos de la nube son más recientes o no hay versión local v7
+            if (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v7')) {
+              state = sanitizeLoadedState(result.data);
+              localStorage.setItem('el_bosque_v7', JSON.stringify(state));
+              render();
+              if (!isInitial) showToast('☁️ Cambios del grupo sincronizados');
+            }
+            updateCloudBadge('synced');
+            return;
+          }
+        }
+        updateCloudBadge('synced');
+      } catch (e) {
+        updateCloudBadge('local');
+      }
+    }
+
+    function updateCloudBadge(status) {
+      const badge = document.getElementById('cloudStatusBadge');
+      const text = document.getElementById('cloudStatusText');
+      const pill = document.getElementById('cloudCardPill');
+      const spinner = document.getElementById('syncSpinner');
+
+      if (!badge || !text) return;
+
+      if (status === 'saving') {
+        badge.className = 'inline-flex items-center gap-1.5 text-amber-700 text-[11px] bg-amber-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-amber-500/20';
+        text.textContent = 'Guardando...';
+        if (pill) { pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-amber-500/10 text-amber-700 border border-amber-500/20'; pill.textContent = 'Guardando...'; }
+        if (spinner) spinner.classList.add('animate-spin');
+      } else if (status === 'loading') {
+        badge.className = 'inline-flex items-center gap-1.5 text-blue-700 text-[11px] bg-blue-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-blue-500/20';
+        text.textContent = 'Conectando...';
+        if (pill) { pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-blue-500/10 text-blue-700 border border-blue-500/20'; pill.textContent = 'Conectando'; }
+        if (spinner) spinner.classList.add('animate-spin');
+      } else if (status === 'synced') {
+        badge.className = 'inline-flex items-center gap-1.5 text-emerald-700 text-[11px] bg-emerald-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-emerald-500/20';
+        text.textContent = 'Nube activa';
+        if (pill) { pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-emerald-500/10 text-emerald-700 border border-emerald-500/20'; pill.textContent = 'En Vivo'; }
+        if (spinner) spinner.classList.remove('animate-spin');
+      } else {
+        badge.className = 'inline-flex items-center gap-1.5 text-muted text-[11px] bg-surface-soft px-2.5 sm:px-3 py-1 rounded-full border border-hairline';
+        text.textContent = 'Modo local';
+        if (pill) { pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline'; pill.textContent = 'Local'; }
+        if (spinner) spinner.classList.remove('animate-spin');
+      }
+    }
+
+    function forceCloudSync() {
+      saveToCloud().then(() => showToast('¡Sincronizado con la nube exitosamente!'));
+    }
+
+    // BACKUP & EXPORTACIÓN JSON
+    function downloadJSONBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `presupuesto-el-bosque-${(state.tripDates?.preset || 'viaje')}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Copia JSON descargada');
+    }
+
+    function importJSONBackup(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (parsed && parsed.members && Array.isArray(parsed.members)) {
+            state = sanitizeLoadedState(parsed);
+            saveState();
+            render();
+            showToast('¡Datos cargados exitosamente desde JSON!');
+          } else {
+            alert('El archivo JSON no tiene el formato correcto del presupuesto.');
+          }
+        } catch (err) {
+          alert('Error al leer el archivo JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
     }
 
     function resetDefaults() {
       if (confirm('¿Restablecer el presupuesto a los valores originales (Vie 18 a Lun 21 Dic, S/ 20 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+        localStorage.removeItem('el_bosque_v7');
         localStorage.removeItem('el_bosque_v6');
         localStorage.removeItem('el_bosque_v5');
-        localStorage.removeItem('el_bosque_airbnb_v1');
-        localStorage.removeItem('el_bosque_light_v4');
         window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
         saveState();
         render();
         showToast('Presupuesto restablecido');
+      }
+    }
+
+    // CONTROL DE DÍAS Y FECHAS DEL VIAJE
+    function setTripPreset(presetKey) {
+      const preset = TRIP_PRESETS[presetKey];
+      if (!preset) return;
+      state.tripDates = { ...preset };
+
+      // Actualizar automáticamente la descripción del bungaló
+      if (state.alojamiento && state.alojamiento[0]) {
+        state.alojamiento[0].name = `Bungaló El Bosque (${preset.nights} noche${preset.nights > 1 ? 's' : ''}: ${preset.shortLabel})`;
+        state.alojamiento[0].qty = `${preset.nights} noche${preset.nights > 1 ? 's' : ''}`;
+        
+        // Ajuste sugerido proporcional si el usuario no lo ha personalizado
+        if (preset.nights === 2 && state.alojamiento[0].total === 500.00) {
+          state.alojamiento[0].total = 350.00;
+        } else if (preset.nights === 3 && state.alojamiento[0].total === 350.00) {
+          state.alojamiento[0].total = 500.00;
+        } else if (preset.nights === 1 && (state.alojamiento[0].total === 350.00 || state.alojamiento[0].total === 500.00)) {
+          state.alojamiento[0].total = 200.00;
+        }
+      }
+
+      saveState();
+      render();
+      showToast(`Días actualizados: ${preset.label}`);
+    }
+
+    function stepNights(delta) {
+      if (!state.tripDates) state.tripDates = { ...TRIP_PRESETS['vie-lun'] };
+      let newNights = Math.max(1, Math.min(7, (state.tripDates.nights || 3) + delta));
+      if (newNights === 3) {
+        setTripPreset('vie-lun');
+      } else if (newNights === 2) {
+        setTripPreset('vie-dom');
+      } else if (newNights === 1) {
+        setTripPreset('sab-dom');
+      } else {
+        state.tripDates.nights = newNights;
+        state.tripDates.preset = 'custom';
+        state.tripDates.label = `${state.tripDates.startDay || 'Viernes'} al ${state.tripDates.endDay || 'Día'} (${newNights} Noches)`;
+        state.tripDates.shortLabel = `${newNights} Noches`;
+        if (state.alojamiento && state.alojamiento[0]) {
+          state.alojamiento[0].qty = `${newNights} noches`;
+        }
+        saveState();
+        render();
+        showToast(`${newNights} noches seleccionadas`);
       }
     }
 
@@ -984,10 +1328,50 @@
       showToast('Participante eliminado');
     }
 
-    // CONTROL DE COMPRAS
+    // CONTROL DE PRODUCTOS Y GASTOS (CRUD COMPLETO)
+    function addExpenseItem(cat) {
+      const newId = cat[0] + '_' + Date.now();
+      if (!state[cat]) state[cat] = [];
+      state[cat].push({
+        id: newId,
+        name: 'Nuevo producto',
+        qty: '1 unid.',
+        total: 0.00
+      });
+      saveState();
+      render();
+      showToast('Producto añadido');
+    }
+
+    function removeExpenseItem(cat, id) {
+      if (!state[cat]) return;
+      state[cat] = state[cat].filter(x => x.id !== id);
+      saveState();
+      render();
+      showToast('Producto eliminado');
+    }
+
+    function updateExpenseName(cat, id, val) {
+      const item = (state[cat] || []).find(x => x.id === id);
+      if (item) {
+        item.name = val;
+        saveState();
+        updateWhatsAppText();
+      }
+    }
+
+    function updateExpenseQty(cat, id, val) {
+      const item = (state[cat] || []).find(x => x.id === id);
+      if (item) {
+        item.qty = val;
+        saveState();
+        updateWhatsAppText();
+      }
+    }
+
     function updateExpenseVal(cat, id, val) {
       const num = parseFloat(val) || 0;
-      const item = state[cat].find(x => x.id === id);
+      const item = (state[cat] || []).find(x => x.id === id);
       if (item) {
         item.total = num;
         saveState();
@@ -1002,18 +1386,18 @@
     }
 
     // =========================================================================
-    // CÁLCULO EXACTO: S/ 20 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
+    // CÁLCULO DINÁMICO: S/ 20 MENOS NO BEBEDORES & MÍNIMO S/ 60 MÁS EL ORGANIZADOR
     // =========================================================================
     function calculate() {
       const totalMembers = state.members.length;
       
-      const subtotalComida = state.comida.reduce((acc, c) => acc + c.total, 0);
-      const subtotalCremas = state.cremas.reduce((acc, c) => acc + c.total, 0);
+      const subtotalComida = (state.comida || []).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
+      const subtotalCremas = (state.cremas || []).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
       const sumaComidaCremas = subtotalComida + subtotalCremas;
       const margen5Pct = Math.round(sumaComidaCremas * 0.05 * 100) / 100;
 
-      const subtotalAlcohol = state.alcohol.reduce((acc, c) => acc + c.total, 0);
-      const subtotalAlojamiento = state.alojamiento.reduce((acc, c) => acc + c.total, 0);
+      const subtotalAlcohol = (state.alcohol || []).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
+      const subtotalAlojamiento = (state.alojamiento || []).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
 
       const totalBaseBudget = sumaComidaCremas + margen5Pct + subtotalAlcohol + subtotalAlojamiento;
 
@@ -1021,7 +1405,7 @@
       const nonDrinkers = state.members.filter(m => !m.drinks);
       const drinkers = state.members.filter(m => m.drinks);
 
-      const totalManualExtras = state.members.reduce((acc, m) => acc + (m.extra || 0), 0);
+      const totalManualExtras = state.members.reduce((acc, m) => acc + (parseFloat(m.extra) || 0), 0);
 
       const X_drinkerBase = totalMembers > 0 
         ? ((totalBaseBudget + (nonDrinkers.length * discount) - totalManualExtras) / totalMembers) 
@@ -1039,7 +1423,7 @@
       const memberCalcs = state.members.map(m => {
         const pernocteCost = (state.pernoctarActive && m.sleeps) ? state.pernoctarAmount : 0;
         let baseQuota = m.drinks ? X_drinkerBase : (X_drinkerBase - discount);
-        const total = baseQuota + m.extra + pernocteCost;
+        const total = baseQuota + (parseFloat(m.extra) || 0) + pernocteCost;
         return { m, baseQuota, pernocteCost, total };
       });
 
@@ -1048,6 +1432,8 @@
 
       return {
         totalMembers,
+        nonDrinkersCount: nonDrinkers.length,
+        drinkersCount: drinkers.length,
         subtotalComida,
         subtotalCremas,
         sumaComidaCremas,
@@ -1067,7 +1453,9 @@
 
     function renderCalculationsOnly() {
       const calc = calculate();
+      const tripDates = state.tripDates || TRIP_PRESETS['vie-lun'];
 
+      // KPIs
       document.getElementById('kpiTotal').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin cobro de pernocte';
@@ -1079,22 +1467,69 @@
       document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : calc.X_drinkerBase).toFixed(2)}`;
 
       const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
-      document.getElementById('kpiTu').textContent = `S/ ${user.total.toFixed(2)}`;
+      document.getElementById('kpiTu').textContent = `S/ ${(user ? user.total : 0).toFixed(2)}`;
 
+      // Contadores dinámicos en los encabezados KPI
+      const countNoTomaEl = document.getElementById('kpiCountNoToma');
+      if (countNoTomaEl) countNoTomaEl.textContent = calc.nonDrinkersCount;
+      const countTomaEl = document.getElementById('kpiCountToma');
+      if (countTomaEl) countTomaEl.textContent = Math.max(0, calc.drinkersCount - (user && user.m.drinks ? 1 : 0));
+
+      // Celdas dinámicas de la tabla de amigos
       calc.memberCalcs.forEach(item => {
         const cell = document.getElementById(`totalCell_${item.m.id}`);
         if (cell) cell.textContent = `S/ ${item.total.toFixed(2)}`;
       });
 
+      // Badges y textos del Hero y Cabecera
+      const heroDate = document.getElementById('heroDateDisplay');
+      if (heroDate) heroDate.textContent = tripDates.label;
+      const heroMembers = document.getElementById('heroMembersDisplay');
+      if (heroMembers) heroMembers.textContent = `${calc.totalMembers} Participantes`;
+      const heroTotal = document.getElementById('heroTotalDisplay');
+      if (heroTotal) heroTotal.textContent = `Total S/ ${calc.totalTripBudget.toFixed(2)}`;
+      const headerDate = document.getElementById('headerDateText');
+      if (headerDate) headerDate.textContent = tripDates.shortLabel;
+      const footerDate = document.getElementById('footerDateText');
+      if (footerDate) footerDate.textContent = tripDates.label;
+
+      // Recaudado
       const pct = calc.totalTripBudget > 0 ? Math.round((calc.totalCollected / calc.totalTripBudget) * 100) : 0;
       document.getElementById('recaudadoLabel').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
 
+      // Fórmula dinámica
+      const formulaEl = document.getElementById('formulaDisplay');
+      if (formulaEl) {
+        const userExtra = (user && user.m.extra) ? user.m.extra : 60;
+        const drinkersWithoutUser = Math.max(0, calc.drinkersCount - (user && user.m.drinks ? 1 : 0));
+        formulaEl.textContent = `Fórmula: ${calc.nonDrinkersCount}(X - ${calc.discount.toFixed(0)}) + ${drinkersWithoutUser}X + (X + ${userExtra.toFixed(0)}) = S/ ${calc.totalBaseBudget.toFixed(2)}`;
+      }
+
+      // Subtotales de compras
       document.getElementById('subtotalComprasBadge').textContent = `S/ ${calc.totalBaseBudget.toFixed(2)}`;
       document.getElementById('comidaSubDisplay').textContent = `S/ ${calc.subtotalComida.toFixed(2)}`;
       document.getElementById('cremasSubDisplay').textContent = `S/ ${calc.subtotalCremas.toFixed(2)}`;
       document.getElementById('alcoholSubDisplay').textContent = `S/ ${calc.subtotalAlcohol.toFixed(2)}`;
       document.getElementById('alojSubDisplay').textContent = `S/ ${calc.subtotalAlojamiento.toFixed(2)}`;
       document.getElementById('margenDisplay').textContent = `S/ ${calc.margen5Pct.toFixed(2)}`;
+
+      // Stepper & Pastillas de Duración
+      const nightsCountEl = document.getElementById('stepperNightsCount');
+      if (nightsCountEl) nightsCountEl.textContent = tripDates.nights || 3;
+      const nightsPill = document.getElementById('nightsPill');
+      if (nightsPill) nightsPill.textContent = `${tripDates.nights || 3} Noche${(tripDates.nights || 3) > 1 ? 's' : ''}`;
+
+      ['vie_dom', 'vie_lun', 'sab_dom'].forEach(key => {
+        const btn = document.getElementById(`btnPreset_${key}`);
+        const normalizedKey = key.replace('_', '-');
+        if (btn) {
+          if (tripDates.preset === normalizedKey) {
+            btn.className = 'px-2 py-1.5 rounded-lg text-center text-[11px] font-semibold border-2 border-brand bg-brand-subtle text-brand transition shadow-2xs';
+          } else {
+            btn.className = 'px-2 py-1.5 rounded-lg text-center text-[11px] font-medium border border-hairline bg-surface-soft text-ink hover:bg-surface-strong transition';
+          }
+        }
+      });
     }
 
     function render() {
@@ -1177,27 +1612,53 @@
         text.className = 'ml-2.5 text-xs font-semibold font-mono text-ink';
         pill.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} Activado`;
         pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-brand text-white';
-        box.className = 'bg-card border-2 border-brand rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm transition-all';
+        box.className = 'bg-card border-2 border-brand rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
       } else {
         sw.checked = false;
         text.textContent = 'OFF';
         text.className = 'ml-2.5 text-xs font-semibold font-mono text-muted';
         pill.textContent = 'Desactivado (S/ 0)';
         pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline';
-        box.className = 'bg-card border border-hairline rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-xs transition-all';
+        box.className = 'bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
       }
     }
 
+    // RENDERIZADO DE TABLA DE GASTOS CON EDICIÓN DE NOMBRE, CANTIDAD, PRECIO Y ELIMINAR
     function renderExpenseTable(tbodyId, items, cat) {
       const tb = document.getElementById(tbodyId);
       tb.innerHTML = '';
+      if (!items || items.length === 0) {
+        tb.innerHTML = `<tr><td colspan="4" class="py-3 text-center text-muted text-xs italic">Sin productos aún</td></tr>`;
+        return;
+      }
       items.forEach(item => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-surface-soft';
+        tr.className = 'hover:bg-surface-soft/80 group transition-colors';
         tr.innerHTML = `
-          <td class="py-1.5 text-bodytext pr-2">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-medium text-ink w-20">
-            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none">
+          <td class="py-1.5 pr-1 align-middle">
+            <input type="text" value="${escapeHtml(item.name)}" 
+              oninput="updateExpenseName('${cat}', '${item.id}', this.value)" 
+              class="w-full bg-transparent text-ink text-xs font-medium border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none py-0.5 truncate" 
+              placeholder="Nombre...">
+          </td>
+          <td class="py-1.5 px-1 w-16 align-middle">
+            <input type="text" value="${escapeHtml(item.qty || '')}" 
+              oninput="updateExpenseQty('${cat}', '${item.id}', this.value)" 
+              class="w-full bg-surface-soft border border-hairlinesoft rounded px-1 py-0.5 text-[11px] text-muted text-center focus:outline-none focus:border-ink font-mono" 
+              placeholder="Cant.">
+          </td>
+          <td class="py-1.5 px-1 text-right font-mono font-medium text-ink w-20 whitespace-nowrap align-middle">
+            <span class="text-[10px] text-muted">S/</span> 
+            <input type="number" step="0.5" min="0" value="${(parseFloat(item.total) || 0).toFixed(2)}" 
+              oninput="updateExpenseVal('${cat}', '${item.id}', this.value)" 
+              class="w-14 text-right bg-transparent border-b border-transparent hover:border-hairline focus:border-ink focus:outline-none">
+          </td>
+          <td class="py-1.5 pl-1 w-6 text-center align-middle">
+            <button onclick="removeExpenseItem('${cat}', '${item.id}')" 
+              class="text-muted/40 group-hover:text-muted hover:!text-terracotta transition p-1" 
+              title="Eliminar producto">
+              <i class="fa-solid fa-trash-can text-[11px]"></i>
+            </button>
           </td>
         `;
         tb.appendChild(tr);
@@ -1279,12 +1740,18 @@
     function updateWhatsAppText() {
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
+      const tripDates = state.tripDates || TRIP_PRESETS['vie-lun'];
+
+      // Generar enlace inteligente con estado completo incrustado en el hash
+      const raw = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+      const shareUrl = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(raw)}`;
 
       let msg = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴\n`;
-      msg += `📅 *Fecha:* Viernes 18 al Lunes 21 de Diciembre (3 Noches)\n`;
+      msg += `📅 *Fecha:* ${tripDates.label}\n`;
       msg += `📍 *Lugar:* Sede Campestre Chosica (Bungalows & Parrilla)\n`;
+      msg += `👥 *Participantes:* ${calc.totalMembers} personas (${calc.drinkersCount} beben / ${calc.nonDrinkersCount} no beben)\n`;
       msg += `------------------------------------\n`;
-      msg += `💰 *Total del viaje:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
+      msg += `💰 *Presupuesto total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
       msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n`;
       msg += `🍻 *Bebedores:* Cuota estándar (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
       msg += `🥤 *No bebedores:* S/ ${calc.discount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
@@ -1301,6 +1768,7 @@
         msg += `• *${m.name}:* S/ ${item.total.toFixed(2)}${tagStr} [${status}]\n`;
       });
 
+      msg += `\n🔗 *Ver y editar presupuesto en vivo:*\n${shareUrl}\n`;
       msg += `\n💳 *Yape / Plin:* ${yape}\n`;
       msg += `¡Envíen captura al transferir para cerrar el bungaló! 🏊‍♂️🥩`;
 
@@ -1328,10 +1796,10 @@
 
     function copyShareLink() {
       saveState();
-      const raw = btoa(JSON.stringify(state));
+      const raw = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
       const url = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(raw)}`;
       navigator.clipboard.writeText(url).then(() => {
-        showToast('Enlace copiado con los cambios guardados');
+        showToast('Enlace copiado con todos los cambios y productos');
       });
     }
 
@@ -1358,6 +1826,8 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       render();
+      // Conectar automáticamente a la nube para consultar si algún amigo modificó datos
+      loadFromCloud(true);
     });
   </script>
 
@@ -1571,7 +2041,7 @@
               }`}
             >
               <i className="fa-solid fa-calendar-day mr-1.5 text-[11px]"></i>
-              Pronóstico del Viaje (Vie 18 - Lun 21 Dic)
+              Pronóstico del Viaje
             </button>
 
             <button
