@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,16 +14,41 @@
   <!-- Google Fonts: Inter + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['"Inter"', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            stone: {
+              25: '#fcfbf9',
+              50: '#f9f8f5',
+              100: '#f3f1eb',
+              200: '#e7e4dc',
+              300: '#d7d2c6',
+              700: '#524e47',
+              800: '#34322e',
+              900: '#1e1c1a',
+            },
+            forest: {
+              50: '#f0f7f3',
+              100: '#dbeee2',
+              600: '#1b5e37',
+              700: '#164d2d',
+              800: '#123d24',
+              900: '#0d2b19',
+            },
+            amberwarm: {
+              50: '#fef9ee',
+              100: '#fcf0d3',
+              700: '#9b5b00',
+              800: '#7c4800',
+            }
           }
         }
       }
@@ -32,8 +57,8 @@
 
   <style>
     body {
-      background-color: #090a0f;
-      color: #e2e8f0;
+      background-color: #f7f6f2;
+      color: #1e1c1a;
       font-family: 'Inter', sans-serif;
     }
     .custom-scroll::-webkit-scrollbar {
@@ -41,10 +66,10 @@
       height: 5px;
     }
     .custom-scroll::-webkit-scrollbar-track {
-      background: #11131a;
+      background: #f3f1eb;
     }
     .custom-scroll::-webkit-scrollbar-thumb {
-      background: #232733;
+      background: #d7d2c6;
       border-radius: 4px;
     }
     input[type=number]::-webkit-inner-spin-button, 
@@ -55,35 +80,34 @@
     @media print {
       header, .no-print, #lightbox, #whatsappModal { display: none !important; }
       body { background: white !important; color: black !important; }
-      .print-border { border-color: #000 !important; }
     }
   </style>
 </head>
-<body class="min-h-screen selection:bg-emerald-500 selection:text-white pb-28 sm:pb-20">
+<body class="min-h-screen selection:bg-forest-100 selection:text-forest-900 pb-28 sm:pb-20">
 
   <!-- ========================================================================= -->
-  <!-- HEADER MINIMALISTA -->
+  <!-- CABECERA CLARA & MINIMALISTA -->
   <!-- ========================================================================= -->
-  <header class="border-b border-slate-800/80 bg-[#0c0e14]/90 backdrop-blur sticky top-0 z-30">
-    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+  <header class="border-b border-stone-200 bg-white sticky top-0 z-30 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
       
       <div>
         <div class="flex items-center gap-2">
-          <span class="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold">Country Club El Bosque</span>
-          <span class="text-slate-600 text-xs">/</span>
-          <span class="text-[11px] text-slate-400">Chosica · 2 Noches</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-forest-700 font-bold">Country Club El Bosque</span>
+          <span class="text-stone-300 text-xs">/</span>
+          <span class="text-[11px] text-stone-500">Chosica · 2 Noches</span>
         </div>
-        <h1 class="text-base sm:text-lg font-bold text-white tracking-tight">
-          Presupuesto & Cuotas
+        <h1 class="text-base sm:text-lg font-bold text-stone-900 tracking-tight">
+          Presupuesto & Cuotas del Viaje
         </h1>
       </div>
 
-      <!-- Estado de auto-guardado e indicador -->
-      <div class="flex items-center gap-2.5 text-xs font-mono">
-        <span id="saveStatus" class="inline-flex items-center gap-1.5 text-slate-400 text-[11px]">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Guardado
+      <!-- Estado de guardado y acciones -->
+      <div class="flex items-center gap-3 text-xs font-mono">
+        <span id="saveStatus" class="inline-flex items-center gap-1.5 text-stone-500 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-forest-600"></span> Guardado
         </span>
-        <button onclick="resetDefaults()" title="Restablecer valores originales" class="text-slate-500 hover:text-slate-300 p-1.5 transition">
+        <button onclick="resetDefaults()" title="Restablecer valores originales" class="text-stone-400 hover:text-stone-700 p-1 transition text-xs">
           <i class="fa-solid fa-rotate-left"></i>
         </button>
       </div>
@@ -91,86 +115,86 @@
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 mt-6 space-y-6">
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 mt-6 space-y-5">
 
     <!-- ======================================================================= -->
-    <!-- 1. EL BOTÓN DE PERNOCTAR S/ 70 (SIMPLE Y DIRECTO) -->
+    <!-- 1. EL BOTÓN DE PERNOCTAR S/ 70 (DESACTIVADO POR DEFAULT) -->
     <!-- ======================================================================= -->
-    <div class="bg-[#11131a] border border-slate-800 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div id="pernoctarBanner" class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all">
       <div class="space-y-1">
         <div class="flex items-center gap-2">
-          <span class="text-xs font-bold text-white flex items-center gap-1.5">
-            <i class="fa-solid fa-bed text-emerald-400"></i> Cobro por Pernoctar (El Bosque)
+          <span class="text-xs font-bold text-stone-900 flex items-center gap-1.5">
+            <i class="fa-solid fa-bed text-forest-700"></i> Cobro por Pernoctar (Invitados)
           </span>
-          <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            +S/ 70 Activado
+          <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-stone-100 text-stone-600 border border-stone-200">
+            Desactivado (S/ 0)
           </span>
         </div>
-        <p class="text-xs text-slate-400">
-          Prende o apaga si el club cobra los S/ 70 por quedarse a dormir a los invitados.
+        <p class="text-xs text-stone-500">
+          Actívalo solo si la administración de El Bosque te confirma que cobrarán los S/ 70 por quedarse a dormir.
         </p>
       </div>
 
-      <!-- El Switch Táctil Minimalista -->
+      <!-- Control del Switch Táctil Claro -->
       <div class="flex items-center gap-3 self-end sm:self-auto">
-        <div class="flex items-center text-xs font-mono text-slate-400 gap-1 bg-[#090a0f] border border-slate-800 rounded-lg px-2 py-1">
+        <div class="flex items-center text-xs font-mono text-stone-500 gap-1 bg-stone-50 border border-stone-200 rounded-lg px-2.5 py-1">
           <span>S/</span>
-          <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-white font-bold text-right focus:outline-none">
+          <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-stone-900 font-bold text-right focus:outline-none">
         </div>
 
         <label class="relative inline-flex items-center cursor-pointer select-none">
-          <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)" checked>
-          <div class="w-14 h-7 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-6 after:transition-all peer-checked:bg-emerald-600"></div>
-          <span id="switchText" class="ml-2.5 text-xs font-mono font-bold text-emerald-400">ON</span>
+          <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
+          <div class="w-14 h-7 bg-stone-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-6 after:transition-all peer-checked:bg-forest-700 shadow-inner"></div>
+          <span id="switchText" class="ml-2.5 text-xs font-mono font-bold text-stone-400">OFF</span>
         </label>
       </div>
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 2. CUADRO RESUMEN DE CUOTAS (3 DATOS CLAVE) -->
+    <!-- 2. RESUMEN DE CUOTAS (REGLA DE S/ 30 MENOS Y S/ 60 MÁS) -->
     <!-- ======================================================================= -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
       
       <!-- Total General -->
-      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
-        <span class="text-[10px] font-mono uppercase text-slate-400 font-bold block">Total Viaje</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-white mt-1" id="kpiTotal">S/ 2,042.76</div>
-        <span class="text-[10px] text-slate-500 font-mono" id="kpiBaseSub">Base S/ 1,552.76</span>
+      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+        <span class="text-[10px] font-mono uppercase text-stone-500 font-bold block">Total Presupuesto</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiTotal">S/ 1,552.76</div>
+        <span class="text-[10px] text-stone-500 font-mono" id="kpiBaseSub">Sin cobro de pernocte</span>
       </div>
 
-      <!-- No Bebedores -->
-      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
-        <span class="text-[10px] font-mono uppercase text-blue-400 font-bold block">No toman (2)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-blue-400 mt-1" id="kpiNoToma">S/ 216.38</div>
-        <span class="text-[10px] text-slate-500 font-mono">S/ 0 alcohol</span>
+      <!-- No Bebedores (S/ 30 MENOS) -->
+      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+        <span class="text-[10px] font-mono uppercase text-stone-600 font-bold block">No toman (2)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiNoToma">S/ 164.10</div>
+        <span class="text-[10px] text-forest-700 font-mono font-semibold">S/ 30 menos que bebedores</span>
       </div>
 
       <!-- Bebedores -->
-      <div class="bg-[#11131a] border border-slate-800 p-3.5 rounded-xl">
-        <span class="text-[10px] font-mono uppercase text-amber-400 font-bold block">Toman (5)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-amber-400 mt-1" id="kpiToma">S/ 270.00</div>
-        <span class="text-[10px] text-slate-500 font-mono">Con trago</span>
+      <div class="bg-white border border-stone-200 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+        <span class="text-[10px] font-mono uppercase text-amberwarm-700 font-bold block">Toman (5)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-stone-900 mt-1" id="kpiToma">S/ 194.10</div>
+        <span class="text-[10px] text-stone-500 font-mono">Cuota estándar con trago</span>
       </div>
 
-      <!-- Tú -->
-      <div class="bg-[#11131a] border border-emerald-500/50 p-3.5 rounded-xl">
-        <span class="text-[10px] font-mono uppercase text-emerald-400 font-bold block">Tú (Organizador)</span>
-        <div class="text-xl sm:text-2xl font-mono font-extrabold text-emerald-400 mt-1" id="kpiTu">S/ 260.00</div>
-        <span class="text-[10px] text-slate-500 font-mono">+S/ 60 extra</span>
+      <!-- Tú (Organizador: S/ 60 MÁS) -->
+      <div class="bg-forest-50/50 border border-forest-600/30 p-3.5 rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+        <span class="text-[10px] font-mono uppercase text-forest-800 font-bold block">Tú (Organizador)</span>
+        <div class="text-xl sm:text-2xl font-mono font-extrabold text-forest-900 mt-1" id="kpiTu">S/ 254.10</div>
+        <span class="text-[10px] text-forest-700 font-mono font-semibold">+S/ 60 más siempre</span>
       </div>
 
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 3. LISTA DE AMIGOS Y PAGOS (EDITABLE Y CON PERSISTENCIA) -->
+    <!-- 3. LISTA DE PARTICIPANTES & PAGOS (CLARA Y EDITABLE) -->
     <!-- ======================================================================= -->
-    <div class="bg-[#11131a] border border-slate-800 rounded-2xl p-4 sm:p-5 space-y-3">
-      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+    <div class="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 space-y-3 shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      <div class="flex items-center justify-between pb-2 border-b border-stone-100">
         <div>
-          <h2 class="text-sm font-bold text-white">Amigos & Cuotas Individuales</h2>
-          <p class="text-[11px] text-slate-400">Edita nombres o marca quién ya pagó por Yape/Plin.</p>
+          <h2 class="text-sm font-bold text-stone-900">Padrón de Amigos & Cuotas Exactas</h2>
+          <p class="text-[11px] text-stone-500">Edita nombres o marca quién ya te pagó por Yape/Plin.</p>
         </div>
-        <button onclick="addFriend()" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-lg transition flex items-center gap-1">
+        <button onclick="addFriend()" class="px-2.5 py-1 bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold rounded-lg transition flex items-center gap-1 shadow-sm">
           <i class="fa-solid fa-plus text-[10px]"></i> Amigo
         </button>
       </div>
@@ -178,14 +202,14 @@
       <div class="overflow-x-auto custom-scroll">
         <table class="w-full text-left text-xs">
           <thead>
-            <tr class="text-slate-400 border-b border-slate-800 text-[11px] font-mono">
-              <th class="py-2 px-2">Nombre</th>
-              <th class="py-2 px-2 text-center">¿Toma?</th>
-              <th class="py-2 px-2 text-center">Pernocte</th>
-              <th class="py-2 px-2 text-right">Extra S/</th>
-              <th class="py-2 px-2 text-right font-bold text-white">Cuota Final</th>
-              <th class="py-2 px-2 text-center">Yape</th>
-              <th class="py-2 px-1"></th>
+            <tr class="text-stone-500 border-b border-stone-200 text-[11px] font-mono">
+              <th class="py-2.5 px-2">Nombre</th>
+              <th class="py-2.5 px-2 text-center">¿Toma?</th>
+              <th class="py-2.5 px-2 text-center">Pernocte</th>
+              <th class="py-2.5 px-2 text-right">Extra S/</th>
+              <th class="py-2.5 px-2 text-right font-bold text-stone-900">Cuota Final</th>
+              <th class="py-2.5 px-2 text-center">Yape</th>
+              <th class="py-2.5 px-1"></th>
             </tr>
           </thead>
           <tbody id="friendsTbody">
@@ -195,105 +219,105 @@
       </div>
 
       <!-- Barra de recaudación -->
-      <div class="pt-2 text-[11px] text-slate-400 flex items-center justify-between font-mono">
-        <span>Recaudado: <strong class="text-emerald-400" id="recaudadoLabel">S/ 0.00 / S/ 0.00 (0%)</strong></span>
-        <button onclick="openWhatsAppModal()" class="text-emerald-400 hover:underline font-bold">
-          <i class="fa-brands fa-whatsapp"></i> Generar mensaje para WhatsApp &rarr;
+      <div class="pt-2 text-[11px] text-stone-500 flex items-center justify-between font-mono">
+        <span>Recaudado: <strong class="text-forest-700" id="recaudadoLabel">S/ 0.00 / S/ 0.00 (0%)</strong></span>
+        <button onclick="openWhatsAppModal()" class="text-forest-700 hover:underline font-bold flex items-center gap-1">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Generar mensaje para WhatsApp &rarr;
         </button>
       </div>
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 4. ACORDEÓN 1: DETALLE DE COMPRAS REALES (LAS 5 TABLAS DE CLAUDE) -->
+    <!-- 4. ACORDEÓN DESPLEGABLE: DETALLE DE COMPRAS REALES (LAS 5 TABLAS) -->
     <!-- ======================================================================= -->
-    <div class="border border-slate-800 rounded-2xl overflow-hidden bg-[#11131a] transition-all">
-      <button onclick="toggleSection('sec-compras')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/40 transition">
+    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
+      <button onclick="toggleSection('sec-compras')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
         <span class="flex items-center gap-2">
-          <i class="fa-solid fa-cart-shopping text-emerald-400"></i>
+          <i class="fa-solid fa-cart-shopping text-forest-700"></i>
           <span>Detalle de Compras (Comida, Cremas, Tragos, Bungaló)</span>
-          <span class="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded font-normal" id="subtotalComprasBadge">S/ 1,552.76</span>
+          <span class="text-[10px] font-mono text-stone-600 bg-stone-100 px-2 py-0.5 rounded font-normal" id="subtotalComprasBadge">S/ 1,552.76</span>
         </span>
-        <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200"></i>
+        <i id="icon-sec-compras" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
       </button>
 
-      <div id="sec-compras" class="hidden p-4 pt-0 space-y-4 border-t border-slate-800/80 text-xs">
+      <div id="sec-compras" class="hidden p-4 pt-0 space-y-4 border-t border-stone-100 text-xs">
         
         <!-- 1. Comida -->
         <div class="pt-3">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
             <span>🥩 Comida (S/ 398.00)</span>
-            <span class="font-mono text-emerald-400" id="comidaSubDisplay">S/ 398.00</span>
+            <span class="font-mono text-forest-700" id="comidaSubDisplay">S/ 398.00</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyComida" class="divide-y divide-slate-800/60"></tbody>
+              <tbody id="tbodyComida" class="divide-y divide-stone-100"></tbody>
             </table>
           </div>
         </div>
 
         <!-- 2. Cremas y Parrilla -->
-        <div class="pt-2 border-t border-slate-800/60">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+        <div class="pt-2 border-t border-stone-100">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
             <span>🥫 Cremas, Mezcladores & Parrilla (S/ 155.39)</span>
-            <span class="font-mono text-emerald-400" id="cremasSubDisplay">S/ 155.39</span>
+            <span class="font-mono text-forest-700" id="cremasSubDisplay">S/ 155.39</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyCremas" class="divide-y divide-slate-800/60"></tbody>
+              <tbody id="tbodyCremas" class="divide-y divide-stone-100"></tbody>
             </table>
           </div>
         </div>
 
         <!-- 3. Alcohol -->
-        <div class="pt-2 border-t border-slate-800/60">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+        <div class="pt-2 border-t border-stone-100">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
             <span>🍻 Alcohol (Solo bebedores: S/ 321.70)</span>
-            <span class="font-mono text-amber-400" id="alcoholSubDisplay">S/ 321.70</span>
+            <span class="font-mono text-amberwarm-700" id="alcoholSubDisplay">S/ 321.70</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyAlcohol" class="divide-y divide-slate-800/60"></tbody>
+              <tbody id="tbodyAlcohol" class="divide-y divide-stone-100"></tbody>
             </table>
           </div>
         </div>
 
         <!-- 4. Alojamiento y Movilidad -->
-        <div class="pt-2 border-t border-slate-800/60">
-          <div class="flex justify-between items-center mb-1.5 font-bold text-slate-300">
+        <div class="pt-2 border-t border-stone-100">
+          <div class="flex justify-between items-center mb-1.5 font-bold text-stone-800">
             <span>🏡 Alojamiento & Movilidad (S/ 650.00)</span>
-            <span class="font-mono text-emerald-400" id="alojSubDisplay">S/ 650.00</span>
+            <span class="font-mono text-forest-700" id="alojSubDisplay">S/ 650.00</span>
           </div>
           <div class="overflow-x-auto custom-scroll">
             <table class="w-full text-left text-[11px]">
-              <tbody id="tbodyAlojamiento" class="divide-y divide-slate-800/60"></tbody>
+              <tbody id="tbodyAlojamiento" class="divide-y divide-stone-100"></tbody>
             </table>
           </div>
         </div>
 
         <!-- Margen de 5% sobre comida y cremas -->
-        <div class="p-2.5 rounded-lg bg-[#090a0f] border border-slate-800 flex justify-between font-mono text-[11px]">
-          <span class="text-slate-400">Margen imprevistos (5% sobre comida y cremas):</span>
-          <span class="font-bold text-slate-200" id="margenDisplay">S/ 27.67</span>
+        <div class="p-2.5 rounded-lg bg-stone-50 border border-stone-200 flex justify-between font-mono text-[11px]">
+          <span class="text-stone-600">Margen imprevistos (5% sobre comida y cremas):</span>
+          <span class="font-bold text-stone-900" id="margenDisplay">S/ 27.67</span>
         </div>
 
       </div>
     </div>
 
     <!-- ======================================================================= -->
-    <!-- 5. ACORDEÓN 2: INSTALACIONES DE EL BOSQUE (FOTOS DEL CLUB) -->
+    <!-- 5. ACORDEÓN DESPLEGABLE: FOTOS DE LAS INSTALACIONES -->
     <!-- ======================================================================= -->
-    <div class="border border-slate-800 rounded-2xl overflow-hidden bg-[#11131a] transition-all">
-      <button onclick="toggleSection('sec-fotos')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-slate-200 hover:text-white hover:bg-slate-800/40 transition">
+    <div class="border border-stone-200 rounded-2xl overflow-hidden bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02)] transition-all">
+      <button onclick="toggleSection('sec-fotos')" class="w-full p-4 text-left flex items-center justify-between text-xs font-bold text-stone-800 hover:bg-stone-50 transition">
         <span class="flex items-center gap-2">
-          <i class="fa-solid fa-tree text-emerald-400"></i>
+          <i class="fa-solid fa-tree text-forest-700"></i>
           <span>Instalaciones del Club (Bungaló, Piscinas, Caballos, Mirador, Billar, Bochas, Deportes)</span>
         </span>
-        <i id="icon-sec-fotos" class="fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200"></i>
+        <i id="icon-sec-fotos" class="fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200"></i>
       </button>
 
-      <div id="sec-fotos" class="hidden p-4 pt-0 space-y-3 border-t border-slate-800/80">
-        <p class="text-[11px] text-slate-400">
-          Fotos cargadas desde <code>presupuesto-el-bosque/img/</code>. Haz clic en cualquiera para ampliar en HD:
+      <div id="sec-fotos" class="hidden p-4 pt-0 space-y-3 border-t border-stone-100">
+        <p class="text-[11px] text-stone-500">
+          Fotos cargadas desde <code>presupuesto-el-bosque/img/</code>. Haz clic en cualquiera para ampliar:
         </p>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3" id="photoGrid">
           <!-- Inyectado por JS -->
@@ -304,21 +328,21 @@
   </main>
 
   <!-- ========================================================================= -->
-  <!-- BARRA FLOTANTE INFERIOR MINIMALISTA -->
+  <!-- BARRA FLOTANTE INFERIOR -->
   <!-- ========================================================================= -->
-  <div class="fixed bottom-0 left-0 right-0 bg-[#0c0e14]/95 border-t border-slate-800 py-2.5 px-4 z-40 backdrop-blur no-print">
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 border-t border-stone-200 py-2.5 px-4 z-40 backdrop-blur shadow-[0_-2px_10px_rgba(0,0,0,0.03)] no-print">
     <div class="max-w-4xl mx-auto flex items-center justify-between gap-3 text-xs">
       <div>
-        <span class="text-slate-400 text-[11px] block font-mono">Total a pagar:</span>
-        <span class="font-mono font-extrabold text-sm text-white" id="barTotalDisplay">S/ 2,042.76</span>
+        <span class="text-stone-500 text-[11px] block font-mono">Total actual:</span>
+        <span class="font-mono font-extrabold text-sm text-stone-900" id="barTotalDisplay">S/ 1,552.76</span>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="copyShareLink()" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg transition" title="Copiar enlace con los cambios guardados">
-          <i class="fa-solid fa-link text-slate-400 mr-1"></i> Compartir Enlace
+        <button onclick="copyShareLink()" class="px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium rounded-lg transition" title="Copiar enlace con cambios">
+          <i class="fa-solid fa-link text-stone-400 mr-1"></i> Compartir Enlace
         </button>
-        <button onclick="openWhatsAppModal()" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5 shadow active:scale-95">
-          <i class="fa-brands fa-whatsapp"></i> Copiar a WhatsApp
+        <button onclick="openWhatsAppModal()" class="px-3.5 py-1.5 bg-forest-700 hover:bg-forest-800 text-white text-xs font-bold rounded-lg transition flex items-center gap-1.5 shadow-sm active:scale-95">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Copiar para WhatsApp
         </button>
       </div>
     </div>
@@ -327,27 +351,27 @@
   <!-- ========================================================================= -->
   <!-- MODAL: MENSAJE PARA WHATSAPP -->
   <!-- ========================================================================= -->
-  <div id="whatsappModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
-    <div class="bg-[#11131a] rounded-2xl max-w-md w-full border border-slate-800 overflow-hidden shadow-2xl">
-      <div class="p-4 border-b border-slate-800 flex items-center justify-between text-white">
+  <div id="whatsappModal" class="fixed inset-0 bg-stone-900/60 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl max-w-md w-full border border-stone-200 overflow-hidden shadow-xl">
+      <div class="p-4 border-b border-stone-100 flex items-center justify-between bg-stone-50 text-stone-900">
         <h3 class="font-bold text-xs flex items-center gap-2">
-          <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Resumen listo para el grupo
+          <i class="fa-brands fa-whatsapp text-forest-700 text-base"></i> Resumen listo para el grupo
         </h3>
-        <button onclick="closeWhatsAppModal()" class="text-slate-400 hover:text-white text-sm p-1">
+        <button onclick="closeWhatsAppModal()" class="text-stone-400 hover:text-stone-700 text-sm p-1">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <div class="p-4 space-y-3 text-xs">
         <div>
-          <label class="block text-[11px] font-semibold text-slate-400 mb-1">Tu número de Yape / Plin:</label>
-          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="updateYape(this.value)" class="w-full bg-[#090a0f] border border-slate-800 text-white rounded-lg p-2 font-mono text-xs focus:outline-none focus:border-emerald-500">
+          <label class="block text-[11px] font-semibold text-stone-600 mb-1">Tu número de Yape / Plin:</label>
+          <input type="text" id="yapeInput" value="987 654 321 (Tú)" oninput="updateYape(this.value)" class="w-full bg-stone-50 border border-stone-200 text-stone-900 rounded-lg p-2 font-mono text-xs focus:outline-none focus:border-forest-600">
         </div>
         <div>
-          <textarea id="whatsappPreview" readonly rows="11" class="w-full bg-[#090a0f] border border-slate-800 text-slate-300 rounded-lg p-2.5 font-mono text-[11px] select-all focus:outline-none custom-scroll leading-relaxed"></textarea>
+          <textarea id="whatsappPreview" readonly rows="11" class="w-full bg-stone-50 border border-stone-200 text-stone-800 rounded-lg p-2.5 font-mono text-[11px] select-all focus:outline-none custom-scroll leading-relaxed"></textarea>
         </div>
         <div class="flex justify-end gap-2 pt-1">
-          <button onclick="closeWhatsAppModal()" class="px-3 py-1.5 text-slate-400 hover:text-white">Cerrar</button>
-          <button onclick="copyWhatsApp()" id="btnCopyWa" class="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg flex items-center gap-1.5">
+          <button onclick="closeWhatsAppModal()" class="px-3 py-1.5 text-stone-500 hover:text-stone-800">Cerrar</button>
+          <button onclick="copyWhatsApp()" id="btnCopyWa" class="px-4 py-1.5 bg-forest-700 hover:bg-forest-800 text-white font-bold rounded-lg flex items-center gap-1.5 shadow-sm">
             <i class="fa-solid fa-copy"></i> Copiar Mensaje
           </button>
         </div>
@@ -358,39 +382,43 @@
   <!-- ========================================================================= -->
   <!-- MODAL: LIGHTBOX PARA FOTOS -->
   <!-- ========================================================================= -->
-  <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
-    <div class="max-w-3xl w-full bg-[#11131a] text-white rounded-xl overflow-hidden border border-slate-800" onclick="event.stopPropagation()">
-      <div class="relative bg-black flex items-center justify-center max-h-[70vh]">
+  <div id="lightbox" class="fixed inset-0 bg-stone-900/80 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeLightbox(event)">
+    <div class="max-w-3xl w-full bg-white text-stone-900 rounded-xl overflow-hidden border border-stone-200 shadow-2xl" onclick="event.stopPropagation()">
+      <div class="relative bg-stone-100 flex items-center justify-center max-h-[70vh]">
         <img id="lightboxImg" src="" alt="Instalación" class="w-full h-auto max-h-[70vh] object-contain">
-        <button onclick="closeLightbox()" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/70 text-white flex items-center justify-center">
+        <button onclick="closeLightbox()" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-stone-900/70 text-white flex items-center justify-center">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="p-3 bg-[#090a0f] flex justify-between items-center text-xs">
+      <div class="p-3 bg-white flex justify-between items-center text-xs border-t border-stone-100">
         <div>
-          <h4 class="font-bold text-white text-xs" id="lightboxTitle"></h4>
-          <span class="text-[10px] text-slate-500 font-mono" id="lightboxFile"></span>
+          <h4 class="font-bold text-stone-900 text-xs" id="lightboxTitle"></h4>
+          <span class="text-[10px] text-stone-400 font-mono" id="lightboxFile"></span>
         </div>
-        <button onclick="closeLightbox()" class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded text-xs">Cerrar</button>
+        <button onclick="closeLightbox()" class="px-2.5 py-1 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded text-xs">Cerrar</button>
       </div>
     </div>
   </div>
 
   <!-- TOAST NOTIFICATION -->
-  <div id="toast" class="fixed bottom-16 right-6 z-50 bg-slate-900 border border-slate-700 text-white px-3.5 py-2 rounded-xl text-xs font-mono transform translate-y-10 opacity-0 transition-all pointer-events-none shadow-xl">
+  <div id="toast" class="fixed bottom-16 right-6 z-50 bg-stone-900 text-white px-3.5 py-2 rounded-xl text-xs font-mono transform translate-y-10 opacity-0 transition-all pointer-events-none shadow-xl">
     <span id="toastMsg">Guardado</span>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MOTOR DE DATOS REALES & PERSISTENCIA AUTOMÁTICA -->
+  <!-- MOTOR MATEMÁTICO & PERSISTENCIA AUTOMÁTICA -->
   <!-- ========================================================================= -->
   <script>
-    // DATOS INICIALES EXACTOS DE LAS CAPTURAS
+    // DATOS INICIALES REALES
     const DEFAULT_DATA = {
-      pernoctarActive: true,
+      pernoctarActive: false,      // DESACTIVADO POR DEFAULT SEGÚN LA SOLICITUD
       pernoctarAmount: 70.00,
       yapeNumber: '987 654 321 (Tú)',
-      // Comida (Subtotal S/ 398.00)
+      // Descuento para los que no toman: S/ 30 menos que los que toman
+      nonDrinkerDiscount: 30.00,
+      // Extra voluntario tuyo: mínimo S/ 60 más que los que toman
+      userExtra: 60.00,
+      // 1. Comida (S/ 398.00)
       comida: [
         { id: 'c1', name: 'Chorizo parrillero Otto Kunz 400 g', qty: '5 paq.', total: 69.50 },
         { id: 'c2', name: 'Hot dog Suiza ahumado (pack 15)', qty: '2 paq.', total: 23.00 },
@@ -402,7 +430,7 @@
         { id: 'c8', name: 'Choclo (6 unid.)', qty: '6 unid.', total: 9.00 },
         { id: 'c9', name: 'Aceite 1 L', qty: '1 unid.', total: 10.00 },
       ],
-      // Cremas & Parrilla (Subtotal S/ 155.39)
+      // 2. Cremas & Parrilla (S/ 155.39)
       cremas: [
         { id: 'cr1', name: 'Ketchup Alacena 800 g', total: 11.60 },
         { id: 'cr2', name: 'Mayonesa Alacena 475 g', total: 12.50 },
@@ -413,26 +441,26 @@
         { id: 'cr7', name: 'Hielo Bell\'s (4 bolsas x 3 kg)', total: 27.60 },
         { id: 'cr8', name: 'Carbón (2 bolsas)', total: 24.00 },
       ],
-      // Alcohol (Subtotal S/ 321.70)
+      // 3. Alcohol (S/ 321.70)
       alcohol: [
         { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, Black Label, Absolut)', total: 250.00 },
         { id: 'a2', name: 'Cerveza Flying Fish lima limón (3 packs / 18 latas)', total: 71.70 },
       ],
-      // Alojamiento & Movilidad (Subtotal S/ 650.00)
+      // 4. Alojamiento & Movilidad (S/ 650.00)
       alojamiento: [
         { id: 'al1', name: 'Bungaló El Bosque (2 noches)', total: 350.00 },
         { id: 'al2', name: 'Movilidad ida viernes y vuelta domingo', total: 300.00 },
       ],
-      // 8 Participantes
+      // 5. Los 8 Participantes
       members: [
         { id: 'm1', name: 'Tú (Organizador / Nieto de socia)', drinks: true, sleeps: false, extra: 60.00, paid: false, isUser: true },
-        { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm5', name: 'Invitado 4 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm6', name: 'Invitado 5 (Amigo)', drinks: true, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm7', name: 'Invitado 6 (No toma)', drinks: false, sleeps: true, extra: 0.00, paid: false },
-        { id: 'm8', name: 'Invitado 7 (No toma)', drinks: false, sleeps: true, extra: 0.00, paid: false },
+        { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm5', name: 'Invitado 4 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm6', name: 'Invitado 5 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm7', name: 'Invitado 6 (No toma)', drinks: false, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm8', name: 'Invitado 7 (No toma)', drinks: false, sleeps: false, extra: 0.00, paid: false },
       ]
     };
 
@@ -452,11 +480,9 @@
       { id: 'p12', title: 'Tenis & Frontón', file: './img/deportes-tenis.jpg', fb: 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?auto=format&fit=crop&w=600&q=80' },
     ];
 
-    // CARGA DE ESTADO: COMPRUEBA HASH URL PRIMERO, LUEGO LOCALSTORAGE, LUEGO DEFAULT
     let state = loadPersistedState();
 
     function loadPersistedState() {
-      // 1. Intentar desde URL hash si se compartió
       if (window.location.hash && window.location.hash.startsWith('#s=')) {
         try {
           const raw = decodeURIComponent(window.location.hash.replace('#s=', ''));
@@ -464,9 +490,8 @@
           if (parsed && parsed.members) return parsed;
         } catch (e) {}
       }
-      // 2. Intentar desde LocalStorage
       try {
-        const saved = localStorage.getItem('el_bosque_minimal_v1');
+        const saved = localStorage.getItem('el_bosque_light_v1');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.members) return parsed;
@@ -477,7 +502,7 @@
 
     function saveState() {
       try {
-        localStorage.setItem('el_bosque_minimal_v1', JSON.stringify(state));
+        localStorage.setItem('el_bosque_light_v1', JSON.stringify(state));
         showSavedIndicator();
       } catch (e) {}
     }
@@ -485,13 +510,13 @@
     function showSavedIndicator() {
       const el = document.getElementById('saveStatus');
       if (el) {
-        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500"></span> Guardado';
+        el.innerHTML = '<span class="w-2 h-2 rounded-full bg-forest-600"></span> Guardado';
       }
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales de las capturas?')) {
-        localStorage.removeItem('el_bosque_minimal_v1');
+      if (confirm('¿Restablecer el presupuesto a los valores originales (S/ 30 menos a no bebedores, S/ 60 más tú y pernocte apagado)?')) {
+        localStorage.removeItem('el_bosque_light_v1');
         window.location.hash = '';
         state = JSON.parse(JSON.stringify(DEFAULT_DATA));
         saveState();
@@ -500,15 +525,15 @@
       }
     }
 
-    // CONTROL DEL SWITCH DE PERNOCTE
+    // CONTROL DEL SWITCH DE PERNOCTE (DEFAULT: OFF)
     function togglePernocte(val) {
       state.pernoctarActive = val;
       state.members.forEach(m => {
         m.sleeps = state.pernoctarActive && !m.isUser;
       });
       saveState();
-      renderCalculationsOnly();
       updatePernocteUI();
+      renderCalculationsOnly();
     }
 
     function changePernocteAmt(val) {
@@ -522,15 +547,18 @@
       const sw = document.getElementById('switchPernocte');
       sw.checked = state.pernoctarActive;
       document.getElementById('switchText').textContent = state.pernoctarActive ? 'ON' : 'OFF';
-      document.getElementById('switchText').className = state.pernoctarActive ? 'ml-2.5 text-xs font-mono font-bold text-emerald-400' : 'ml-2.5 text-xs font-mono font-bold text-slate-500';
+      document.getElementById('switchText').className = state.pernoctarActive ? 'ml-2.5 text-xs font-mono font-bold text-forest-700' : 'ml-2.5 text-xs font-mono font-bold text-stone-400';
       
       const pill = document.getElementById('pernoctePill');
+      const box = document.getElementById('pernoctarBanner');
       if (state.pernoctarActive) {
         pill.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} Activado`;
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-forest-50 text-forest-700 border border-forest-600/30';
+        box.className = 'bg-white border-2 border-forest-600/60 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm transition-all';
       } else {
         pill.textContent = 'Desactivado (S/ 0)';
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-slate-800 text-slate-400 border border-slate-700';
+        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded font-bold uppercase bg-stone-100 text-stone-600 border border-stone-200';
+        box.className = 'bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all';
       }
     }
 
@@ -559,10 +587,9 @@
         m.paid = !m.paid;
         saveState();
         renderCalculationsOnly();
-        // Solo actualizar el botón visual sin redibujar la tabla entera
         const btn = document.getElementById(`btnPaid_${id}`);
         if (btn) {
-          btn.className = `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'}`;
+          btn.className = `px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-forest-700 text-white' : 'bg-stone-100 text-stone-600 border border-stone-200'}`;
           btn.textContent = m.paid ? 'Pagó' : 'Debe';
         }
       }
@@ -609,7 +636,6 @@
       showToast(`Amigo ${count} agregado`);
     }
 
-    // EDICIÓN DE GASTOS
     function updateExpenseVal(cat, id, val) {
       const list = state[cat];
       if (list) {
@@ -629,12 +655,12 @@
       updateWhatsAppText();
     }
 
-    // MOTOR MATEMÁTICO EXACTO
+    // =========================================================================
+    // MATEMÁTICA EXACTA: S/ 30 MENOS NO BEBEDORES & S/ 60 MÁS EL ORGANIZADOR
+    // =========================================================================
     function calculate() {
       const totalMembers = state.members.length;
-      const drinkers = state.members.filter(m => m.drinks);
-      const drinkersCount = drinkers.length;
-
+      
       const subtotalComida = state.comida.reduce((acc, c) => acc + c.total, 0);
       const subtotalCremas = state.cremas.reduce((acc, c) => acc + c.total, 0);
       const sumaComidaCremas = subtotalComida + subtotalCremas;
@@ -643,10 +669,28 @@
       const subtotalAlcohol = state.alcohol.reduce((acc, c) => acc + c.total, 0);
       const subtotalAlojamiento = state.alojamiento.reduce((acc, c) => acc + c.total, 0);
 
-      const generalSharedPool = sumaComidaCremas + margen5Pct + subtotalAlojamiento;
-      const totalExtras = state.members.reduce((acc, m) => acc + (m.extra || 0), 0);
-      const basePerPerson = totalMembers > 0 ? ((generalSharedPool - totalExtras) / totalMembers) : 0;
-      const alcoholPerDrinker = drinkersCount > 0 ? (subtotalAlcohol / drinkersCount) : 0;
+      const totalBaseBudget = sumaComidaCremas + margen5Pct + subtotalAlcohol + subtotalAlojamiento;
+
+      // Descuento para los que no toman: S/ 30 menos
+      const discount = state.nonDrinkerDiscount || 30.00;
+
+      // Conteo de bebedores y no bebedores
+      const nonDrinkers = state.members.filter(m => !m.drinks);
+      const drinkers = state.members.filter(m => m.drinks);
+
+      // Suma de extras manuales (tú tienes +S/ 60 por default)
+      const totalManualExtras = state.members.reduce((acc, m) => acc + (m.extra || 0), 0);
+
+      // Ecuación:
+      // Sea X la cuota base de los que toman (sin extras ni pernoctes).
+      // Cada no bebedor paga: (X - discount)
+      // Cada bebedor paga: X + extraIndividual
+      // Suma total = nonDrinkers.length * (X - discount) + drinkers.length * X + totalManualExtras = totalBaseBudget
+      // totalMembers * X - nonDrinkers.length * discount + totalManualExtras = totalBaseBudget
+      // X = (totalBaseBudget + nonDrinkers.length * discount - totalManualExtras) / totalMembers
+      const X_drinkerBase = totalMembers > 0 
+        ? ((totalBaseBudget + (nonDrinkers.length * discount) - totalManualExtras) / totalMembers) 
+        : 0;
 
       let pernocteTotal = 0;
       let sleepersCount = 0;
@@ -659,26 +703,25 @@
 
       const memberCalcs = state.members.map(m => {
         const pernocteCost = (state.pernoctarActive && m.sleeps) ? state.pernoctarAmount : 0;
-        const alcCost = m.drinks ? alcoholPerDrinker : 0;
-        const total = basePerPerson + alcCost + m.extra + pernocteCost;
-        return { m, basePerPerson, alcCost, pernocteCost, total };
+        let baseQuota = m.drinks ? X_drinkerBase : (X_drinkerBase - discount);
+        const total = baseQuota + m.extra + pernocteCost;
+        return { m, baseQuota, pernocteCost, total };
       });
 
-      const totalTripBudget = generalSharedPool + subtotalAlcohol + pernocteTotal;
+      const totalTripBudget = totalBaseBudget + pernocteTotal;
       const totalCollected = memberCalcs.filter(x => x.m.paid).reduce((acc, c) => acc + c.total, 0);
 
       return {
         totalMembers,
-        drinkersCount,
         subtotalComida,
         subtotalCremas,
         sumaComidaCremas,
         margen5Pct,
         subtotalAlcohol,
         subtotalAlojamiento,
-        generalSharedPool,
-        basePerPerson,
-        alcoholPerDrinker,
+        totalBaseBudget,
+        X_drinkerBase,
+        discount,
         pernocteTotal,
         sleepersCount,
         memberCalcs,
@@ -687,20 +730,22 @@
       };
     }
 
-    // RENDERIZAR SOLO TOTALES Y CIFRAS (SIN RE-CREAR INPUTS PARA NO PERDER FOCO)
     function renderCalculationsOnly() {
       const calc = calculate();
 
       document.getElementById('kpiTotal').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-      document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Base S/ 1,552.76';
+      document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin cobro de pernocte';
 
+      // No bebedores (S/ 30 menos)
       const noToma = calc.memberCalcs.find(x => !x.m.drinks);
-      document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : calc.basePerPerson).toFixed(2)}`;
+      document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : (calc.X_drinkerBase - calc.discount)).toFixed(2)}`;
 
+      // Bebedores
       const toma = calc.memberCalcs.find(x => x.m.drinks && !x.m.isUser);
-      document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : (calc.basePerPerson + calc.alcoholPerDrinker)).toFixed(2)}`;
+      document.getElementById('kpiToma').textContent = `S/ ${(toma ? toma.total : calc.X_drinkerBase).toFixed(2)}`;
 
+      // Tú (+S/ 60 más)
       const user = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
       document.getElementById('kpiTu').textContent = `S/ ${user.total.toFixed(2)}`;
 
@@ -715,7 +760,7 @@
       document.getElementById('recaudadoLabel').textContent = `S/ ${calc.totalCollected.toFixed(2)} de S/ ${calc.totalTripBudget.toFixed(2)} (${pct}%)`;
 
       // Subtotales acordeón
-      document.getElementById('subtotalComprasBadge').textContent = `S/ ${(calc.generalSharedPool + calc.subtotalAlcohol).toFixed(2)}`;
+      document.getElementById('subtotalComprasBadge').textContent = `S/ ${calc.totalBaseBudget.toFixed(2)}`;
       document.getElementById('comidaSubDisplay').textContent = `S/ ${calc.subtotalComida.toFixed(2)}`;
       document.getElementById('cremasSubDisplay').textContent = `S/ ${calc.subtotalCremas.toFixed(2)}`;
       document.getElementById('alcoholSubDisplay').textContent = `S/ ${calc.subtotalAlcohol.toFixed(2)}`;
@@ -723,7 +768,6 @@
       document.getElementById('margenDisplay').textContent = `S/ ${calc.margen5Pct.toFixed(2)}`;
     }
 
-    // RENDERIZADO COMPLETO DEL PADRÓN Y TABLAS
     function render() {
       const calc = calculate();
       updatePernocteUI();
@@ -736,45 +780,45 @@
       calc.memberCalcs.forEach(item => {
         const m = item.m;
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/30 border-b border-slate-800/50';
+        tr.className = 'hover:bg-stone-50 border-b border-stone-100';
 
         tr.innerHTML = `
           <td class="py-2.5 px-2">
             <div class="flex items-center gap-1.5">
-              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-white border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none w-full max-w-[190px]">
-              ${m.isUser ? '<span class="text-[9px] bg-emerald-500/20 text-emerald-400 font-mono font-bold px-1 rounded">Tú</span>' : ''}
+              <input type="text" value="${escapeHtml(m.name)}" oninput="onFriendNameInput('${m.id}', this.value)" class="bg-transparent font-medium text-stone-900 border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none w-full max-w-[190px]">
+              ${m.isUser ? '<span class="text-[9px] bg-forest-100 text-forest-800 font-mono font-bold px-1.5 py-0.5 rounded">Tú (+60)</span>' : ''}
             </div>
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleFriendDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${m.drinks ? 'bg-amber-500/20 text-amber-400' : 'bg-slate-800 text-slate-500'}">
-              ${m.drinks ? 'Sí' : 'No'}
+            <button onclick="toggleFriendDrink('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${m.drinks ? 'bg-amberwarm-100 text-amberwarm-800 border border-amberwarm-700/20' : 'bg-stone-100 text-stone-500'}">
+              ${m.drinks ? 'Sí' : 'No (-30)'}
             </button>
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleFriendSleep('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${item.pernocteCost > 0 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'}">
+            <button onclick="toggleFriendSleep('${m.id}')" class="px-2 py-0.5 rounded text-[11px] font-mono font-bold transition ${item.pernocteCost > 0 ? 'bg-forest-100 text-forest-800 border border-forest-600/30' : 'bg-stone-100 text-stone-400'}">
               ${item.pernocteCost > 0 ? `+S/${item.pernocteCost.toFixed(0)}` : 'S/0'}
             </button>
           </td>
 
           <td class="py-2.5 px-2 text-right">
-            <input type="number" step="5" value="${m.extra}" oninput="onFriendExtraInput('${m.id}', this.value)" class="w-12 text-right font-mono text-white bg-[#090a0f] border border-slate-800 rounded px-1 py-0.5 text-xs focus:outline-none focus:border-emerald-500">
+            <input type="number" step="5" value="${m.extra}" oninput="onFriendExtraInput('${m.id}', this.value)" class="w-12 text-right font-mono text-stone-900 bg-stone-50 border border-stone-200 rounded px-1 py-0.5 text-xs focus:outline-none focus:border-forest-700">
           </td>
 
-          <td class="py-2.5 px-2 text-right font-mono font-bold text-white text-xs sm:text-sm" id="totalCell_${m.id}">
+          <td class="py-2.5 px-2 text-right font-mono font-bold text-stone-900 text-xs sm:text-sm" id="totalCell_${m.id}">
             S/ ${item.total.toFixed(2)}
           </td>
 
           <td class="py-2.5 px-2 text-center">
-            <button id="btnPaid_${m.id}" onclick="toggleFriendPaid('${m.id}')" class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-emerald-600 text-white' : 'bg-slate-800 text-slate-400'}">
+            <button id="btnPaid_${m.id}" onclick="toggleFriendPaid('${m.id}')" class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold transition ${m.paid ? 'bg-forest-700 text-white' : 'bg-stone-100 text-stone-600 border border-stone-200'}">
               ${m.paid ? 'Pagó' : 'Debe'}
             </button>
           </td>
 
           <td class="py-2.5 px-1 text-center">
             ${!m.isUser ? `
-              <button onclick="removeFriend('${m.id}')" class="text-slate-600 hover:text-red-400 p-1">
+              <button onclick="removeFriend('${m.id}')" class="text-stone-300 hover:text-red-500 p-1">
                 <i class="fa-solid fa-xmark"></i>
               </button>
             ` : ''}
@@ -783,7 +827,6 @@
         tbody.appendChild(tr);
       });
 
-      // Tablas de compras detalladas
       renderComprasSubtables();
       renderPhotosGrid();
       renderCalculationsOnly();
@@ -796,10 +839,10 @@
       state.comida.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-slate-500 font-mono">${escapeHtml(item.qty)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-white">
-            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('comida', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
+          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-stone-400 font-mono">${escapeHtml(item.qty)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
+            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('comida', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
           </td>
         `;
         tbC.appendChild(tr);
@@ -811,9 +854,9 @@
       state.cremas.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-white">
-            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('cremas', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
+          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
+            S/ <input type="number" step="0.5" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('cremas', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
           </td>
         `;
         tbCr.appendChild(tr);
@@ -825,9 +868,9 @@
       state.alcohol.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-amber-400">
-            S/ <input type="number" step="1" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alcohol', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none text-amber-400">
+          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-amberwarm-700">
+            S/ <input type="number" step="1" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alcohol', '${item.id}', this.value)" class="w-14 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none text-amberwarm-700">
           </td>
         `;
         tbA.appendChild(tr);
@@ -839,26 +882,25 @@
       state.alojamiento.forEach(item => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-1.5 text-slate-300 font-medium">${escapeHtml(item.name)}</td>
-          <td class="py-1.5 text-right font-mono font-bold text-white">
-            S/ <input type="number" step="10" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alojamiento', '${item.id}', this.value)" class="w-16 text-right bg-transparent border-b border-transparent hover:border-slate-700 focus:border-emerald-500 focus:outline-none">
+          <td class="py-1.5 text-stone-700 font-medium">${escapeHtml(item.name)}</td>
+          <td class="py-1.5 text-right font-mono font-bold text-stone-900">
+            S/ <input type="number" step="10" value="${item.total.toFixed(2)}" oninput="updateExpenseVal('alojamiento', '${item.id}', this.value)" class="w-16 text-right bg-transparent border-b border-transparent hover:border-stone-300 focus:border-forest-700 focus:outline-none">
           </td>
         `;
         tbAl.appendChild(tr);
       });
     }
 
-    // FOTOS DEL CLUB
     function renderPhotosGrid() {
       const grid = document.getElementById('photoGrid');
       grid.innerHTML = '';
       PHOTOS.forEach(p => {
         const div = document.createElement('div');
-        div.className = 'relative h-28 bg-black rounded-xl overflow-hidden border border-slate-800 cursor-pointer group';
+        div.className = 'relative h-28 bg-stone-100 rounded-xl overflow-hidden border border-stone-200 cursor-pointer group shadow-sm';
         div.onclick = () => openLightbox(p.file, p.fb, p.title);
         div.innerHTML = `
           <img src="${p.file}" onerror="this.onerror=null; this.src='${p.fb}';" alt="${escapeHtml(p.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2">
+          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-transparent to-transparent flex items-end p-2">
             <span class="text-[10px] text-white font-medium truncate">${escapeHtml(p.title)}</span>
           </div>
         `;
@@ -866,20 +908,18 @@
       });
     }
 
-    // ACORDEONES
     function toggleSection(id) {
       const el = document.getElementById(id);
       const icon = document.getElementById(`icon-${id}`);
       if (el.classList.contains('hidden')) {
         el.classList.remove('hidden');
-        if (icon) icon.className = 'fa-solid fa-chevron-up text-slate-400 text-xs transition-transform duration-200';
+        if (icon) icon.className = 'fa-solid fa-chevron-up text-stone-500 text-xs transition-transform duration-200';
       } else {
         el.classList.add('hidden');
-        if (icon) icon.className = 'fa-solid fa-chevron-down text-slate-500 text-xs transition-transform duration-200';
+        if (icon) icon.className = 'fa-solid fa-chevron-down text-stone-400 text-xs transition-transform duration-200';
       }
     }
 
-    // LIGHTBOX
     function openLightbox(file, fb, title) {
       const modal = document.getElementById('lightbox');
       const img = document.getElementById('lightboxImg');
@@ -897,7 +937,6 @@
       document.body.style.overflow = 'auto';
     }
 
-    // WHATSAPP
     function updateWhatsAppText() {
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
@@ -906,15 +945,16 @@
       msg += `Presupuesto & Cuotas para el grupo:\n`;
       msg += `------------------------------------\n`;
       msg += `💰 *Total del viaje:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
-      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (No aplica)'}\n`;
-      msg += `🍻 *Alcohol:* S/ ${calc.subtotalAlcohol.toFixed(2)} (dividido solo entre los ${calc.drinkersCount} bebedores = S/ ${calc.alcoholPerDrinker.toFixed(2)} c/u)\n\n`;
+      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n`;
+      msg += `🍻 *Bebedores:* Cuota estándar (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
+      msg += `🥤 *No bebedores:* S/ ${state.nonDrinkerDiscount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
 
-      msg += `👥 *CUOTAS EXACTAS:*\n`;
+      msg += `👥 *CUOTAS INDIVIDUALES:*\n`;
       calc.memberCalcs.forEach(item => {
         const m = item.m;
         const status = m.paid ? '✅ Pagó' : '⏳ Pendiente';
         const tags = [];
-        if (!m.drinks) tags.push('no toma');
+        if (!m.drinks) tags.push('no toma -30');
         if (item.pernocteCost > 0) tags.push(`duerme +S/${item.pernocteCost.toFixed(0)}`);
         if (m.extra > 0) tags.push(`+S/${m.extra} extra`);
         const tagStr = tags.length > 0 ? ` (${tags.join(', ')})` : '';
@@ -950,7 +990,6 @@
       });
     }
 
-    // COMPARTIR ENLACE CON CAMBIOS GUARDADOS
     function copyShareLink() {
       try {
         const json = JSON.stringify(state);
