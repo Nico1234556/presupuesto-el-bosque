@@ -315,35 +315,61 @@
         </div>
       </div>
 
-      <!-- 2. Switch de Pernocte S/ 70 -->
-      <div id="pernoctarBanner" class="bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all">
+      <!-- 2. Tarifa & Control de Pernocte (S/ 35 por noche por persona) -->
+      <div id="pernoctarBanner" class="bg-card border-2 border-brand rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all">
         <div>
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold text-ink flex items-center gap-1.5">
-              <i class="fa-solid fa-bed text-muted"></i> Cobro por Pernoctar
+              <i class="fa-solid fa-bed text-amber-700"></i> Cobro de Pernocte
             </span>
-            <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline">
-              Desactivado (S/ 0)
+            <span id="pernoctePill" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-brand text-white">
+              Activo: S/ 35/noche
             </span>
           </div>
           <p class="text-xs text-muted mt-1">
-            Solo si administración confirma cobro por dormir a los invitados del socio:
+            Tasa oficial del club por invitado que pernocta. Modifica la tarifa diaria o las noches que duerme cada amigo:
           </p>
         </div>
 
-        <div class="space-y-2">
-          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft">
-            <div class="flex items-center text-xs font-mono text-muted gap-1 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
-              <span>S/</span>
-              <input type="number" id="inputPernocte" value="70.00" step="5" min="0" oninput="changePernocteAmt(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none">
+        <div class="space-y-2.5">
+          <!-- Tarifa por noche y switch maestro -->
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft gap-2">
+            <div class="flex items-center text-xs font-mono text-muted gap-1.5 bg-surface-soft border border-hairline rounded-lg px-2.5 py-1">
+              <span class="text-muted/70 text-[11px]">Tarifa:</span>
+              <span class="text-ink font-semibold">S/</span>
+              <input type="number" id="inputPernocteNightRate" value="35.00" step="5" min="0" oninput="changePernocteNightRate(this.value)" class="w-12 bg-transparent text-ink font-semibold text-right focus:outline-none" title="Precio en S/ por persona por cada noche de pernocte">
+              <span class="text-[10px] text-muted">/ noche</span>
             </div>
 
-            <label class="relative inline-flex items-center cursor-pointer select-none">
-              <input type="checkbox" id="switchPernocte" class="sr-only peer" onchange="togglePernocte(this.checked)">
-              <div class="w-13 h-7 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-5.5 after:w-5.5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
-              <span id="switchText" class="ml-2.5 text-xs font-semibold font-mono text-muted">OFF</span>
+            <label class="relative inline-flex items-center cursor-pointer select-none" title="Activar o desactivar cobro de pernocte en todo el grupo">
+              <input type="checkbox" id="switchPernocte" class="sr-only peer" checked onchange="togglePernocte(this.checked)">
+              <div class="w-12 h-6 bg-hairline peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-ink shadow-inner"></div>
+              <span id="switchText" class="ml-2 text-xs font-semibold font-mono text-ink">ON</span>
             </label>
           </div>
+
+          <!-- Selector rápido de noches para todos -->
+          <div class="space-y-1">
+            <div class="flex items-center justify-between text-[11px] text-muted">
+              <span>Asignar noches a todos los invitados:</span>
+              <span id="pernocteTotalNightsDisplay" class="font-mono text-ink font-medium">21 noches (S/ 735)</span>
+            </div>
+            <div class="grid grid-cols-4 gap-1 text-[11px] font-mono">
+              <button onclick="setAllSleepNights(3)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 3 noches a todos los amigos (S/ 105 c/u)">
+                3 noc.<br><span class="text-[10px] text-brand font-semibold">S/105</span>
+              </button>
+              <button onclick="setAllSleepNights(2)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 2 noches a todos los amigos (S/ 70 c/u)">
+                2 noc.<br><span class="text-[10px] text-brand font-semibold">S/70</span>
+              </button>
+              <button onclick="setAllSleepNights(1)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 1 noche a todos los amigos (S/ 35 c/u)">
+                1 noc.<br><span class="text-[10px] text-brand font-semibold">S/35</span>
+              </button>
+              <button onclick="setAllSleepNights(0)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 0 noches a todos (S/ 0 c/u)">
+                0 noc.<br><span class="text-[10px] text-muted font-medium">S/0</span>
+              </button>
+            </div>
+          </div>
+
           <button onclick="saveSection('pernocte')" class="w-full py-1.5 px-2 bg-surface-strong hover:bg-ink hover:text-white border border-hairline rounded-lg text-ink text-[11px] font-semibold transition flex items-center justify-center gap-1 shadow-xs active:scale-98" title="Guardar configuración de pernocte">
             <i class="fa-solid fa-floppy-disk text-[10px]"></i> Guardar Pernocte
           </button>
@@ -454,7 +480,7 @@
             <tr class="text-muted border-b border-hairlinesoft text-[11px]">
               <th class="py-2.5 px-2 font-medium">Amigo / Participante</th>
               <th class="py-2.5 px-2 text-center font-medium">¿Toma Alcohol?</th>
-              <th class="py-2.5 px-2 text-center font-medium">Pernocte</th>
+              <th class="py-2.5 px-2 text-center font-medium" title="S/ 35 por noche por invitado. Ajustable individualmente.">Pernocte (noches)</th>
               <th class="py-2.5 px-2 text-right font-medium">Extra (S/)</th>
               <th class="py-2.5 px-2 text-right font-medium">Total a Pagar</th>
               <th class="py-2.5 px-2 text-center font-medium">¿Pagó?</th>
@@ -558,8 +584,49 @@
             <div>
               <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
                 <span>🏡 Bungalow & Van</span>
-                <span class="font-mono text-ink text-xs font-semibold" id="alojSubDisplay">S/ 800.00</span>
+                <span class="font-mono text-ink text-xs font-semibold" id="alojSubDisplay">S/ 1,300.00</span>
               </div>
+
+              <!-- Configurador Rápido de Bungalows según aforo de 8 personas -->
+              <div class="mb-3 p-2.5 bg-amber-500/10 border border-amber-500/25 rounded-xl space-y-2">
+                <div class="flex items-center justify-between text-xs font-semibold text-amber-950">
+                  <span class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-house-chimney text-amber-700"></i> Aforo: 2 Bungalows
+                  </span>
+                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white border border-amber-300 text-amber-800">
+                    Máx 6 pers/bungalow
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+                  <div class="bg-white/90 p-1.5 rounded-lg border border-amber-200/70">
+                    <div class="text-muted text-[10px]">Vie-Dom (2 noc):</div>
+                    <div class="font-mono font-semibold text-ink flex items-center justify-between">
+                      <span>2 × S/350</span>
+                      <span class="text-amber-900">= S/ 700</span>
+                    </div>
+                  </div>
+                  <div class="bg-white/90 p-1.5 rounded-lg border border-amber-200/70">
+                    <div class="text-muted text-[10px]">Dom-Lun (1 noc):</div>
+                    <div class="font-mono font-semibold text-ink flex items-center justify-between">
+                      <span>2 × S/150</span>
+                      <span class="text-amber-900">= S/ 300</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between pt-1 border-t border-amber-200/60 text-[11px]">
+                  <span class="text-muted">Total 2 Bungalows:</span>
+                  <span class="font-mono font-bold text-ink">S/ 1,000.00</span>
+                </div>
+                <div class="grid grid-cols-2 gap-1 pt-0.5">
+                  <button onclick="applyBungalowConfig(2, 350, 150)" class="py-1 px-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded text-[10px] font-semibold transition text-center shadow-2xs">
+                    ✓ 2 Bungalows (8p)
+                  </button>
+                  <button onclick="applyBungalowConfig(1, 350, 150)" class="py-1 px-1.5 bg-white hover:bg-surface-soft border border-hairline text-ink rounded text-[10px] font-medium transition text-center shadow-2xs">
+                    1 Bungalow (6p)
+                  </button>
+                </div>
+              </div>
+
               <div id="listAlojamiento" class="space-y-2"></div>
             </div>
             <div class="pt-2.5 border-t border-hairlinesoft flex items-center gap-2">
@@ -928,8 +995,12 @@
         label: 'Viernes 18 al Lunes 21 Dic (3 Noches)',
         shortLabel: 'Vie 18 — Lun 21 Dic'
       },
-      pernoctarActive: false,      // DESACTIVADO POR DEFAULT
-      pernoctarAmount: 70.00,
+      pernoctarActive: true,       // ACTIVADO (Tasa oficial de invitado por noche)
+      pernoctarNightRate: 35.00,   // S/ 35 POR NOCHE POR PERSONA
+      pernoctarAmount: 35.00,      // Compatibilidad
+      bungalowsCount: 2,           // 2 BUNGALOWS PARA 8 PERSONAS (Aforo máx 6 pers/bungalow)
+      bungalowWeekendRate: 350.00, // S/ 350 fin de semana (2 noches)
+      bungalowWeekdayRate: 150.00, // S/ 150 noche adicional dom-lun
       yapeNumber: '987 654 321 (Tú)',
       nonDrinkerDiscount: 20.00,   // S/ 20 MENOS PARA NO BEBEDORES
       userExtra: 60.00,            // MÍNIMO S/ 60 MÁS PARA EL ORGANIZADOR
@@ -960,21 +1031,22 @@
         { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, etc.)', qty: '5 botellas', total: 250.00 },
         { id: 'a2', name: 'Cerveza Flying Fish lima limón (18 latas)', qty: '18 latas', total: 71.70 },
       ],
-      // 4. Alojamiento & Movilidad (S/ 800.00)
+      // 4. Alojamiento & Movilidad (S/ 1,300.00: 2 Bungalows S/ 1,000 + Van S/ 300)
       alojamiento: [
-        { id: 'al1', name: 'Bungaló El Bosque (3 noches: Vie 18 - Lun 21)', qty: '3 noches', total: 500.00 },
-        { id: 'al2', name: 'Movilidad ida viernes y vuelta lunes', qty: 'Ida y vuelta', total: 300.00 },
+        { id: 'al1', name: '2 Bungalows El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)', qty: '2 bungalows (2 noches)', total: 700.00 },
+        { id: 'al2', name: '2 Bungalows El Bosque - Noche Extra (Dom 20 - Lun 21)', qty: '2 bungalows (1 noche)', total: 300.00 },
+        { id: 'al3', name: 'Movilidad ida viernes y vuelta lunes (Van para 8 pers)', qty: 'Ida y vuelta', total: 300.00 },
       ],
-      // 5. Los 8 Participantes
+      // 5. Los 8 Participantes (Tú: S/ 0 pernocte como nieto de socia; 7 Amigos: 3 noches S/ 105 c/u)
       members: [
-        { id: 'm1', name: 'Tú (Organizador / Nieto de socia)', drinks: true, sleeps: false, extra: 60.00, paid: false, isUser: true },
-        { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm5', name: 'Invitado 4 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm6', name: 'Invitado 5 (Amigo)', drinks: true, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm7', name: 'Invitado 6 (No toma)', drinks: false, sleeps: false, extra: 0.00, paid: false },
-        { id: 'm8', name: 'Invitado 7 (No toma)', drinks: false, sleeps: false, extra: 0.00, paid: false },
+        { id: 'm1', name: 'Tú (Organizador / Nieto de socia)', drinks: true, sleeps: false, sleepNights: 0, extra: 60.00, paid: false, isUser: true },
+        { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm5', name: 'Invitado 4 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm6', name: 'Invitado 5 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm7', name: 'Invitado 6 (No toma)', drinks: false, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+        { id: 'm8', name: 'Invitado 7 (No toma)', drinks: false, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
       ]
     };
 
@@ -1000,15 +1072,55 @@
       const res = JSON.parse(JSON.stringify(DEFAULT_DATA));
       if (parsed.tripDates && typeof parsed.tripDates === 'object') res.tripDates = parsed.tripDates;
       if (typeof parsed.pernoctarActive === 'boolean') res.pernoctarActive = parsed.pernoctarActive;
-      if (typeof parsed.pernoctarAmount === 'number') res.pernoctarAmount = parsed.pernoctarAmount;
+
+      res.pernoctarNightRate = (typeof parsed.pernoctarNightRate === 'number' && parsed.pernoctarNightRate >= 0)
+        ? parsed.pernoctarNightRate
+        : 35.00;
+      res.pernoctarAmount = res.pernoctarNightRate;
+
+      res.bungalowsCount = (typeof parsed.bungalowsCount === 'number') ? parsed.bungalowsCount : 2;
+      res.bungalowWeekendRate = (typeof parsed.bungalowWeekendRate === 'number') ? parsed.bungalowWeekendRate : 350.00;
+      res.bungalowWeekdayRate = (typeof parsed.bungalowWeekdayRate === 'number') ? parsed.bungalowWeekdayRate : 150.00;
+
       if (parsed.yapeNumber) res.yapeNumber = parsed.yapeNumber;
       if (typeof parsed.nonDrinkerDiscount === 'number') res.nonDrinkerDiscount = parsed.nonDrinkerDiscount;
       if (typeof parsed.userExtra === 'number') res.userExtra = parsed.userExtra;
       if (Array.isArray(parsed.comida) && parsed.comida.length > 0) res.comida = parsed.comida;
       if (Array.isArray(parsed.cremas) && parsed.cremas.length > 0) res.cremas = parsed.cremas;
       if (Array.isArray(parsed.alcohol) && parsed.alcohol.length > 0) res.alcohol = parsed.alcohol;
-      if (Array.isArray(parsed.alojamiento) && parsed.alojamiento.length > 0) res.alojamiento = parsed.alojamiento;
-      if (Array.isArray(parsed.members) && parsed.members.length > 0) res.members = parsed.members;
+
+      // Migrar alojamiento antiguo de 1 bungalow a 2 bungalows para 8 personas si corresponde
+      if (Array.isArray(parsed.alojamiento) && parsed.alojamiento.length > 0) {
+        const hasOldSingleBungalow = parsed.alojamiento.some(a => (a.total === 500.00 || a.name.includes('Bungaló El Bosque (3 noches')));
+        if (hasOldSingleBungalow) {
+          res.alojamiento = JSON.parse(JSON.stringify(DEFAULT_DATA.alojamiento));
+        } else {
+          res.alojamiento = parsed.alojamiento;
+        }
+      } else {
+        res.alojamiento = JSON.parse(JSON.stringify(DEFAULT_DATA.alojamiento));
+      }
+
+      if (Array.isArray(parsed.members) && parsed.members.length > 0) {
+        res.members = parsed.members.map(m => {
+          let sleepNights = 3;
+          if (typeof m.sleepNights === 'number') {
+            sleepNights = m.sleepNights;
+          } else if (typeof m.sleeps === 'boolean') {
+            sleepNights = m.sleeps ? (res.tripDates?.nights || 3) : 0;
+          } else {
+            sleepNights = m.isUser ? 0 : 3;
+          }
+          return {
+            ...m,
+            sleeps: sleepNights > 0,
+            sleepNights: sleepNights
+          };
+        });
+      } else {
+        res.members = JSON.parse(JSON.stringify(DEFAULT_DATA.members));
+      }
+
       if (parsed._clientTimestamp) res._clientTimestamp = parsed._clientTimestamp;
       return res;
     }
@@ -1024,9 +1136,9 @@
           }
         } catch (e) {}
       }
-      // 2. Carga desde LocalStorage
+      // 2. Carga desde LocalStorage (v8 primero, luego versiones previas)
       try {
-        const saved = localStorage.getItem('el_bosque_v7') || localStorage.getItem('el_bosque_v6') || localStorage.getItem('el_bosque_v5');
+        const saved = localStorage.getItem('el_bosque_v8') || localStorage.getItem('el_bosque_v7') || localStorage.getItem('el_bosque_v6') || localStorage.getItem('el_bosque_v5');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (parsed && parsed.members) {
@@ -1042,7 +1154,7 @@
     function saveState(shouldSyncCloud = true) {
       try {
         state._clientTimestamp = Date.now();
-        localStorage.setItem('el_bosque_v7', JSON.stringify(state));
+        localStorage.setItem('el_bosque_v8', JSON.stringify(state));
         showSavedIndicator();
         if (shouldSyncCloud) {
           triggerCloudSync();
@@ -1108,9 +1220,9 @@
 
             // Solo adoptar cambios de la nube si trae datos completos válidos
             const cloudHasProducts = Array.isArray(result.data.comida) && result.data.comida.length > 0;
-            if (cloudHasProducts && (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v7'))) {
+            if (cloudHasProducts && (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v8'))) {
               state = sanitizeLoadedState(result.data);
-              localStorage.setItem('el_bosque_v7', JSON.stringify(state));
+              localStorage.setItem('el_bosque_v8', JSON.stringify(state));
               render();
               if (!isInitial) showToast('☁️ Cambios del grupo sincronizados');
             }
@@ -1194,7 +1306,8 @@
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales (Vie 18 a Lun 21 Dic, S/ 20 menos no bebedores, S/ 60 más tú y pernocte desactivado)?')) {
+      if (confirm('¿Restablecer el presupuesto a los valores originales (Vie 18 a Lun 21 Dic, 2 Bungalows para 8 personas, S/ 35/noche pernocte, S/ 20 menos no bebedores y S/ 60 más tú)?')) {
+        localStorage.removeItem('el_bosque_v8');
         localStorage.removeItem('el_bosque_v7');
         localStorage.removeItem('el_bosque_v6');
         localStorage.removeItem('el_bosque_v5');
@@ -1212,20 +1325,16 @@
       if (!preset) return;
       state.tripDates = { ...preset };
 
-      // Actualizar automáticamente la descripción del bungaló
-      if (state.alojamiento && state.alojamiento[0]) {
-        state.alojamiento[0].name = `Bungaló El Bosque (${preset.nights} noche${preset.nights > 1 ? 's' : ''}: ${preset.shortLabel})`;
-        state.alojamiento[0].qty = `${preset.nights} noche${preset.nights > 1 ? 's' : ''}`;
-        
-        // Ajuste sugerido proporcional si el usuario no lo ha personalizado
-        if (preset.nights === 2 && state.alojamiento[0].total === 500.00) {
-          state.alojamiento[0].total = 350.00;
-        } else if (preset.nights === 3 && state.alojamiento[0].total === 350.00) {
-          state.alojamiento[0].total = 500.00;
-        } else if (preset.nights === 1 && (state.alojamiento[0].total === 350.00 || state.alojamiento[0].total === 500.00)) {
-          state.alojamiento[0].total = 200.00;
+      // Ajustar automáticamente noches de pernocte si exceden la duración
+      state.members.forEach(m => {
+        if (typeof m.sleepNights === 'number' && m.sleepNights > preset.nights) {
+          m.sleepNights = preset.nights;
+          m.sleeps = m.sleepNights > 0;
         }
-      }
+      });
+
+      // Actualizar automáticamente los 2 bungalows según la duración del viaje
+      applyBungalowConfig(state.bungalowsCount || 2, state.bungalowWeekendRate || 350.00, state.bungalowWeekdayRate || 150.00, false);
 
       saveState();
       render();
@@ -1246,29 +1355,138 @@
         state.tripDates.preset = 'custom';
         state.tripDates.label = `${state.tripDates.startDay || 'Viernes'} al ${state.tripDates.endDay || 'Día'} (${newNights} Noches)`;
         state.tripDates.shortLabel = `${newNights} Noches`;
-        if (state.alojamiento && state.alojamiento[0]) {
-          state.alojamiento[0].qty = `${newNights} noches`;
-        }
+        applyBungalowConfig(state.bungalowsCount || 2, state.bungalowWeekendRate || 350.00, state.bungalowWeekdayRate || 150.00, false);
         saveState();
         render();
         showToast(`${newNights} noches seleccionadas`);
       }
     }
 
-    // CONTROL DEL SWITCH DE PERNOCTE
+    // CONFIGURACIÓN DINÁMICA DE BUNGALOWS (2 BUNGALOWS PARA 8 PERSONAS POR AFORO MÁX DE 6)
+    function applyBungalowConfig(count, weekendRate, weekdayRate, notify = true) {
+      state.bungalowsCount = count;
+      state.bungalowWeekendRate = weekendRate;
+      state.bungalowWeekdayRate = weekdayRate;
+
+      const nights = state.tripDates?.nights || 3;
+      const weekendTotal = count * weekendRate;
+      const weekdayNights = Math.max(0, nights - 2);
+      const weekdayTotal = count * weekdayRate * weekdayNights;
+
+      state.alojamiento = state.alojamiento || [];
+
+      // 1. Paquete Fin de Semana
+      let itemWeekend = state.alojamiento.find(a => a.id === 'al1' || a.name.includes('Fin de Semana') || a.name.includes('Bungaló'));
+      if (itemWeekend) {
+        itemWeekend.id = 'al1';
+        itemWeekend.name = `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)`;
+        itemWeekend.qty = `${count} bungalow${count > 1 ? 's' : ''} (S/${weekendRate.toFixed(0)} c/u)`;
+        itemWeekend.total = weekendTotal;
+      } else {
+        state.alojamiento.unshift({
+          id: 'al1',
+          name: `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)`,
+          qty: `${count} bungalow${count > 1 ? 's' : ''} (S/${weekendRate.toFixed(0)} c/u)`,
+          total: weekendTotal
+        });
+      }
+
+      // 2. Noche adicional Dom-Lun si el viaje dura 3+ noches
+      if (weekdayNights > 0) {
+        let itemWeekday = state.alojamiento.find(a => a.id === 'al2' || a.name.includes('Noche Extra') || a.name.includes('Dom-Lun'));
+        if (itemWeekday) {
+          itemWeekday.id = 'al2';
+          itemWeekday.name = `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Noche Extra (Dom 20 - Lun 21)`;
+          itemWeekday.qty = `${count} bungalow${count > 1 ? 's' : ''} (${weekdayNights} noc: S/${weekdayRate.toFixed(0)} c/u)`;
+          itemWeekday.total = weekdayTotal;
+        } else {
+          state.alojamiento.splice(1, 0, {
+            id: 'al2',
+            name: `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Noche Extra (Dom 20 - Lun 21)`,
+            qty: `${count} bungalow${count > 1 ? 's' : ''} (${weekdayNights} noc: S/${weekdayRate.toFixed(0)} c/u)`,
+            total: weekdayTotal
+          });
+        }
+      } else {
+        state.alojamiento = state.alojamiento.filter(a => a.id !== 'al2' && !a.name.includes('Noche Extra'));
+      }
+
+      // 3. Movilidad en van si no existe
+      if (!state.alojamiento.some(a => a.name.includes('Movilidad') || a.name.includes('Van'))) {
+        state.alojamiento.push({
+          id: 'al3',
+          name: 'Movilidad ida viernes y vuelta lunes (Van para 8 pers)',
+          qty: 'Ida y vuelta',
+          total: 300.00
+        });
+      }
+
+      saveState();
+      render();
+      if (notify) showToast(`Configurado: ${count} bungalow${count > 1 ? 's' : ''} (S/ ${(weekendTotal + weekdayTotal).toFixed(0)})`);
+    }
+
+    // CONTROL DEL SWITCH Y TARIFA DE PERNOCTE
     function togglePernocte(val) {
       state.pernoctarActive = val;
-      state.members.forEach(m => {
-        m.sleeps = state.pernoctarActive && !m.isUser;
-      });
       saveState();
+      render();
+      showToast(val ? 'Cobro de pernocte activado' : 'Cobro de pernocte desactivado');
+    }
+
+    function changePernocteNightRate(val) {
+      const num = Math.max(0, parseFloat(val) || 0);
+      state.pernoctarNightRate = num;
+      state.pernoctarAmount = num;
+      saveState();
+      renderCalculationsOnly();
       render();
     }
 
     function changePernocteAmt(val) {
-      state.pernoctarAmount = parseFloat(val) || 0;
+      changePernocteNightRate(val);
+    }
+
+    function setAllSleepNights(nights) {
+      state.members.forEach(m => {
+        if (!m.isUser) {
+          m.sleepNights = nights;
+          m.sleeps = nights > 0;
+        }
+      });
+      if (nights > 0) state.pernoctarActive = true;
       saveState();
-      renderCalculationsOnly();
+      render();
+      showToast(`Asignadas ${nights} noche${nights === 1 ? '' : 's'} a todos los amigos`);
+    }
+
+    function stepFriendSleepNights(id, delta) {
+      const m = state.members.find(x => x.id === id);
+      if (m) {
+        const cur = (typeof m.sleepNights === 'number') ? m.sleepNights : (m.sleeps ? (state.tripDates?.nights || 3) : 0);
+        m.sleepNights = Math.max(0, Math.min(7, cur + delta));
+        m.sleeps = m.sleepNights > 0;
+        if (m.sleepNights > 0 && !state.pernoctarActive) {
+          state.pernoctarActive = true;
+        }
+        saveState();
+        render();
+      }
+    }
+
+    function cycleFriendSleepNights(id) {
+      const m = state.members.find(x => x.id === id);
+      if (m) {
+        const maxNights = state.tripDates?.nights || 3;
+        const cur = (typeof m.sleepNights === 'number') ? m.sleepNights : (m.sleeps ? maxNights : 0);
+        m.sleepNights = (cur >= maxNights) ? 0 : (cur + 1);
+        m.sleeps = m.sleepNights > 0;
+        if (m.sleepNights > 0 && !state.pernoctarActive) {
+          state.pernoctarActive = true;
+        }
+        saveState();
+        render();
+      }
     }
 
     // CONTROL DE AMIGOS
@@ -1282,12 +1500,7 @@
     }
 
     function toggleFriendSleep(id) {
-      const m = state.members.find(x => x.id === id);
-      if (m) {
-        m.sleeps = !m.sleeps;
-        saveState();
-        render();
-      }
+      cycleFriendSleepNights(id);
     }
 
     function toggleFriendPaid(id) {
@@ -1320,17 +1533,19 @@
     function addFriend() {
       const newId = 'm_' + Date.now();
       const num = state.members.length + 1;
+      const tripNights = state.tripDates?.nights || 3;
       state.members.push({
         id: newId,
         name: `Invitado ${num}`,
         drinks: true,
         sleeps: state.pernoctarActive,
+        sleepNights: state.pernoctarActive ? tripNights : 0,
         extra: 0.00,
         paid: false
       });
       saveState();
       render();
-      showToast('Amigo añadido');
+      showToast(`Amigo añadido: Invitado ${num}`);
     }
 
     function removeFriend(id) {
@@ -1445,18 +1660,38 @@
 
       let pernocteTotal = 0;
       let sleepersCount = 0;
+      let totalGuestNights = 0;
+      const nightRate = (typeof state.pernoctarNightRate === 'number' && state.pernoctarNightRate >= 0) 
+        ? state.pernoctarNightRate 
+        : 35.00;
+
       state.members.forEach(m => {
-        if (state.pernoctarActive && m.sleeps) {
-          sleepersCount++;
-          pernocteTotal += state.pernoctarAmount;
+        let nights = 0;
+        if (state.pernoctarActive) {
+          if (typeof m.sleepNights === 'number') {
+            nights = m.sleepNights;
+          } else if (m.sleeps) {
+            nights = state.tripDates?.nights || 3;
+          }
         }
+        if (nights > 0) sleepersCount++;
+        totalGuestNights += nights;
+        pernocteTotal += (nights * nightRate);
       });
 
       const memberCalcs = state.members.map(m => {
-        const pernocteCost = (state.pernoctarActive && m.sleeps) ? state.pernoctarAmount : 0;
+        let nights = 0;
+        if (state.pernoctarActive) {
+          if (typeof m.sleepNights === 'number') {
+            nights = m.sleepNights;
+          } else if (m.sleeps) {
+            nights = state.tripDates?.nights || 3;
+          }
+        }
+        const pernocteCost = nights * nightRate;
         let baseQuota = m.drinks ? X_drinkerBase : (X_drinkerBase - discount);
         const total = baseQuota + (parseFloat(m.extra) || 0) + pernocteCost;
-        return { m, baseQuota, pernocteCost, total };
+        return { m, baseQuota, pernocteCost, nights, total };
       });
 
       const totalTripBudget = totalBaseBudget + pernocteTotal;
@@ -1477,6 +1712,8 @@
         discount,
         pernocteTotal,
         sleepersCount,
+        totalGuestNights,
+        nightRate,
         memberCalcs,
         totalTripBudget,
         totalCollected
@@ -1490,7 +1727,9 @@
       // KPIs
       document.getElementById('kpiTotal').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
       document.getElementById('barTotalDisplay').textContent = `S/ ${calc.totalTripBudget.toFixed(2)}`;
-      document.getElementById('kpiBaseSub').textContent = state.pernoctarActive ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte` : 'Sin cobro de pernocte';
+      document.getElementById('kpiBaseSub').textContent = (state.pernoctarActive && calc.pernocteTotal > 0)
+        ? `+S/ ${calc.pernocteTotal.toFixed(0)} pernocte (${calc.totalGuestNights} noc-pers)` 
+        : 'Sin cobro de pernocte';
 
       const noToma = calc.memberCalcs.find(x => !x.m.drinks);
       document.getElementById('kpiNoToma').textContent = `S/ ${(noToma ? noToma.total : (calc.X_drinkerBase - calc.discount)).toFixed(2)}`;
@@ -1567,7 +1806,6 @@
     function render() {
       const calc = calculate();
       updatePernocteUI();
-      document.getElementById('inputPernocte').value = state.pernoctarAmount.toFixed(2);
 
       const tbody = document.getElementById('friendsTbody');
       tbody.innerHTML = '';
@@ -1591,10 +1829,21 @@
             </button>
           </td>
 
-          <td class="py-2.5 px-2 text-center">
-            <button onclick="toggleFriendSleep('${m.id}')" class="px-2.5 py-1 rounded-full text-xs font-medium transition ${item.pernocteCost > 0 ? 'bg-brand text-white' : 'bg-surface-soft text-muted border border-hairlinesoft'}">
-              ${item.pernocteCost > 0 ? `+S/${item.pernocteCost.toFixed(0)}` : 'S/0'}
-            </button>
+          <td class="py-2 px-2 text-center">
+            <div class="inline-flex items-center bg-white border border-hairline rounded-lg p-0.5 shadow-2xs">
+              <button onclick="stepFriendSleepNights('${m.id}', -1)" class="w-6 h-6 rounded hover:bg-surface-soft text-muted hover:text-ink font-bold text-xs flex items-center justify-center transition active:scale-95" title="Quitar 1 noche de pernocte">-</button>
+              
+              <button onclick="cycleFriendSleepNights('${m.id}')" class="px-2 py-0.5 text-center transition cursor-pointer hover:bg-surface-soft/60 rounded" title="Clic para alternar noches (0, 1, 2, 3)">
+                <div class="font-mono text-xs font-bold leading-tight ${item.pernocteCost > 0 ? 'text-brand' : 'text-muted'}">
+                  ${item.nights} ${item.nights === 1 ? 'noc' : 'noc'}
+                </div>
+                <div class="text-[10px] font-mono leading-tight ${item.pernocteCost > 0 ? 'text-emerald-700 font-semibold' : 'text-muted/60'}">
+                  ${item.pernocteCost > 0 ? `+S/${item.pernocteCost.toFixed(0)}` : 'S/0'}
+                </div>
+              </button>
+              
+              <button onclick="stepFriendSleepNights('${m.id}', 1)" class="w-6 h-6 rounded hover:bg-surface-soft text-muted hover:text-ink font-bold text-xs flex items-center justify-center transition active:scale-95" title="Añadir 1 noche de pernocte">+</button>
+            </div>
           </td>
 
           <td class="py-2.5 px-2 text-right">
@@ -1637,21 +1886,42 @@
       const text = document.getElementById('switchText');
       const pill = document.getElementById('pernoctePill');
       const box = document.getElementById('pernoctarBanner');
+      const inputRate = document.getElementById('inputPernocteNightRate');
+      const nightsDisplay = document.getElementById('pernocteTotalNightsDisplay');
+
+      const nightRate = (typeof state.pernoctarNightRate === 'number') ? state.pernoctarNightRate : 35.00;
+      if (inputRate) inputRate.value = nightRate.toFixed(2);
+
+      const calc = calculate();
 
       if (state.pernoctarActive) {
-        sw.checked = true;
-        text.textContent = 'ON';
-        text.className = 'ml-2.5 text-xs font-semibold font-mono text-ink';
-        pill.textContent = `+S/ ${state.pernoctarAmount.toFixed(0)} Activado`;
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-brand text-white';
-        box.className = 'bg-card border-2 border-brand rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
+        if (sw) sw.checked = true;
+        if (text) {
+          text.textContent = 'ON';
+          text.className = 'ml-2 text-xs font-semibold font-mono text-ink';
+        }
+        if (pill) {
+          pill.textContent = `Activo: S/ ${nightRate.toFixed(0)}/noc`;
+          pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-brand text-white';
+        }
+        if (box) box.className = 'bg-card border-2 border-brand rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
       } else {
-        sw.checked = false;
-        text.textContent = 'OFF';
-        text.className = 'ml-2.5 text-xs font-semibold font-mono text-muted';
-        pill.textContent = 'Desactivado (S/ 0)';
-        pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline';
-        box.className = 'bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
+        if (sw) sw.checked = false;
+        if (text) {
+          text.textContent = 'OFF';
+          text.className = 'ml-2 text-xs font-semibold font-mono text-muted';
+        }
+        if (pill) {
+          pill.textContent = 'Desactivado (S/ 0)';
+          pill.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold uppercase bg-surface-soft text-muted border border-hairline';
+        }
+        if (box) box.className = 'bg-card border border-hairline rounded-2xl p-4 sm:p-5 shadow-xs space-y-3 flex flex-col justify-between transition-all';
+      }
+
+      if (nightsDisplay) {
+        nightsDisplay.textContent = state.pernoctarActive 
+          ? `${calc.totalGuestNights} noches (S/ ${calc.pernocteTotal.toFixed(0)})`
+          : 'Desactivado (S/ 0)';
       }
     }
 
@@ -1780,6 +2050,7 @@
       const calc = calculate();
       const yape = state.yapeNumber || '987 654 321';
       const tripDates = state.tripDates || TRIP_PRESETS['vie-lun'];
+      const nightRate = (typeof state.pernoctarNightRate === 'number') ? state.pernoctarNightRate : 35.00;
 
       // Generar enlace inteligente con estado completo incrustado en el hash
       const raw = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
@@ -1787,12 +2058,13 @@
 
       let msg = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴\n`;
       msg += `📅 *Fecha:* ${tripDates.label}\n`;
-      msg += `📍 *Lugar:* Sede Campestre Chosica (Bungalows & Parrilla)\n`;
+      msg += `📍 *Lugar:* Sede Campestre Chosica (2 Bungalows & Parrilla)\n`;
       msg += `👥 *Participantes:* ${calc.totalMembers} personas (${calc.drinkersCount} beben / ${calc.nonDrinkersCount} no beben)\n`;
+      msg += `🏡 *Alojamiento:* 2 Bungalows (aforo máx 6 pers c/u) = S/ 1,000 + Van = S/ 1,300\n`;
+      msg += `🌙 *Pernoctar:* ${state.pernoctarActive ? `S/ ${nightRate.toFixed(0)}/noche por invitado (${calc.totalGuestNights} noches-persona = S/ ${calc.pernocteTotal.toFixed(0)})` : 'S/ 0 (Desactivado / No aplica)'}\n`;
       msg += `------------------------------------\n`;
       msg += `💰 *Presupuesto total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
-      msg += `🏨 *Pernoctar:* ${state.pernoctarActive ? `S/ ${state.pernoctarAmount.toFixed(0)} por persona` : 'S/ 0 (Desactivado / No aplica)'}\n`;
-      msg += `🍻 *Bebedores:* Cuota estándar (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
+      msg += `🍻 *Bebedores:* Cuota base (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
       msg += `🥤 *No bebedores:* S/ ${calc.discount.toFixed(0)} MENOS (S/ ${(calc.X_drinkerBase - calc.discount).toFixed(2)})\n\n`;
 
       msg += `👥 *CUOTAS INDIVIDUALES:*\n`;
@@ -1801,7 +2073,7 @@
         const status = m.paid ? '✅ Pagó' : '⏳ Pendiente';
         const tags = [];
         if (!m.drinks) tags.push(`no toma -${calc.discount.toFixed(0)}`);
-        if (item.pernocteCost > 0) tags.push(`duerme +S/${item.pernocteCost.toFixed(0)}`);
+        if (item.pernocteCost > 0) tags.push(`pernocta ${item.nights} noc. +S/${item.pernocteCost.toFixed(0)}`);
         if (m.extra > 0) tags.push(`+S/${m.extra} extra`);
         const tagStr = tags.length > 0 ? ` (${tags.join(', ')})` : '';
         msg += `• *${m.name}:* S/ ${item.total.toFixed(2)}${tagStr} [${status}]\n`;
@@ -1809,7 +2081,7 @@
 
       msg += `\n🔗 *Ver y editar presupuesto en vivo:*\n${shareUrl}\n`;
       msg += `\n💳 *Yape / Plin:* ${yape}\n`;
-      msg += `¡Envíen captura al transferir para cerrar el bungaló! 🏊‍♂️🥩`;
+      msg += `¡Envíen captura al transferir para cerrar los 2 bungalows! 🏊‍♂️🥩`;
 
       document.getElementById('whatsappPreview').value = msg;
     }
@@ -1866,7 +2138,7 @@
     // Auto-guardado de seguridad al cerrar o refrescar
     window.addEventListener('beforeunload', () => {
       try {
-        localStorage.setItem('el_bosque_v7', JSON.stringify(state));
+        localStorage.setItem('el_bosque_v8', JSON.stringify(state));
       } catch (e) {}
     });
 
