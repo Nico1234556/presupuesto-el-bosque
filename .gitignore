@@ -1,3 +1,14 @@
+# Node dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Production build
+dist/
+dist-ssr/
+*.local
+
 # OS generated files
 Thumbs.db
 Thumbs.db:encryptable
@@ -16,6 +27,7 @@ ehthumbs_vista.db
 *.sln
 *.sw?
 
-# Reference design assets
+# Reference design assets & backup
 travelio*.png
 Travelio*.html
+index.html.vanilla.bak
