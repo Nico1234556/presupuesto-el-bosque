@@ -351,17 +351,17 @@
           <!-- Selector rápido de noches para todos -->
           <div class="space-y-1">
             <div class="flex items-center justify-between text-[11px] text-muted">
-              <span>Asignar noches a todos los invitados:</span>
-              <span id="pernocteTotalNightsDisplay" class="font-mono text-ink font-medium">21 noches (S/ 735)</span>
+              <span>Asignar noches a los 8 participantes:</span>
+              <span id="pernocteTotalNightsDisplay" class="font-mono text-ink font-medium">24 noches (S/ 840)</span>
             </div>
             <div class="grid grid-cols-4 gap-1 text-[11px] font-mono">
-              <button onclick="setAllSleepNights(3)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 3 noches a todos los amigos (S/ 105 c/u)">
+              <button onclick="setAllSleepNights(3)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 3 noches a los 8 participantes (S/ 105 c/u)">
                 3 noc.<br><span class="text-[10px] text-brand font-semibold">S/105</span>
               </button>
-              <button onclick="setAllSleepNights(2)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 2 noches a todos los amigos (S/ 70 c/u)">
+              <button onclick="setAllSleepNights(2)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 2 noches a los 8 participantes (S/ 70 c/u)">
                 2 noc.<br><span class="text-[10px] text-brand font-semibold">S/70</span>
               </button>
-              <button onclick="setAllSleepNights(1)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 1 noche a todos los amigos (S/ 35 c/u)">
+              <button onclick="setAllSleepNights(1)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 1 noche a los 8 participantes (S/ 35 c/u)">
                 1 noc.<br><span class="text-[10px] text-brand font-semibold">S/35</span>
               </button>
               <button onclick="setAllSleepNights(0)" class="py-1 px-1 bg-surface-soft hover:bg-surface-strong border border-hairlinesoft rounded text-center transition" title="Asignar 0 noches a todos (S/ 0 c/u)">
@@ -1039,9 +1039,9 @@
         { id: 'al2', name: '1 Departamento El Bosque - Noche Extra (Dom 20 - Lun 21)', qty: '1 depa (1 noche extra)', total: 150.00 },
         { id: 'al3', name: 'Movilidad ida viernes y vuelta lunes (Van para 8 pers)', qty: 'Ida y vuelta', total: 300.00 },
       ],
-      // 5. Los 8 Participantes (Tú: S/ 0 pernocte como nieto de socia; 7 Amigos: 3 noches S/ 105 c/u)
+      // 5. Los 8 Participantes (Todos pagan pernocte al no ser socios titulares: 3 noches S/ 105 c/u)
       members: [
-        { id: 'm1', name: 'Tú (Organizador / Nieto de socia)', drinks: true, sleeps: false, sleepNights: 0, extra: 100.00, paid: false, isUser: true },
+        { id: 'm1', name: 'Tú (Organizador)', drinks: true, sleeps: true, sleepNights: 3, extra: 100.00, paid: false, isUser: true },
         { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
         { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
         { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
@@ -1125,7 +1125,7 @@
           } else if (typeof m.sleeps === 'boolean') {
             sleepNights = m.sleeps ? (res.tripDates?.nights || 3) : 0;
           } else {
-            sleepNights = m.isUser ? 0 : 3;
+            sleepNights = res.tripDates?.nights || 3;
           }
           let extra = typeof m.extra === 'number' ? m.extra : 0.00;
           if (m.isUser && (extra === 60.00 || extra === 0.00)) {
@@ -1715,15 +1715,13 @@
 
     function setAllSleepNights(nights) {
       state.members.forEach(m => {
-        if (!m.isUser) {
-          m.sleepNights = nights;
-          m.sleeps = nights > 0;
-        }
+        m.sleepNights = nights;
+        m.sleeps = nights > 0;
       });
       if (nights > 0) state.pernoctarActive = true;
       saveState();
       render();
-      showToast(`Asignadas ${nights} noche${nights === 1 ? '' : 's'} a todos los amigos`);
+      showToast(`Asignadas ${nights} noche${nights === 1 ? '' : 's'} a todos los participantes`);
     }
 
     function stepFriendSleepNights(id, delta) {
