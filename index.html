@@ -583,48 +583,47 @@
           <div class="bg-surface-soft/60 border border-hairlinesoft p-3.5 rounded-2xl flex flex-col justify-between space-y-3">
             <div>
               <div class="flex justify-between items-center mb-2.5 font-semibold text-ink border-b border-hairlinesoft pb-1.5">
-                <span>🏡 Bungalow & Van</span>
-                <span class="font-mono text-ink text-xs font-semibold" id="alojSubDisplay">S/ 1,300.00</span>
+                <span>🏡 Alojamiento & Van</span>
+                <span class="font-mono text-ink text-xs font-semibold" id="alojSubDisplay">S/ 900.00</span>
               </div>
 
-              <!-- Configurador Rápido de Bungalows según aforo de 8 personas -->
-              <div class="mb-3 p-2.5 bg-amber-500/10 border border-amber-500/25 rounded-xl space-y-2">
-                <div class="flex items-center justify-between text-xs font-semibold text-amber-950">
+              <!-- Selector y Comparador: Departamento vs 2 Bungalows vs 1 Bungalow -->
+              <div class="mb-3 p-2.5 bg-card border border-hairline rounded-xl space-y-2.5 shadow-2xs">
+                
+                <!-- Encabezado del selector -->
+                <div class="flex items-center justify-between text-xs font-semibold text-ink">
                   <span class="flex items-center gap-1.5">
-                    <i class="fa-solid fa-house-chimney text-amber-700"></i> Aforo: 2 Bungalows
+                    <i class="fa-solid fa-hotel text-brand"></i> Tipo de Hospedaje
                   </span>
-                  <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white border border-amber-300 text-amber-800">
-                    Máx 6 pers/bungalow
+                  <span id="alojModeBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-emerald-500/10 text-emerald-800 border border-emerald-500/20">
+                    Aforo 8 pers
                   </span>
                 </div>
-                <div class="grid grid-cols-2 gap-1.5 text-[11px]">
-                  <div class="bg-white/90 p-1.5 rounded-lg border border-amber-200/70">
-                    <div class="text-muted text-[10px]">Vie-Dom (2 noc):</div>
-                    <div class="font-mono font-semibold text-ink flex items-center justify-between">
-                      <span>2 × S/350</span>
-                      <span class="text-amber-900">= S/ 700</span>
-                    </div>
-                  </div>
-                  <div class="bg-white/90 p-1.5 rounded-lg border border-amber-200/70">
-                    <div class="text-muted text-[10px]">Dom-Lun (1 noc):</div>
-                    <div class="font-mono font-semibold text-ink flex items-center justify-between">
-                      <span>2 × S/150</span>
-                      <span class="text-amber-900">= S/ 300</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex items-center justify-between pt-1 border-t border-amber-200/60 text-[11px]">
-                  <span class="text-muted">Total 2 Bungalows:</span>
-                  <span class="font-mono font-bold text-ink">S/ 1,000.00</span>
-                </div>
-                <div class="grid grid-cols-2 gap-1 pt-0.5">
-                  <button onclick="applyBungalowConfig(2, 350, 150)" class="py-1 px-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded text-[10px] font-semibold transition text-center shadow-2xs">
-                    ✓ 2 Bungalows (8p)
+
+                <!-- 3 Botones de Selección Rápida con Costo Total -->
+                <div class="grid grid-cols-3 gap-1">
+                  <button id="btnAloj_depa" onclick="switchAlojamientoMode('departamento')" class="p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border" title="1 Departamento: acepta 8 personas, +S/ 100 vs bungaló pero ahorra S/ 400 vs 2 bungalows">
+                    <span class="text-[11px] font-bold leading-tight flex items-center gap-1">🏢 1 Depa</span>
+                    <span class="text-[10px] text-muted leading-tight font-mono">8 pers</span>
+                    <span class="text-[10px] font-bold font-mono text-emerald-700 leading-tight">S/ 600</span>
                   </button>
-                  <button onclick="applyBungalowConfig(1, 350, 150)" class="py-1 px-1.5 bg-white hover:bg-surface-soft border border-hairline text-ink rounded text-[10px] font-medium transition text-center shadow-2xs">
-                    1 Bungalow (6p)
+                  <button id="btnAloj_2bung" onclick="switchAlojamientoMode('2_bungalows')" class="p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border" title="2 Bungalows: 4 pers en cada cabaña (máx 6 c/u)">
+                    <span class="text-[11px] font-medium leading-tight flex items-center gap-1">🏡 2 Bung.</span>
+                    <span class="text-[10px] text-muted leading-tight font-mono">8 pers (4 c/u)</span>
+                    <span class="text-[10px] font-bold font-mono text-ink leading-tight">S/ 1,000</span>
+                  </button>
+                  <button id="btnAloj_1bung" onclick="switchAlojamientoMode('1_bungalow')" class="p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border" title="1 Bungalow: aforo máx 6 pers">
+                    <span class="text-[11px] font-medium leading-tight flex items-center gap-1">🏠 1 Bung.</span>
+                    <span class="text-[10px] text-muted leading-tight font-mono">Máx 6 pers</span>
+                    <span class="text-[10px] font-bold font-mono text-ink leading-tight">S/ 500</span>
                   </button>
                 </div>
+
+                <!-- Tarjeta explicativa y tarifas editables del modo activo -->
+                <div id="alojModeDetails" class="space-y-2 pt-1 border-t border-hairlinesoft text-xs">
+                  <!-- Se inyecta dinámicamente con updateAlojamientoUI() -->
+                </div>
+
               </div>
 
               <div id="listAlojamiento" class="space-y-2"></div>
@@ -816,14 +815,14 @@
               </p>
             </div>
 
-            <!-- 5. Silencio Bungalows -->
+            <!-- 5. Silencio Bungalows y Departamentos -->
             <div class="p-3.5 rounded-2xl bg-surface-soft border border-hairlinesoft space-y-1">
               <div class="flex items-center gap-2 font-semibold text-ink">
                 <i class="fa-solid fa-volume-xmark text-muted"></i>
                 <span>5. Silencio (11:00 PM)</span>
               </div>
               <p class="text-[11px] text-bodytext leading-relaxed">
-                A partir de las 11:00 pm rige el descanso en bungalows. Parlantes a volumen moderado para convivir con socios y familias vecinas.
+                A partir de las 11:00 pm rige el descanso en bungalows y departamentos. Parlantes a volumen moderado para convivir con socios y familias vecinas.
               </p>
             </div>
 
@@ -998,9 +997,12 @@
       pernoctarActive: true,       // ACTIVADO (Tasa oficial de invitado por noche)
       pernoctarNightRate: 35.00,   // S/ 35 POR NOCHE POR PERSONA
       pernoctarAmount: 35.00,      // Compatibilidad
-      bungalowsCount: 2,           // 2 BUNGALOWS PARA 8 PERSONAS (Aforo máx 6 pers/bungalow)
+      alojamientoMode: 'departamento', // 'departamento' (8 pers, S/ 600) | '2_bungalows' (8 pers, S/ 1,000) | '1_bungalow' (6 pers, S/ 500)
+      bungalowsCount: 2,           // Compatibilidad
       bungalowWeekendRate: 350.00, // S/ 350 fin de semana (2 noches)
       bungalowWeekdayRate: 150.00, // S/ 150 noche adicional dom-lun
+      departamentoWeekendRate: 450.00, // S/ 450 fin de semana (+S/ 100 vs bungaló simple para 8 pers)
+      departamentoWeekdayRate: 150.00, // S/ 150 noche adicional dom-lun
       yapeNumber: '987 654 321 (Tú)',
       nonDrinkerDiscount: 20.00,   // S/ 20 MENOS PARA NO BEBEDORES
       userExtra: 60.00,            // MÍNIMO S/ 60 MÁS PARA EL ORGANIZADOR
@@ -1031,10 +1033,10 @@
         { id: 'a1', name: '5 botellas 750 ml Bar Express (Cuervo, Jäger, etc.)', qty: '5 botellas', total: 250.00 },
         { id: 'a2', name: 'Cerveza Flying Fish lima limón (18 latas)', qty: '18 latas', total: 71.70 },
       ],
-      // 4. Alojamiento & Movilidad (S/ 1,300.00: 2 Bungalows S/ 1,000 + Van S/ 300)
+      // 4. Alojamiento & Movilidad (S/ 900.00: 1 Departamento 8 pers S/ 600 + Van S/ 300)
       alojamiento: [
-        { id: 'al1', name: '2 Bungalows El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)', qty: '2 bungalows (2 noches)', total: 700.00 },
-        { id: 'al2', name: '2 Bungalows El Bosque - Noche Extra (Dom 20 - Lun 21)', qty: '2 bungalows (1 noche)', total: 300.00 },
+        { id: 'al1', name: '1 Departamento El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)', qty: '1 depa (aforo 8 pers)', total: 450.00 },
+        { id: 'al2', name: '1 Departamento El Bosque - Noche Extra (Dom 20 - Lun 21)', qty: '1 depa (1 noche extra)', total: 150.00 },
         { id: 'al3', name: 'Movilidad ida viernes y vuelta lunes (Van para 8 pers)', qty: 'Ida y vuelta', total: 300.00 },
       ],
       // 5. Los 8 Participantes (Tú: S/ 0 pernocte como nieto de socia; 7 Amigos: 3 noches S/ 105 c/u)
@@ -1078,9 +1080,19 @@
         : 35.00;
       res.pernoctarAmount = res.pernoctarNightRate;
 
+      res.alojamientoMode = (parsed.alojamientoMode === '2_bungalows' || parsed.alojamientoMode === '1_bungalow' || parsed.alojamientoMode === 'departamento')
+        ? parsed.alojamientoMode
+        : (parsed.alojamiento && parsed.alojamiento.some(a => a.name.includes('2 Bungalow')) ? '2_bungalows' : 'departamento');
+
       res.bungalowsCount = (typeof parsed.bungalowsCount === 'number') ? parsed.bungalowsCount : 2;
       res.bungalowWeekendRate = (typeof parsed.bungalowWeekendRate === 'number') ? parsed.bungalowWeekendRate : 350.00;
       res.bungalowWeekdayRate = (typeof parsed.bungalowWeekdayRate === 'number') ? parsed.bungalowWeekdayRate : 150.00;
+      res.departamentoWeekendRate = (typeof parsed.departamentoWeekendRate === 'number' && parsed.departamentoWeekendRate >= 0)
+        ? parsed.departamentoWeekendRate
+        : 450.00;
+      res.departamentoWeekdayRate = (typeof parsed.departamentoWeekdayRate === 'number' && parsed.departamentoWeekdayRate >= 0)
+        ? parsed.departamentoWeekdayRate
+        : 150.00;
 
       if (parsed.yapeNumber) res.yapeNumber = parsed.yapeNumber;
       if (typeof parsed.nonDrinkerDiscount === 'number') res.nonDrinkerDiscount = parsed.nonDrinkerDiscount;
@@ -1306,7 +1318,7 @@
     }
 
     function resetDefaults() {
-      if (confirm('¿Restablecer el presupuesto a los valores originales (Vie 18 a Lun 21 Dic, 2 Bungalows para 8 personas, S/ 35/noche pernocte, S/ 20 menos no bebedores y S/ 60 más tú)?')) {
+      if (confirm('¿Restablecer el presupuesto a los valores originales (Vie 18 a Lun 21 Dic, Departamento para 8 personas / 2 Bungalows, S/ 35/noche pernocte, S/ 20 menos no bebedores y S/ 60 más tú)?')) {
         localStorage.removeItem('el_bosque_v8');
         localStorage.removeItem('el_bosque_v7');
         localStorage.removeItem('el_bosque_v6');
@@ -1333,8 +1345,8 @@
         }
       });
 
-      // Actualizar automáticamente los 2 bungalows según la duración del viaje
-      applyBungalowConfig(state.bungalowsCount || 2, state.bungalowWeekendRate || 350.00, state.bungalowWeekdayRate || 150.00, false);
+      // Actualizar automáticamente el alojamiento según la duración del viaje
+      applyAlojamientoMode(state.alojamientoMode || 'departamento', null, null, false);
 
       saveState();
       render();
@@ -1355,55 +1367,110 @@
         state.tripDates.preset = 'custom';
         state.tripDates.label = `${state.tripDates.startDay || 'Viernes'} al ${state.tripDates.endDay || 'Día'} (${newNights} Noches)`;
         state.tripDates.shortLabel = `${newNights} Noches`;
-        applyBungalowConfig(state.bungalowsCount || 2, state.bungalowWeekendRate || 350.00, state.bungalowWeekdayRate || 150.00, false);
+        applyAlojamientoMode(state.alojamientoMode || 'departamento', null, null, false);
         saveState();
         render();
         showToast(`${newNights} noches seleccionadas`);
       }
     }
 
-    // CONFIGURACIÓN DINÁMICA DE BUNGALOWS (2 BUNGALOWS PARA 8 PERSONAS POR AFORO MÁX DE 6)
-    function applyBungalowConfig(count, weekendRate, weekdayRate, notify = true) {
-      state.bungalowsCount = count;
-      state.bungalowWeekendRate = weekendRate;
-      state.bungalowWeekdayRate = weekdayRate;
+    // =========================================================================
+    // CONFIGURACIÓN DINÁMICA DE ALOJAMIENTO (DEPARTAMENTO vs 2 BUNGALOWS vs 1 BUNGALOW)
+    // =========================================================================
+    function switchAlojamientoMode(mode) {
+      applyAlojamientoMode(mode, null, null, true);
+    }
+
+    function applyAlojamientoMode(mode, customWeekendRate, customWeekdayRate, notify = true) {
+      if (!mode) mode = state.alojamientoMode || 'departamento';
+      state.alojamientoMode = mode;
 
       const nights = state.tripDates?.nights || 3;
-      const weekendTotal = count * weekendRate;
       const weekdayNights = Math.max(0, nights - 2);
-      const weekdayTotal = count * weekdayRate * weekdayNights;
+
+      let weekendTotal = 0;
+      let weekdayTotal = 0;
+      let weekendName = '';
+      let weekdayName = '';
+      let weekendQty = '';
+      let weekdayQty = '';
+
+      if (mode === 'departamento') {
+        const weekendRate = (typeof customWeekendRate === 'number') ? customWeekendRate : (state.departamentoWeekendRate || 450.00);
+        const weekdayRate = (typeof customWeekdayRate === 'number') ? customWeekdayRate : (state.departamentoWeekdayRate || 150.00);
+        state.departamentoWeekendRate = weekendRate;
+        state.departamentoWeekdayRate = weekdayRate;
+
+        weekendTotal = weekendRate;
+        weekdayTotal = weekdayRate * weekdayNights;
+
+        weekendName = '1 Departamento El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)';
+        weekendQty = `1 depa (aforo 8 pers · S/${weekendRate.toFixed(0)})`;
+        weekdayName = '1 Departamento El Bosque - Noche Extra (Dom 20 - Lun 21)';
+        weekdayQty = `1 depa (${weekdayNights} noc: S/${weekdayRate.toFixed(0)})`;
+
+      } else if (mode === '2_bungalows') {
+        const baseWeekend = (typeof customWeekendRate === 'number') ? (customWeekendRate / 2) : (state.bungalowWeekendRate || 350.00);
+        const baseWeekday = (typeof customWeekdayRate === 'number') ? (customWeekdayRate / 2) : (state.bungalowWeekdayRate || 150.00);
+        state.bungalowWeekendRate = baseWeekend;
+        state.bungalowWeekdayRate = baseWeekday;
+        state.bungalowsCount = 2;
+
+        weekendTotal = 2 * baseWeekend;
+        weekdayTotal = 2 * baseWeekday * weekdayNights;
+
+        weekendName = '2 Bungalows El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)';
+        weekendQty = `2 bungalows (S/${baseWeekend.toFixed(0)} c/u)`;
+        weekdayName = '2 Bungalows El Bosque - Noche Extra (Dom 20 - Lun 21)';
+        weekdayQty = `2 bungalows (${weekdayNights} noc: S/${baseWeekday.toFixed(0)} c/u)`;
+
+      } else { // '1_bungalow'
+        const baseWeekend = (typeof customWeekendRate === 'number') ? customWeekendRate : (state.bungalowWeekendRate || 350.00);
+        const baseWeekday = (typeof customWeekdayRate === 'number') ? customWeekdayRate : (state.bungalowWeekdayRate || 150.00);
+        state.bungalowWeekendRate = baseWeekend;
+        state.bungalowWeekdayRate = baseWeekday;
+        state.bungalowsCount = 1;
+
+        weekendTotal = baseWeekend;
+        weekdayTotal = baseWeekday * weekdayNights;
+
+        weekendName = '1 Bungalow El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)';
+        weekendQty = `1 bungalow (aforo máx 6 pers)`;
+        weekdayName = '1 Bungalow El Bosque - Noche Extra (Dom 20 - Lun 21)';
+        weekdayQty = `1 bungalow (${weekdayNights} noc: S/${baseWeekday.toFixed(0)})`;
+      }
 
       state.alojamiento = state.alojamiento || [];
 
-      // 1. Paquete Fin de Semana
-      let itemWeekend = state.alojamiento.find(a => a.id === 'al1' || a.name.includes('Fin de Semana') || a.name.includes('Bungaló'));
+      // 1. Paquete Fin de Semana (al1)
+      let itemWeekend = state.alojamiento.find(a => a.id === 'al1' || a.name.includes('Fin de Semana') || a.name.includes('Bungalow') || a.name.includes('Departamento') || a.name.includes('Bungaló'));
       if (itemWeekend) {
         itemWeekend.id = 'al1';
-        itemWeekend.name = `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)`;
-        itemWeekend.qty = `${count} bungalow${count > 1 ? 's' : ''} (S/${weekendRate.toFixed(0)} c/u)`;
+        itemWeekend.name = weekendName;
+        itemWeekend.qty = weekendQty;
         itemWeekend.total = weekendTotal;
       } else {
         state.alojamiento.unshift({
           id: 'al1',
-          name: `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Paquete Fin de Semana (Vie 18 - Dom 20)`,
-          qty: `${count} bungalow${count > 1 ? 's' : ''} (S/${weekendRate.toFixed(0)} c/u)`,
+          name: weekendName,
+          qty: weekendQty,
           total: weekendTotal
         });
       }
 
-      // 2. Noche adicional Dom-Lun si el viaje dura 3+ noches
+      // 2. Noche adicional Dom-Lun si el viaje dura 3+ noches (al2)
       if (weekdayNights > 0) {
         let itemWeekday = state.alojamiento.find(a => a.id === 'al2' || a.name.includes('Noche Extra') || a.name.includes('Dom-Lun'));
         if (itemWeekday) {
           itemWeekday.id = 'al2';
-          itemWeekday.name = `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Noche Extra (Dom 20 - Lun 21)`;
-          itemWeekday.qty = `${count} bungalow${count > 1 ? 's' : ''} (${weekdayNights} noc: S/${weekdayRate.toFixed(0)} c/u)`;
+          itemWeekday.name = weekdayName;
+          itemWeekday.qty = weekdayQty;
           itemWeekday.total = weekdayTotal;
         } else {
           state.alojamiento.splice(1, 0, {
             id: 'al2',
-            name: `${count} Bungalow${count > 1 ? 's' : ''} El Bosque - Noche Extra (Dom 20 - Lun 21)`,
-            qty: `${count} bungalow${count > 1 ? 's' : ''} (${weekdayNights} noc: S/${weekdayRate.toFixed(0)} c/u)`,
+            name: weekdayName,
+            qty: weekdayQty,
             total: weekdayTotal
           });
         }
@@ -1412,7 +1479,7 @@
       }
 
       // 3. Movilidad en van si no existe
-      if (!state.alojamiento.some(a => a.name.includes('Movilidad') || a.name.includes('Van'))) {
+      if (!state.alojamiento.some(a => a.id === 'al3' || a.name.includes('Movilidad') || a.name.includes('Van'))) {
         state.alojamiento.push({
           id: 'al3',
           name: 'Movilidad ida viernes y vuelta lunes (Van para 8 pers)',
@@ -1423,7 +1490,197 @@
 
       saveState();
       render();
-      if (notify) showToast(`Configurado: ${count} bungalow${count > 1 ? 's' : ''} (S/ ${(weekendTotal + weekdayTotal).toFixed(0)})`);
+
+      if (notify) {
+        const modeLabel = mode === 'departamento' 
+          ? '🏢 1 Departamento (8 pers)' 
+          : (mode === '2_bungalows' ? '🏡 2 Bungalows (8 pers)' : '🏠 1 Bungalow (6 pers)');
+        showToast(`${modeLabel} seleccionado (Estadía: S/ ${(weekendTotal + weekdayTotal).toFixed(0)})`);
+      }
+    }
+
+    function applyBungalowConfig(count, weekendRate, weekdayRate, notify = true) {
+      if (count === 2) {
+        applyAlojamientoMode('2_bungalows', weekendRate * 2, weekdayRate * 2, notify);
+      } else {
+        applyAlojamientoMode('1_bungalow', weekendRate, weekdayRate, notify);
+      }
+    }
+
+    function onAlojRateChange(mode, field, val) {
+      const num = Math.max(0, parseFloat(val) || 0);
+      const nights = state.tripDates?.nights || 3;
+      const weekdayNights = Math.max(0, nights - 2);
+
+      if (mode === 'departamento') {
+        if (field === 'weekend') state.departamentoWeekendRate = num;
+        if (field === 'weekday') state.departamentoWeekdayRate = num;
+        applyAlojamientoMode('departamento', state.departamentoWeekendRate, state.departamentoWeekdayRate, false);
+      } else if (mode === '2_bungalows') {
+        if (field === 'weekend') state.bungalowWeekendRate = num / 2;
+        if (field === 'weekday') state.bungalowWeekdayRate = weekdayNights > 0 ? (num / (2 * weekdayNights)) : (num / 2);
+        applyAlojamientoMode('2_bungalows', state.bungalowWeekendRate * 2, state.bungalowWeekdayRate * 2, false);
+      } else {
+        if (field === 'weekend') state.bungalowWeekendRate = num;
+        if (field === 'weekday') state.bungalowWeekdayRate = weekdayNights > 0 ? (num / weekdayNights) : num;
+        applyAlojamientoMode('1_bungalow', state.bungalowWeekendRate, state.bungalowWeekdayRate, false);
+      }
+      renderCalculationsOnly();
+    }
+
+    function updateAlojamientoUI() {
+      const mode = state.alojamientoMode || 'departamento';
+      const badge = document.getElementById('alojModeBadge');
+      const btnDepa = document.getElementById('btnAloj_depa');
+      const btn2Bung = document.getElementById('btnAloj_2bung');
+      const btn1Bung = document.getElementById('btnAloj_1bung');
+      const details = document.getElementById('alojModeDetails');
+
+      const nights = state.tripDates?.nights || 3;
+      const weekdayNights = Math.max(0, nights - 2);
+
+      if (btnDepa) {
+        if (mode === 'departamento') {
+          btnDepa.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border-2 border-emerald-600 bg-emerald-50 text-emerald-950 shadow-2xs font-semibold';
+        } else {
+          btnDepa.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border border-hairline bg-surface-soft hover:bg-surface-strong text-ink font-medium';
+        }
+      }
+
+      if (btn2Bung) {
+        if (mode === '2_bungalows') {
+          btn2Bung.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border-2 border-amber-600 bg-amber-50 text-amber-950 shadow-2xs font-semibold';
+        } else {
+          btn2Bung.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border border-hairline bg-surface-soft hover:bg-surface-strong text-ink font-medium';
+        }
+      }
+
+      if (btn1Bung) {
+        if (mode === '1_bungalow') {
+          btn1Bung.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border-2 border-ink bg-surface-strong text-ink shadow-2xs font-semibold';
+        } else {
+          btn1Bung.className = 'p-1.5 rounded-lg text-center transition flex flex-col items-center justify-center border border-hairline bg-surface-soft hover:bg-surface-strong text-ink font-medium';
+        }
+      }
+
+      if (badge) {
+        if (mode === 'departamento') {
+          badge.textContent = 'Aforo 8 pers (Juntos)';
+          badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-emerald-500/15 text-emerald-800 border border-emerald-500/25';
+        } else if (mode === '2_bungalows') {
+          badge.textContent = '2 Cabañas (4 c/u)';
+          badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-amber-500/15 text-amber-900 border border-amber-500/25';
+        } else {
+          badge.textContent = 'Máx 6 pers';
+          badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold bg-surface-strong text-muted border border-hairline';
+        }
+      }
+
+      if (!details) return;
+
+      if (mode === 'departamento') {
+        const wRate = state.departamentoWeekendRate || 450.00;
+        const dRate = state.departamentoWeekdayRate || 150.00;
+        const totalEstadia = wRate + (dRate * weekdayNights);
+        details.innerHTML = `
+          <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-950 text-[11px] leading-snug">
+            <div class="flex items-center gap-1 font-semibold text-emerald-900">
+              <i class="fa-solid fa-circle-check text-emerald-600"></i> Opción Departamento (Acepta 8 personas)
+            </div>
+            <p class="text-[10.5px] text-emerald-800 mt-0.5">
+              Todos bajo el mismo techo. Cuesta <strong>+S/ 100</strong> sobre el bungaló base de fin de semana, pero <strong>ahorran S/ 400</strong> comparado con alquilar 2 bungalows separados.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">Fin de semana (Vie-Dom):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${wRate.toFixed(2)}" oninput="onAlojRateChange('departamento', 'weekend', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">Noche extra (${weekdayNights} Dom-Lun):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${dRate.toFixed(2)}" oninput="onAlojRateChange('departamento', 'weekday', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft text-[11px]">
+            <span class="text-muted">Total Estadía Departamento:</span>
+            <span class="font-mono font-bold text-emerald-800">S/ ${totalEstadia.toFixed(2)}</span>
+          </div>
+        `;
+      } else if (mode === '2_bungalows') {
+        const bWeekend = state.bungalowWeekendRate || 350.00;
+        const bWeekday = state.bungalowWeekdayRate || 150.00;
+        const totalEstadia = (2 * bWeekend) + (2 * bWeekday * weekdayNights);
+        details.innerHTML = `
+          <div class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-950 text-[11px] leading-snug">
+            <div class="flex items-center gap-1 font-semibold text-amber-900">
+              <i class="fa-solid fa-house-chimney text-amber-700"></i> Opción 2 Bungalows (4 personas en c/u)
+            </div>
+            <p class="text-[10.5px] text-amber-800 mt-0.5">
+              2 cabañas separadas para 4 personas cada una (aforo máx 6 pers/cabaña). Ofrece más privacidad y 2 baños, pero el costo de estadía sube a S/ 1,000.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">2 x Fin de Sem (S/${bWeekend.toFixed(0)} c/u):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${(2 * bWeekend).toFixed(2)}" oninput="onAlojRateChange('2_bungalows', 'weekend', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">2 x Noche Extra (S/${bWeekday.toFixed(0)} c/u):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${(2 * bWeekday * weekdayNights).toFixed(2)}" oninput="onAlojRateChange('2_bungalows', 'weekday', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft text-[11px]">
+            <span class="text-muted">Total 2 Bungalows:</span>
+            <span class="font-mono font-bold text-amber-900">S/ ${totalEstadia.toFixed(2)}</span>
+          </div>
+        `;
+      } else {
+        const bWeekend = state.bungalowWeekendRate || 350.00;
+        const bWeekday = state.bungalowWeekdayRate || 150.00;
+        const totalEstadia = bWeekend + (bWeekday * weekdayNights);
+        details.innerHTML = `
+          <div class="p-2 rounded-lg bg-surface-soft border border-hairline text-ink text-[11px] leading-snug">
+            <div class="flex items-center gap-1 font-semibold text-ink">
+              <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Opción 1 Bungalow (Aforo máx 6 pers)
+            </div>
+            <p class="text-[10.5px] text-muted mt-0.5">
+              Si van 8 personas, el club requiere 2 bungalows o 1 departamento por reglamento de aforo de garita.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-1.5 text-[11px]">
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">Fin de semana (Vie-Dom):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${bWeekend.toFixed(2)}" oninput="onAlojRateChange('1_bungalow', 'weekend', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+            <div class="bg-white/95 p-1.5 rounded-lg border border-hairline">
+              <span class="text-muted text-[10px] block">Noche extra (${weekdayNights} Dom-Lun):</span>
+              <div class="flex items-center justify-between font-mono font-semibold text-ink mt-0.5">
+                <span class="text-muted text-[10px]">S/</span>
+                <input type="number" step="10" min="0" value="${bWeekday.toFixed(2)}" oninput="onAlojRateChange('1_bungalow', 'weekday', this.value)" class="w-14 text-right bg-transparent focus:outline-none font-mono font-bold text-ink">
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1 border-t border-hairlinesoft text-[11px]">
+            <span class="text-muted">Total 1 Bungalow:</span>
+            <span class="font-mono font-bold text-ink">S/ ${totalEstadia.toFixed(2)}</span>
+          </div>
+        `;
+      }
     }
 
     // CONTROL DEL SWITCH Y TARIFA DE PERNOCTE
@@ -1801,11 +2058,14 @@
           }
         }
       });
+
+      updateAlojamientoUI();
     }
 
     function render() {
       const calc = calculate();
       updatePernocteUI();
+      updateAlojamientoUI();
 
       const tbody = document.getElementById('friendsTbody');
       tbody.innerHTML = '';
@@ -2056,11 +2316,32 @@
       const raw = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
       const shareUrl = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(raw)}`;
 
+      const stayTotal = (state.alojamiento || []).filter(a => a.id === 'al1' || a.id === 'al2').reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
+      const vanTotal = (state.alojamiento || []).filter(a => a.id === 'al3' || a.name.includes('Movilidad') || a.name.includes('Van')).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
+
+      let alojText = '';
+      let alojCierre = '';
+      let lugarEstadia = 'Sede Campestre Chosica';
+
+      if (state.alojamientoMode === 'departamento') {
+        alojText = `🏢 *Alojamiento:* 1 Departamento (aforo oficial 8 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)} (¡Ahorro S/ 400 vs 2 bungalows!)`;
+        alojCierre = `¡Envíen captura al transferir para cerrar la reserva del departamento! 🏊‍♂️🏢`;
+        lugarEstadia = `Sede Campestre Chosica (1 Departamento para 8 pers & Parrilla)`;
+      } else if (state.alojamientoMode === '1_bungalow') {
+        alojText = `🏠 *Alojamiento:* 1 Bungalow (aforo máx 6 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+        alojCierre = `¡Envíen captura al transferir para cerrar el bungalow! 🏊‍♂️🥩`;
+        lugarEstadia = `Sede Campestre Chosica (1 Bungalow & Parrilla)`;
+      } else {
+        alojText = `🏡 *Alojamiento:* 2 Bungalows (aforo máx 6 pers c/u) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+        alojCierre = `¡Envíen captura al transferir para cerrar los 2 bungalows! 🏊‍♂️🥩`;
+        lugarEstadia = `Sede Campestre Chosica (2 Bungalows & Parrilla)`;
+      }
+
       let msg = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴\n`;
       msg += `📅 *Fecha:* ${tripDates.label}\n`;
-      msg += `📍 *Lugar:* Sede Campestre Chosica (2 Bungalows & Parrilla)\n`;
+      msg += `📍 *Lugar:* ${lugarEstadia}\n`;
       msg += `👥 *Participantes:* ${calc.totalMembers} personas (${calc.drinkersCount} beben / ${calc.nonDrinkersCount} no beben)\n`;
-      msg += `🏡 *Alojamiento:* 2 Bungalows (aforo máx 6 pers c/u) = S/ 1,000 + Van = S/ 1,300\n`;
+      msg += `${alojText}\n`;
       msg += `🌙 *Pernoctar:* ${state.pernoctarActive ? `S/ ${nightRate.toFixed(0)}/noche por invitado (${calc.totalGuestNights} noches-persona = S/ ${calc.pernocteTotal.toFixed(0)})` : 'S/ 0 (Desactivado / No aplica)'}\n`;
       msg += `------------------------------------\n`;
       msg += `💰 *Presupuesto total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
@@ -2081,7 +2362,7 @@
 
       msg += `\n🔗 *Ver y editar presupuesto en vivo:*\n${shareUrl}\n`;
       msg += `\n💳 *Yape / Plin:* ${yape}\n`;
-      msg += `¡Envíen captura al transferir para cerrar los 2 bungalows! 🏊‍♂️🥩`;
+      msg += `${alojCierre}`;
 
       document.getElementById('whatsappPreview').value = msg;
     }
