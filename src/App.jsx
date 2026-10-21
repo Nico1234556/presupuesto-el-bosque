@@ -10,43 +10,60 @@ import ClubRulesAccordion from './components/ClubRulesAccordion';
 import LightboxModal from './components/LightboxModal';
 import WhatsAppModal from './components/WhatsAppModal';
 import Toast from './components/Toast';
-import { DEFAULT_DATA, TRIP_PRESETS, CLOUD_API_URL } from './data/defaultData';
-import { calculate, buildAlojamientoItems, computeModeStayTotal } from './utils/calculations';
+import { 
+  DEFAULT_DATA_EL_BOSQUE, 
+  DEFAULT_DATA_PUNTA_SAL, 
+  TRIP_PRESETS_EL_BOSQUE, 
+  TRIP_PRESETS_PUNTA_SAL, 
+  CLOUD_API_URL 
+} from './data/defaultData';
+import { calculate, buildAlojamientoItems } from './utils/calculations';
 
-function sanitizeState(parsed) {
-  if (!parsed || typeof parsed !== 'object') return JSON.parse(JSON.stringify(DEFAULT_DATA));
-  const res = JSON.parse(JSON.stringify(DEFAULT_DATA));
+function sanitizeState(parsed, forcedDest = null) {
+  const dest = forcedDest || (parsed && parsed.destination === 'punta_sal' ? 'punta_sal' : 'el_bosque');
+  const baseDefaults = dest === 'punta_sal' ? DEFAULT_DATA_PUNTA_SAL : DEFAULT_DATA_EL_BOSQUE;
+  if (!parsed || typeof parsed !== 'object') return JSON.parse(JSON.stringify(baseDefaults));
+
+  const res = JSON.parse(JSON.stringify(baseDefaults));
+  res.destination = dest;
 
   if (parsed.tripDates && typeof parsed.tripDates === 'object') res.tripDates = parsed.tripDates;
   if (typeof parsed.pernoctarActive === 'boolean') res.pernoctarActive = parsed.pernoctarActive;
 
   res.pernoctarNightRate = (typeof parsed.pernoctarNightRate === 'number' && parsed.pernoctarNightRate >= 0)
     ? parsed.pernoctarNightRate
-    : 35.00;
+    : (dest === 'punta_sal' ? 0.00 : 35.00);
 
-  // Alojamiento mode
-  if (['depa_1', 'depa_2', '2_bungalows', '1_bungalow'].includes(parsed.alojamientoMode)) {
-    res.alojamientoMode = parsed.alojamientoMode;
-  } else if (parsed.alojamientoMode === 'departamento') {
-    res.alojamientoMode = 'depa_1';
-  } else if (parsed.alojamiento && parsed.alojamiento.some(a => a.name.includes('2 Bungalow'))) {
-    res.alojamientoMode = '2_bungalows';
+  if (dest === 'punta_sal') {
+    res.casa3NochesRate = typeof parsed.casa3NochesRate === 'number' ? parsed.casa3NochesRate : 1600.00;
+    res.casa2NochesRate = typeof parsed.casa2NochesRate === 'number' ? parsed.casa2NochesRate : 1100.00;
+    res.casa1NocheRate = typeof parsed.casa1NocheRate === 'number' ? parsed.casa1NocheRate : 600.00;
+    res.alojamientoMode = 'casa_playa';
   } else {
-    res.alojamientoMode = 'depa_1';
+    // Alojamiento mode El Bosque
+    if (['depa_1', 'depa_2', '2_bungalows', '1_bungalow'].includes(parsed.alojamientoMode)) {
+      res.alojamientoMode = parsed.alojamientoMode;
+    } else if (parsed.alojamientoMode === 'departamento') {
+      res.alojamientoMode = 'depa_1';
+    } else if (parsed.alojamiento && parsed.alojamiento.some(a => a.name.includes('2 Bungalow'))) {
+      res.alojamientoMode = '2_bungalows';
+    } else {
+      res.alojamientoMode = 'depa_1';
+    }
+
+    // Rates El Bosque
+    res.depa1WeekendRate = typeof parsed.depa1WeekendRate === 'number' ? parsed.depa1WeekendRate : 400.00;
+    res.depa1SingleWeekendRate = typeof parsed.depa1SingleWeekendRate === 'number' ? parsed.depa1SingleWeekendRate : 200.00;
+    res.depa1WeekdayRate = typeof parsed.depa1WeekdayRate === 'number' ? parsed.depa1WeekdayRate : 180.00;
+
+    res.depa2WeekendRate = typeof parsed.depa2WeekendRate === 'number' ? parsed.depa2WeekendRate : 450.00;
+    res.depa2SingleWeekendRate = typeof parsed.depa2SingleWeekendRate === 'number' ? parsed.depa2SingleWeekendRate : 230.00;
+    res.depa2WeekdayRate = typeof parsed.depa2WeekdayRate === 'number' ? parsed.depa2WeekdayRate : 200.00;
+
+    res.bungalowWeekendRate = typeof parsed.bungalowWeekendRate === 'number' ? parsed.bungalowWeekendRate : 350.00;
+    res.bungalowSingleWeekendRate = typeof parsed.bungalowSingleWeekendRate === 'number' ? parsed.bungalowSingleWeekendRate : 175.00;
+    res.bungalowWeekdayRate = typeof parsed.bungalowWeekdayRate === 'number' ? parsed.bungalowWeekdayRate : 150.00;
   }
-
-  // Rates
-  res.depa1WeekendRate = typeof parsed.depa1WeekendRate === 'number' ? parsed.depa1WeekendRate : 400.00;
-  res.depa1SingleWeekendRate = typeof parsed.depa1SingleWeekendRate === 'number' ? parsed.depa1SingleWeekendRate : 200.00;
-  res.depa1WeekdayRate = typeof parsed.depa1WeekdayRate === 'number' ? parsed.depa1WeekdayRate : 180.00;
-
-  res.depa2WeekendRate = typeof parsed.depa2WeekendRate === 'number' ? parsed.depa2WeekendRate : 450.00;
-  res.depa2SingleWeekendRate = typeof parsed.depa2SingleWeekendRate === 'number' ? parsed.depa2SingleWeekendRate : 230.00;
-  res.depa2WeekdayRate = typeof parsed.depa2WeekdayRate === 'number' ? parsed.depa2WeekdayRate : 200.00;
-
-  res.bungalowWeekendRate = typeof parsed.bungalowWeekendRate === 'number' ? parsed.bungalowWeekendRate : 350.00;
-  res.bungalowSingleWeekendRate = typeof parsed.bungalowSingleWeekendRate === 'number' ? parsed.bungalowSingleWeekendRate : 175.00;
-  res.bungalowWeekdayRate = typeof parsed.bungalowWeekdayRate === 'number' ? parsed.bungalowWeekdayRate : 150.00;
 
   if (parsed.yapeNumber) res.yapeNumber = parsed.yapeNumber;
   if (typeof parsed.nonDrinkerDiscount === 'number') res.nonDrinkerDiscount = parsed.nonDrinkerDiscount;
@@ -56,12 +73,11 @@ function sanitizeState(parsed) {
   if (Array.isArray(parsed.cremas) && parsed.cremas.length > 0) res.cremas = parsed.cremas;
   if (Array.isArray(parsed.alcohol) && parsed.alcohol.length > 0) res.alcohol = parsed.alcohol;
 
-  // Check if accommodation needs refresh from old rates
-  const hasOldRates = Array.isArray(parsed.alojamiento) && parsed.alojamiento.some(a => a.total === 450.00 && a.name.includes('Departamento'));
-  if (hasOldRates || !Array.isArray(parsed.alojamiento) || parsed.alojamiento.length === 0) {
-    res.alojamiento = buildAlojamientoItems(res.alojamientoMode, res.tripDates, res);
-  } else {
+  // Alojamiento items
+  if (Array.isArray(parsed.alojamiento) && parsed.alojamiento.length > 0) {
     res.alojamiento = parsed.alojamiento;
+  } else {
+    res.alojamiento = buildAlojamientoItems(res.alojamientoMode, res.tripDates, res);
   }
 
   if (Array.isArray(parsed.members) && parsed.members.length > 0) {
@@ -84,40 +100,59 @@ function sanitizeState(parsed) {
       };
     });
   } else {
-    res.members = JSON.parse(JSON.stringify(DEFAULT_DATA.members));
+    res.members = JSON.parse(JSON.stringify(baseDefaults.members));
   }
 
   if (parsed._clientTimestamp) res._clientTimestamp = parsed._clientTimestamp;
   return res;
 }
 
-function loadInitialState() {
+function loadInitialDestination() {
+  if (typeof window !== 'undefined' && window.location.hash) {
+    if (window.location.hash.includes('punta-sal')) return 'punta_sal';
+    if (window.location.hash.includes('el-bosque')) return 'el_bosque';
+  }
+  try {
+    const savedDest = localStorage.getItem('active_destination_v1');
+    if (savedDest === 'punta_sal' || savedDest === 'el_bosque') return savedDest;
+  } catch (e) {}
+  return 'el_bosque';
+}
+
+function loadInitialState(destination) {
   // 1. From URL Hash
-  if (window.location.hash && window.location.hash.startsWith('#s=')) {
+  if (typeof window !== 'undefined' && window.location.hash && window.location.hash.includes('s=')) {
     try {
-      const raw = decodeURIComponent(window.location.hash.replace('#s=', ''));
-      const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
-      if (parsed && parsed.members) {
-        return sanitizeState(parsed);
+      const parts = window.location.hash.split('s=');
+      if (parts.length > 1) {
+        const raw = decodeURIComponent(parts[1]);
+        const parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
+        if (parsed && parsed.members) {
+          const dest = parsed.destination || destination;
+          return sanitizeState(parsed, dest);
+        }
       }
     } catch (e) {}
   }
+
   // 2. From LocalStorage
   try {
-    const saved = localStorage.getItem('el_bosque_v8') || localStorage.getItem('el_bosque_v7') || localStorage.getItem('el_bosque_v6');
+    const storageKey = destination === 'punta_sal' ? 'punta_sal_v1' : 'el_bosque_v8';
+    const saved = localStorage.getItem(storageKey);
     if (saved) {
       const parsed = JSON.parse(saved);
       if (parsed && parsed.members) {
-        return sanitizeState(parsed);
+        return sanitizeState(parsed, destination);
       }
     }
   } catch (e) {}
 
-  return JSON.parse(JSON.stringify(DEFAULT_DATA));
+  return JSON.parse(JSON.stringify(destination === 'punta_sal' ? DEFAULT_DATA_PUNTA_SAL : DEFAULT_DATA_EL_BOSQUE));
 }
 
 export default function App() {
-  const [state, setState] = useState(() => loadInitialState());
+  const [destination, setDestination] = useState(() => loadInitialDestination());
+  const [state, setState] = useState(() => loadInitialState(loadInitialDestination()));
   const [cloudStatus, setCloudStatus] = useState('synced'); // 'synced' | 'saving' | 'loading' | 'local'
   const [toast, setToast] = useState({ message: '', visible: false });
   const [lightbox, setLightbox] = useState({ isOpen: false, image: '', title: '', desc: '' });
@@ -135,13 +170,18 @@ export default function App() {
 
   // Save State and Trigger Debounced Cloud Sync
   const saveState = (newState, syncToCloud = true) => {
+    const currentDest = newState.destination || destination;
     const updated = {
       ...newState,
+      destination: currentDest,
       _clientTimestamp: Date.now()
     };
     setState(updated);
+
+    const storageKey = currentDest === 'punta_sal' ? 'punta_sal_v1' : 'el_bosque_v8';
     try {
-      localStorage.setItem('el_bosque_v8', JSON.stringify(updated));
+      localStorage.setItem(storageKey, JSON.stringify(updated));
+      localStorage.setItem('active_destination_v1', currentDest);
     } catch (e) {}
 
     if (syncToCloud) {
@@ -153,7 +193,7 @@ export default function App() {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              name: 'Presupuesto El Bosque Chosica',
+              name: `Presupuesto ${currentDest === 'punta_sal' ? 'Punta Sal (Playa)' : 'El Bosque (Chosica)'}`,
               data: updated
             })
           });
@@ -169,11 +209,36 @@ export default function App() {
     }
   };
 
+  // Switch Destination
+  const handleSelectDestination = (newDest) => {
+    if (newDest === destination) return;
+
+    // Save current destination before switching
+    const currentStorageKey = destination === 'punta_sal' ? 'punta_sal_v1' : 'el_bosque_v8';
+    try {
+      localStorage.setItem(currentStorageKey, JSON.stringify(state));
+      localStorage.setItem('active_destination_v1', newDest);
+    } catch (e) {}
+
+    // Load or initialize target destination state
+    const nextState = loadInitialState(newDest);
+    setDestination(newDest);
+    setState(nextState);
+
+    // Update URL hash without reloads
+    try {
+      window.history.replaceState(null, '', newDest === 'punta_sal' ? '#punta-sal' : '#el-bosque');
+    } catch (e) {}
+
+    showToast(newDest === 'punta_sal' 
+      ? '🏖️ Cambiado a Casa de Playa en Punta Sal' 
+      : '🌳 Cambiado a Country Club El Bosque');
+  };
+
   // Initial Cloud Load
   useEffect(() => {
     async function fetchFromCloud() {
-      // If URL hash is present, URL hash takes precedence
-      if (window.location.hash && window.location.hash.startsWith('#s=')) {
+      if (window.location.hash && window.location.hash.includes('s=')) {
         setCloudStatus('synced');
         return;
       }
@@ -183,12 +248,16 @@ export default function App() {
         if (res.ok) {
           const result = await res.json();
           if (result && result.data && result.data.members && result.data.members.length > 0) {
-            const cloudTimestamp = result.data._clientTimestamp || 0;
-            const localTimestamp = state._clientTimestamp || 0;
-            if (cloudTimestamp > localTimestamp || !localStorage.getItem('el_bosque_v8')) {
-              const sanitized = sanitizeState(result.data);
-              setState(sanitized);
-              localStorage.setItem('el_bosque_v8', JSON.stringify(sanitized));
+            const cloudDest = result.data.destination || 'el_bosque';
+            if (cloudDest === destination) {
+              const cloudTimestamp = result.data._clientTimestamp || 0;
+              const localTimestamp = state._clientTimestamp || 0;
+              const storageKey = destination === 'punta_sal' ? 'punta_sal_v1' : 'el_bosque_v8';
+              if (cloudTimestamp > localTimestamp || !localStorage.getItem(storageKey)) {
+                const sanitized = sanitizeState(result.data, destination);
+                setState(sanitized);
+                localStorage.setItem(storageKey, JSON.stringify(sanitized));
+              }
             }
           }
         }
@@ -198,14 +267,17 @@ export default function App() {
       }
     }
     fetchFromCloud();
-  }, []);
+  }, [destination]);
 
   // Compute calculated values
   const calc = calculate(state);
 
+  // Presets table according to destination
+  const activePresets = destination === 'punta_sal' ? TRIP_PRESETS_PUNTA_SAL : TRIP_PRESETS_EL_BOSQUE;
+
   // --- Handlers ---
   const handleSetPreset = (presetKey) => {
-    const preset = TRIP_PRESETS[presetKey];
+    const preset = activePresets[presetKey] || TRIP_PRESETS_EL_BOSQUE[presetKey];
     if (!preset) return;
 
     // Adjust friend pernocte nights
@@ -221,7 +293,10 @@ export default function App() {
     });
 
     const newDates = { ...preset };
-    const newAlojItems = buildAlojamientoItems(state.alojamientoMode || 'depa_1', newDates, state);
+    const newAlojItems = buildAlojamientoItems(state.alojamientoMode || 'depa_1', newDates, {
+      ...state,
+      destination
+    });
 
     saveState({
       ...state,
@@ -235,11 +310,17 @@ export default function App() {
   const handleStepNights = (delta) => {
     const current = state.tripDates?.nights || 3;
     const newNights = Math.max(1, Math.min(7, current + delta));
-    if (newNights === 3) handleSetPreset('vie-lun');
-    else if (newNights === 2) {
-      if (state.tripDates?.preset === 'sab-lun') handleSetPreset('sab-lun');
-      else handleSetPreset('vie-dom');
-    } else if (newNights === 1) handleSetPreset('sab-dom');
+    if (destination === 'punta_sal') {
+      if (newNights >= 3) handleSetPreset('vie-lun');
+      else if (newNights === 2) handleSetPreset('vie-dom');
+      else handleSetPreset('sab-dom');
+    } else {
+      if (newNights === 3) handleSetPreset('vie-lun');
+      else if (newNights === 2) {
+        if (state.tripDates?.preset === 'sab-lun') handleSetPreset('sab-lun');
+        else handleSetPreset('vie-dom');
+      } else if (newNights === 1) handleSetPreset('sab-dom');
+    }
   };
 
   const handleTogglePernocte = (val) => {
@@ -397,6 +478,15 @@ export default function App() {
 
   // Accommodation Mode & Rates
   const handleSwitchMode = (newMode) => {
+    if (destination === 'punta_sal') {
+      if (newMode === 'punta_sal_3noches') {
+        handleSetPreset('vie-lun');
+      } else if (newMode === 'punta_sal_2noches') {
+        handleSetPreset('vie-dom');
+      }
+      return;
+    }
+
     const newItems = buildAlojamientoItems(newMode, state.tripDates, state);
     saveState({
       ...state,
@@ -413,32 +503,38 @@ export default function App() {
   };
 
   const handleChangeAlojRate = (mode, field, val) => {
-    const updated = { ...state };
+    const updated = { ...state, destination };
     const isSingleWeekend = (state.tripDates?.preset === 'sab-lun' || state.tripDates?.preset === 'sab-dom');
 
-    if (mode === 'depa_1') {
-      if (field === 'weekend') {
-        if (isSingleWeekend) updated.depa1SingleWeekendRate = val;
-        else updated.depa1WeekendRate = val;
-      } else if (field === 'weekday') updated.depa1WeekdayRate = val;
-    } else if (mode === 'depa_2') {
-      if (field === 'weekend') {
-        if (isSingleWeekend) updated.depa2SingleWeekendRate = val;
-        else updated.depa2WeekendRate = val;
-      } else if (field === 'weekday') updated.depa2WeekdayRate = val;
-    } else if (mode === '2_bungalows') {
-      if (field === 'weekend') {
-        if (isSingleWeekend) updated.bungalowSingleWeekendRate = val / 2;
-        else updated.bungalowWeekendRate = val / 2;
-      } else if (field === 'weekday') updated.bungalowWeekdayRate = val / 2;
-    } else if (mode === '1_bungalow') {
-      if (field === 'weekend') {
-        if (isSingleWeekend) updated.bungalowSingleWeekendRate = val;
-        else updated.bungalowWeekendRate = val;
-      } else if (field === 'weekday') updated.bungalowWeekdayRate = val;
+    if (destination === 'punta_sal') {
+      if (field === '3noches') updated.casa3NochesRate = val;
+      else if (field === '2noches') updated.casa2NochesRate = val;
+      else if (field === '1noche') updated.casa1NocheRate = val;
+    } else {
+      if (mode === 'depa_1') {
+        if (field === 'weekend') {
+          if (isSingleWeekend) updated.depa1SingleWeekendRate = val;
+          else updated.depa1WeekendRate = val;
+        } else if (field === 'weekday') updated.depa1WeekdayRate = val;
+      } else if (mode === 'depa_2') {
+        if (field === 'weekend') {
+          if (isSingleWeekend) updated.depa2SingleWeekendRate = val;
+          else updated.depa2WeekendRate = val;
+        } else if (field === 'weekday') updated.depa2WeekdayRate = val;
+      } else if (mode === '2_bungalows') {
+        if (field === 'weekend') {
+          if (isSingleWeekend) updated.bungalowSingleWeekendRate = val / 2;
+          else updated.bungalowWeekendRate = val / 2;
+        } else if (field === 'weekday') updated.bungalowWeekdayRate = val / 2;
+      } else if (mode === '1_bungalow') {
+        if (field === 'weekend') {
+          if (isSingleWeekend) updated.bungalowSingleWeekendRate = val;
+          else updated.bungalowWeekendRate = val;
+        } else if (field === 'weekday') updated.bungalowWeekdayRate = val;
+      }
     }
 
-    updated.alojamiento = buildAlojamientoItems(mode, state.tripDates, updated);
+    updated.alojamiento = buildAlojamientoItems(updated.alojamientoMode, state.tripDates, updated);
     saveState(updated);
   };
 
@@ -451,7 +547,7 @@ export default function App() {
       comida: 'Carnes y comida',
       cremas: 'Cremas y carbón',
       alcohol: 'Tragos y bebidas',
-      alojamiento: 'Alojamiento y movilidad'
+      alojamiento: destination === 'punta_sal' ? 'Casa de playa y movilidad' : 'Alojamiento y movilidad'
     };
     showToast(`💾 ¡${labels[sec] || 'Cambios'} guardado! Presupuesto actualizado`);
   };
@@ -463,8 +559,8 @@ export default function App() {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: 'Presupuesto El Bosque Chosica',
-          data: { ...state, _clientTimestamp: Date.now() }
+          name: `Presupuesto ${destination === 'punta_sal' ? 'Punta Sal (Playa)' : 'El Bosque (Chosica)'}`,
+          data: { ...state, destination, _clientTimestamp: Date.now() }
         })
       });
       if (res.ok) {
@@ -482,7 +578,7 @@ export default function App() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
     const a = document.createElement('a');
     a.href = dataStr;
-    a.download = `presupuesto-el-bosque-${state.tripDates?.preset || 'viaje'}.json`;
+    a.download = `presupuesto-${destination}-${state.tripDates?.preset || 'viaje'}.json`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -497,7 +593,9 @@ export default function App() {
       try {
         const parsed = JSON.parse(evt.target.result);
         if (parsed && parsed.members) {
-          const sanitized = sanitizeState(parsed);
+          const dest = parsed.destination || destination;
+          const sanitized = sanitizeState(parsed, dest);
+          setDestination(dest);
           saveState(sanitized);
           showToast('¡Datos cargados exitosamente desde JSON!');
         } else {
@@ -511,19 +609,21 @@ export default function App() {
   };
 
   const handleResetDefaults = () => {
-    if (confirm('¿Restablecer el presupuesto a los valores originales (Sábado a Lunes / Viernes a Lunes, Depa 1° Piso, S/ 35/noche pernocte, S/ 20 menos no bebedores y S/ 100 más tú)?')) {
-      localStorage.removeItem('el_bosque_v8');
-      window.location.hash = '';
-      const def = JSON.parse(JSON.stringify(DEFAULT_DATA));
+    const targetName = destination === 'punta_sal' ? 'Punta Sal (Playa)' : 'El Bosque (Chosica)';
+    if (confirm(`¿Restablecer el presupuesto de ${targetName} a sus valores originales?`)) {
+      const storageKey = destination === 'punta_sal' ? 'punta_sal_v1' : 'el_bosque_v8';
+      localStorage.removeItem(storageKey);
+      window.location.hash = destination === 'punta_sal' ? '#punta-sal' : '#el-bosque';
+      const def = JSON.parse(JSON.stringify(destination === 'punta_sal' ? DEFAULT_DATA_PUNTA_SAL : DEFAULT_DATA_EL_BOSQUE));
       saveState(def);
-      showToast('Presupuesto restablecido');
+      showToast(`Presupuesto de ${targetName} restablecido`);
     }
   };
 
   const handleCopyShareLink = () => {
     try {
-      const raw = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
-      const url = `${window.location.origin}${window.location.pathname}#s=${encodeURIComponent(raw)}`;
+      const raw = btoa(unescape(encodeURIComponent(JSON.stringify({ ...state, destination }))));
+      const url = `${window.location.origin}${window.location.pathname}#${destination}&s=${encodeURIComponent(raw)}`;
       navigator.clipboard.writeText(url).then(() => {
         showToast('Enlace copiado con todos los cambios y productos');
       });
@@ -532,7 +632,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-paper text-ink flex flex-col font-sans selection:bg-brand selection:text-white pb-16">
-      {/* Navbar */}
+      {/* Navbar with Header Destination Switcher */}
       <Navbar
         cloudStatus={cloudStatus}
         onForceCloudSync={handleForceCloudSync}
@@ -541,6 +641,8 @@ export default function App() {
         onResetDefaults={handleResetDefaults}
         onCopyShareLink={handleCopyShareLink}
         tripDates={state.tripDates}
+        activeDestination={destination}
+        onSelectDestination={handleSelectDestination}
       />
 
       {/* Main Content */}
@@ -549,7 +651,8 @@ export default function App() {
         <Hero 
           calc={calc} 
           tripDates={state.tripDates} 
-          onOpenWhatsAppModal={() => setIsWhatsAppOpen(true)} 
+          onOpenWhatsAppModal={() => setIsWhatsAppOpen(true)}
+          destination={destination}
         />
 
         {/* Top Controls Row: 1. Duración del Viaje & 2. Cobro de Pernocte */}
@@ -558,17 +661,19 @@ export default function App() {
             tripDates={state.tripDates} 
             onSetPreset={handleSetPreset} 
             onStepNights={handleStepNights} 
-            onSaveSection={handleSaveSection} 
+            onSaveSection={handleSaveSection}
+            destination={destination}
           />
 
           <PernocteCard 
             pernoctarActive={state.pernoctarActive} 
-            nightRate={state.pernoctarNightRate || 35.00} 
+            nightRate={state.pernoctarNightRate || (destination === 'punta_sal' ? 0.00 : 35.00)} 
             calc={calc} 
             onTogglePernocte={handleTogglePernocte} 
             onChangeNightRate={handleChangeNightRate} 
             onSetAllNights={handleSetAllNights} 
-            onSaveSection={handleSaveSection} 
+            onSaveSection={handleSaveSection}
+            destination={destination}
           />
         </div>
 
@@ -601,19 +706,22 @@ export default function App() {
           onSaveSection={handleSaveSection} 
         />
 
-        {/* 5. Galería de Fotos del Club */}
+        {/* 5. Galería de Fotos (El Bosque o Punta Sal) */}
         <PhotosGallery 
           onOpenLightbox={(img, title, desc) => setLightbox({ isOpen: true, image: img, title, desc })} 
+          destination={destination}
         />
 
-        {/* 6. Normas del Club */}
-        <ClubRulesAccordion />
+        {/* 6. Normas / Reglamento */}
+        <ClubRulesAccordion destination={destination} />
       </main>
 
       {/* Footer */}
       <footer className="border-t border-hairline py-6 text-center text-xs text-muted max-w-6xl mx-auto px-4 w-full">
         <p>
-          Country Club El Bosque — Sede Campestre Chosica · Planificador de Viaje 2026
+          {destination === 'punta_sal' 
+            ? 'Casa de Playa en Punta Sal · Tumbes · Planificador de Viaje 2027' 
+            : 'Country Club El Bosque — Sede Campestre Chosica · Planificador de Viaje 2026'}
         </p>
         <p className="text-[11px] text-muted/70 mt-1">
           {state.tripDates?.label} · Todos los cambios se guardan localmente y en la nube en tiempo real.
@@ -635,7 +743,8 @@ export default function App() {
         state={state} 
         calc={calc} 
         onUpdateYape={(val) => setState(prev => ({ ...prev, yapeNumber: val }))} 
-        onShowToast={showToast} 
+        onShowToast={showToast}
+        destination={destination}
       />
 
       <Toast 

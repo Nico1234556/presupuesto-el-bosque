@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function Hero({ calc, tripDates, onOpenWhatsAppModal }) {
+export default function Hero({ calc, tripDates, onOpenWhatsAppModal, destination }) {
+  const isPuntaSal = destination === 'punta_sal';
+
   const userItem = calc.memberCalcs.find(x => x.m.isUser) || calc.memberCalcs[0];
   const drinkerFriend = calc.memberCalcs.find(x => x.m.drinks && !x.m.isUser);
   const nonDrinkerFriend = calc.memberCalcs.find(x => !x.m.drinks);
@@ -15,14 +17,25 @@ export default function Hero({ calc, tripDates, onOpenWhatsAppModal }) {
       {/* Editorial Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-hairline pb-4">
         <div>
-          <div className="inline-flex items-center gap-1.5 bg-brand-subtle text-brand text-xs font-semibold px-3 py-1 rounded-full border border-brand/20 mb-2">
-            <span>✨</span> Fin de Semana Campestre · Sede Chosica
+          <div className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full border mb-2 ${
+            isPuntaSal 
+              ? 'bg-sky-50 text-sky-800 border-sky-200' 
+              : 'bg-brand-subtle text-brand border-brand/20'
+          }`}>
+            <span>{isPuntaSal ? '🏖️' : '✨'}</span>
+            <span>
+              {isPuntaSal 
+                ? 'Casa de Playa Frente al Mar · Primera Línea en Punta Sal (Tumbes)' 
+                : 'Fin de Semana Campestre · Sede Chosica'}
+            </span>
           </div>
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-ink tracking-tight font-serif">
-            Presupuesto & Cuotas El Bosque
+            {isPuntaSal ? 'Presupuesto & Cuotas Punta Sal' : 'Presupuesto & Cuotas El Bosque'}
           </h1>
           <p className="text-xs sm:text-sm text-muted mt-1 max-w-2xl font-sans">
-            Planificador grupal en tiempo real. Configura días, hospedaje oficial del club, comidas y reparto exacto entre amigos.
+            {isPuntaSal 
+              ? 'Planificador de casa de playa en Airbnb (Beto Superanfitrión · 9 huéspedes). Configura días, comida para parrilla/brasero, bebidas y cuotas exactas.' 
+              : 'Planificador grupal en tiempo real. Configura días, hospedaje oficial del club, comidas y reparto exacto entre amigos.'}
           </p>
         </div>
 
@@ -40,12 +53,12 @@ export default function Hero({ calc, tripDates, onOpenWhatsAppModal }) {
       {/* Date & Group Status Pills */}
       <div className="flex flex-wrap items-center gap-2 text-xs">
         <span className="bg-surface-soft border border-hairline text-ink font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
-          <i className="fa-regular fa-calendar-days text-brand"></i> {tripDates?.label}
+          <i className={`fa-regular fa-calendar-days ${isPuntaSal ? 'text-sky-600' : 'text-brand'}`}></i> {tripDates?.label}
         </span>
         <span className="bg-surface-soft border border-hairline text-ink font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
-          <i className="fa-solid fa-users text-brand"></i> {calc.totalMembers} Participantes
+          <i className={`fa-solid fa-users ${isPuntaSal ? 'text-sky-600' : 'text-brand'}`}></i> {calc.totalMembers} Participantes
         </span>
-        <span className="bg-brand text-white font-mono font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs">
+        <span className={`${isPuntaSal ? 'bg-sky-700' : 'bg-brand'} text-white font-mono font-bold px-3 py-1 rounded-full flex items-center gap-1.5 shadow-2xs`}>
           <i className="fa-solid fa-coins text-amber-300"></i> Total S/ {calc.totalTripBudget.toFixed(2)}
         </span>
       </div>
@@ -57,7 +70,9 @@ export default function Hero({ calc, tripDates, onOpenWhatsAppModal }) {
           <div>
             <div className="flex items-center justify-between text-muted text-xs">
               <span className="font-medium">Total Viaje</span>
-              <span className="text-[10px] bg-brand-subtle text-brand font-semibold px-2 py-0.5 rounded-full">
+              <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                isPuntaSal ? 'bg-sky-50 text-sky-800' : 'bg-brand-subtle text-brand'
+              }`}>
                 {calc.totalMembers} pers
               </span>
             </div>
@@ -66,7 +81,7 @@ export default function Hero({ calc, tripDates, onOpenWhatsAppModal }) {
             </div>
           </div>
           <div className="text-[11px] text-muted mt-2 pt-2 border-t border-hairlinesoft flex items-center justify-between">
-            <span>Estadía + Van:</span>
+            <span>{isPuntaSal ? 'Casa + Van:' : 'Estadía + Van:'}</span>
             <span className="font-mono font-semibold text-ink">S/ {calc.subtotalAlojamiento.toFixed(0)}</span>
           </div>
         </div>

@@ -1,9 +1,20 @@
-import { TRIP_PRESETS } from '../data/defaultData';
+import { TRIP_PRESETS_EL_BOSQUE, TRIP_PRESETS_PUNTA_SAL } from '../data/defaultData';
 
 export function computeModeStayTotal(modeKey, tripDates, state) {
-  const dates = tripDates || state?.tripDates || TRIP_PRESETS['vie-lun'];
+  const isPuntaSal = (state?.destination === 'punta_sal');
+  const dates = tripDates || state?.tripDates || (isPuntaSal ? TRIP_PRESETS_PUNTA_SAL['vie-lun'] : TRIP_PRESETS_EL_BOSQUE['vie-lun']);
   const preset = dates.preset;
   const nights = dates.nights || 3;
+
+  if (isPuntaSal) {
+    if (preset === 'vie-dom' || preset === 'sab-lun' || nights === 2) {
+      return state?.casa2NochesRate ?? 1100.00;
+    } else if (preset === 'sab-dom' || nights === 1) {
+      return state?.casa1NocheRate ?? 600.00;
+    } else {
+      return state?.casa3NochesRate ?? 1600.00;
+    }
+  }
 
   let singleWeekend = 0;
   let doubleWeekend = 0;
@@ -57,9 +68,56 @@ export function computeModeStayTotal(modeKey, tripDates, state) {
 }
 
 export function buildAlojamientoItems(mode, dates, state) {
+  const isPuntaSal = (state?.destination === 'punta_sal');
   const preset = dates.preset;
   const nights = dates.nights || 3;
 
+  // Si el destino es Punta Sal
+  if (isPuntaSal) {
+    let casaTotal = 1600.00;
+    let descNoches = '3 Noches (Vie 8 - Lun 11 Ene)';
+
+    if (preset === 'vie-dom') {
+      casaTotal = state?.casa2NochesRate ?? 1100.00;
+      descNoches = '2 Noches (Vie 8 - Dom 10 Ene)';
+    } else if (preset === 'sab-lun') {
+      casaTotal = state?.casa2NochesRate ?? 1100.00;
+      descNoches = '2 Noches (Sáb 9 - Lun 11 Ene)';
+    } else if (preset === 'sab-dom') {
+      casaTotal = state?.casa1NocheRate ?? 600.00;
+      descNoches = '1 Noche (Sáb 9 - Dom 10 Ene)';
+    } else if (nights === 2) {
+      casaTotal = state?.casa2NochesRate ?? 1100.00;
+      descNoches = '2 Noches';
+    } else if (nights === 1) {
+      casaTotal = state?.casa1NocheRate ?? 600.00;
+      descNoches = '1 Noche';
+    } else {
+      casaTotal = state?.casa3NochesRate ?? 1600.00;
+      descNoches = `${nights} Noches`;
+    }
+
+    const items = [
+      {
+        id: 'al1',
+        name: 'Casa de Playa en Punta Sal (Primera Línea de Playa - Beto Superhost)',
+        qty: `Casa completa para 8 pers (${descNoches})`,
+        total: casaTotal
+      }
+    ];
+
+    const existingVan = (state.alojamiento || []).find(a => a.id === 'al3' || a.name.includes('Movilidad') || a.name.includes('Transporte'));
+    items.push(existingVan ? { ...existingVan } : {
+      id: 'al3',
+      name: 'Transporte / Movilidad compartida (Van / Traslados)',
+      qty: 'Ida y vuelta para 8 pers',
+      total: 400.00
+    });
+
+    return items;
+  }
+
+  // Destino El Bosque (Chosica)
   const isSabLun = (preset === 'sab-lun');
   const isVieLun = (preset === 'vie-lun');
   const isSabDom = (preset === 'sab-dom');
@@ -203,7 +261,7 @@ export function calculate(state) {
   let totalGuestNights = 0;
   const nightRate = (typeof state.pernoctarNightRate === 'number' && state.pernoctarNightRate >= 0) 
     ? state.pernoctarNightRate 
-    : 35.00;
+    : (state.destination === 'punta_sal' ? 0.00 : 35.00);
 
   members.forEach(m => {
     let nights = 0;

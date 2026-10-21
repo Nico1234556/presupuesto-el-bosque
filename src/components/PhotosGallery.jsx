@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { REAL_PHOTOS } from '../data/defaultData';
+import { REAL_PHOTOS_EL_BOSQUE, REAL_PHOTOS_PUNTA_SAL } from '../data/defaultData';
 
-export default function PhotosGallery({ onOpenLightbox }) {
+export default function PhotosGallery({ onOpenLightbox, destination }) {
   const [isOpen, setIsOpen] = useState(true);
+
+  const isPuntaSal = destination === 'punta_sal';
+  const photos = isPuntaSal ? REAL_PHOTOS_PUNTA_SAL : REAL_PHOTOS_EL_BOSQUE;
 
   return (
     <div className="border border-hairline rounded-2xl overflow-hidden bg-card shadow-xs transition-all">
@@ -12,9 +15,17 @@ export default function PhotosGallery({ onOpenLightbox }) {
       >
         <span className="flex items-center gap-2">
           <i className="fa-solid fa-camera text-muted"></i>
-          <span>Fotos de la Sede Chosica (Bungalows, Piscinas, Parrillas, Laguna, Canchas)</span>
-          <span className="text-[11px] font-semibold text-brand bg-brand-subtle px-2.5 py-0.5 rounded-full border border-brand/20">
-            11 Fotos Reales
+          <span>
+            {isPuntaSal 
+              ? 'Fotos Reales de la Casa de Playa en Punta Sal (Primera Línea, Océano, Terraza, Brasero)' 
+              : 'Fotos de la Sede Chosica (Bungalows, Piscinas, Parrillas, Laguna, Canchas)'}
+          </span>
+          <span className={`text-[11px] font-semibold px-2.5 py-0.5 rounded-full border ${
+            isPuntaSal 
+              ? 'bg-sky-50 text-sky-800 border-sky-200' 
+              : 'text-brand bg-brand-subtle border-brand/20'
+          }`}>
+            {photos.length} Fotos Reales
           </span>
         </span>
         <i className={`fa-solid fa-chevron-up text-muted text-xs transition-transform duration-200 ${isOpen ? '' : 'rotate-180'}`}></i>
@@ -23,7 +34,7 @@ export default function PhotosGallery({ onOpenLightbox }) {
       {isOpen && (
         <div className="p-4 sm:p-5 border-t border-hairlinesoft bg-surface/30">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {REAL_PHOTOS.map(p => (
+            {photos.map(p => (
               <div 
                 key={p.id}
                 onClick={() => onOpenLightbox(p.file, p.title, p.desc)}
@@ -38,10 +49,12 @@ export default function PhotosGallery({ onOpenLightbox }) {
                       loading="lazy" 
                     />
                     <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-xs text-ink text-[11px] font-semibold px-3 py-1 rounded-full shadow-2xs">
-                      {p.tag || 'Sede Chosica'}
+                      {p.tag || (isPuntaSal ? 'Punta Sal' : 'Sede Chosica')}
                     </span>
                   </div>
-                  <h4 className="text-sm font-bold text-ink mt-3.5 group-hover:text-brand transition-colors">
+                  <h4 className={`text-sm font-bold text-ink mt-3.5 transition-colors ${
+                    isPuntaSal ? 'group-hover:text-sky-700' : 'group-hover:text-brand'
+                  }`}>
                     {p.title}
                   </h4>
                   <p className="text-xs text-muted leading-relaxed mt-1 line-clamp-2">
@@ -50,10 +63,11 @@ export default function PhotosGallery({ onOpenLightbox }) {
                 </div>
                 <div className="pt-3 mt-3 border-t border-dashed border-hairlinesoft flex items-center justify-between text-xs">
                   <span className="text-[11px] font-medium text-muted flex items-center gap-1.5">
-                    <i className="fa-solid fa-tree text-brand text-[10px]"></i> El Bosque
+                    <i className={`fa-solid ${isPuntaSal ? 'fa-umbrella-beach text-sky-600' : 'fa-tree text-brand'} text-[10px]`}></i> 
+                    {isPuntaSal ? 'Punta Sal (Tumbes)' : 'El Bosque Chosica'}
                   </span>
-                  <span className="bg-ink text-white text-[10px] font-mono px-2.5 py-0.5 rounded-full font-semibold">
-                    HD Oficial
+                  <span className={`${isPuntaSal ? 'bg-sky-900' : 'bg-ink'} text-white text-[10px] font-mono px-2.5 py-0.5 rounded-full font-semibold`}>
+                    {isPuntaSal ? 'Airbnb Oficial' : 'HD Oficial'}
                   </span>
                 </div>
               </div>

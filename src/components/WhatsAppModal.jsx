@@ -6,7 +6,8 @@ export default function WhatsAppModal({
   state, 
   calc, 
   onUpdateYape, 
-  onShowToast 
+  onShowToast,
+  destination
 }) {
   const dialogRef = useRef(null);
   const [copied, setCopied] = useState(false);
@@ -28,9 +29,10 @@ export default function WhatsAppModal({
 
   if (!isOpen) return null;
 
+  const isPuntaSal = destination === 'punta_sal';
   const yape = state.yapeNumber || '987 654 321';
   const tripDates = state.tripDates;
-  const nightRate = state.pernoctarNightRate || 35.00;
+  const nightRate = state.pernoctarNightRate || (isPuntaSal ? 0.00 : 35.00);
 
   // Build Share URL with encoded state
   let shareUrl = '';
@@ -42,36 +44,45 @@ export default function WhatsAppModal({
   }
 
   const stayTotal = (state.alojamiento || []).filter(a => a.id === 'al1' || a.id === 'al2').reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
-  const vanTotal = (state.alojamiento || []).filter(a => a.id === 'al3' || a.name.includes('Movilidad') || a.name.includes('Van')).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
+  const vanTotal = (state.alojamiento || []).filter(a => a.id === 'al3' || a.name.includes('Movilidad') || a.name.includes('Transporte') || a.name.includes('Van')).reduce((acc, c) => acc + (parseFloat(c.total) || 0), 0);
 
   let alojText = '';
   let alojCierre = '';
-  let lugarEstadia = 'Sede Campestre Chosica';
+  let lugarEstadia = '';
+  let headerTitle = '';
 
-  if (state.alojamientoMode === 'depa_1' || state.alojamientoMode === 'departamento') {
-    alojText = `🏢 *Alojamiento:* Departamento 1° Piso (aforo oficial 8 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)} (¡Tarifa Oficial Más Económica!)`;
-    alojCierre = `¡Envíen captura al transferir para cerrar la reserva del Departamento 1° Piso! 🏊‍♂️🏢`;
-    lugarEstadia = `Sede Campestre Chosica (Depa 1° Piso para 8 pers & Parrilla)`;
-  } else if (state.alojamientoMode === 'depa_2') {
-    alojText = `🏢 *Alojamiento:* Departamento 2° Piso con Balcón (aforo oficial 8 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
-    alojCierre = `¡Envíen captura al transferir para cerrar la reserva del Departamento 2° Piso! 🏊‍♂️🏢`;
-    lugarEstadia = `Sede Campestre Chosica (Depa 2° Piso con Balcón para 8 pers & Parrilla)`;
-  } else if (state.alojamientoMode === '1_bungalow') {
-    alojText = `🏠 *Alojamiento:* 1 Bungalow (aforo máx 6 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
-    alojCierre = `¡Envíen captura al transferir para cerrar el bungalow! 🏊‍♂️🥩`;
-    lugarEstadia = `Sede Campestre Chosica (1 Bungalow & Parrilla)`;
+  if (isPuntaSal) {
+    headerTitle = `🏖️ *CASA DE PLAYA EN PUNTA SAL (PRIMERA LÍNEA - AIRBNB)* 🏖️`;
+    lugarEstadia = `Punta Sal, Tumbes (Casa entera frente al mar · Superanfitrión Beto)`;
+    alojText = `🏡 *Alojamiento:* Casa completa frente al mar (${tripDates?.nights || 3} noches) = S/ ${stayTotal.toFixed(0)} + Movilidad S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+    alojCierre = `¡Envíen captura al transferir para cerrar la reserva de la casa en Punta Sal por Airbnb! 🏖️🌊`;
   } else {
-    alojText = `🏡 *Alojamiento:* 2 Bungalows (aforo máx 6 pers c/u) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
-    alojCierre = `¡Envíen captura al transferir para cerrar los 2 bungalows! 🏊‍♂️🥩`;
-    lugarEstadia = `Sede Campestre Chosica (2 Bungalows & Parrilla)`;
+    headerTitle = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴`;
+    if (state.alojamientoMode === 'depa_1' || state.alojamientoMode === 'departamento') {
+      alojText = `🏢 *Alojamiento:* Departamento 1° Piso (aforo oficial 8 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)} (¡Tarifa Oficial Más Económica!)`;
+      alojCierre = `¡Envíen captura al transferir para cerrar la reserva del Departamento 1° Piso! 🏊‍♂️🏢`;
+      lugarEstadia = `Sede Campestre Chosica (Depa 1° Piso para 8 pers & Parrilla)`;
+    } else if (state.alojamientoMode === 'depa_2') {
+      alojText = `🏢 *Alojamiento:* Departamento 2° Piso con Balcón (aforo oficial 8 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+      alojCierre = `¡Envíen captura al transferir para cerrar la reserva del Departamento 2° Piso! 🏊‍♂️🏢`;
+      lugarEstadia = `Sede Campestre Chosica (Depa 2° Piso con Balcón para 8 pers & Parrilla)`;
+    } else if (state.alojamientoMode === '1_bungalow') {
+      alojText = `🏠 *Alojamiento:* 1 Bungalow (aforo máx 6 pers) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+      alojCierre = `¡Envíen captura al transferir para cerrar el bungalow! 🏊‍♂️🥩`;
+      lugarEstadia = `Sede Campestre Chosica (1 Bungalow & Parrilla)`;
+    } else {
+      alojText = `🏡 *Alojamiento:* 2 Bungalows (aforo máx 6 pers c/u) = S/ ${stayTotal.toFixed(0)} + Van S/ ${vanTotal.toFixed(0)} = S/ ${(stayTotal + vanTotal).toFixed(0)}`;
+      alojCierre = `¡Envíen captura al transferir para cerrar los 2 bungalows! 🏊‍♂️🥩`;
+      lugarEstadia = `Sede Campestre Chosica (2 Bungalows & Parrilla)`;
+    }
   }
 
-  let msg = `🌴 *COUNTRY CLUB EL BOSQUE (CHOSICA)* 🌴\n`;
+  let msg = `${headerTitle}\n`;
   msg += `📅 *Fecha:* ${tripDates?.label}\n`;
   msg += `📍 *Lugar:* ${lugarEstadia}\n`;
   msg += `👥 *Participantes:* ${calc.totalMembers} personas (${calc.drinkersCount} beben / ${calc.nonDrinkersCount} no beben)\n`;
   msg += `${alojText}\n`;
-  msg += `🌙 *Pernoctar:* ${state.pernoctarActive ? `S/ ${nightRate.toFixed(0)}/noche por invitado (${calc.totalGuestNights} noches-persona = S/ ${calc.pernocteTotal.toFixed(0)})` : 'S/ 0 (Desactivado / No aplica)'}\n`;
+  msg += `🌙 *Pernoctar:* ${state.pernoctarActive ? `S/ ${nightRate.toFixed(0)}/noche por persona (${calc.totalGuestNights} noches-persona = S/ ${calc.pernocteTotal.toFixed(0)})` : (isPuntaSal ? 'S/ 0 (Incluido en el alquiler total de Airbnb)' : 'S/ 0 (Desactivado / No aplica)')}\n`;
   msg += `------------------------------------\n`;
   msg += `💰 *Presupuesto total:* S/ ${calc.totalTripBudget.toFixed(2)}\n`;
   msg += `🍻 *Bebedores:* Cuota base (S/ ${(calc.X_drinkerBase).toFixed(2)})\n`;
@@ -119,7 +130,7 @@ export default function WhatsAppModal({
             </div>
             <div>
               <h3 className="text-sm font-bold text-ink">
-                Mensaje para el Grupo de WhatsApp
+                Mensaje para el Grupo de WhatsApp ({isPuntaSal ? 'Punta Sal' : 'El Bosque'})
               </h3>
               <p className="text-[11px] text-emerald-800">
                 Copia y pega directamente en el chat grupal con tus amigos
@@ -138,39 +149,41 @@ export default function WhatsAppModal({
         <div className="p-4 space-y-3 overflow-y-auto">
           {/* Yape number input */}
           <div className="flex items-center gap-2 bg-surface-soft border border-hairline rounded-xl px-3 py-1.5 text-xs">
-            <span className="font-semibold text-ink shrink-0">💳 Tu Yape/Plin:</span>
-            <input
-              type="text"
-              value={state.yapeNumber || ''}
-              onChange={(e) => onUpdateYape(e.target.value)}
-              placeholder="Ej. 987 654 321 (Tú)"
-              className="w-full bg-transparent font-mono text-ink text-xs focus:outline-none"
+            <span className="text-muted font-medium whitespace-nowrap">💳 Tu número Yape/Plin:</span>
+            <input 
+              type="text" 
+              value={yape} 
+              onChange={(e) => onUpdateYape(e.target.value)} 
+              placeholder="Ej: 987 654 321 (Tú)" 
+              className="bg-transparent text-ink font-semibold focus:outline-none w-full"
             />
           </div>
 
-          {/* Textarea preview */}
-          <textarea
-            readOnly
-            value={msg}
-            rows="12"
-            className="w-full bg-surface-soft border border-hairline rounded-xl p-3 text-ink font-mono text-[11px] leading-relaxed focus:outline-none resize-none"
-          ></textarea>
+          {/* Text preview */}
+          <div className="relative">
+            <textarea
+              readOnly
+              value={msg}
+              rows={14}
+              className="w-full p-3 text-[11.5px] font-mono leading-relaxed bg-surface-soft rounded-2xl border border-hairline focus:outline-none resize-none text-ink select-all"
+            />
+          </div>
         </div>
 
         {/* Footer */}
-        <div className="p-3.5 bg-surface/50 border-t border-hairlinesoft flex items-center justify-between gap-2">
+        <div className="p-4 border-t border-hairlinesoft bg-surface/40 flex items-center justify-end gap-2">
           <button
             onClick={onClose}
-            className="py-2 px-4 rounded-xl border border-hairline bg-white hover:bg-surface-soft text-ink text-xs font-semibold transition cursor-pointer"
+            className="px-4 py-2 rounded-xl text-xs font-semibold text-muted hover:text-ink hover:bg-surface-soft transition cursor-pointer"
           >
             Cerrar
           </button>
           <button
             onClick={copyToClipboard}
-            className="py-2 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-xs cursor-pointer active:scale-98"
+            className="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-2 shadow-xs cursor-pointer active:scale-98"
           >
-            <i className={`fa-solid ${copied ? 'fa-check' : 'fa-copy'}`}></i>
-            {copied ? '¡Copiado!' : 'Copiar para WhatsApp'}
+            <i className="fa-solid fa-copy"></i>
+            {copied ? '¡Copiado!' : 'Copiar Mensaje'}
           </button>
         </div>
       </div>

@@ -1,7 +1,8 @@
 export const CLOUD_OBJECT_ID = 'ff808181a09d98f701a15a82699c32cf';
 export const CLOUD_API_URL = 'https://api.restful-api.dev/objects/' + CLOUD_OBJECT_ID;
 
-export const TRIP_PRESETS = {
+// Presets para El Bosque (Chosica)
+export const TRIP_PRESETS_EL_BOSQUE = {
   'vie-lun': {
     preset: 'vie-lun',
     startDate: '2026-12-18',
@@ -44,7 +45,59 @@ export const TRIP_PRESETS = {
   }
 };
 
-export const DEFAULT_DATA = {
+// Presets para Punta Sal (Playa)
+export const TRIP_PRESETS_PUNTA_SAL = {
+  'vie-lun': {
+    preset: 'vie-lun',
+    startDate: '2027-01-08',
+    endDate: '2027-01-11',
+    startDay: 'Viernes',
+    endDay: 'Lunes',
+    nights: 3,
+    label: 'Viernes 8 al Lunes 11 Enero (3 Noches)',
+    shortLabel: 'Vie 8 — Lun 11 Ene',
+    alojamientoTotal: 1600.00
+  },
+  'vie-dom': {
+    preset: 'vie-dom',
+    startDate: '2027-01-08',
+    endDate: '2027-01-10',
+    startDay: 'Viernes',
+    endDay: 'Domingo',
+    nights: 2,
+    label: 'Viernes 8 al Domingo 10 Enero (2 Noches)',
+    shortLabel: 'Vie 8 — Dom 10 Ene',
+    alojamientoTotal: 1100.00
+  },
+  'sab-lun': {
+    preset: 'sab-lun',
+    startDate: '2027-01-09',
+    endDate: '2027-01-11',
+    startDay: 'Sábado',
+    endDay: 'Lunes',
+    nights: 2,
+    label: 'Sábado 9 al Lunes 11 Enero (2 Noches)',
+    shortLabel: 'Sáb 9 — Lun 11 Ene',
+    alojamientoTotal: 1100.00
+  },
+  'sab-dom': {
+    preset: 'sab-dom',
+    startDate: '2027-01-09',
+    endDate: '2027-01-10',
+    startDay: 'Sábado',
+    endDay: 'Domingo',
+    nights: 1,
+    label: 'Sábado 9 al Domingo 10 Enero (1 Noche)',
+    shortLabel: 'Sáb 9 — Dom 10 Ene',
+    alojamientoTotal: 600.00
+  }
+};
+
+export const TRIP_PRESETS = TRIP_PRESETS_EL_BOSQUE;
+
+// Estado por defecto para El Bosque
+export const DEFAULT_DATA_EL_BOSQUE = {
+  destination: 'el_bosque',
   tripDates: {
     preset: 'vie-lun',
     startDate: '2026-12-18',
@@ -113,7 +166,73 @@ export const DEFAULT_DATA = {
   ]
 };
 
-export const REAL_PHOTOS = [
+// Estado por defecto para Punta Sal (Playa)
+export const DEFAULT_DATA_PUNTA_SAL = {
+  destination: 'punta_sal',
+  tripDates: {
+    preset: 'vie-lun',
+    startDate: '2027-01-08',
+    endDate: '2027-01-11',
+    startDay: 'Viernes',
+    endDay: 'Lunes',
+    nights: 3,
+    label: 'Viernes 8 al Lunes 11 Enero (3 Noches)',
+    shortLabel: 'Vie 8 — Lun 11 Ene'
+  },
+  pernoctarActive: false, // En Airbnb el alquiler completo cubre a los 8 amigos
+  pernoctarNightRate: 0.00,
+  alojamientoMode: 'casa_playa',
+  // Tarifas Punta Sal según Airbnb Oficial (Beto Superanfitrión)
+  casa3NochesRate: 1600.00, // Viernes 8 a Lunes 11 Ene (Airbnb muestra S/ 1,594)
+  casa2NochesRate: 1100.00, // Viernes a Domingo
+  casa1NocheRate: 600.00,
+  yapeNumber: '987 654 321 (Tú)',
+  nonDrinkerDiscount: 20.00,
+  userExtra: 100.00,
+  _clientTimestamp: 0,
+  comida: [
+    { id: 'c1', name: 'Chorizo parrillero artesanal Otto Kunz', qty: '5 paq.', total: 69.50 },
+    { id: 'c2', name: 'Hot dog Suiza ahumado (pack 15)', qty: '2 paq.', total: 23.00 },
+    { id: 'c3', name: 'Bife angosto & Cortes parrilleros (4 kg)', qty: '4 kg', total: 182.00 },
+    { id: 'c4', name: 'Alitas de pollo marinadas (3 kg)', qty: '3 kg', total: 54.00 },
+    { id: 'c5', name: 'Papa amarilla cóctel para brasero (4 kg)', qty: '4 kg', total: 24.00 },
+    { id: 'c6', name: 'Pan de hot dog (30 unid.)', qty: '30 unid.', total: 18.00 },
+    { id: 'c7', name: 'Pan francés artesanal (10 unid.)', qty: '10 unid.', total: 8.50 },
+    { id: 'c8', name: 'Choclos dulces para asar (6 unid.)', qty: '6 unid.', total: 9.00 },
+    { id: 'c9', name: 'Aceite y condimentos marinos', qty: '1 pack', total: 15.00 },
+  ],
+  cremas: [
+    { id: 'cr1', name: 'Salsas Alacena surtidas (mayo, tártara, ají)', qty: '6 sachets', total: 47.90 },
+    { id: 'cr2', name: 'Carbón vegetal & Leña para brasero en arena', qty: '8 kg', total: 38.00 },
+    { id: 'cr3', name: 'Hielo en bolsa para cooler de playa (5 bolsas)', qty: '5 bolsas', total: 25.00 },
+    { id: 'cr4', name: 'Agua mineral San Luis 7 L (2 bidones)', qty: '2 bidones', total: 22.00 },
+    { id: 'cr5', name: 'Gaseosas Coca-Cola / Sprite 3 L (3 bot.)', qty: '3 botellas', total: 36.00 },
+    { id: 'cr6', name: 'Snacks playeros Pringles, papas Lays & Chifles', qty: '5 paq.', total: 35.00 },
+  ],
+  alcohol: [
+    { id: 'a1', name: '5 botellas 750 ml Bar Express (Ron Havana, Cuervo, Jäger)', qty: '5 botellas', total: 250.00 },
+    { id: 'a2', name: 'Cerveza en lata helada Corona / Stella (24 latas)', qty: '24 latas', total: 96.00 },
+  ],
+  alojamiento: [
+    { id: 'al1', name: 'Casa de Playa en Punta Sal (Primera Línea de Playa - Beto Superhost)', qty: 'Casa entera 3 noches (3 hab · 7 camas · 3 baños)', total: 1600.00 },
+    { id: 'al3', name: 'Transporte / Movilidad compartida (Van / Traslados)', qty: 'Ida y vuelta para 8 pers', total: 400.00 },
+  ],
+  members: [
+    { id: 'm1', name: 'Tú (Organizador)', drinks: true, sleeps: true, sleepNights: 3, extra: 100.00, paid: false, isUser: true },
+    { id: 'm2', name: 'Invitado 1 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm3', name: 'Invitado 2 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm4', name: 'Invitado 3 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm5', name: 'Invitado 4 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm6', name: 'Invitado 5 (Amigo)', drinks: true, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm7', name: 'Invitado 6 (No toma)', drinks: false, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+    { id: 'm8', name: 'Invitado 7 (No toma)', drinks: false, sleeps: true, sleepNights: 3, extra: 0.00, paid: false },
+  ]
+};
+
+export const DEFAULT_DATA = DEFAULT_DATA_EL_BOSQUE;
+
+// Fotos Reales El Bosque (Chosica)
+export const REAL_PHOTOS_EL_BOSQUE = [
   { id: 'rf1', tag: 'Bungalows', title: 'Bungalows de Chosica', desc: 'Casas de campo de ladrillo con techos a dos aguas y mesas campestres frente al jardín.', file: './img/elbosque-bungalows.jpg' },
   { id: 'rf2', tag: 'Piscinas', title: 'Piscina Olímpica de Nado', desc: 'Piscina reglamentaria con carriles, sombrillas y sol constante.', file: './img/elbosque-piscina.jpg' },
   { id: 'rf3', tag: 'Parrillas', title: 'Zona de Parrillas & Picnic', desc: 'Parrillas de ladrillo y mesas de madera en el pasto bajo los árboles.', file: './img/elbosque-parrillas.jpg' },
@@ -127,7 +246,20 @@ export const REAL_PHOTOS = [
   { id: 'rf11', tag: 'Estadio', title: 'Cancha Oficial de Fútbol', desc: 'Estadio de césped natural con tribunas y el escudo de El Bosque en el círculo central.', file: './img/elbosque-futbol.jpg' },
 ];
 
-export const CLUB_RULES = [
+// Fotos Reales Punta Sal (Playa)
+export const REAL_PHOTOS_PUNTA_SAL = [
+  { id: 'ps1', tag: 'Primera Línea', title: 'Casa Rústica Frente al Mar', desc: 'Casa entera de playa construida sobre la arena con palmeras y salida directa a la orilla del mar en Punta Sal.', file: './img/puntasal-casa-playa.jpg' },
+  { id: 'ps2', tag: 'Terraza & Olas', title: 'Pérgola & Vista Panorámica', desc: 'Amplia terraza rústica de madera con hamaca, sombra y vista panorámica a las olas turquesas del norte.', file: './img/puntasal-terraza.jpg' },
+  { id: 'ps3', tag: 'Habitaciones', title: 'Dormitorio Principal con Dosel', desc: 'Cama matrimonial amplia con dosel mosquitero blanco, ventilación marina y decoración cálida.', file: './img/puntasal-cama-matrimonial.jpg' },
+  { id: 'ps4', tag: 'Vista al Mar', title: 'Ventanal con Vista al Océano', desc: 'Habitación luminosa con vista despejada al romper de las olas y atardeceres dorados de Punta Sal.', file: './img/puntasal-habitacion-vista.jpg' },
+  { id: 'ps5', tag: 'Outdoor & Brasero', title: 'Bar & Comedor sobre la Arena', desc: 'Mesa rústica desayunadora y zona de brasero bajo techos de palapa junto a la orilla para comer con los pies en la arena.', file: './img/puntasal-desayunador-arena.jpg' },
+  { id: 'ps6', tag: 'Airbnb Oficial', title: 'Ficha Oficial de Reserva Airbnb', desc: 'Alojamiento entero en Punta Sal de Beto (Superanfitrión) · 9 huéspedes · 3 hab · 7 camas · S/ 1,594 (S/ 1,600).', file: './img/puntasal-hero.png' },
+];
+
+export const REAL_PHOTOS = REAL_PHOTOS_EL_BOSQUE;
+
+// Normas El Bosque
+export const CLUB_RULES_EL_BOSQUE = [
   {
     title: 'Ingreso & Garita',
     icon: 'fa-id-card',
@@ -154,3 +286,34 @@ export const CLUB_RULES = [
     desc: 'A partir de las 11:00 pm rige horario de descanso en bungalows y departamentos. Parlantes con volumen moderado para convivencia.'
   }
 ];
+
+// Normas Casa de Playa Punta Sal
+export const CLUB_RULES_PUNTA_SAL = [
+  {
+    title: 'Llegada & Check-In',
+    icon: 'fa-key',
+    desc: 'Check-in desde las 3:00 pm con cerradura digital / anfitrión Beto (Superanfitrión). Check-out coordinado hasta las 11:00 am.'
+  },
+  {
+    title: 'Primera Línea de Playa',
+    icon: 'fa-umbrella-beach',
+    desc: 'Acceso directo a la arena sin cruzar pistas ni pistas auxiliares. Duchas exteriores de agua dulce para enjuagarse antes de entrar a las habitaciones.'
+  },
+  {
+    title: 'Brasero & Fogatas en la Arena',
+    icon: 'fa-fire',
+    desc: 'Área habilitada de brasero y fogata en la playa frente a la casa. Parrilla disponible para asados y carnes al atardecer.'
+  },
+  {
+    title: 'Capacidad & Distribución',
+    icon: 'fa-bed',
+    desc: 'Casa privada para 8-9 huéspedes con 7 camas en 3 habitaciones, 3 baños completos y cocina equipada al aire libre.'
+  },
+  {
+    title: 'Cuidado del Agua & Convivencia',
+    icon: 'fa-water',
+    desc: 'Uso consciente y responsable de agua dulce en la costa norte. Música y parlantes con volumen moderado a partir de medianoche por tranquilidad del balneario.'
+  }
+];
+
+export const CLUB_RULES = CLUB_RULES_EL_BOSQUE;
